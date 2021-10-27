@@ -83,14 +83,15 @@ void configureAnimation(Sprite* pSprite,ANIM_PLAYER Player) {
                                                                         Qt::IgnoreAspectRatio,
                                                                         Qt::SmoothTransformation)));
         }
-        pSprite->startAnimation(25);
+
         // qDebug() << "MARCHE "<< iSprite;
     }else {
-        pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseV1.png");
-       // qDebug() << "BASE " << iSprite;
+        //pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseV1.png");
+        pSprite->addAnimationFrame(GameFramework::imagesPath() + "BasicPoseV1.png");
+       qDebug() << "BASE " << iSprite;
 
     }
-
+pSprite->startAnimation(25);
 
 
     //pSprite->setAnimationSpeed(25);
@@ -125,6 +126,9 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     configureAnimation(P_SPRITE,BASE);
 
     m_pPlayer = P_SPRITE;
+
+    Sprite* caisse = new Sprite(GameFramework::imagesPath() + "CaisseV1.png");
+    m_pScene->addSpriteToScene(caisse, 100,500);
 
 
     // ...

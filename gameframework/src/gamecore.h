@@ -10,6 +10,8 @@
 #include <QObject>
 #include <QPointF>
 
+#include <QGraphicsTransform>
+ #include <QList>
 
 class GameCanvas;
 class GameScene;
@@ -27,7 +29,16 @@ private:
     int distanceRight;
 
 
+
     Q_OBJECT
+
+private:
+     void configureTransformationMatrix();
+
+     QList<QGraphicsTransform*> m_transformsForFlip;
+
+
+
 public:
     explicit GameCore(GameCanvas* pGameCanvas, QObject *parent = nullptr);
     ~GameCore();
