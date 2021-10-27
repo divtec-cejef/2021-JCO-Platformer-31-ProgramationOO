@@ -3,6 +3,7 @@ release/keytickhandler.o
 release/mainfrm.o
 release/gamescene.o
 release/player.o
+release/playertickhandler.o
 release/randommovetickhandler.o
 release/sprite.o
 release/gamecore.o

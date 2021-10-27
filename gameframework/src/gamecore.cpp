@@ -15,6 +15,7 @@
 #include "gamecanvas.h"
 #include "resources.h"
 #include "utilities.h"
+#include "playertickhandler.h"
 
 
 #include <QString>
@@ -88,10 +89,10 @@ void configureAnimation(Sprite* pSprite,ANIM_PLAYER Player) {
     }else {
         //pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseV1.png");
         pSprite->addAnimationFrame(GameFramework::imagesPath() + "BasicPoseV1.png");
-       qDebug() << "BASE " << iSprite;
+        qDebug() << "BASE " << iSprite;
 
     }
-pSprite->startAnimation(25);
+    pSprite->startAnimation(25);
 
 
     //pSprite->setAnimationSpeed(25);
@@ -128,8 +129,9 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pPlayer = P_SPRITE;
 
     Sprite* caisse = new Sprite(GameFramework::imagesPath() + "CaisseV1.png");
-    m_pScene->addSpriteToScene(caisse, 100,500);
+    m_pScene->addSpriteToScene(caisse, 100,400);
 
+    m_pPlayer->setTickHandler(new PlayerTickHandler);
 
     // ...
     // m_pGameCanvas->startTick();

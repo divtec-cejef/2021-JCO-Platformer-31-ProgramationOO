@@ -3,6 +3,7 @@ debug/keytickhandler.o
 debug/mainfrm.o
 debug/gamescene.o
 debug/player.o
+debug/playertickhandler.o
 debug/randommovetickhandler.o
 debug/sprite.o
 debug/gamecore.o
