@@ -65,8 +65,8 @@ void configureAnimation(Sprite* pSprite) {
 
     //pSprite->setAnimationSpeed(25);
     //}else{
-        //pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseGauche.png");
-   // }
+   //pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseGauche.png");
+   // aa}
 }
 
 
