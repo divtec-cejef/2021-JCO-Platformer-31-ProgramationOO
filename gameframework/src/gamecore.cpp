@@ -33,7 +33,7 @@ const int FRAME_WIDTH = 192;
 const int FRAME_HEIGHT = 192;
 const int FRAME_COUNT = 4;
 const int COLUMN_COUNT = 2;
-const float SCALE_RATIO = 2;
+//const float SCALE_RATIO = 2;
 
 
 //Type d'animation du joueurs
@@ -51,6 +51,7 @@ static Sprite* P_SPRITE;
 
 void configureAnimation(Sprite* pSprite,ANIM_PLAYER Player) {
 
+    pSprite->clearAnimations();
     QString iSprite;
 
     switch (Player) {
@@ -68,27 +69,25 @@ void configureAnimation(Sprite* pSprite,ANIM_PLAYER Player) {
     }
 
     if(iSprite == "MarcheDroiteV4.png" || iSprite == "MarcheGaucheV4.png"){
+
         QImage spriteSheet(GameFramework::imagesPath() + iSprite);
 
-        pSprite->clearAnimations();
-
         // Découpage de la spritesheet
-        for (int frameIndex = 0; frameIndex < COLUMN_COUNT; frameIndex++) {
-            QImage sprite = spriteSheet.copy((frameIndex % FRAME_COUNT) * FRAME_WIDTH,
-                                             (frameIndex / FRAME_COUNT) * FRAME_HEIGHT,
+        for (int frameIndex = 0; frameIndex < FRAME_COUNT; frameIndex++) {
+            QImage sprite = spriteSheet.copy((frameIndex % COLUMN_COUNT) * FRAME_WIDTH,
+                                             (frameIndex / COLUMN_COUNT) * FRAME_HEIGHT,
                                              FRAME_WIDTH, FRAME_HEIGHT);
 
             pSprite->addAnimationFrame(QPixmap::fromImage(sprite.scaled(FRAME_WIDTH * 1,
                                                                         FRAME_HEIGHT * 1,
                                                                         Qt::IgnoreAspectRatio,
                                                                         Qt::SmoothTransformation)));
-
         }
         pSprite->startAnimation(25);
-         qDebug() << "MARCHE "<< iSprite;
+        // qDebug() << "MARCHE "<< iSprite;
     }else {
         pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseV1.png");
-        qDebug() << "BASE " << iSprite;
+       // qDebug() << "BASE " << iSprite;
 
     }
 
@@ -119,8 +118,8 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     // Instancier et initialiser les sprite ici :
     // ...
-    P_SPRITE = new Sprite(GameFramework::imagesPath() + "BasicPoseGaucheV3.png");
-    m_pScene->addSpriteToScene(P_SPRITE, 20,600);
+    P_SPRITE = new Sprite(GameFramework::imagesPath() + "BasicPoseV1.png");
+    m_pScene->addSpriteToScene(P_SPRITE, 20,500);
 
     P_SPRITE->setAnimationSpeed(25);
     configureAnimation(P_SPRITE,BASE);
