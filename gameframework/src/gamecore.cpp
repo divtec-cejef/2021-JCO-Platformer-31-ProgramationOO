@@ -16,6 +16,9 @@
 #include "resources.h"
 #include "utilities.h"
 
+
+#include <QString>
+
 //Ajoute Supp
 #include "sprite.h"
 
@@ -39,34 +42,62 @@ enum ANIM_PLAYER{
     DEPLA_GAUCHE,
     DEPLA_DROITE,
     ATTA_GAUCHE,
-    ATTA_DROITE
+    ATTA_DROITE,
+    BASE
 };
 
 static char PressedKeyInit;
+static Sprite* P_SPRITE;
 
-void configureAnimation(Sprite* pSprite) {
+void configureAnimation(Sprite* pSprite,ANIM_PLAYER Player) {
 
+    QString iSprite;
 
-    //if(Player == GAUCHE){
-    QImage spriteSheet(GameFramework::imagesPath() + "MarcheGaucheV4.png");
-
-
-    // Découpage de la spritesheet
-    for (int frameIndex = 0; frameIndex < COLUMN_COUNT; frameIndex++) {
-        QImage sprite = spriteSheet.copy((frameIndex % FRAME_COUNT) * FRAME_WIDTH,
-                                         (frameIndex / FRAME_COUNT) * FRAME_HEIGHT,
-                                         FRAME_WIDTH, FRAME_HEIGHT);
-
-        pSprite->addAnimationFrame(QPixmap::fromImage(sprite.scaled(FRAME_WIDTH * 1,
-                                                                    FRAME_HEIGHT * 1,
-                                                                    Qt::IgnoreAspectRatio,
-                                                                    Qt::SmoothTransformation)));
+    switch (Player) {
+    case DEPLA_GAUCHE:
+        iSprite = "MarcheGaucheV4.png";
+        break;
+    case DEPLA_DROITE:
+        iSprite =  "MarcheDroiteV4.png";
+        break;
+    case SAUT:
+        iSprite = "BasicPoseV1.png";
+        break;
+    case BASE:
+        iSprite = "BasicPoseV1.png";
     }
+
+    if(iSprite == "MarcheDroiteV4.png" || iSprite == "MarcheGaucheV4.png"){
+        QImage spriteSheet(GameFramework::imagesPath() + iSprite);
+
+        pSprite->clearAnimations();
+
+        // Découpage de la spritesheet
+        for (int frameIndex = 0; frameIndex < COLUMN_COUNT; frameIndex++) {
+            QImage sprite = spriteSheet.copy((frameIndex % FRAME_COUNT) * FRAME_WIDTH,
+                                             (frameIndex / FRAME_COUNT) * FRAME_HEIGHT,
+                                             FRAME_WIDTH, FRAME_HEIGHT);
+
+            pSprite->addAnimationFrame(QPixmap::fromImage(sprite.scaled(FRAME_WIDTH * 1,
+                                                                        FRAME_HEIGHT * 1,
+                                                                        Qt::IgnoreAspectRatio,
+                                                                        Qt::SmoothTransformation)));
+
+        }
+        pSprite->startAnimation(25);
+         qDebug() << "MARCHE "<< iSprite;
+    }else {
+        pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseV1.png");
+        qDebug() << "BASE " << iSprite;
+
+    }
+
+
 
     //pSprite->setAnimationSpeed(25);
     //}else{
-   //pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseGauche.png");
-   // aa}
+    //pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseGauche.png");
+    // aa}
 }
 
 
@@ -88,14 +119,13 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     // Instancier et initialiser les sprite ici :
     // ...
-    Sprite* pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseGaucheV3.png");
-    m_pScene->addSpriteToScene(pSprite, 20,600);
+    P_SPRITE = new Sprite(GameFramework::imagesPath() + "BasicPoseGaucheV3.png");
+    m_pScene->addSpriteToScene(P_SPRITE, 20,600);
 
-    pSprite->startAnimation(100);
-    //ANIM_PLAYER Player = GAUCHE;
-    configureAnimation(pSprite);
+    P_SPRITE->setAnimationSpeed(25);
+    configureAnimation(P_SPRITE,BASE);
 
-    m_pPlayer = pSprite;
+    m_pPlayer = P_SPRITE;
 
 
     // ...
@@ -120,15 +150,22 @@ GameCore::~GameCore() {
 void GameCore::keyPressed(int key) {
 
     emit notifyKeyPressed(key);
+    ANIM_PLAYER animation;
+
     switch(key) {
     case Qt::Key_Left:
         distanceLeft = PLAYER_SPEED;
+        P_SPRITE->startAnimation(100);
+        animation = DEPLA_GAUCHE;
         break;
 
     case Qt::Key_Right:
         distanceRight = PLAYER_SPEED;
+        animation = DEPLA_DROITE;
         break;
     }
+    P_SPRITE->setAnimationSpeed(25);
+    configureAnimation(P_SPRITE,animation);
 }
 
 //! Traite le relâchement d'une touche.
@@ -146,6 +183,9 @@ void GameCore::keyReleased(int key) {
         distanceRight = PLAYER_STOP;
         break;
     }
+
+    P_SPRITE->clearAnimations();
+    configureAnimation(P_SPRITE,BASE);
 }
 
 //! Cadence.
@@ -156,10 +196,10 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F;
 
 
-        m_pPlayer->setX(m_pPlayer->x() + distanceRight);
-        //configureAnimation(pSprite);
+    m_pPlayer->setX(m_pPlayer->x() + distanceRight);
+    //configureAnimation(pSprite);
 
-        m_pPlayer->setX(m_pPlayer->x() - distanceLeft);
+    m_pPlayer->setX(m_pPlayer->x() - distanceLeft);
 
 }
 
