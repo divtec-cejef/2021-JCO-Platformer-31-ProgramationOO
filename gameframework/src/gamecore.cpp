@@ -1,6 +1,6 @@
 /**
   Fichier qui contient toute la logique du jeu.
-  
+
   @author   Léo Küttel
   @date     Novembre 2021
  */
@@ -53,6 +53,7 @@ enum ANIM_PLAYER{
 
 static char PressedKeyInit;
 static Sprite* P_SPRITE;
+static Sprite* CAISSE_SPRITE;
 
 void configureAnimation(Sprite* pSprite,ANIM_PLAYER Player) {
 
@@ -113,14 +114,14 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     // Mémorise l'accès au canvas (qui gère le tick et l'affichage d'une scène)
     m_pGameCanvas = pGameCanvas;
-    
+
     // Créé la scène de base et indique au canvas qu'il faut l'afficher.
     m_pScene = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
     pGameCanvas->setCurrentScene(m_pScene);
-    
+
     // Trace un rectangle blanc tout autour des limites de la scène.
     m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::white));
-    
+
 
     // Instancier et initialiser les sprite ici :
     // ...
@@ -132,8 +133,9 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     m_pPlayer = P_SPRITE;
 
-    Sprite* caisse = new Sprite(GameFramework::imagesPath() + "CaisseV1.png");
-    m_pScene->addSpriteToScene(caisse, 200,500);
+    CAISSE_SPRITE = new Sprite(GameFramework::imagesPath() + "CaisseV1.png");
+    CAISSE_SPRITE->setData(1,"caisse");
+    m_pScene->addSpriteToScene(CAISSE_SPRITE, 200,500);
 
     m_pPlayer->setTickHandler(new PlayerTickHandler);
     m_pScene->registerSpriteForTick(m_pPlayer);
@@ -202,39 +204,40 @@ void GameCore::keyReleased(int key) {
 //! éplace le joueur en fonction de la touche préssé.
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
-    //Sprite* pParentSprite;
 
-    double distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F;
-
-    // Création d'un vecteur de déplacement du sprite.
-    QPointF spriteMovement(distance, 0.0);
-
-    // Détermine la prochaine position du sprite
-    QRectF nextSpriteRect = m_pPlayer->globalBoundingBox().translated(spriteMovement);
-
-    // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
-    auto collidingSprites = m_pPlayer->parentScene()->collidingSprites(nextSpriteRect);
-
-    // Supprimer le sprite lui-même, qui collisionne toujours avec sa boundingbox
-    collidingSprites.removeAll(m_pPlayer);
-    bool collision = !collidingSprites.isEmpty();
-
-    // Si la prochaine position du sprite n'est pas comprise au sein de la scène,
-    // ou s’il y a collision, le sprite n’est pas déplacé
-    if (!m_pPlayer->parentScene()->isInsideScene(nextSpriteRect) ||collision){
+    /*
+    if(P_SPRITE->globalBoundingBox().intersects(CAISSE_SPRITE->globalBoundingBox())){
         distanceRight = PLAYER_STOP;
         distanceLeft = PLAYER_STOP;
+        configureAnimation(P_SPRITE,BASE);
+    }else {
+        distanceRight = PLAYER_SPEED;
+        distanceLeft = PLAYER_SPEED;
 
 
-        // S'il n'y a pas de collision et que le sprite ne sort pas de la scène, on le déplace
-        // (en lui appliquant le vecteur de déplacement)
-    }else{
+    }
+    */
+
+    bool collision = false;
+
+    auto listeCollision = P_SPRITE->parentScene()->collidingSprites(P_SPRITE);
+
+    collision = !listeCollision.isEmpty();
+    for (Sprite* CollisionDetected : listeCollision) {
+        if(CollisionDetected->data(1) == "caisse"){
+
+           CAISSE_SPRITE->setX(CAISSE_SPRITE->x() - 10);
+        }
+
+   }
+   /* if(collision){
+
+    }else {
         distanceRight = PLAYER_SPEED;
         distanceLeft = PLAYER_SPEED;
     }
 
-
-
+*/
     m_pPlayer->setX(m_pPlayer->x() + distanceRight);
     //configureAnimation(pSprite);
 

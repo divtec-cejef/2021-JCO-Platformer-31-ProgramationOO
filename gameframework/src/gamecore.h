@@ -25,8 +25,8 @@ class GameCore : public QObject
 {
 private:
     Sprite* m_pPlayer;
-    int distanceLeft;
-    int distanceRight;
+    int distanceLeft = 0;
+    int distanceRight = 0;
     int m_playerDirection = 1;
     QPointF m_initialPos;
 
