@@ -3,10 +3,11 @@
 
 #include "sprite.h"
 #include "gamescene.h"
+#include "gamecore.h"
 
 #include <QDebug>
 
-const int PLAYER_SPEED = 200;
+const int PLAYER_SPEED = 10;
 
 PlayerTickHandler::PlayerTickHandler(Sprite* pParentSprite) : SpriteTickHandler(pParentSprite)
 {
@@ -16,8 +17,9 @@ PlayerTickHandler::PlayerTickHandler(Sprite* pParentSprite) : SpriteTickHandler(
 void PlayerTickHandler::init() {
     m_initialPos = m_pParentSprite->pos();
 }
-void PlayerTickHandler::tick(long long elapsedTimeInMilliseconds) {
 
+void PlayerTickHandler::tick(long long elapsedTimeInMilliseconds) {
+    /*
     QPointF spriteMovement = m_spriteVelocity * elapsedTimeInMilliseconds / 1000.;
 
     // Détermine la prochaine position du sprite
@@ -32,10 +34,11 @@ void PlayerTickHandler::tick(long long elapsedTimeInMilliseconds) {
 
     // Si les bords sont atteints ou s’il y a collision : le sprite change de direction
     if (m_pParentSprite->right() > m_pParentSprite->parentScene()->width() ||
-            m_pParentSprite->left() < 0.0 ||
-            collision)
-        m_playerDirection *= -1;
+    m_pParentSprite->left() < 0.0 ||
+    collision)
+    m_playerDirection *= -1;
+    */
 }
 
 
-}
+//}

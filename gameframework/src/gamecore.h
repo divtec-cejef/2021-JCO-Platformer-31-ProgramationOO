@@ -27,7 +27,8 @@ private:
     Sprite* m_pPlayer;
     int distanceLeft;
     int distanceRight;
-
+    int m_playerDirection = 1;
+    QPointF m_initialPos;
 
 
     Q_OBJECT

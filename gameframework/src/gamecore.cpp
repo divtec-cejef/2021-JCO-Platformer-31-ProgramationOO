@@ -16,6 +16,10 @@
 #include "resources.h"
 #include "utilities.h"
 #include "playertickhandler.h"
+#include "sprite.h"
+
+
+
 
 
 #include <QString>
@@ -121,7 +125,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     // Instancier et initialiser les sprite ici :
     // ...
     P_SPRITE = new Sprite(GameFramework::imagesPath() + "BasicPoseV1.png");
-    m_pScene->addSpriteToScene(P_SPRITE, 20,500);
+    m_pScene->addSpriteToScene(P_SPRITE, 500,500);
 
     P_SPRITE->setAnimationSpeed(25);
     configureAnimation(P_SPRITE,BASE);
@@ -129,9 +133,10 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pPlayer = P_SPRITE;
 
     Sprite* caisse = new Sprite(GameFramework::imagesPath() + "CaisseV1.png");
-    m_pScene->addSpriteToScene(caisse, 100,400);
+    m_pScene->addSpriteToScene(caisse, 200,500);
 
     m_pPlayer->setTickHandler(new PlayerTickHandler);
+    m_pScene->registerSpriteForTick(m_pPlayer);
 
     // ...
     // m_pGameCanvas->startTick();
@@ -197,16 +202,45 @@ void GameCore::keyReleased(int key) {
 //! éplace le joueur en fonction de la touche préssé.
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
+    //Sprite* pParentSprite;
 
-    float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F;
+    double distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F;
+
+    // Création d'un vecteur de déplacement du sprite.
+    QPointF spriteMovement(distance, 0.0);
+
+    // Détermine la prochaine position du sprite
+    QRectF nextSpriteRect = m_pPlayer->globalBoundingBox().translated(spriteMovement);
+
+    // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
+    auto collidingSprites = m_pPlayer->parentScene()->collidingSprites(nextSpriteRect);
+
+    // Supprimer le sprite lui-même, qui collisionne toujours avec sa boundingbox
+    collidingSprites.removeAll(m_pPlayer);
+    bool collision = !collidingSprites.isEmpty();
+
+    // Si la prochaine position du sprite n'est pas comprise au sein de la scène,
+    // ou s’il y a collision, le sprite n’est pas déplacé
+    if (!m_pPlayer->parentScene()->isInsideScene(nextSpriteRect) ||collision){
+        distanceRight = PLAYER_STOP;
+        distanceLeft = PLAYER_STOP;
+
+
+        // S'il n'y a pas de collision et que le sprite ne sort pas de la scène, on le déplace
+        // (en lui appliquant le vecteur de déplacement)
+    }else{
+        distanceRight = PLAYER_SPEED;
+        distanceLeft = PLAYER_SPEED;
+    }
+
 
 
     m_pPlayer->setX(m_pPlayer->x() + distanceRight);
     //configureAnimation(pSprite);
 
     m_pPlayer->setX(m_pPlayer->x() - distanceLeft);
-
 }
+
 
 //! La souris a été déplacée.
 //! Pour que cet événement soit pris en compte, la propriété MouseTracking de GameView
