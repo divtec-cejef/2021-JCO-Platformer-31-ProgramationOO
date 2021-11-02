@@ -51,9 +51,10 @@ enum ANIM_PLAYER{
     BASE
 };
 
-static char PressedKeyInit;
+
 static Sprite* P_SPRITE;
-static Sprite* CAISSE_SPRITE;
+static Sprite* WOODCAISSE_SPRITE;
+static Sprite* METALCAISSE_SPRITE;
 
 void configureAnimation(Sprite* pSprite,ANIM_PLAYER Player) {
 
@@ -133,9 +134,13 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     m_pPlayer = P_SPRITE;
 
-    CAISSE_SPRITE = new Sprite(GameFramework::imagesPath() + "CaisseV1.png");
-    CAISSE_SPRITE->setData(1,"caisse");
-    m_pScene->addSpriteToScene(CAISSE_SPRITE, 200,500);
+    WOODCAISSE_SPRITE = new Sprite(GameFramework::imagesPath() + "CaisseV1.png");
+    WOODCAISSE_SPRITE->setData(1,"Wood_caisse");
+    m_pScene->addSpriteToScene(WOODCAISSE_SPRITE, 200,500);
+
+    METALCAISSE_SPRITE = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
+    METALCAISSE_SPRITE->setData(1,"Metal_caisse");
+    m_pScene->addSpriteToScene(METALCAISSE_SPRITE, 800,500);
 
     m_pPlayer->setTickHandler(new PlayerTickHandler);
     m_pScene->registerSpriteForTick(m_pPlayer);
@@ -223,13 +228,26 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     auto listeCollision = P_SPRITE->parentScene()->collidingSprites(P_SPRITE);
 
     collision = !listeCollision.isEmpty();
+    if(collision){
+
+
     for (Sprite* CollisionDetected : listeCollision) {
-        if(CollisionDetected->data(1) == "caisse"){
+        if(CollisionDetected->data(1) == "Wood_caisse"){
 
-           CAISSE_SPRITE->setX(CAISSE_SPRITE->x() - 10);
+           WOODCAISSE_SPRITE->setX(WOODCAISSE_SPRITE->x() - 1);
+           m_pPlayer->setX(m_pPlayer->x() + 1);
+        }else if(CollisionDetected->data(1) == "Metal_caisse"){
+
+            m_pPlayer->setX(m_pPlayer->x() -5);
         }
+    }
 
-   }
+    }else{
+        m_pPlayer->setX(m_pPlayer->x() + distanceRight);
+        //configureAnimation(pSprite);
+
+        m_pPlayer->setX(m_pPlayer->x() - distanceLeft);
+    }
    /* if(collision){
 
     }else {
@@ -238,10 +256,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     }
 
 */
-    m_pPlayer->setX(m_pPlayer->x() + distanceRight);
-    //configureAnimation(pSprite);
 
-    m_pPlayer->setX(m_pPlayer->x() - distanceLeft);
 }
 
 
