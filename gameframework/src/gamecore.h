@@ -23,23 +23,8 @@ class Sprite;
 //! sa surface avec une ligne blanche puis démarre la cadence du jeu.
 class GameCore : public QObject
 {
-private:
-    Sprite* m_pPlayer;
-    int distanceLeft = 0;
-    int distanceRight = 0;
-    int m_playerDirection = 1;
-    QPointF m_initialPos;
-
 
     Q_OBJECT
-
-private:
-     void configureTransformationMatrix();
-
-     QList<QGraphicsTransform*> m_transformsForFlip;
-
-
-
 public:
     explicit GameCore(GameCanvas* pGameCanvas, QObject *parent = nullptr);
     ~GameCore();
@@ -51,7 +36,13 @@ public:
     void mouseButtonPressed(QPointF mousePosition, Qt::MouseButtons buttons);
     void mouseButtonReleased(QPointF mousePosition, Qt::MouseButtons buttons);
 
+
+    //Physique
+    QPointF gravity = QPointF(0,50);
+    QPointF velocity = QPointF(0,2);
+
     void tick(long long elapsedTimeInMilliseconds);
+
 
 signals:
     void notifyMouseMoved(QPointF newMousePosition);
@@ -64,6 +55,21 @@ private:
 
     GameCanvas* m_pGameCanvas;
     GameScene* m_pScene;
+    Sprite* Pplayer;
+
+
+    int distanceLeft = 0;
+    int distanceRight = 0;
+    int distanceJump = 0;
+    int m_playerDirection = 1;
+
+    //QPointF p_position = QPointF(0,0);
+
+    void configureTransformationMatrix();
+
+    QList<QGraphicsTransform*> m_transformsForFlip;
+
+
 
 private slots:
 

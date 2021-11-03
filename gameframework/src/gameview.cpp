@@ -82,6 +82,7 @@ void GameView::drawForeground(QPainter* pPainter, const QRectF& rRect) {
 
 //! Initialise cette affichage.
 void GameView::init() {
+
     m_fitToScreen = false;
     m_clipScene = false;
     m_clippingRectUpToDate = false;

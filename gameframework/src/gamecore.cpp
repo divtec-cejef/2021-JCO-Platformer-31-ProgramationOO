@@ -17,6 +17,7 @@
 #include "utilities.h"
 #include "playertickhandler.h"
 #include "sprite.h"
+#include "time.h"
 
 
 
@@ -27,7 +28,8 @@
 //Ajoute Supp
 #include "sprite.h"
 
-const int PLAYER_SPEED = 10 ; // vitesse de déplacement du joueur en pixels/s
+const int PLAYER_SPEED = 1 ; // vitesse de déplacement du joueur en pixels/s
+const int PLAYER_JUMP= 10 ; //Vitesse du saute
 const int PLAYER_STOP = 0;
 
 const int SCENE_WIDTH = 1280;
@@ -52,9 +54,12 @@ enum ANIM_PLAYER{
 };
 
 
-static Sprite* P_SPRITE;
+//static
 static Sprite* WOODCAISSE_SPRITE;
 static Sprite* METALCAISSE_SPRITE;
+//QPointF(0,0);
+
+
 
 void configureAnimation(Sprite* pSprite,ANIM_PLAYER Player) {
 
@@ -126,13 +131,13 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     // Instancier et initialiser les sprite ici :
     // ...
-    P_SPRITE = new Sprite(GameFramework::imagesPath() + "BasicPoseV1.png");
-    m_pScene->addSpriteToScene(P_SPRITE, 500,500);
+    Pplayer = new Sprite(GameFramework::imagesPath() + "BasicPoseV1.png");
+    m_pScene->addSpriteToScene(Pplayer, 500,200);
 
-    P_SPRITE->setAnimationSpeed(25);
-    configureAnimation(P_SPRITE,BASE);
+    Pplayer->setAnimationSpeed(25);
+    configureAnimation(Pplayer,BASE);
 
-    m_pPlayer = P_SPRITE;
+
 
     WOODCAISSE_SPRITE = new Sprite(GameFramework::imagesPath() + "CaisseV1.png");
     WOODCAISSE_SPRITE->setData(1,"Wood_caisse");
@@ -142,12 +147,21 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     METALCAISSE_SPRITE->setData(1,"Metal_caisse");
     m_pScene->addSpriteToScene(METALCAISSE_SPRITE, 800,500);
 
-    m_pPlayer->setTickHandler(new PlayerTickHandler);
-    m_pScene->registerSpriteForTick(m_pPlayer);
+    Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
+    caisseM1->setData(1,"Metal_caisse");
+    m_pScene->addSpriteToScene(caisseM1, 700,500);
+
+    Sprite* caisseM2 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
+    caisseM1->setData(1,"Metal_caisse");
+    m_pScene->addSpriteToScene(caisseM2, 600,500);
+
+    Sprite* caisseM3 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
+    caisseM1->setData(1,"Metal_caisse");
+    m_pScene->addSpriteToScene(caisseM3, 500,300);
+
+
 
     // ...
-    // m_pGameCanvas->startTick();
-
     // Démarre le tick pour que les animations qui en dépendent fonctionnent correctement.
     // Attention : il est important que l'enclenchement du tick soit fait vers la fin de cette fonction,
     // sinon le temps passé jusqu'au premier tick (ElapsedTime) peut être élevé et provoquer de gros
@@ -165,24 +179,39 @@ GameCore::~GameCore() {
 //! \param key Numéro de la touche (voir les constantes Qt)
 //!
 void GameCore::keyPressed(int key) {
-
     emit notifyKeyPressed(key);
+
     ANIM_PLAYER animation;
+
+
+
 
     switch(key) {
     case Qt::Key_Left:
-        distanceLeft = PLAYER_SPEED;
-        P_SPRITE->startAnimation(100);
+        velocity.setX(-PLAYER_SPEED);
+        //distanceLeft = PLAYER_SPEED;
+        //p_position.setX(-PLAYER_SPEED);
         animation = DEPLA_GAUCHE;
         break;
 
     case Qt::Key_Right:
-        distanceRight = PLAYER_SPEED;
+        //distanceRight = PLAYER_SPEED;
+        velocity.setX(PLAYER_SPEED);
         animation = DEPLA_DROITE;
         break;
+
+    case Qt::Key_Up:
+         animation = BASE;
+        //distanceJump = PLAYER_JUMP;
+        velocity.setY(-20);
+
+    break;
+
+    default:
+         animation = BASE;
     }
-    P_SPRITE->setAnimationSpeed(25);
-    configureAnimation(P_SPRITE,animation);
+    Pplayer->setAnimationSpeed(25);
+    configureAnimation(Pplayer,animation);
 }
 
 //! Traite le relâchement d'une touche.
@@ -192,17 +221,26 @@ void GameCore::keyReleased(int key) {
 
     switch(key) {
     case Qt::Key_Left:
-
-        distanceLeft = PLAYER_STOP;
+        velocity.setX(PLAYER_STOP);
+        //distanceLeft = PLAYER_STOP;
         break;
 
     case Qt::Key_Right:
-        distanceRight = PLAYER_STOP;
+        velocity.setX(PLAYER_STOP);
+        //distanceRight = PLAYER_STOP;
+        break;
+    case Qt::Key_Up:
+        velocity.setY(PLAYER_STOP);
+
         break;
     }
 
-    P_SPRITE->clearAnimations();
-    configureAnimation(P_SPRITE,BASE);
+    configureAnimation(Pplayer,BASE);
+    //other keys
+
+    //do collisions
+
+
 }
 
 //! Cadence.
@@ -210,22 +248,11 @@ void GameCore::keyReleased(int key) {
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
-    /*
-    if(P_SPRITE->globalBoundingBox().intersects(CAISSE_SPRITE->globalBoundingBox())){
-        distanceRight = PLAYER_STOP;
-        distanceLeft = PLAYER_STOP;
-        configureAnimation(P_SPRITE,BASE);
-    }else {
-        distanceRight = PLAYER_SPEED;
-        distanceLeft = PLAYER_SPEED;
 
-
-    }
-    */
 
     bool collision = false;
 
-    auto listeCollision = P_SPRITE->parentScene()->collidingSprites(P_SPRITE);
+    auto listeCollision = Pplayer->parentScene()->collidingSprites(Pplayer);
 
     collision = !listeCollision.isEmpty();
     if(collision){
@@ -235,29 +262,43 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         if(CollisionDetected->data(1) == "Wood_caisse"){
 
            WOODCAISSE_SPRITE->setX(WOODCAISSE_SPRITE->x() - 1);
-           m_pPlayer->setX(m_pPlayer->x() + 1);
+            //p_position.setX(m_pPlayer->x() + 1);
+           Pplayer->setX(Pplayer->x() + 1);
         }else if(CollisionDetected->data(1) == "Metal_caisse"){
-
-            m_pPlayer->setX(m_pPlayer->x() -5);
+            Pplayer->setX(Pplayer->x() - 4);
+            //p_position.setY(-4);
         }
     }
-
-    }else{
-        m_pPlayer->setX(m_pPlayer->x() + distanceRight);
-        //configureAnimation(pSprite);
-
-        m_pPlayer->setX(m_pPlayer->x() - distanceLeft);
-    }
-   /* if(collision){
-
-    }else {
-        distanceRight = PLAYER_SPEED;
-        distanceLeft = PLAYER_SPEED;
-    }
-
+/*
+    PlayerDelta.Zero(Drag); //see above comment by Drag
+    PlayerDelta += Gravity;
+    PlayerPosition += PlayerDelta;
 */
+    Pplayer->clearAnimations();
+    configureAnimation(Pplayer,BASE);
+    Pplayer->setY(Pplayer->x() + distanceJump);
+
+
+   }else{
+        //m_pPlayer->setX(m_pPlayer->x() + distanceRight);
+        Pplayer->setPos(Pplayer->pos()+ velocity);
+
+
+
+        //m_pPlayer->setX(m_pPlayer->x() - distanceLeft);
+   }
+
+    Pplayer->setPos(Pplayer->pos() + velocity * (elapsedTimeInMilliseconds/100.0));
+    velocity+= gravity * (elapsedTimeInMilliseconds/100.0);
+
+
+
+
 
 }
+
+
+
 
 
 //! La souris a été déplacée.
@@ -276,6 +317,7 @@ void GameCore::mouseButtonPressed(QPointF mousePosition, Qt::MouseButtons button
 void GameCore::mouseButtonReleased(QPointF mousePosition, Qt::MouseButtons buttons) {
     emit notifyMouseButtonReleased(mousePosition, buttons);
 }
+
 
 
 
