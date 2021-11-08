@@ -1,4 +1,5 @@
 release/main.o
+release/character.o
 release/keytickhandler.o
 release/mainfrm.o
 release/gamescene.o

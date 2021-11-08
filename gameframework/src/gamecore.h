@@ -39,7 +39,7 @@ public:
 
     //Physique
     QPointF gravity = QPointF(0,2);
-    QPointF velocity = QPointF(0,10);
+    QPointF velocity = QPointF(0,0);
     bool isOnFloor = false;
     bool isJump = false;
     QVariant collisionCurrent;

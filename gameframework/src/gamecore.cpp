@@ -23,7 +23,7 @@
 //Ajoute Supp
 #include <QString>
 
-const int PLAYER_SPEED = 10 ; // vitesse de déplacement du joueur en pixels/s
+const int PLAYER_SPEED = 50 ; // vitesse de déplacement du joueur en pixels/s
 const int PLAYER_JUMP= 10 ; //Vitesse du saute
 const int PLAYER_STOP = 0;
 
@@ -143,7 +143,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solV1.png");
     Sol2->setData(1,"sol");
-    m_pScene->addSpriteToScene(Sol2, 500,700);
+    m_pScene->addSpriteToScene(Sol2, 700,600);
 
 
     // ...
@@ -184,11 +184,11 @@ void GameCore::keyPressed(int key) {
 
     case Qt::Key_Up:
         //if(isOnFloor){
-            animation = BASE;
-            //distanceJump = PLAYER_JUMP;
-            velocity.setY(-10);
-            isJump = true;
-            qDebug() << "isJump : " << isJump;
+        animation = BASE;
+        //distanceJump = PLAYER_JUMP;
+        velocity.setY(-10);
+        isJump = true;
+        qDebug() << "isJump : " << isJump;
         //}
         break;
 
@@ -234,14 +234,24 @@ void GameCore::keyReleased(int key) {
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
-    bool collision = false;
+    bool currentCollision = false;
+    bool futurCollision = false;
+    QPointF bondingBoxSize = QPointF(0,40);
+    // Détermine la prochaine position du sprite
+    QRectF nextSpriteRect = Pplayer->globalBoundingBox().translated(bondingBoxSize);
+    // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
+    auto listeFuturCollision = Pplayer->parentScene()->collidingSprites(nextSpriteRect);
+    futurCollision = !listeFuturCollision.isEmpty();
 
-    auto listeCollision = Pplayer->parentScene()->collidingSprites(Pplayer);
-    collision = !listeCollision.isEmpty();
+    // Récupère tous les sprites de la scène qui touche ce sprite
+    auto listeCurrentCollision = Pplayer->parentScene()->collidingSprites(Pplayer);
+    // Supprimer le sprite lui-même, qui collisionne toujours avec sa boundingbox
+    listeCurrentCollision.removeAll(Pplayer);
 
-    if(collision){
+    currentCollision = !listeCurrentCollision.isEmpty();
+    if(currentCollision){
 
-        for (Sprite* CollisionDetected : listeCollision) {
+        for (Sprite* CollisionDetected : listeCurrentCollision) {
 
             if(CollisionDetected->data(1) == "Wood_caisse"){
 
@@ -252,25 +262,47 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 Pplayer->setX(Pplayer->x() - 10);
                 //p_position.setY(-4);
 
-            }else if (CollisionDetected->data(1) == "sol") {
-                //isOnFloor = true;
-                isJump = false;
-                Pplayer->setY(Pplayer->y() - 1);
-                qDebug() << "sur le sol";
             }
         }
-    }else /*if (!isOnFloor)*/{
-        //m_pPlayer->setX(m_pPlayer->x() + distanceRight);
-
+    }
+    if(futurCollision){
+        for (Sprite* CollisionDetected : listeFuturCollision) {
+            if (CollisionDetected->data(1) == "sol") {
+                isOnFloor = true;
+                isJump = false;
+                //Pplayer->setY(Pplayer->y() - 1);
+               qDebug() << "sol pas loin";
+            }
+        }
+         qDebug() << "aedferfrg";
+    }
+    if (!isOnFloor){
         //qDebug() << "PAS SUR LE SOL";
         Pplayer->setPos(Pplayer->pos() + velocity * (elapsedTimeInMilliseconds/100.0));
-            velocity+= gravity * (elapsedTimeInMilliseconds/100.0);
+        velocity+= gravity * (elapsedTimeInMilliseconds/100.0);
     }
-    /*if(isJump || !collision){
+    if(isJump || !currentCollision){
         isOnFloor = false;
-    }*/
-    Pplayer->setPos(Pplayer->pos()+ velocity);
+    }
+
+        Pplayer->setPos(Pplayer->pos()+ velocity);
+
+
+    /*
+    auto collidingSprites = Pplayer->parentScene()->collidingSprites(nextSpriteRect);
+
+    // Si la prochaine position du sprite n'est pas comprise au sein de la scène,
+    // ou s’il y a collision, le sprite n’est pas déplacé et change de direction
+    if (!Pplayer->parentScene()->isInsideScene(nextSpriteRect) ||
+    collision)
+    m_playerDirection *= -1;
+    else
+    // S'il n'y a pas de collision et que le sprite ne sort pas de la scène, on le déplace
+    // (en lui appliquant le vecteur de déplacement)
+    Pplayer->setPos(Pplayer->pos() + velocity);
+    */
 }
+
 
 //! La souris a été déplacée.
 //! Pour que cet événement soit pris en compte, la propriété MouseTracking de GameView
