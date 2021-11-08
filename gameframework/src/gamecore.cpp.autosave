@@ -281,7 +281,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 isJump = false;
                 //Pplayer->setY(Pplayer->y() - 1);
 
-               qDebug() << "sol pas loin";
+               //qDebug() << "sol pas loin";
             }else{
                 isOnFloor = false;
             }
