@@ -20,18 +20,14 @@
 #include "time.h"
 
 
-
-
-
+//Ajoute Supp
 #include <QString>
 
-//Ajoute Supp
-#include "sprite.h"
-
-const int PLAYER_SPEED = 1 ; // vitesse de déplacement du joueur en pixels/s
+const int PLAYER_SPEED = 10 ; // vitesse de déplacement du joueur en pixels/s
 const int PLAYER_JUMP= 10 ; //Vitesse du saute
 const int PLAYER_STOP = 0;
 
+//résolution de la fenetre
 const int SCENE_WIDTH = 1280;
 
 
@@ -57,8 +53,6 @@ enum ANIM_PLAYER{
 //static
 static Sprite* WOODCAISSE_SPRITE;
 static Sprite* METALCAISSE_SPRITE;
-//QPointF(0,0);
-
 
 
 void configureAnimation(Sprite* pSprite,ANIM_PLAYER Player) {
@@ -109,9 +103,8 @@ void configureAnimation(Sprite* pSprite,ANIM_PLAYER Player) {
     //pSprite->setAnimationSpeed(25);
     //}else{
     //pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseGauche.png");
-    // aa}
+    //}
 }
-
 
 //! Initialise le contrôleur de jeu.
 //! \param pGameCanvas  GameCanvas pour lequel cet objet travaille.
@@ -128,7 +121,6 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     // Trace un rectangle blanc tout autour des limites de la scène.
     m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::white));
 
-
     // Instancier et initialiser les sprite ici :
     // ...
     Pplayer = new Sprite(GameFramework::imagesPath() + "BasicPoseV1.png");
@@ -137,28 +129,21 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     Pplayer->setAnimationSpeed(25);
     configureAnimation(Pplayer,BASE);
 
-
-
     WOODCAISSE_SPRITE = new Sprite(GameFramework::imagesPath() + "CaisseV1.png");
     WOODCAISSE_SPRITE->setData(1,"Wood_caisse");
     m_pScene->addSpriteToScene(WOODCAISSE_SPRITE, 200,500);
 
-    METALCAISSE_SPRITE = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
-    METALCAISSE_SPRITE->setData(1,"Metal_caisse");
-    m_pScene->addSpriteToScene(METALCAISSE_SPRITE, 800,500);
-
     Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
     caisseM1->setData(1,"Metal_caisse");
-    m_pScene->addSpriteToScene(caisseM1, 700,500);
+    m_pScene->addSpriteToScene(caisseM1, 700,200);
 
-    Sprite* caisseM2 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
-    caisseM1->setData(1,"Metal_caisse");
-    m_pScene->addSpriteToScene(caisseM2, 600,500);
+    Sprite* Sol1 = new Sprite(GameFramework::imagesPath() + "solV1.png");
+    Sol1->setData(1,"sol");
+    m_pScene->addSpriteToScene(Sol1, 500,600);
 
-    Sprite* caisseM3 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
-    caisseM1->setData(1,"Metal_caisse");
-    m_pScene->addSpriteToScene(caisseM3, 500,300);
-
+    Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solV1.png");
+    Sol2->setData(1,"sol");
+    m_pScene->addSpriteToScene(Sol2, 500,700);
 
 
     // ...
@@ -183,9 +168,6 @@ void GameCore::keyPressed(int key) {
 
     ANIM_PLAYER animation;
 
-
-
-
     switch(key) {
     case Qt::Key_Left:
         velocity.setX(-PLAYER_SPEED);
@@ -201,14 +183,17 @@ void GameCore::keyPressed(int key) {
         break;
 
     case Qt::Key_Up:
-         animation = BASE;
-        //distanceJump = PLAYER_JUMP;
-        velocity.setY(-20);
-
-    break;
+        //if(isOnFloor){
+            animation = BASE;
+            //distanceJump = PLAYER_JUMP;
+            velocity.setY(-10);
+            isJump = true;
+            qDebug() << "isJump : " << isJump;
+        //}
+        break;
 
     default:
-         animation = BASE;
+        animation = BASE;
     }
     Pplayer->setAnimationSpeed(25);
     configureAnimation(Pplayer,animation);
@@ -231,7 +216,8 @@ void GameCore::keyReleased(int key) {
         break;
     case Qt::Key_Up:
         velocity.setY(PLAYER_STOP);
-
+        isJump = false;
+        qDebug() << "isJump : " << isJump;
         break;
     }
 
@@ -248,58 +234,43 @@ void GameCore::keyReleased(int key) {
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
-
-
     bool collision = false;
 
     auto listeCollision = Pplayer->parentScene()->collidingSprites(Pplayer);
-
     collision = !listeCollision.isEmpty();
+
     if(collision){
 
+        for (Sprite* CollisionDetected : listeCollision) {
 
-    for (Sprite* CollisionDetected : listeCollision) {
-        if(CollisionDetected->data(1) == "Wood_caisse"){
+            if(CollisionDetected->data(1) == "Wood_caisse"){
 
-           WOODCAISSE_SPRITE->setX(WOODCAISSE_SPRITE->x() - 1);
-            //p_position.setX(m_pPlayer->x() + 1);
-           Pplayer->setX(Pplayer->x() + 1);
-        }else if(CollisionDetected->data(1) == "Metal_caisse"){
-            Pplayer->setX(Pplayer->x() - 4);
-            //p_position.setY(-4);
+                WOODCAISSE_SPRITE->setX(WOODCAISSE_SPRITE->x() - 1);
+                //p_position.setX(m_pPlayer->x() + 1);
+
+            }else if(CollisionDetected->data(1) == "Metal_caisse"){
+                Pplayer->setX(Pplayer->x() - 10);
+                //p_position.setY(-4);
+
+            }else if (CollisionDetected->data(1) == "sol") {
+                //isOnFloor = true;
+                isJump = false;
+                Pplayer->setY(Pplayer->y() - 1);
+                qDebug() << "sur le sol";
+            }
         }
-    }
-/*
-    PlayerDelta.Zero(Drag); //see above comment by Drag
-    PlayerDelta += Gravity;
-    PlayerPosition += PlayerDelta;
-*/
-    Pplayer->clearAnimations();
-    configureAnimation(Pplayer,BASE);
-    Pplayer->setY(Pplayer->x() + distanceJump);
-
-
-   }else{
+    }else /*if (!isOnFloor)*/{
         //m_pPlayer->setX(m_pPlayer->x() + distanceRight);
-        Pplayer->setPos(Pplayer->pos()+ velocity);
 
-
-
-        //m_pPlayer->setX(m_pPlayer->x() - distanceLeft);
-   }
-
-    Pplayer->setPos(Pplayer->pos() + velocity * (elapsedTimeInMilliseconds/100.0));
-    velocity+= gravity * (elapsedTimeInMilliseconds/100.0);
-
-
-
-
-
+        //qDebug() << "PAS SUR LE SOL";
+        Pplayer->setPos(Pplayer->pos() + velocity * (elapsedTimeInMilliseconds/100.0));
+            velocity+= gravity * (elapsedTimeInMilliseconds/100.0);
+    }
+    /*if(isJump || !collision){
+        isOnFloor = false;
+    }*/
+    Pplayer->setPos(Pplayer->pos()+ velocity);
 }
-
-
-
-
 
 //! La souris a été déplacée.
 //! Pour que cet événement soit pris en compte, la propriété MouseTracking de GameView

@@ -38,8 +38,11 @@ public:
 
 
     //Physique
-    QPointF gravity = QPointF(0,50);
-    QPointF velocity = QPointF(0,2);
+    QPointF gravity = QPointF(0,2);
+    QPointF velocity = QPointF(0,10);
+    bool isOnFloor = false;
+    bool isJump = false;
+    QVariant collisionCurrent;
 
     void tick(long long elapsedTimeInMilliseconds);
 

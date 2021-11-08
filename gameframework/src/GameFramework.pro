@@ -17,6 +17,7 @@ TEMPLATE = app
 #DEFINES += DEPLOY # Pour une compilation dans un but de déploiement
 
 SOURCES += main.cpp\
+    character.cpp \
     keytickhandler.cpp \
         mainfrm.cpp \
     gamescene.cpp \
@@ -38,6 +39,7 @@ SOURCES += main.cpp\
     automaticwalkinghandler.cpp
 
 HEADERS  += mainfrm.h \
+    character.h \
     gamescene.h \
     keytickhandler.h \
     player.h \
