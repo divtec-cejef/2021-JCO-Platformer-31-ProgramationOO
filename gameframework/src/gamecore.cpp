@@ -18,7 +18,7 @@
 #include "playertickhandler.h"
 #include "sprite.h"
 #include "time.h"
-
+#include "QPainterPath"
 
 //Ajoute Supp
 #include <QString>
@@ -142,7 +142,27 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
    // }
     Sprite* Sol1 = new Sprite(GameFramework::imagesPath() + "solV1.png");
     Sol1->setData(1,"sol");
-    m_pScene->addSpriteToScene(Sol1, 500,600);
+    m_pScene->addSpriteToScene(Sol1, 400,600);
+
+    Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solV1.png");
+    Sol2->setData(1,"sol");
+    m_pScene->addSpriteToScene(Sol2, 500,600);
+
+    Sprite* Sol3 = new Sprite(GameFramework::imagesPath() + "solV1.png");
+    Sol3->setData(1,"sol");
+    m_pScene->addSpriteToScene(Sol3, 600,600);
+
+    Sprite* Sol4 = new Sprite(GameFramework::imagesPath() + "solV1.png");
+    Sol4->setData(1,"sol");
+    m_pScene->addSpriteToScene(Sol4, 700,600);
+
+    Sprite* Sol5 = new Sprite(GameFramework::imagesPath() + "solV1.png");
+    Sol5->setData(1,"sol");
+    m_pScene->addSpriteToScene(Sol5, 800,600);
+
+    Sprite* Sol6 = new Sprite(GameFramework::imagesPath() + "solV1.png");
+    Sol6->setData(1,"sol");
+    m_pScene->addSpriteToScene(Sol6, 900,600);
 
     //Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solV1.png");
     //Sol2->setData(1,"sol");
@@ -261,7 +281,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
     QPointF boundingBoxSize = QPointF(40,40);
     // Détermine la prochaine position du sprite
-    QRectF nextSpriteRect = Pplayer->globalBoundingBox().translated(boundingBoxSize);
+    QPainterPath nextSpriteRect = Pplayer->globalShape().translated(boundingBoxSize);
     // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
     auto listeFuturCollision = Pplayer->parentScene()->collidingSprites(nextSpriteRect);
     // Supprime le sprite lui-même, qui collisionne toujours avec sa boundingbox
@@ -281,7 +301,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 isJump = false;
                 //Pplayer->setY(Pplayer->y() - 1);
 
-               qDebug() << "sol pas loin";
+               //qDebug() << "sol pas loin";
             }else{
                 isOnFloor = false;
             }
@@ -295,23 +315,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         Pplayer->setPos(Pplayer->pos() + velocity * (elapsedTimeInMilliseconds/100.0));
         velocity+= gravity * (elapsedTimeInMilliseconds/100.0);
     }
-
-
-
-
-    /*
-    auto collidingSprites = Pplayer->parentScene()->collidingSprites(nextSpriteRect);
-
-    // Si la prochaine position du sprite n'est pas comprise au sein de la scène,
-    // ou s’il y a collision, le sprite n’est pas déplacé et change de direction
-    if (!Pplayer->parentScene()->isInsideScene(nextSpriteRect) ||
-    collision)
-    m_playerDirection *= -1;
-    else
-    // S'il n'y a pas de collision et que le sprite ne sort pas de la scène, on le déplace
-    // (en lui appliquant le vecteur de déplacement)
-    Pplayer->setPos(Pplayer->pos() + velocity);
-    */
 }
 
 
