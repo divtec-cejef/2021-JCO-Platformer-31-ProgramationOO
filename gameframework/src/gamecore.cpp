@@ -68,7 +68,7 @@ void configureAnimation(Sprite* pSprite,ANIM_PLAYER Player) {
         iSprite =  "MarcheDroiteV7.png";
         break;
     case SAUT:
-        iSprite = "BasicPoseV2.png";
+        iSprite = "SautDroiteV1.png";
         break;
     case BASE:
         iSprite = "BasicPoseV2.png";
@@ -93,8 +93,8 @@ void configureAnimation(Sprite* pSprite,ANIM_PLAYER Player) {
         // qDebug() << "MARCHE "<< iSprite;
     }else {
         //pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseV1.png");
-        pSprite->addAnimationFrame(GameFramework::imagesPath() + "BasicPoseV2.png");
-        qDebug() << "BASE " << iSprite;
+        pSprite->addAnimationFrame(GameFramework::imagesPath() + iSprite);
+        //qDebug() << "BASE " << iSprite;
 
     }
     pSprite->startAnimation(25);
@@ -185,7 +185,7 @@ void GameCore::keyPressed(int key) {
 
     case Qt::Key_Up:
         if(isOnFloor){
-        animation = BASE;
+        animation = SAUT;
         velocity.setY(PLAYER_JUMP);
         isJump = true;
         qDebug() << "isJump : " << isJump;
@@ -207,7 +207,7 @@ void GameCore::keyPressed(int key) {
 
     case Qt::Key_Space:
         //if(isOnFloor){
-        animation = BASE;
+        animation = SAUT;
         velocity.setY(PLAYER_JUMP);
         isJump = true;
         //qDebug() << "isJump : " << isJump;
@@ -255,8 +255,8 @@ void GameCore::keyReleased(int key) {
         isJump = false;
         break;
     }
-
-    configureAnimation(Pplayer,BASE);
+    if(!isOnFloor)
+        configureAnimation(Pplayer,BASE);
 }
 
 //! Cadence.
