@@ -129,9 +129,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     Pplayer->setAnimationSpeed(25);
     configureAnimation(Pplayer,BASE);
 
-    WOODCAISSE_SPRITE = new Sprite(GameFramework::imagesPath() + "CaisseV1.png");
-    WOODCAISSE_SPRITE->setData(1,"Wood_caisse");
-    m_pScene->addSpriteToScene(WOODCAISSE_SPRITE, 600,680);
+
 
     Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
     caisseM1->setData(1,"Metal_caisse");
@@ -141,6 +139,10 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     Sprite* Sol1 = new Sprite(GameFramework::imagesPath() + "solV2.png");
     Sol1->setData(1,"sol");
     m_pScene->addSpriteToScene(Sol1, 1,600);
+
+    WOODCAISSE_SPRITE = new Sprite(GameFramework::imagesPath() + "CaisseV1.png");
+    WOODCAISSE_SPRITE->setData(1,"Wood_caisse");
+    m_pScene->addSpriteToScene(WOODCAISSE_SPRITE, 600,465);
 
 
     //Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solV1.png");
