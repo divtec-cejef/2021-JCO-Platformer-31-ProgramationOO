@@ -12,6 +12,7 @@
 
 #include <QGraphicsTransform>
  #include <QList>
+#include "character.h"
 
 class GameCanvas;
 class GameScene;
@@ -44,6 +45,7 @@ public:
     bool isJump = false;
     QVariant collisionCurrent;
 
+
     void tick(long long elapsedTimeInMilliseconds);
 
 
@@ -58,8 +60,9 @@ private:
 
     GameCanvas* m_pGameCanvas;
     GameScene* m_pScene;
-    Sprite* Pplayer;
+    Sprite* Pplayer ;
 
+    Character m_character();
 
     int distanceLeft = 0;
     int distanceRight = 0;

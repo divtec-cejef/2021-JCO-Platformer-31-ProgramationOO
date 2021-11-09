@@ -29,8 +29,6 @@ public:
     };
 
     void configureAnimation(ANIM_PLAYER animation);
-
-
 };
 
 #endif // CHARACTER_H

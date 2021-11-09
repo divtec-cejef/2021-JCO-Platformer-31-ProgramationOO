@@ -45,7 +45,6 @@ struct collisionDistance{
 
 };
 
-
 Character::Character(Sprite* _Player)
 {
     m_player = _Player;
@@ -59,19 +58,19 @@ void Character::configureAnimation(ANIM_PLAYER animation) {
 
     switch (animation) {
     case DEPLA_GAUCHE:
-        iSprite = "MarcheGaucheV5.png";
+        iSprite = "MarcheGaucheV7.png";
         break;
     case DEPLA_DROITE:
-        iSprite =  "MarcheDroiteV5.png";
+        iSprite =  "MarcheDroiteV7.png";
         break;
     case SAUT:
-        iSprite = "BasicPoseV5.png";
+        iSprite = "SautDroiteV1.png";
         break;
     case BASE:
-        iSprite = "BasicPoseV1.png";
+        iSprite = "BasicPoseV2.png";
     }
 
-    if(iSprite == "MarcheDroiteV4.png" || iSprite == "MarcheGaucheV4.png"){
+    if(iSprite == "MarcheDroiteV7.png" || iSprite == "MarcheGaucheV7.png"){
 
         QImage spriteSheet(GameFramework::imagesPath() + iSprite);
 
@@ -90,15 +89,11 @@ void Character::configureAnimation(ANIM_PLAYER animation) {
         // qDebug() << "MARCHE "<< iSprite;
     }else {
         //pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseV1.png");
-        m_player->addAnimationFrame(GameFramework::imagesPath() + "BasicPoseV1.png");
-        qDebug() << "BASE " << iSprite;
+        m_player->addAnimationFrame(GameFramework::imagesPath() + iSprite);
+        //qDebug() << "BASE " << iSprite;
 
     }
     m_player->startAnimation(25);
-
-
-    //pSprite->setAnimationSpeed(25);
-    //}else{
-    //pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseGauche.png");
-    //}
 }
+
+
