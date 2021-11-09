@@ -131,38 +131,17 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     WOODCAISSE_SPRITE = new Sprite(GameFramework::imagesPath() + "CaisseV1.png");
     WOODCAISSE_SPRITE->setData(1,"Wood_caisse");
-    m_pScene->addSpriteToScene(WOODCAISSE_SPRITE, 200,500);
+    m_pScene->addSpriteToScene(WOODCAISSE_SPRITE, 600,680);
 
     Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
     caisseM1->setData(1,"Metal_caisse");
     m_pScene->addSpriteToScene(caisseM1, 700,200);
 
-   /// for (int i = 0;i = ;) {
 
-   // }
-    Sprite* Sol1 = new Sprite(GameFramework::imagesPath() + "solV1.png");
+    Sprite* Sol1 = new Sprite(GameFramework::imagesPath() + "solV2.png");
     Sol1->setData(1,"sol");
-    m_pScene->addSpriteToScene(Sol1, 400,600);
+    m_pScene->addSpriteToScene(Sol1, 1,600);
 
-    Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solV1.png");
-    Sol2->setData(1,"sol");
-    m_pScene->addSpriteToScene(Sol2, 500,600);
-
-    Sprite* Sol3 = new Sprite(GameFramework::imagesPath() + "solV1.png");
-    Sol3->setData(1,"sol");
-    m_pScene->addSpriteToScene(Sol3, 600,600);
-
-    Sprite* Sol4 = new Sprite(GameFramework::imagesPath() + "solV1.png");
-    Sol4->setData(1,"sol");
-    m_pScene->addSpriteToScene(Sol4, 700,600);
-
-    Sprite* Sol5 = new Sprite(GameFramework::imagesPath() + "solV1.png");
-    Sol5->setData(1,"sol");
-    m_pScene->addSpriteToScene(Sol5, 800,600);
-
-    Sprite* Sol6 = new Sprite(GameFramework::imagesPath() + "solV1.png");
-    Sol6->setData(1,"sol");
-    m_pScene->addSpriteToScene(Sol6, 900,600);
 
     //Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solV1.png");
     //Sol2->setData(1,"sol");
@@ -203,6 +182,28 @@ void GameCore::keyPressed(int key) {
         break;
 
     case Qt::Key_Up:
+        if(isOnFloor){
+        animation = BASE;
+        velocity.setY(PLAYER_JUMP);
+        isJump = true;
+        qDebug() << "isJump : " << isJump;
+        }else{
+         animation = BASE;
+        }
+        //qDebug() << "velocity y : " << velocity.y();
+        break;
+
+    case Qt::Key_A:
+        velocity.setX(-PLAYER_SPEED);
+        animation = DEPLA_GAUCHE;
+        break;
+
+    case Qt::Key_D:
+        velocity.setX(PLAYER_SPEED);
+        animation = DEPLA_DROITE;
+        break;
+
+    case Qt::Key_Space:
         //if(isOnFloor){
         animation = BASE;
         velocity.setY(PLAYER_JUMP);
@@ -234,18 +235,26 @@ void GameCore::keyReleased(int key) {
         //distanceRight = PLAYER_STOP;
         break;
     case Qt::Key_Up:
+        //velocity.setY(PLAYER_STOP);
+        //isJump = false;
+        //qDebug() << "isJump : " << isJump;
+        break;
+
+    case Qt::Key_A:
+        velocity.setX(PLAYER_STOP);
+        break;
+
+    case Qt::Key_D:
+        velocity.setX(PLAYER_STOP);
+        break;
+
+    case Qt::Key_Space:
         velocity.setY(PLAYER_STOP);
         isJump = false;
-        //qDebug() << "isJump : " << isJump;
         break;
     }
 
     configureAnimation(Pplayer,BASE);
-    //other keys
-
-    //do collisions
-
-
 }
 
 //! Cadence.
@@ -267,8 +276,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         for (Sprite* CollisionDetected : listeCurrentCollision) {
 
             if(CollisionDetected->data(1) == "Wood_caisse"){
-
-                WOODCAISSE_SPRITE->setX(WOODCAISSE_SPRITE->x() - 1);
+                WOODCAISSE_SPRITE->setX(WOODCAISSE_SPRITE->x() + velocity.x());
                 //p_position.setX(m_pPlayer->x() + 1);
 
             }else if(CollisionDetected->data(1) == "Metal_caisse"){
@@ -279,9 +287,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         }
     }
 
-    QPointF boundingBoxSize = QPointF(40,40);
-    // Détermine la prochaine position du sprite
-    QPainterPath nextSpriteRect = Pplayer->globalShape().translated(boundingBoxSize);
+    // Détermine la prochaine position du sprite selon sa velocité
+    QPainterPath nextSpriteRect = Pplayer->globalShape().translated(velocity);
     // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
     auto listeFuturCollision = Pplayer->parentScene()->collidingSprites(nextSpriteRect);
     // Supprime le sprite lui-même, qui collisionne toujours avec sa boundingbox
@@ -299,7 +306,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     velocity.setY(0.0);
 
                 isJump = false;
-                //Pplayer->setY(Pplayer->y() - 1);
+
 
                //qDebug() << "sol pas loin";
             }else{

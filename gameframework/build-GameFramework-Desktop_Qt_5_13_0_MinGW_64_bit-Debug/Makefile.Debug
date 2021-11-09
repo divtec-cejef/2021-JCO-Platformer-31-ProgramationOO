@@ -13,7 +13,7 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1 -DQT_QML_DEBUG -DQT_SVG_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
+DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1 -DDEBUG_BBOX -DDEBUG_SHAPE -DQT_QML_DEBUG -DQT_SVG_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
 CFLAGS        = -fno-keep-inline-dllexport -g -Wall -W -Wextra $(DEFINES)
 CXXFLAGS      = -fno-keep-inline-dllexport -g -Wall -W -Wextra -fexceptions -mthreads $(DEFINES)
 INCPATH       = -I..\src -I. -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\include -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\include\QtSvg -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\include\QtWidgets -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\include\QtGui -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\include\QtANGLE -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\include\QtCore -Idebug -I. -I\include -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\mkspecs\win32-g++ 
@@ -2621,7 +2621,8 @@ debug/gamecore.o: ../src/gamecore.cpp ../src/gamecore.h \
 		../src/sprite.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsPixmapItem \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsitem.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/QPixmap
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/QPixmap \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/QPainterPath
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\gamecore.o ..\src\gamecore.cpp
 
 debug/resources.o: ../src/resources.cpp ../src/resources.h \
