@@ -59,13 +59,13 @@ void Character::configureAnimation(ANIM_PLAYER animation) {
 
     switch (animation) {
     case DEPLA_GAUCHE:
-        iSprite = "MarcheGaucheV4.png";
+        iSprite = "MarcheGaucheV5.png";
         break;
     case DEPLA_DROITE:
-        iSprite =  "MarcheDroiteV4.png";
+        iSprite =  "MarcheDroiteV5.png";
         break;
     case SAUT:
-        iSprite = "BasicPoseV1.png";
+        iSprite = "BasicPoseV5.png";
         break;
     case BASE:
         iSprite = "BasicPoseV1.png";

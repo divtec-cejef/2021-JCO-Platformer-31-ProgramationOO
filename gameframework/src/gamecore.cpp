@@ -32,8 +32,8 @@ const int SCENE_WIDTH = 1280;
 
 
 //spriteSheet animation de marche à gauche
-const int FRAME_WIDTH = 192;
-const int FRAME_HEIGHT = 192;
+const int FRAME_WIDTH = 96;
+const int FRAME_HEIGHT = 96;
 const int FRAME_COUNT = 4;
 const int COLUMN_COUNT = 2;
 //const float SCALE_RATIO = 2;
@@ -62,19 +62,19 @@ void configureAnimation(Sprite* pSprite,ANIM_PLAYER Player) {
 
     switch (Player) {
     case DEPLA_GAUCHE:
-        iSprite = "MarcheGaucheV4.png";
+        iSprite = "MarcheGaucheV7.png";
         break;
     case DEPLA_DROITE:
-        iSprite =  "MarcheDroiteV4.png";
+        iSprite =  "MarcheDroiteV7.png";
         break;
     case SAUT:
-        iSprite = "BasicPoseV1.png";
+        iSprite = "BasicPoseV2.png";
         break;
     case BASE:
-        iSprite = "BasicPoseV1.png";
+        iSprite = "BasicPoseV2.png";
     }
 
-    if(iSprite == "MarcheDroiteV4.png" || iSprite == "MarcheGaucheV4.png"){
+    if(iSprite == "MarcheDroiteV7.png" || iSprite == "MarcheGaucheV5.png"){
 
         QImage spriteSheet(GameFramework::imagesPath() + iSprite);
 
@@ -93,7 +93,7 @@ void configureAnimation(Sprite* pSprite,ANIM_PLAYER Player) {
         // qDebug() << "MARCHE "<< iSprite;
     }else {
         //pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseV1.png");
-        pSprite->addAnimationFrame(GameFramework::imagesPath() + "BasicPoseV1.png");
+        pSprite->addAnimationFrame(GameFramework::imagesPath() + "BasicPoseV2.png");
         qDebug() << "BASE " << iSprite;
 
     }
@@ -123,8 +123,8 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     // Instancier et initialiser les sprite ici :
     // ...
-    Pplayer = new Sprite(GameFramework::imagesPath() + "BasicPoseV1.png");
-    m_pScene->addSpriteToScene(Pplayer, 500,200);
+    Pplayer = new Sprite(GameFramework::imagesPath() + "BasicPoseV2.png");
+    m_pScene->addSpriteToScene(Pplayer, 300,200);
 
     Pplayer->setAnimationSpeed(25);
     configureAnimation(Pplayer,BASE);
@@ -133,7 +133,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
     caisseM1->setData(1,"Metal_caisse");
-    m_pScene->addSpriteToScene(caisseM1, 700,200);
+    m_pScene->addSpriteToScene(caisseM1, 700,465);
 
 
     Sprite* Sol1 = new Sprite(GameFramework::imagesPath() + "solV2.png");
@@ -237,7 +237,7 @@ void GameCore::keyReleased(int key) {
         //distanceRight = PLAYER_STOP;
         break;
     case Qt::Key_Up:
-        //velocity.setY(PLAYER_STOP);
+        velocity.setY(PLAYER_STOP);
         //isJump = false;
         //qDebug() << "isJump : " << isJump;
         break;
@@ -278,11 +278,12 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         for (Sprite* CollisionDetected : listeCurrentCollision) {
 
             if(CollisionDetected->data(1) == "Wood_caisse"){
+
                 WOODCAISSE_SPRITE->setX(WOODCAISSE_SPRITE->x() + velocity.x());
                 //p_position.setX(m_pPlayer->x() + 1);
 
             }else if(CollisionDetected->data(1) == "Metal_caisse"){
-                Pplayer->setX(Pplayer->x() - 10);
+                Pplayer->setX(Pplayer->x() + velocity.x());
                 //p_position.setY(-4);
 
             }
