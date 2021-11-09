@@ -74,7 +74,7 @@ void configureAnimation(Sprite* pSprite,ANIM_PLAYER Player) {
         iSprite = "BasicPoseV2.png";
     }
 
-    if(iSprite == "MarcheDroiteV7.png" || iSprite == "MarcheGaucheV5.png"){
+    if(iSprite == "MarcheDroiteV7.png" || iSprite == "MarcheGaucheV7.png"){
 
         QImage spriteSheet(GameFramework::imagesPath() + iSprite);
 
@@ -255,8 +255,11 @@ void GameCore::keyReleased(int key) {
         isJump = false;
         break;
     }
-    if(!isOnFloor)
+    if(isOnFloor)
         configureAnimation(Pplayer,BASE);
+    else {
+        configureAnimation(Pplayer,SAUT);
+    }
 }
 
 //! Cadence.
@@ -305,8 +308,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         for (Sprite* CollisionDetected : listeFuturCollision) {
             if (CollisionDetected->data(1) == "sol") {
                 isOnFloor = true;
-
-                    velocity.setY(0.0);
+                configureAnimation(Pplayer,BASE);
+                velocity.setY(0.0);
 
                 isJump = false;
 
