@@ -36,6 +36,11 @@ const int FRAME_HEIGHT = 96;
 const int FRAME_COUNT = 4;
 const int COLUMN_COUNT = 2;
 
+//Déplcament du joueur
+const int PLAYER_SPEED = 10 ; // vitesse de déplacement du joueur en pixels/s
+const int PLAYER_JUMP= -10 ; //Vitesse du saute
+const int PLAYER_STOP = 0;
+
 struct collisionDistance{
     double top;
     double down;
@@ -50,20 +55,17 @@ Character::Character(QGraphicsItem* pParent) : Sprite(GameFramework::imagesPath(
     //m_keyDownPressed  = false;
     //m_keyLeftPressed  = false;
     //m_keyRightPressed = false;
-    //m_playerVelocity = QPointF(0,0);
+    //m_playerm_velocity = QPointF(0,0);
 }
-/*
-void Character::setVelocity(QPointF m_playerVelocity){
-      this->m_playerVelocity = m_playerVelocity;
-}
+
 
 QPointF Character::getVelocity(){
-    return  m_playerVelocity;
-}
-*/
+    return m_velocity;
+};
+
 void Character::configureAnimation(animation player) {
 
-   clearAnimations();
+    clearAnimations();
     QString iSprite;
 
     switch (player) {
@@ -76,7 +78,7 @@ void Character::configureAnimation(animation player) {
     case SAUT:
         iSprite = "SautDroiteV1.png";
         break;
-    case BASE:
+    default:
         iSprite = "BasicPoseV2.png";
         break;
     }
@@ -108,3 +110,101 @@ void Character::configureAnimation(animation player) {
 
 }
 
+
+//! Traite la pression d'une touche.
+//! \param key Numéro de la touche (voir les constantes Qt)
+//!
+void Character::onKeyPressed(int key) {
+    //emit notifyKeyPressed(key);
+
+    Character::animation player;
+
+    switch(key) {
+    case Qt::Key_Left:
+        m_velocity.setX(-PLAYER_SPEED);
+        player = DEPLA_GAUCHE;
+        break;
+
+    case Qt::Key_Right:
+        m_velocity.setX(PLAYER_SPEED);
+        player = DEPLA_DROITE;
+        break;
+
+    case Qt::Key_Up:
+        if(isOnFloor){
+            player = SAUT;
+            m_velocity.setY(PLAYER_JUMP);
+            isJump = true;
+            qDebug() << "isJump : " << isJump;
+        }else{
+            player = BASE;
+        }
+        //qDebug() << "m_velocity y : " << m_velocity.y();
+        break;
+
+    case Qt::Key_A:
+        m_velocity.setX(-PLAYER_SPEED);
+        player = DEPLA_GAUCHE;
+        break;
+
+    case Qt::Key_D:
+        m_velocity.setX(PLAYER_SPEED);
+        player = DEPLA_DROITE;
+        break;
+
+    case Qt::Key_Space:
+        //if(isOnFloor){
+        player = SAUT;
+        m_velocity.setY(PLAYER_JUMP);
+        isJump = true;
+        //qDebug() << "isJump : " << isJump;
+        //}
+        break;
+
+    default:
+        player = BASE;
+    }
+     //m_character(pCharacter).configureAnimation();
+    configureAnimation(player);
+}
+
+//! Traite le relâchement d'une touche.
+//! \param key Numéro de la touche (voir les constantes Qt)
+void Character::onKeyReleased(int key) {
+    //emit notifyKeyReleased(key);
+
+    switch(key) {
+    case Qt::Key_Left:
+        m_velocity.setX(PLAYER_STOP);
+        //distanceLeft = PLAYER_STOP;
+        break;
+
+    case Qt::Key_Right:
+        m_velocity.setX(PLAYER_STOP);
+        //distanceRight = PLAYER_STOP;
+        break;
+    case Qt::Key_Up:
+        m_velocity.setY(PLAYER_STOP);
+        //isJump = false;
+        //qDebug() << "isJump : " << isJump;
+        break;
+
+    case Qt::Key_A:
+        m_velocity.setX(PLAYER_STOP);
+        break;
+
+    case Qt::Key_D:
+        m_velocity.setX(PLAYER_STOP);
+        break;
+
+    case Qt::Key_Space:
+        m_velocity.setY(PLAYER_STOP);
+        isJump = false;
+        break;
+    }
+    //if(!isOnFloor)
+        //pCharacter->configureAnimation(Character::SAUT);
+    //else {
+        configureAnimation(Character::BASE);
+    //}
+}
