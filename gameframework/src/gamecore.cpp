@@ -32,68 +32,11 @@ const int SCENE_WIDTH = 1280;
 
 
 //spriteSheet animation de marche à gauche
-const int FRAME_WIDTH = 96;
-const int FRAME_HEIGHT = 96;
-const int FRAME_COUNT = 4;
-const int COLUMN_COUNT = 2;
+
 //const float SCALE_RATIO = 2;
 
 //static
 static Sprite* WOODCAISSE_SPRITE;
-static Sprite* METALCAISSE_SPRITE;
-
-/*
-void configureAnimation(Sprite* pSprite,ANIM_PLAYER Player) {
-
-    pSprite->clearAnimations();
-    QString iSprite;
-
-    switch (Player) {
-    case DEPLA_GAUCHE:
-        iSprite = "MarcheGaucheV7.png";
-        break;
-    case DEPLA_DROITE:
-        iSprite =  "MarcheDroiteV7.png";
-        break;
-    case SAUT:
-        iSprite = "SautDroiteV1.png";
-        break;
-    case BASE:
-        iSprite = "BasicPoseV2.png";
-    }
-
-    if(iSprite == "MarcheDroiteV7.png" || iSprite == "MarcheGaucheV7.png"){
-
-        QImage spriteSheet(GameFramework::imagesPath() + iSprite);
-
-        // Découpage de la spritesheet
-        for (int frameIndex = 0; frameIndex < FRAME_COUNT; frameIndex++) {
-            QImage sprite = spriteSheet.copy((frameIndex % COLUMN_COUNT) * FRAME_WIDTH,
-                                             (frameIndex / COLUMN_COUNT) * FRAME_HEIGHT,
-                                             FRAME_WIDTH, FRAME_HEIGHT);
-
-            pSprite->addAnimationFrame(QPixmap::fromImage(sprite.scaled(FRAME_WIDTH * 1,
-                                                                        FRAME_HEIGHT * 1,
-                                                                        Qt::IgnoreAspectRatio,
-                                                                        Qt::SmoothTransformation)));
-        }
-
-        // qDebug() << "MARCHE "<< iSprite;
-    }else {
-        //pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseV1.png");
-        pSprite->addAnimationFrame(GameFramework::imagesPath() + iSprite);
-        //qDebug() << "BASE " << iSprite;
-
-    }
-    pSprite->startAnimation(25);
-
-
-    //pSprite->setAnimationSpeed(25);
-    //}else{
-    //pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseGauche.png");
-    //}
-}
-*/
 
 //! Initialise le contrôleur de jeu.
 //! \param pGameCanvas  GameCanvas pour lequel cet objet travaille.
@@ -116,7 +59,6 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pScene->addSpriteToScene(pCharacter, 300,200);
 
     pCharacter->startAnimation(25);
-    pCharacter->configureAnimation(Character::SAUT);
 
     //configureAnimation(pCharacter,BASE);
 
@@ -206,9 +148,8 @@ void GameCore::keyPressed(int key) {
     default:
         player = Character::BASE;
     }
-    pCharacter->setAnimationSpeed(25);
      //m_character(pCharacter).configureAnimation();
-    //configureAnimation(pCharacter,animation);
+    pCharacter->configureAnimation(player);
 }
 
 //! Traite le relâchement d'une touche.
@@ -245,11 +186,11 @@ void GameCore::keyReleased(int key) {
         isJump = false;
         break;
     }
-    if(isOnFloor)
+    //if(!isOnFloor)
+        //pCharacter->configureAnimation(Character::SAUT);
+    //else {
         pCharacter->configureAnimation(Character::BASE);
-    else {
-        pCharacter->configureAnimation(Character::SAUT);
-    }
+    //}
 }
 
 //! Cadence.

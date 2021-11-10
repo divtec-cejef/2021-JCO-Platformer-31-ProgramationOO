@@ -31,8 +31,8 @@ enum animation{
 };
 
 //spriteSheet animation de marche à gauche
-const int FRAME_WIDTH = 192;
-const int FRAME_HEIGHT = 192;
+const int FRAME_WIDTH = 96;
+const int FRAME_HEIGHT = 96;
 const int FRAME_COUNT = 4;
 const int COLUMN_COUNT = 2;
 
@@ -63,7 +63,7 @@ QPointF Character::getVelocity(){
 */
 void Character::configureAnimation(animation player) {
 
-    //SpritePlayer->clearAnimations();
+   clearAnimations();
     QString iSprite;
 
     switch (player) {
@@ -75,10 +75,10 @@ void Character::configureAnimation(animation player) {
         break;
     case SAUT:
         iSprite = "SautDroiteV1.png";
-         qDebug() << "AsssA";
         break;
     case BASE:
         iSprite = "BasicPoseV2.png";
+        break;
     }
 
     if(iSprite == "MarcheDroiteV7.png" || iSprite == "MarcheGaucheV7.png"){
