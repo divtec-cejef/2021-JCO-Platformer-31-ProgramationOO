@@ -80,10 +80,15 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     Sol1->setData(2,"sol");
     m_pScene->addSpriteToScene(Sol1, 1,600);
 
-    Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
+    Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solv2.png");
     Sol2->setData(1,"soltest");
     Sol2->setData(2,"sol");
-    m_pScene->addSpriteToScene(Sol2, 700,200);
+    m_pScene->addSpriteToScene(Sol2, 1280,600);
+
+    Sprite* platM1 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
+    platM1->setData(1,"soltest");
+    platM1->setData(2,"sol");
+    m_pScene->addSpriteToScene(platM1, 700,400);
 
     WOODCAISSE_SPRITE = new Sprite(GameFramework::imagesPath() + "CaisseV1.png");
     WOODCAISSE_SPRITE->setData(1,"Wood_caisse");
