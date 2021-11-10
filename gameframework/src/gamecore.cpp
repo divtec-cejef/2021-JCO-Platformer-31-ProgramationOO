@@ -62,17 +62,28 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     //configureAnimation(pCharacter,BASE);
 
-
+/*
     Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
-    caisseM1->setData(1,"Metal_caisse");
+    caisseM1->setData(1,"Wood_caisse");
     caisseM1->setData(2,"Sol");
-    m_pScene->addSpriteToScene(caisseM1, 300,465);
+    m_pScene->addSpriteToScene(caisseM1, 700,465);
+*/
+    /*
+    Sprite* caisseM2 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
+    caisseM2->setData(1,"caisseM");
+    caisseM2->setData(2,"Sol");
+    m_pScene->addSpriteToScene(caisseM2, 700,465);
+    */
 
-
-    Sprite* Sol1 = new Sprite(GameFramework::imagesPath() + "solV2.png");
+    Sprite* Sol1 = new Sprite(GameFramework::imagesPath() + "solv2.png");
     Sol1->setData(1,"soltest");
     Sol1->setData(2,"sol");
     m_pScene->addSpriteToScene(Sol1, 1,600);
+
+    Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
+    Sol2->setData(1,"soltest");
+    Sol2->setData(2,"sol");
+    m_pScene->addSpriteToScene(Sol2, 700,200);
 
     WOODCAISSE_SPRITE = new Sprite(GameFramework::imagesPath() + "CaisseV1.png");
     WOODCAISSE_SPRITE->setData(1,"Wood_caisse");
@@ -211,24 +222,16 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         //Cherche les collisions entre le joueurs les autres sprites
         for (Sprite* CollisionDetected : listeCurrentCollision) {
 
-
             if(CollisionDetected->data(1) == "Wood_caisse"){
 
-                WOODCAISSE_SPRITE->setX(WOODCAISSE_SPRITE->x() + pCharacter->m_velocity.x());
+               // WOODCAISSE_SPRITE->setX(WOODCAISSE_SPRITE->x() + pCharacter->m_velocity.x());
                 //p_position.setX(m_pCharacter->x() + 1);
-
-            }else if(CollisionDetected->data(1) == "Metal_caisse"){
-                //pCharacter->setX(pCharacter->x() + pCharacter->pCharacter->m_velocity.x());
-                //p_position.setY(-4);
-
             }
         }
     }
 
     // Détermine la prochaine position du sprite selon sa velocité
     QPainterPath nextSpriteRect = pCharacter->globalShape().translated(pCharacter->m_velocity);
-
-
 
     // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
     auto listeFuturCollision = pCharacter->parentScene()->collidingSprites(nextSpriteRect);

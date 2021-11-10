@@ -36,11 +36,6 @@ const int FRAME_HEIGHT = 96;
 const int FRAME_COUNT = 4;
 const int COLUMN_COUNT = 2;
 
-//Déplcament du joueur
-const int PLAYER_SPEED = 10 ; // vitesse de déplacement du joueur en pixels/s
-const int PLAYER_JUMP= -10 ; //Vitesse du saute
-const int PLAYER_STOP = 0;
-
 struct collisionDistance{
     double top;
     double down;
@@ -107,7 +102,6 @@ void Character::configureAnimation(animation player) {
 
     }
     startAnimation(25);
-
 }
 
 
