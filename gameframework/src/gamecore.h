@@ -59,7 +59,7 @@ private:
 
     GameCanvas* m_pGameCanvas;
     GameScene* m_pScene;
-    Sprite* m_pPlayer ;
+
 
     //Character m_character();
 
@@ -70,8 +70,8 @@ private:
 
     //QPointF p_position = QPointF(0,0);
 
-    void configureTransformationMatrix();
-    Character* pCharacter = new Character(m_pPlayer);
+
+    Character* pCharacter = new Character();
     QList<QGraphicsTransform*> m_transformsForFlip;
 
 

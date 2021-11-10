@@ -112,14 +112,13 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     // Instancier et initialiser les sprite ici :
     // ...
-    qDebug() << "aaaa";
-    m_pPlayer = new Sprite(GameFramework::imagesPath() + "BasicPoseV2.png");
-    m_pScene->addSpriteToScene(m_pPlayer, 300,200);
 
-    qDebug() << "aaaa";
-    m_pPlayer->startAnimation(25);
+    m_pScene->addSpriteToScene(pCharacter, 300,200);
+
+    pCharacter->startAnimation(25);
     pCharacter->configureAnimation(Character::SAUT);
-    //configureAnimation(m_pPlayer,BASE);
+
+    //configureAnimation(pCharacter,BASE);
 
 
     Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
@@ -207,9 +206,9 @@ void GameCore::keyPressed(int key) {
     default:
         player = Character::BASE;
     }
-    m_pPlayer->setAnimationSpeed(25);
-     //m_character(m_pPlayer).configureAnimation();
-    //configureAnimation(m_pPlayer,animation);
+    pCharacter->setAnimationSpeed(25);
+     //m_character(pCharacter).configureAnimation();
+    //configureAnimation(pCharacter,animation);
 }
 
 //! Traite le relâchement d'une touche.
@@ -258,11 +257,11 @@ void GameCore::keyReleased(int key) {
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
-    m_pPlayer->setPos(m_pPlayer->pos()+ velocity);
+    pCharacter->setPos(pCharacter->pos()+ velocity);
     // Récupère tous les sprites de la scène qui touche ce sprite
-    auto listeCurrentCollision = m_pPlayer->parentScene()->collidingSprites(m_pPlayer);
+    auto listeCurrentCollision = pCharacter->parentScene()->collidingSprites(pCharacter);
     // Supprimer le sprite lui-même
-    listeCurrentCollision.removeAll(m_pPlayer);
+    listeCurrentCollision.removeAll(pCharacter);
 
     //récupère la valeur de liste (remplis/vide)
     bool currentCollision  = !listeCurrentCollision.isEmpty();
@@ -275,10 +274,10 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             if(CollisionDetected->data(1) == "Wood_caisse"){
 
                 WOODCAISSE_SPRITE->setX(WOODCAISSE_SPRITE->x() + velocity.x());
-                //p_position.setX(m_m_pPlayer->x() + 1);
+                //p_position.setX(m_pCharacter->x() + 1);
 
             }else if(CollisionDetected->data(1) == "Metal_caisse"){
-                //m_pPlayer->setX(m_pPlayer->x() + velocity.x());
+                //pCharacter->setX(pCharacter->x() + velocity.x());
                 //p_position.setY(-4);
 
             }
@@ -286,14 +285,14 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     }
 
     // Détermine la prochaine position du sprite selon sa velocité
-    QPainterPath nextSpriteRect = m_pPlayer->globalShape().translated(velocity);
+    QPainterPath nextSpriteRect = pCharacter->globalShape().translated(velocity);
 
 
 
     // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
-    auto listeFuturCollision = m_pPlayer->parentScene()->collidingSprites(nextSpriteRect);
+    auto listeFuturCollision = pCharacter->parentScene()->collidingSprites(nextSpriteRect);
     // Supprime le sprite lui-même, qui collisionne toujours avec sa boundingbox
-    listeFuturCollision.removeAll(m_pPlayer);
+    listeFuturCollision.removeAll(pCharacter);
 
     //récupère la valeur de liste (remplis/vide)
     bool futurCollision = !listeFuturCollision.isEmpty();
@@ -304,7 +303,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             if (CollisionDetected->data(2) == "sol") {
 
                 if(!isOnFloor)
-                    pCharacter->configureAnimation(Character::BASE);
+                    //pCharacter->configureAnimation(Character::BASE);
                     isOnFloor = true;
                     velocity.setY(0.0);
                     isJump = false;
@@ -321,7 +320,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     //Si le joueur ne touche pas le sol alors il est attiré vers le bas
     if (!isOnFloor){
         //qDebug() << "PAS SUR LE SOL";
-        m_pPlayer->setPos(m_pPlayer->pos() + velocity * (elapsedTimeInMilliseconds/100.0));
+        pCharacter->setPos(pCharacter->pos() + velocity * (elapsedTimeInMilliseconds/100.0));
         velocity+= gravity * (elapsedTimeInMilliseconds/100.0);
     }
 }

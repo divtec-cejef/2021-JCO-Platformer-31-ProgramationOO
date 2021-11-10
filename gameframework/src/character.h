@@ -10,13 +10,13 @@
 #include <sprite.h>
 
 
-class Character
+class Character: public Sprite
 {
 public:
 
-    Sprite* SpritePlayer;
-    Character(Sprite* _player);
-    void setSpritePlayer(Sprite* _SpritePlayer);
+    QPointF m_playerVelocity = QPointF(0,0);
+
+    Character(QGraphicsItem* pParent = nullptr);
 
     //Type d'animation du joueurs
     enum animation{
@@ -29,6 +29,27 @@ public:
     };
 
     void configureAnimation(animation player);
+
+    void updateCharacterVelocity();
+
+    //void setVelocity(QPointF m_velocity);
+    //QPointF getVelocity();
+
+
+
+    /*
+    bool m_keyUpPressed;
+    bool m_keyDownPressed;
+    bool m_keyLeftPressed;
+    bool m_keyRightPressed;
+    */
+
+public slots:
+    //void onKeyPressed(int key);
+    //void onKeyReleased(int key);
+
+private:
+     void configureTransformationMatrix();
 };
 
 #endif // CHARACTER_H

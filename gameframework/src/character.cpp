@@ -44,19 +44,25 @@ struct collisionDistance{
 
 };
 
-Character::Character(Sprite* _SpritePlayer)
+Character::Character(QGraphicsItem* pParent) : Sprite(GameFramework::imagesPath() + "BasicPoseV2.png", pParent)
 {
-    this->SpritePlayer = _SpritePlayer;
+    //m_keyUpPressed    = false;
+    //m_keyDownPressed  = false;
+    //m_keyLeftPressed  = false;
+    //m_keyRightPressed = false;
+    //m_playerVelocity = QPointF(0,0);
+}
+/*
+void Character::setVelocity(QPointF m_playerVelocity){
+      this->m_playerVelocity = m_playerVelocity;
 }
 
-
-void Character::setSpritePlayer(Sprite* SpritePlayer){
-    this->SpritePlayer = SpritePlayer;
+QPointF Character::getVelocity(){
+    return  m_playerVelocity;
 }
-
+*/
 void Character::configureAnimation(animation player) {
 
-     qDebug() << "AA";
     //SpritePlayer->clearAnimations();
     QString iSprite;
 
@@ -73,8 +79,6 @@ void Character::configureAnimation(animation player) {
         break;
     case BASE:
         iSprite = "BasicPoseV2.png";
-    default:
-        iSprite = "BasicPoseV2.png";
     }
 
     if(iSprite == "MarcheDroiteV7.png" || iSprite == "MarcheGaucheV7.png"){
@@ -87,7 +91,7 @@ void Character::configureAnimation(animation player) {
                                              (frameIndex / COLUMN_COUNT) * FRAME_HEIGHT,
                                              FRAME_WIDTH, FRAME_HEIGHT);
 
-            SpritePlayer->addAnimationFrame(QPixmap::fromImage(sprite.scaled(FRAME_WIDTH * 1,
+            addAnimationFrame(QPixmap::fromImage(sprite.scaled(FRAME_WIDTH * 1,
                                                                         FRAME_HEIGHT * 1,
                                                                         Qt::IgnoreAspectRatio,
                                                                         Qt::SmoothTransformation)));
@@ -96,12 +100,11 @@ void Character::configureAnimation(animation player) {
         // qDebug() << "MARCHE "<< iSprite;
     }else {
         //pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseV1.png");
-         qDebug() << "Ajdidjijf";
-        SpritePlayer->addAnimationFrame(GameFramework::imagesPath() + iSprite);
+        addAnimationFrame(GameFramework::imagesPath() + iSprite);
         //qDebug() << "BASE " << iSprite;
 
     }
-    SpritePlayer->startAnimation(25);
-}
+    startAnimation(25);
 
+}
 
