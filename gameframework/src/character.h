@@ -14,7 +14,7 @@ class Character: public Sprite
 {
 public:
 
-    QPointF m_playerVelocity = QPointF(0,0);
+
 
     Character(QGraphicsItem* pParent = nullptr);
 
@@ -32,9 +32,14 @@ public:
 
     void updateCharacterVelocity();
 
-    //void setVelocity(QPointF m_velocity);
-    //QPointF getVelocity();
 
+    QPointF m_velocity = QPointF(0,0);
+    //void setVelocity(QPointF m_velocity);
+    QPointF getVelocity();
+
+
+    bool isOnFloor = false;
+    bool isJump = false;
 
 
     /*
@@ -42,11 +47,13 @@ public:
     bool m_keyDownPressed;
     bool m_keyLeftPressed;
     bool m_keyRightPressed;
+
     */
 
 public slots:
-    //void onKeyPressed(int key);
-    //void onKeyReleased(int key);
+
+    void onKeyPressed(int key);
+    void onKeyReleased(int key);
 
 private:
      void configureTransformationMatrix();
