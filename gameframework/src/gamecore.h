@@ -43,7 +43,6 @@ public:
     QPointF velocity = QPointF(0,0);
     bool isOnFloor = false;
     bool isJump = false;
-    QVariant collisionCurrent;
 
 
     void tick(long long elapsedTimeInMilliseconds);
@@ -60,9 +59,9 @@ private:
 
     GameCanvas* m_pGameCanvas;
     GameScene* m_pScene;
-    Sprite* Pplayer ;
+    Sprite* m_pPlayer ;
 
-    Character m_character();
+    //Character m_character();
 
     int distanceLeft = 0;
     int distanceRight = 0;
@@ -72,7 +71,7 @@ private:
     //QPointF p_position = QPointF(0,0);
 
     void configureTransformationMatrix();
-
+    Character* pCharacter = new Character(m_pPlayer);
     QList<QGraphicsTransform*> m_transformsForFlip;
 
 

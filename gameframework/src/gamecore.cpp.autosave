@@ -38,23 +38,11 @@ const int FRAME_COUNT = 4;
 const int COLUMN_COUNT = 2;
 //const float SCALE_RATIO = 2;
 
-
-//Type d'animation du joueurs
-enum ANIM_PLAYER{
-    SAUT,
-    DEPLA_GAUCHE,
-    DEPLA_DROITE,
-    ATTA_GAUCHE,
-    ATTA_DROITE,
-    BASE
-};
-
-
 //static
 static Sprite* WOODCAISSE_SPRITE;
 static Sprite* METALCAISSE_SPRITE;
 
-
+/*
 void configureAnimation(Sprite* pSprite,ANIM_PLAYER Player) {
 
     pSprite->clearAnimations();
@@ -105,6 +93,7 @@ void configureAnimation(Sprite* pSprite,ANIM_PLAYER Player) {
     //pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseGauche.png");
     //}
 }
+*/
 
 //! Initialise le contrôleur de jeu.
 //! \param pGameCanvas  GameCanvas pour lequel cet objet travaille.
@@ -123,12 +112,15 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     // Instancier et initialiser les sprite ici :
     // ...
-    Pplayer = new Sprite(GameFramework::imagesPath() + "BasicPoseV2.png");
-    m_pScene->addSpriteToScene(Pplayer, 300,200);
+    qDebug() << "aaaa";
+    m_pPlayer = new Sprite(GameFramework::imagesPath() + "BasicPoseV2.png");
+    m_pScene->addSpriteToScene(m_pPlayer, 300,200);
 
-    Pplayer->setAnimationSpeed(25);
-    configureAnimation(Pplayer,BASE);
-
+    qDebug() << "aaaa";
+    pCharacter->startAnimation(25);
+    pCharacter->configureAnimation(Character::SAUT);
+    
+    //configureAnimation(m_pPlayer,BASE);
 
 
     Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
@@ -147,14 +139,6 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     WOODCAISSE_SPRITE->setData(2,"sol");
     m_pScene->addSpriteToScene(WOODCAISSE_SPRITE, 600,465);
 
-
-   m_pScene->a 
-   m_pScene->registerSpriteForTick(oui)
-
-
-    //Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solV1.png");
-    //Sol2->setData(1,"sol");
-    //m_pScene->addSpriteToScene(Sol2, 700,600);
 
 
     // ...
@@ -177,44 +161,44 @@ GameCore::~GameCore() {
 void GameCore::keyPressed(int key) {
     emit notifyKeyPressed(key);
 
-    ANIM_PLAYER animation;
+    Character::animation player;
 
     switch(key) {
     case Qt::Key_Left:
         velocity.setX(-PLAYER_SPEED);
-        animation = DEPLA_GAUCHE;
+        player = Character::DEPLA_GAUCHE;
         break;
 
     case Qt::Key_Right:
         velocity.setX(PLAYER_SPEED);
-        animation = DEPLA_DROITE;
+        player = Character::DEPLA_DROITE;
         break;
 
     case Qt::Key_Up:
         if(isOnFloor){
-            animation = SAUT;
+            player = Character::SAUT;
             velocity.setY(PLAYER_JUMP);
             isJump = true;
             qDebug() << "isJump : " << isJump;
         }else{
-            animation = BASE;
+            player = Character::BASE;
         }
         //qDebug() << "velocity y : " << velocity.y();
         break;
 
     case Qt::Key_A:
         velocity.setX(-PLAYER_SPEED);
-        animation = DEPLA_GAUCHE;
+        player = Character::DEPLA_GAUCHE;
         break;
 
     case Qt::Key_D:
         velocity.setX(PLAYER_SPEED);
-        animation = DEPLA_DROITE;
+        player = Character::DEPLA_DROITE;
         break;
 
     case Qt::Key_Space:
         //if(isOnFloor){
-        animation = SAUT;
+        player = Character::SAUT;
         velocity.setY(PLAYER_JUMP);
         isJump = true;
         //qDebug() << "isJump : " << isJump;
@@ -222,11 +206,11 @@ void GameCore::keyPressed(int key) {
         break;
 
     default:
-        animation = BASE;
+        player = Character::BASE;
     }
-    Pplayer->setAnimationSpeed(25);
-     m_character(Pplayer).configureAnimation(Character::SAUT);
-    //configureAnimation(Pplayer,animation);
+    m_pPlayer->setAnimationSpeed(25);
+     //m_character(m_pPlayer).configureAnimation();
+    //configureAnimation(m_pPlayer,animation);
 }
 
 //! Traite le relâchement d'une touche.
@@ -264,9 +248,9 @@ void GameCore::keyReleased(int key) {
         break;
     }
     if(isOnFloor)
-        configureAnimation(Pplayer,BASE);
+        pCharacter->configureAnimation(Character::BASE);
     else {
-        configureAnimation(Pplayer,SAUT);
+        pCharacter->configureAnimation(Character::SAUT);
     }
 }
 
@@ -275,11 +259,11 @@ void GameCore::keyReleased(int key) {
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
-    Pplayer->setPos(Pplayer->pos()+ velocity);
+    m_pPlayer->setPos(m_pPlayer->pos()+ velocity);
     // Récupère tous les sprites de la scène qui touche ce sprite
-    auto listeCurrentCollision = Pplayer->parentScene()->collidingSprites(Pplayer);
+    auto listeCurrentCollision = m_pPlayer->parentScene()->collidingSprites(m_pPlayer);
     // Supprimer le sprite lui-même
-    listeCurrentCollision.removeAll(Pplayer);
+    listeCurrentCollision.removeAll(m_pPlayer);
 
     //récupère la valeur de liste (remplis/vide)
     bool currentCollision  = !listeCurrentCollision.isEmpty();
@@ -292,10 +276,10 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             if(CollisionDetected->data(1) == "Wood_caisse"){
 
                 WOODCAISSE_SPRITE->setX(WOODCAISSE_SPRITE->x() + velocity.x());
-                //p_position.setX(m_pPlayer->x() + 1);
+                //p_position.setX(m_m_pPlayer->x() + 1);
 
             }else if(CollisionDetected->data(1) == "Metal_caisse"){
-                //Pplayer->setX(Pplayer->x() + velocity.x());
+                //m_pPlayer->setX(m_pPlayer->x() + velocity.x());
                 //p_position.setY(-4);
 
             }
@@ -303,14 +287,14 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     }
 
     // Détermine la prochaine position du sprite selon sa velocité
-    QPainterPath nextSpriteRect = Pplayer->globalShape().translated(velocity);
+    QPainterPath nextSpriteRect = m_pPlayer->globalShape().translated(velocity);
 
 
 
     // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
-    auto listeFuturCollision = Pplayer->parentScene()->collidingSprites(nextSpriteRect);
+    auto listeFuturCollision = m_pPlayer->parentScene()->collidingSprites(nextSpriteRect);
     // Supprime le sprite lui-même, qui collisionne toujours avec sa boundingbox
-    listeFuturCollision.removeAll(Pplayer);
+    listeFuturCollision.removeAll(m_pPlayer);
 
     //récupère la valeur de liste (remplis/vide)
     bool futurCollision = !listeFuturCollision.isEmpty();
@@ -321,11 +305,10 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             if (CollisionDetected->data(2) == "sol") {
 
                 if(!isOnFloor)
-                    configureAnimation(Pplayer,BASE);
-
-                isOnFloor = true;
-                velocity.setY(0.0);
-                isJump = false;
+                    pCharacter->configureAnimation(Character::BASE);
+                    isOnFloor = true;
+                    velocity.setY(0.0);
+                    isJump = false;
 
                 //qDebug() << "sol pas loin";
             }else{
@@ -336,9 +319,10 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         isOnFloor = false;
     }
 
+    //Si le joueur ne touche pas le sol alors il est attiré vers le bas
     if (!isOnFloor){
         //qDebug() << "PAS SUR LE SOL";
-        Pplayer->setPos(Pplayer->pos() + velocity * (elapsedTimeInMilliseconds/100.0));
+        m_pPlayer->setPos(m_pPlayer->pos() + velocity * (elapsedTimeInMilliseconds/100.0));
         velocity+= gravity * (elapsedTimeInMilliseconds/100.0);
     }
 }

@@ -14,12 +14,12 @@ class Character
 {
 public:
 
-    Sprite* m_player;
+    Sprite* SpritePlayer;
     Character(Sprite* _player);
-
+    void setSpritePlayer(Sprite* _SpritePlayer);
 
     //Type d'animation du joueurs
-    enum ANIM_PLAYER{
+    enum animation{
         SAUT,
         DEPLA_GAUCHE,
         DEPLA_DROITE,
@@ -28,7 +28,7 @@ public:
         BASE
     };
 
-    void configureAnimation(ANIM_PLAYER animation);
+    void configureAnimation(animation player);
 };
 
 #endif // CHARACTER_H
