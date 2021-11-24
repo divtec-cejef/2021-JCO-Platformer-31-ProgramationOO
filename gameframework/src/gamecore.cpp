@@ -21,7 +21,6 @@
 #include "QPainterPath"
 #include <QGraphicsView>
 
-
 //Ajoute Supp
 #include <QString>
 
@@ -31,11 +30,6 @@ const int PLAYER_STOP = 0;
 
 //résolution de la fenetre
 const int SCENE_WIDTH = 3000;
-
-
-//spriteSheet animation de marche à gauche
-
-//const float SCALE_RATIO = 2;
 
 //static
 static Sprite* WOODCAISSE_SPRITE;
@@ -55,17 +49,13 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     // Trace un rectangle blanc tout autour des limites de la scène.
     m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::white));
 
-    //m_pView->setScene(m_pScene);
-
-
-
     // Instancier et initialiser les sprite ici :
     // ...
 
     Sprite* Sol1 = new Sprite(GameFramework::imagesPath() + "solv2.png");
     Sol1->setData(1,"soltest");
     Sol1->setData(2,"sol");
-    m_pScene->addSpriteToScene(Sol1, 100,900);
+    m_pScene->addSpriteToScene(Sol1, 0,600);
 
     Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solv2.png");
     Sol2->setData(1,"soltest");
@@ -121,11 +111,12 @@ GameCore::~GameCore() {
 //! \param key Numéro de la touche (voir les constantes Qt)
 //!
 void GameCore::keyPressed(int key) {
-    //emit notifyKeyPressed(key);
+    emit notifyKeyPressed(key);
 
     Character::animation player;
 
     switch(key) {
+    /*
     case Qt::Key_Left:
         pCharacter->m_velocity.setX(-PLAYER_SPEED);
         player = Character::DEPLA_GAUCHE;
@@ -135,8 +126,8 @@ void GameCore::keyPressed(int key) {
         pCharacter->m_velocity.setX(PLAYER_SPEED);
         player = Character::DEPLA_DROITE;
         break;
-
-    case Qt::Key_Up:
+    */
+    case Qt::Key_W:
         player = Character::SAUT;
         pCharacter->m_velocity.setY(PLAYER_JUMP);
         isJump = true;
@@ -173,7 +164,7 @@ void GameCore::keyPressed(int key) {
 //! Traite le relâchement d'une touche.
 //! \param key Numéro de la touche (voir les constantes Qt)
 void GameCore::keyReleased(int key) {
-    //emit notifyKeyReleased(key);
+    emit notifyKeyReleased(key);
 
     switch(key) {
     case Qt::Key_Left:
@@ -216,6 +207,7 @@ void GameCore::keyReleased(int key) {
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
+    //Suite les déplacement du joueur dans la scene
     m_pGameCanvas->m_pView->centerOn(m_pScene->sprites().takeAt(0)->pos());
     //qDebug()  << "valu perso x"<< m_pScene->sprites().takeAt(0)->pos().x()
     //          << "valu perso y"<< m_pScene->sprites().takeAt(0)->pos().y();
