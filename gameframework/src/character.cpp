@@ -31,8 +31,8 @@ enum animation{
 };
 
 //spriteSheet animation de marche à gauche
-const int FRAME_WIDTH = 96;
-const int FRAME_HEIGHT = 96;
+const int FRAME_WIDTH = 60;
+const int FRAME_HEIGHT = 60;
 const int FRAME_COUNT = 4;
 const int COLUMN_COUNT = 2;
 
@@ -44,7 +44,7 @@ struct collisionDistance{
 
 };
 
-Character::Character(QGraphicsItem* pParent) : Sprite(GameFramework::imagesPath() + "BasicPoseV2.png", pParent)
+Character::Character(QGraphicsItem* pParent) : Sprite(GameFramework::imagesPath() + "BasicPoseV4.png", pParent)
 {
 
 }
@@ -61,20 +61,20 @@ void Character::configureAnimation(animation player) {
 
     switch (player) {
     case DEPLA_GAUCHE:
-        iSprite = "MarcheGaucheV7.png";
+        iSprite = "MarcheGaucheV9.png";
         break;
     case DEPLA_DROITE:
-        iSprite =  "MarcheDroiteV7.png";
+        iSprite =  "MarcheDroiteV9.png";
         break;
     case SAUT:
-        iSprite = "SautDroiteV1.png";
+        iSprite = "SautDroiteV7.png";
         break;
     default:
-        iSprite = "BasicPoseV2.png";
+        iSprite = "BasicPoseV4.png";
         break;
     }
 
-    if(iSprite == "MarcheDroiteV7.png" || iSprite == "MarcheGaucheV7.png"){
+    if(iSprite == "MarcheDroiteV9.png" || iSprite == "MarcheGaucheV9.png"){
 
         QImage spriteSheet(GameFramework::imagesPath() + iSprite);
 

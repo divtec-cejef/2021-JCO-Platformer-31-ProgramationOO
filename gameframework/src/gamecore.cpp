@@ -67,24 +67,26 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     platM1->setData(2,"sol");
     m_pScene->addSpriteToScene(platM1, 700,400);
 
-    WOODCAISSE_SPRITE = new Sprite(GameFramework::imagesPath() + "CaisseV1.png");
+    WOODCAISSE_SPRITE = new Sprite(GameFramework::imagesPath() + "CaisseV2.png");
     WOODCAISSE_SPRITE->setData(1,"Wood_caisse");
     WOODCAISSE_SPRITE->setData(2,"sol");
     m_pScene->addSpriteToScene(WOODCAISSE_SPRITE, 500,465);
 
-    m_pScene->addSpriteToScene(pCharacter, 300,200);
+    Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV2.png");
+    caisseM1->setData(1,"Wood_caisse");
+    caisseM1->setData(2,"Sol");
+    m_pScene->addSpriteToScene(caisseM1, 700,465);
 
+    //Ajoute du joueur dans la scene
+    m_pScene->addSpriteToScene(pCharacter, 300,200);
     pCharacter->startAnimation(25);
 
 
     //configureAnimation(pCharacter,BASE);
 
-    /*
-    Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
-    caisseM1->setData(1,"Wood_caisse");
-    caisseM1->setData(2,"Sol");
-    m_pScene->addSpriteToScene(caisseM1, 700,465);
 
+
+    /*
     Sprite* caisseM2 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
     caisseM2->setData(1,"caisseM");
     caisseM2->setData(2,"Sol");
