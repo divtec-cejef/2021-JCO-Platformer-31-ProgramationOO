@@ -51,11 +51,37 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     // Instancier et initialiser les sprite ici :
     // ...
-
-    Sprite* Sol1 = new Sprite(GameFramework::imagesPath() + "solv2.png");
+    /*
+    Sprite* Sol1 = new Sprite(GameFramework::imagesPath() + "SolV3G.png");
     Sol1->setData(1,"soltest");
     Sol1->setData(2,"sol");
     m_pScene->addSpriteToScene(Sol1, 0,600);
+
+    Sprite* Sol11 = new Sprite(GameFramework::imagesPath() + "SolDuSolV3G.png");
+    Sol11->setData(1,"soltest");
+    Sol11->setData(2,"sol");
+    m_pScene->addSpriteToScene(Sol11, 0,720);
+    */
+    QPointF posSol(0,600);
+    QPointF posSolDuSol(0,posSol.y()+120);
+
+    for(int i = 0; i<14; i++){
+
+        Sprite* pSol = new Sprite(GameFramework::imagesPath()+"SolV3G.png");
+        pSol->setPos(posSol);
+        pSol->setData(1,"soltest");
+        pSol->setData(2,"sol");
+        m_pScene->addSpriteToScene(pSol);
+
+        Sprite* pSolDuSol = new Sprite(GameFramework::imagesPath()+"SolDuSolV3G.png");
+        pSolDuSol->setPos(posSolDuSol);
+        pSolDuSol->setData(1,"soltest");
+        pSolDuSol->setData(2,"sol");
+        m_pScene->addSpriteToScene(pSolDuSol);
+
+        posSol.setX(posSol.x() +120);
+        posSolDuSol.setX(posSol.x());
+    }
 
     Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solv2.png");
     Sol2->setData(1,"soltest");
@@ -81,10 +107,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pScene->addSpriteToScene(pCharacter, 300,200);
     pCharacter->startAnimation(25);
 
-
     //configureAnimation(pCharacter,BASE);
-
-
 
     /*
     Sprite* caisseM2 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
@@ -92,8 +115,6 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     caisseM2->setData(2,"Sol");
     m_pScene->addSpriteToScene(caisseM2, 700,465);
     */
-
-
 
     // ...
     // Démarre le tick pour que les animations qui en dépendent fonctionnent correctement.
