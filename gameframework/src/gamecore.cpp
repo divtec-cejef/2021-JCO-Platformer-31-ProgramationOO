@@ -67,7 +67,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     for(int i = 0; i<14; i++){
 
-        Sprite* pSol = new Sprite(GameFramework::imagesPath()+"SolV3G.png");
+        Sprite* pSol = new Sprite(GameFramework::imagesPath()+"SolV4G.png");
         pSol->setPos(posSol);
         pSol->setData(1,"soltest");
         pSol->setData(2,"sol");
@@ -82,12 +82,12 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
         posSol.setX(posSol.x() +120);
         posSolDuSol.setX(posSol.x());
     }
-
+/*
     Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solv2.png");
     Sol2->setData(1,"soltest");
     Sol2->setData(2,"sol");
     m_pScene->addSpriteToScene(Sol2, 1280,600);
-
+*/
     Sprite* platM1 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
     platM1->setData(1,"platforme");
     platM1->setData(2,"sol");
@@ -96,12 +96,12 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     WOODCAISSE_SPRITE = new Sprite(GameFramework::imagesPath() + "CaisseV2.png");
     WOODCAISSE_SPRITE->setData(1,"Wood_caisse");
     WOODCAISSE_SPRITE->setData(2,"sol");
-    m_pScene->addSpriteToScene(WOODCAISSE_SPRITE, 500,465);
+    m_pScene->addSpriteToScene(WOODCAISSE_SPRITE, 500,520);
 
     Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV2.png");
     caisseM1->setData(1,"Wood_caisse");
     caisseM1->setData(2,"Sol");
-    m_pScene->addSpriteToScene(caisseM1, 700,465);
+    m_pScene->addSpriteToScene(caisseM1, 700,520);
 
     //Ajoute du joueur dans la scene
     m_pScene->addSpriteToScene(pCharacter, 300,200);

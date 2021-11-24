@@ -12,12 +12,13 @@ TARGET = GameFramework
 TEMPLATE = app
 
 #DEFINES += DEBUG_SPRITE_COUNT
-DEFINES += DEBUG_BBOX
-DEFINES += DEBUG_SHAPE
+#DEFINES += DEBUG_BBOX
+#DEFINES += DEBUG_SHAPE
 #DEFINES += DEPLOY # Pour une compilation dans un but de déploiement
 
 SOURCES += main.cpp\
     character.cpp \
+    ground.cpp \
     keytickhandler.cpp \
         mainfrm.cpp \
     gamescene.cpp \
@@ -41,6 +42,7 @@ SOURCES += main.cpp\
 HEADERS  += mainfrm.h \
     character.h \
     gamescene.h \
+    ground.h \
     keytickhandler.h \
     player.h \
     playertickhandler.h \

@@ -13,7 +13,7 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1 -DDEBUG_BBOX -DDEBUG_SHAPE -DQT_QML_DEBUG -DQT_SVG_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
+DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1 -DQT_QML_DEBUG -DQT_SVG_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
 CFLAGS        = -fno-keep-inline-dllexport -g -Wall -W -Wextra $(DEFINES)
 CXXFLAGS      = -fno-keep-inline-dllexport -g -Wall -W -Wextra -fexceptions -mthreads $(DEFINES)
 INCPATH       = -I..\src -I. -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\include -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\include\QtSvg -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\include\QtWidgets -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\include\QtGui -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\include\QtANGLE -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\include\QtCore -Idebug -I. -I\include -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\mkspecs\win32-g++ 
@@ -766,6 +766,39 @@ debug/moc_gamecore.cpp: ../src/gamecore.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qfiledevice.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qvector2d.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qtouchdevice.h \
+		../src/character.h \
+		../src/sprite.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsPixmapItem \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsitem.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpixmap.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpaintdevice.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qcolor.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qrgb.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qrgba64.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qimage.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpixelformat.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/QPixmap \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QTimer \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qtimer.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qbasictimer.h \
+		../src/gameview.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsView \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpainter.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qtextoption.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpen.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qbrush.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qfontinfo.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qfont.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qfontmetrics.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qscrollarea.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qframe.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qwidget.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpalette.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qsizepolicy.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qcursor.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsscene.h \
 		debug/moc_predefs.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/bin/moc.exe
 	C:\Qt\Qt5.13.0\5.13.0\mingw73_64\bin\moc.exe $(DEFINES) --include "C:/Users/kuttleo/DIVTEC/EMT Informatique - 2019-2023/Kuttel Leo/Atelier/31-ProgramationOO/LeJeu/gameframework/build-GameFramework-Desktop_Qt_5_13_0_MinGW_64_bit-Debug/debug/moc_predefs.h" -IC:/Qt/Qt5.13.0/5.13.0/mingw73_64/mkspecs/win32-g++ -I"C:/Users/kuttleo/DIVTEC/EMT Informatique - 2019-2023/Kuttel Leo/Atelier/31-ProgramationOO/LeJeu/gameframework/src" -IC:/Qt/Qt5.13.0/5.13.0/mingw73_64/include -IC:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtSvg -IC:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets -IC:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui -IC:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtANGLE -IC:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore -I. -IC:/Qt/Qt5.13.0/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Qt5.13.0/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Qt5.13.0/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Qt5.13.0/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Qt5.13.0/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Qt5.13.0/Tools/mingw730_64/x86_64-w64-mingw32/include ..\src\gamecore.h -o debug\moc_gamecore.cpp
@@ -1711,7 +1744,22 @@ debug/keytickhandler.o: ../src/keytickhandler.cpp ../src/keytickhandler.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qfile.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qfiledevice.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qvector2d.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qtouchdevice.h
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qtouchdevice.h \
+		../src/character.h \
+		../src/gameview.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsView \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpainter.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qtextoption.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qfontinfo.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qfontmetrics.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qscrollarea.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qframe.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qwidget.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpalette.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qsizepolicy.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qcursor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\keytickhandler.o ..\src\keytickhandler.cpp
 
 debug/mainfrm.o: ../src/mainfrm.cpp ../src/mainfrm.h \
@@ -2001,12 +2049,19 @@ debug/gamescene.o: ../src/gamescene.cpp ../src/gamescene.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qquaternion.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qgenericmatrix.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/QList \
-		../src/resources.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QString \
+		../src/character.h \
 		../src/sprite.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsPixmapItem \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsitem.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/QPixmap
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/QPixmap \
+		../src/gameview.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsView \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qscrollarea.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qframe.h \
+		../src/resources.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QString
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\gamescene.o ..\src\gamescene.cpp
 
 debug/player.o: ../src/player.cpp ../src/player.h \
@@ -2251,6 +2306,21 @@ debug/playertickhandler.o: ../src/playertickhandler.cpp ../src/playertickhandler
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qfiledevice.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qvector2d.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qtouchdevice.h \
+		../src/character.h \
+		../src/gameview.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsView \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpainter.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qtextoption.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qfontinfo.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qfontmetrics.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qscrollarea.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qframe.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qwidget.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpalette.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qsizepolicy.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qcursor.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\playertickhandler.o ..\src\playertickhandler.cpp
 
@@ -2586,6 +2656,39 @@ debug/gamecore.o: ../src/gamecore.cpp ../src/gamecore.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qfiledevice.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qvector2d.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qtouchdevice.h \
+		../src/character.h \
+		../src/sprite.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsPixmapItem \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsitem.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpixmap.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpaintdevice.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qcolor.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qrgb.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qrgba64.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qimage.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpixelformat.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/QPixmap \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QTimer \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qtimer.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qbasictimer.h \
+		../src/gameview.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsView \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpainter.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qtextoption.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpen.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qbrush.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qfontinfo.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qfont.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qfontmetrics.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qscrollarea.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qframe.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qwidget.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpalette.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qsizepolicy.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qcursor.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsscene.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QDebug \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QSettings \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qsettings.h \
@@ -2595,33 +2698,15 @@ debug/gamecore.o: ../src/gamecore.cpp ../src/gamecore.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qpointer.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QTime \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qdatetime.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QTimer \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qtimer.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qbasictimer.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QElapsedTimer \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qelapsedtimer.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsScene \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsscene.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qbrush.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qcolor.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qrgb.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qrgba64.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qimage.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpaintdevice.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpixelformat.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpixmap.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qfont.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpen.h \
 		../src/resources.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QString \
 		../src/utilities.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QSize \
 		../src/playertickhandler.h \
 		../src/spritetickhandler.h \
-		../src/sprite.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsPixmapItem \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsitem.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/QPixmap \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/QPainterPath
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\gamecore.o ..\src\gamecore.cpp
 
@@ -3049,25 +3134,27 @@ debug/gamecanvas.o: ../src/gamecanvas.cpp ../src/gamecanvas.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qfiledevice.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qvector2d.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qtouchdevice.h \
-		../src/gamescene.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsScene \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsscene.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qbrush.h \
+		../src/character.h \
+		../src/sprite.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsPixmapItem \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsitem.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpixmap.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpaintdevice.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qcolor.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qrgb.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qrgba64.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qimage.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpaintdevice.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpixelformat.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpixmap.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qfont.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpen.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/QPixmap \
 		../src/gameview.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsView \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsview.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpainter.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qtextoption.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpen.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qbrush.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qfontinfo.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qfont.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qfontmetrics.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qscrollarea.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
@@ -3076,11 +3163,13 @@ debug/gamecanvas.o: ../src/gamecanvas.cpp ../src/gamecanvas.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpalette.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qsizepolicy.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qcursor.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsscene.h \
+		../src/gamescene.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsScene \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QDebug \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsSceneMouseEvent \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicssceneevent.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsItem \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsitem.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsTextItem \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/QKeyEvent
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\gamecanvas.o ..\src\gamecanvas.cpp
