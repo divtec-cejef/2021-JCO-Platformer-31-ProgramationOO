@@ -14,6 +14,7 @@
  #include <QList>
 #include "character.h"
 #include "gameview.h"
+#include "ground.h"
 
 class GameCanvas;
 class GameScene;
@@ -74,6 +75,7 @@ private:
 
 
     Character* pCharacter = new Character();
+    Ground* pGround = new Ground();
     QList<QGraphicsTransform*> m_transformsForFlip;
 
 

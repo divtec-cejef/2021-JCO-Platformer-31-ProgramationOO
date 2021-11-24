@@ -23,6 +23,7 @@
 
 //Ajoute Supp
 #include <QString>
+#include "ground.h"
 
 const int PLAYER_SPEED = 10 ; // vitesse de déplacement du joueur en pixels/s
 const int PLAYER_JUMP= -10 ; //Vitesse du saute
@@ -65,8 +66,26 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     QPointF posSol(0,600);
     QPointF posSolDuSol(0,posSol.y()+120);
 
+
+
+
     for(int i = 0; i<14; i++){
 
+        Ground* ground1 = new Ground();
+        ground1->configureOrientation(Ground::GROUND_UP);
+        ground1->setPos(posSol);
+        ground1->setData(1,"soltest");
+        ground1->setData(2,"sol");
+        m_pScene->addSpriteToScene(ground1);
+
+        Ground* groundOfGround = new Ground();
+        groundOfGround->configureOrientation(Ground::GROUND_OF_GROUND);
+        groundOfGround->setPos(posSol);
+        groundOfGround->setData(1,"soltest");
+        groundOfGround->setData(2,"sol");
+        m_pScene->addSpriteToScene(groundOfGround);
+
+        /*
         Sprite* pSol = new Sprite(GameFramework::imagesPath()+"SolV4G.png");
         pSol->setPos(posSol);
         pSol->setData(1,"soltest");
@@ -78,9 +97,10 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
         pSolDuSol->setData(1,"soltest");
         pSolDuSol->setData(2,"sol");
         m_pScene->addSpriteToScene(pSolDuSol);
-
+        */
         posSol.setX(posSol.x() +120);
         posSolDuSol.setX(posSol.x());
+
     }
 /*
     Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solv2.png");
