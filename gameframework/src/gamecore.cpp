@@ -19,6 +19,8 @@
 #include "sprite.h"
 #include "time.h"
 #include "QPainterPath"
+#include <QGraphicsView>
+
 
 //Ajoute Supp
 #include <QString>
@@ -28,7 +30,7 @@ const int PLAYER_JUMP= -10 ; //Vitesse du saute
 const int PLAYER_STOP = 0;
 
 //résolution de la fenetre
-const int SCENE_WIDTH = 1280;
+const int SCENE_WIDTH = 3000;
 
 
 //spriteSheet animation de marche à gauche
@@ -53,32 +55,17 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     // Trace un rectangle blanc tout autour des limites de la scène.
     m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::white));
 
+    //m_pView->setScene(m_pScene);
+
+
+
     // Instancier et initialiser les sprite ici :
     // ...
-
-    m_pScene->addSpriteToScene(pCharacter, 300,200);
-
-    pCharacter->startAnimation(25);
-
-    //configureAnimation(pCharacter,BASE);
-
-/*
-    Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
-    caisseM1->setData(1,"Wood_caisse");
-    caisseM1->setData(2,"Sol");
-    m_pScene->addSpriteToScene(caisseM1, 700,465);
-*/
-    /*
-    Sprite* caisseM2 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
-    caisseM2->setData(1,"caisseM");
-    caisseM2->setData(2,"Sol");
-    m_pScene->addSpriteToScene(caisseM2, 700,465);
-    */
 
     Sprite* Sol1 = new Sprite(GameFramework::imagesPath() + "solv2.png");
     Sol1->setData(1,"soltest");
     Sol1->setData(2,"sol");
-    m_pScene->addSpriteToScene(Sol1, 1,600);
+    m_pScene->addSpriteToScene(Sol1, 100,900);
 
     Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solv2.png");
     Sol2->setData(1,"soltest");
@@ -86,14 +73,33 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pScene->addSpriteToScene(Sol2, 1280,600);
 
     Sprite* platM1 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
-    platM1->setData(1,"soltest");
+    platM1->setData(1,"platforme");
     platM1->setData(2,"sol");
     m_pScene->addSpriteToScene(platM1, 700,400);
 
     WOODCAISSE_SPRITE = new Sprite(GameFramework::imagesPath() + "CaisseV1.png");
     WOODCAISSE_SPRITE->setData(1,"Wood_caisse");
     WOODCAISSE_SPRITE->setData(2,"sol");
-    m_pScene->addSpriteToScene(WOODCAISSE_SPRITE, 600,465);
+    m_pScene->addSpriteToScene(WOODCAISSE_SPRITE, 500,465);
+
+    m_pScene->addSpriteToScene(pCharacter, 300,200);
+
+    pCharacter->startAnimation(25);
+
+
+    //configureAnimation(pCharacter,BASE);
+
+    /*
+    Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
+    caisseM1->setData(1,"Wood_caisse");
+    caisseM1->setData(2,"Sol");
+    m_pScene->addSpriteToScene(caisseM1, 700,465);
+
+    Sprite* caisseM2 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
+    caisseM2->setData(1,"caisseM");
+    caisseM2->setData(2,"Sol");
+    m_pScene->addSpriteToScene(caisseM2, 700,465);
+    */
 
 
 
@@ -121,7 +127,7 @@ void GameCore::keyPressed(int key) {
 
     switch(key) {
     case Qt::Key_Left:
-       pCharacter->m_velocity.setX(-PLAYER_SPEED);
+        pCharacter->m_velocity.setX(-PLAYER_SPEED);
         player = Character::DEPLA_GAUCHE;
         break;
 
@@ -131,15 +137,9 @@ void GameCore::keyPressed(int key) {
         break;
 
     case Qt::Key_Up:
-        if(isOnFloor){
-            player = Character::SAUT;
-            pCharacter->m_velocity.setY(PLAYER_JUMP);
-            isJump = true;
-            qDebug() << "isJump : " << isJump;
-        }else{
-            player = Character::BASE;
-        }
-        //qDebug() << "pCharacter->m_velocity y : " << pCharacter->m_velocity.y();
+        player = Character::SAUT;
+        pCharacter->m_velocity.setY(PLAYER_JUMP);
+        isJump = true;
         break;
 
     case Qt::Key_A:
@@ -153,18 +153,20 @@ void GameCore::keyPressed(int key) {
         break;
 
     case Qt::Key_Space:
-        //if(isOnFloor){
-        player = Character::SAUT;
-        pCharacter->m_velocity.setY(PLAYER_JUMP);
-        isJump = true;
-        //qDebug() << "isJump : " << isJump;
-        //}
+        if(isOnFloor){
+            player = Character::SAUT;
+            pCharacter->m_velocity.setY(PLAYER_JUMP);
+            isJump = true;
+            qDebug() << "isJump : " << isJump;
+        }else{
+            player = Character::BASE;
+        }
         break;
 
     default:
         player = Character::BASE;
     }
-     //m_character(pCharacter).configureAnimation();
+    //m_character(pCharacter).configureAnimation();
     pCharacter->configureAnimation(player);
 }
 
@@ -203,9 +205,9 @@ void GameCore::keyReleased(int key) {
         break;
     }
     //if(!isOnFloor)
-        //pCharacter->configureAnimation(Character::SAUT);
+    //pCharacter->configureAnimation(Character::SAUT);
     //else {
-        pCharacter->configureAnimation(Character::BASE);
+    pCharacter->configureAnimation(Character::BASE);
     //}
 }
 
@@ -213,6 +215,12 @@ void GameCore::keyReleased(int key) {
 //! éplace le joueur en fonction de la touche préssé.
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
+
+    m_pGameCanvas->m_pView->centerOn(m_pScene->sprites().takeAt(0)->pos());
+    //qDebug()  << "valu perso x"<< m_pScene->sprites().takeAt(0)->pos().x()
+    //          << "valu perso y"<< m_pScene->sprites().takeAt(0)->pos().y();
+
+    //m_pScene->sprites().takeAt(0)->addAnimationFrame(GameFramework::imagesPath()+"CaisseV1.png");
 
     pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
     // Récupère tous les sprites de la scène qui touche ce sprite
@@ -229,7 +237,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
             if(CollisionDetected->data(1) == "Wood_caisse"){
 
-               // WOODCAISSE_SPRITE->setX(WOODCAISSE_SPRITE->x() + pCharacter->m_velocity.x());
+                // WOODCAISSE_SPRITE->setX(WOODCAISSE_SPRITE->x() + pCharacter->m_velocity.x());
                 //p_position.setX(m_pCharacter->x() + 1);
             }
         }
@@ -254,8 +262,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 if(!isOnFloor)
                     //pCharacter->configureAnimation(Character::BASE);
                     isOnFloor = true;
-                     pCharacter->m_velocity.setY(0.0);
-                    isJump = false;
+                pCharacter->m_velocity.setY(0.0);
+                isJump = false;
 
                 //qDebug() << "sol pas loin";
             }else{

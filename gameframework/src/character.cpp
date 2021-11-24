@@ -46,11 +46,7 @@ struct collisionDistance{
 
 Character::Character(QGraphicsItem* pParent) : Sprite(GameFramework::imagesPath() + "BasicPoseV2.png", pParent)
 {
-    //m_keyUpPressed    = false;
-    //m_keyDownPressed  = false;
-    //m_keyLeftPressed  = false;
-    //m_keyRightPressed = false;
-    //m_playerm_velocity = QPointF(0,0);
+
 }
 
 

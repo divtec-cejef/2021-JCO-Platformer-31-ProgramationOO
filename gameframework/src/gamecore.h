@@ -13,6 +13,7 @@
 #include <QGraphicsTransform>
  #include <QList>
 #include "character.h"
+#include "gameview.h"
 
 class GameCanvas;
 class GameScene;
@@ -59,6 +60,7 @@ private:
 
     GameCanvas* m_pGameCanvas;
     GameScene* m_pScene;
+    GameView* m_pView;
 
 
     //Character m_character();
