@@ -439,39 +439,27 @@ void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
                 orientGround = GROUND_UP;
 
                 if(currentColonne == 0){
-                    //Definit le coin du haut à droite
+                    //Definit le coin du haut à gauche
                     orientGround = CORNER_UP_LEFT;
                 }else if (currentColonne == colonneMax) {
-                    orientGround = CORNER_UP_RIGHT;
-                }
-            }
-            if(currentColonne == 0 &&  colonneMax > 0){
-                //définit un coté gauche quelconque
-                orientGround = GROUND_LEFT;
-
-
-                if(currentLigne == 0){
-                    //Définit le coin du haut à gauche
-                    orientGround = CORNER_UP_LEFT;
-
-
-                }else if(currentLigne == ligneMax){
-                    //Définit le coin du haut à droite
-                    orientGround = CORNER_DOWN_LEFT;
-                }
-
-            }else if(currentColonne == colonneMax){
-                //définit un coté droit quelconque
-                orientGround = GROUND_RIGHT;
-
-
-                if(currentLigne == 0){
                     //Definit le coin du haut à droite
                     orientGround = CORNER_UP_RIGHT;
                 }
-                if(currentLigne == ligneMax){
+            }else if(currentLigne == ligneMax){
+                orientGround = GROUND_DOWN;
+
+                if(currentColonne == 0){
+                    //Definit le coin du bas à gauche
+                    orientGround = CORNER_DOWN_LEFT;
+                }else if (currentColonne == colonneMax) {
                     //Definit le coin du bas à droite
                     orientGround = CORNER_DOWN_RIGHT;
+                }
+            }else {
+                if(currentColonne == 0){
+                    orientGround = GROUND_LEFT;
+                }else if (currentColonne == colonneMax) {
+                     orientGround = GROUND_RIGHT;
                 }
             }
 
@@ -482,32 +470,10 @@ void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
             pCurrentGround->setData(2,"sol");
             m_pScene->addSpriteToScene(pCurrentGround);
 
-            //posCurrentGround += spriteSize;
-            //Change de colonne
-            posCurrentGround.setY(posCurrentGround.y()+120);
-
-
-            /*
-            configureOrientation(orientGround,ground1);
-            ground1->setPos(posSol);
-            ground1->setData(1,"soltest");
-            ground1->setData(2,"sol");
-            m_pScene->addSpriteToScene(ground1);
-
-            Sprite* groundOfGround = new Sprite();
-            configureOrientation(GROUND_OF_GROUND,groundOfGround);
-            groundOfGround->setPos(posSolDuSol);
-            groundOfGround->setData(1,"soltest");
-            groundOfGround->setData(2,"sol");
-            m_pScene->addSpriteToScene(groundOfGround);
-
-
-            posSol.setX(posSol.x() +120);
-            posSolDuSol.setX(posSol.x());
-            */
         }
         //Change de ligne
-        posCurrentGround.setX(posCurrentGround.x()+120);
+        posCurrentGround.setX(posGroupe.x());
+        posCurrentGround.setY(posGroupe.y()+120);
     }
 }
 
