@@ -33,8 +33,7 @@ const int PLAYER_JUMP= -10 ; //Vitesse du saute
 const int PLAYER_STOP = 0;
 
 //dimenssion de découpage des spriteSheets du sol
-const int FRAME_WIDTH = 120;
-const int FRAME_HEIGHT = 120;
+const int FRAME_SIZE = 120;
 const int FRAME_COUNT = 9;
 const int COLUMN_COUNT = 3;
 
@@ -63,9 +62,9 @@ void GameCore::setGroundImages(){
     // Découpage de la spritesheet
     for (int frameIndex = 0; frameIndex <= FRAME_COUNT; frameIndex++) {
 
-        QImage CurrentGroundImage = spriteSheet.copy((frameIndex % COLUMN_COUNT) * FRAME_WIDTH,
-                                                     (frameIndex / COLUMN_COUNT) * FRAME_HEIGHT,
-                                                     FRAME_WIDTH, FRAME_HEIGHT);
+        QImage CurrentGroundImage = spriteSheet.copy((frameIndex % COLUMN_COUNT) * FRAME_SIZE,
+                                                     (frameIndex / COLUMN_COUNT) * FRAME_SIZE,
+                                                     FRAME_SIZE, FRAME_SIZE);
 
 
         this->m_groundImagesList.append(CurrentGroundImage);
@@ -92,64 +91,9 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     setGroundImages();
 
     // Instancier et initialiser les sprite ici :
-    // ...
-    /*
-    Sprite* Sol1 = new Sprite(GameFramework::imagesPath() + "SolV3G.png");
-    Sol1->setData(1,"soltest");
-    Sol1->setData(2,"sol");
-    m_pScene->addSpriteToScene(Sol1, 0,600);
 
-    Sprite* Sol11 = new Sprite(GameFramework::imagesPath() + "SolDuSolV3G.png");
-    Sol11->setData(1,"soltest");
-    Sol11->setData(2,"sol");
-    m_pScene->addSpriteToScene(Sol11, 0,720);
-    */
-    QPointF posSol(0,600);
-    QPointF posSolDuSol(0,posSol.y()+120);
-    /*
-    for(int i = 0; i <= 14; i++){
-        orientation orientGround = GROUND_UP;
-
-        Sprite* ground1 = new Sprite();
-
-        if(i == 0)
-            orientGround = CORNER_UP_LEFT;
-        else if(i == 14)
-            orientGround = CORNER_UP_RIGHT;
-
-        configureOrientation(orientGround,ground1);
-        ground1->setPos(posSol);
-        ground1->setData(1,"soltest");
-        ground1->setData(2,"sol");
-        m_pScene->addSpriteToScene(ground1);
-
-        Sprite* groundOfGround = new Sprite();
-        configureOrientation(GROUND_OF_GROUND,groundOfGround);
-        groundOfGround->setPos(posSolDuSol);
-        groundOfGround->setData(1,"soltest");
-        groundOfGround->setData(2,"sol");
-        m_pScene->addSpriteToScene(groundOfGround);
-
-
-        Sprite* pSol = new Sprite(GameFramework::imagesPath()+"SolV4G.png");
-        pSol->setPos(posSol);
-        pSol->setData(1,"soltest");
-        pSol->setData(2,"sol");
-        m_pScene->addSpriteToScene(pSol);
-
-        Sprite* pSolDuSol = new Sprite(GameFramework::imagesPath()+"SolDuSolV3G.png");
-        pSolDuSol->setPos(posSolDuSol);
-        pSolDuSol->setData(1,"soltest");
-        pSolDuSol->setData(2,"sol");
-        m_pScene->addSpriteToScene(pSolDuSol);
-
-        posSol.setX(posSol.x() +120);
-        posSolDuSol.setX(posSol.x());
-
-    }
-*/
-    QPointF posSolGroup1(0,600);
-    generatorGround(8,8,posSolGroup1);
+    QPointF posSolGroup1(480,600);
+    generatorGround(4,6,posSolGroup1);
     /*
     Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solv2.png");
     Sol2->setData(1,"soltest");
@@ -175,7 +119,6 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pScene->addSpriteToScene(pCharacter, 300,200);
     pCharacter->startAnimation(25);
 
-    //configureAnimation(pCharacter,BASE);
 
     /*
     Sprite* caisseM2 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
@@ -404,8 +347,8 @@ void GameCore::configureOrientation(orientation orientation, Sprite* &ground) {
     }
 
     qDebug() << "sheetID : " << sheetID;
-    ground = new Sprite(QPixmap::fromImage(m_groundImagesList.at(sheetID).scaled(FRAME_WIDTH * 1,
-                                                                                 FRAME_HEIGHT * 1,
+    ground = new Sprite(QPixmap::fromImage(m_groundImagesList.at(sheetID).scaled(FRAME_SIZE * 1,
+                                                                                 FRAME_SIZE * 1,
                                                                                  Qt::IgnoreAspectRatio,
                                                                                  Qt::SmoothTransformation)));
 
@@ -427,18 +370,18 @@ void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
 
     //posSolDuSol.setY(posSolDuSol.y() +120);
 
-    for(int currentLigne = 0; currentLigne <= ligneMax; currentLigne++ ) {
+    for(int currentLigne = 1; currentLigne <= ligneMax; currentLigne++ ) {
         qDebug() <<" ligne actu " << currentLigne;
 
-        for(int currentColonne = 0; currentColonne <= colonneMax; currentColonne++){
+        for(int currentColonne = 1; currentColonne <= colonneMax; currentColonne++){
             orientation orientGround = GROUND_OF_GROUND;
 
             Sprite* pCurrentGround = new Sprite();
 
-            if(currentLigne == 0){
+            if(currentLigne == 1){
                 orientGround = GROUND_UP;
 
-                if(currentColonne == 0){
+                if(currentColonne == 1){
                     //Definit le coin du haut à gauche
                     orientGround = CORNER_UP_LEFT;
                 }else if (currentColonne == colonneMax) {
@@ -448,7 +391,7 @@ void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
             }else if(currentLigne == ligneMax){
                 orientGround = GROUND_DOWN;
 
-                if(currentColonne == 0){
+                if(currentColonne == 1){
                     //Definit le coin du bas à gauche
                     orientGround = CORNER_DOWN_LEFT;
                 }else if (currentColonne == colonneMax) {
@@ -456,7 +399,7 @@ void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
                     orientGround = CORNER_DOWN_RIGHT;
                 }
             }else {
-                if(currentColonne == 0){
+                if(currentColonne == 1){
                     orientGround = GROUND_LEFT;
                 }else if (currentColonne == colonneMax) {
                      orientGround = GROUND_RIGHT;
@@ -470,10 +413,12 @@ void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
             pCurrentGround->setData(2,"sol");
             m_pScene->addSpriteToScene(pCurrentGround);
 
+            //Changement de colonne
+            posCurrentGround.setX(posCurrentGround.x() + FRAME_SIZE);
         }
         //Change de ligne
-        posCurrentGround.setX(posGroupe.x());
-        posCurrentGround.setY(posGroupe.y()+120);
+        posCurrentGround.setX(0);
+        posCurrentGround.setY(posCurrentGround.y()+FRAME_SIZE);
     }
 }
 
