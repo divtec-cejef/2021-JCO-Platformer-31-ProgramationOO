@@ -78,6 +78,21 @@ private:
     Ground* pGround = new Ground();
     QList<QGraphicsTransform*> m_transformsForFlip;
 
+    enum orientation{
+        GROUND_UP,
+        GROUND_DOWN,
+        GROUND_LEFT,
+        GROUND_RIGHT,
+        CORNER_UP_RIGHT,
+        CORNER_UP_LEFT,
+        CORNER_DOWN_RIGHT,
+        CORNER_DOWN_LEFT,
+        GROUND_OF_GROUND
+
+    };
+
+    void configureOrientation(orientation orientation, Sprite* &ground);
+
 
 
 private slots:

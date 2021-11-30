@@ -45,9 +45,10 @@ Ground::Ground(QGraphicsItem* pParent) : Sprite(GameFramework::imagesPath() + "E
 
 }
 
-
-
 void Ground::configureOrientation(orientation ground) {
+/*
+    //this = new Ground();
+    
     int sheetID = 0;
     switch (ground) {
     case GROUND_UP:
@@ -104,6 +105,6 @@ void Ground::configureOrientation(orientation ground) {
     }
     startAnimation(1000);
     setActiveAnimation(0);
-
+*/
 }
 

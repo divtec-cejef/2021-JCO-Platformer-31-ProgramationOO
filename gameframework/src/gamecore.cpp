@@ -25,15 +25,37 @@
 #include <QString>
 #include "ground.h"
 
+//résolution de la fenetre
+const int SCENE_WIDTH = 3000;
+
 const int PLAYER_SPEED = 10 ; // vitesse de déplacement du joueur en pixels/s
 const int PLAYER_JUMP= -10 ; //Vitesse du saute
 const int PLAYER_STOP = 0;
 
-//résolution de la fenetre
-const int SCENE_WIDTH = 3000;
+//dimenssion de découpage des spriteSheets du sol
+const int FRAME_WIDTH = 120;
+const int FRAME_HEIGHT = 120;
+const int FRAME_COUNT = 9;
+const int COLUMN_COUNT = 3;
 
-//static
+
+//Type de murs
+enum orientation{
+    GROUND_UP,
+    GROUND_DOWN,
+    GROUND_LEFT,
+    GROUND_RIGHT,
+    CORNER_UP_RIGHT,
+    CORNER_UP_LEFT,
+    CORNER_DOWN_RIGHT,
+    CORNER_DOWN_LEFT,
+    GROUND_OF_GROUND
+
+};
+
+//static test
 static Sprite* WOODCAISSE_SPRITE;
+
 
 //! Initialise le contrôleur de jeu.
 //! \param pGameCanvas  GameCanvas pour lequel cet objet travaille.
@@ -69,18 +91,27 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
 
 
-    for(int i = 0; i<14; i++){
+    for(int i = 0; i <= 14; i++){
+        orientation orientGround;
 
-        Ground* ground1 = new Ground();
-        ground1->configureOrientation(Ground::GROUND_UP);
+        Sprite* ground1 = new Sprite();
+        if(i == 0){
+            orientGround = CORNER_UP_LEFT;
+        }else if(i == 14){
+            orientGround = CORNER_UP_RIGHT;
+        }else{
+            orientGround = GROUND_UP;
+        }
+
+        configureOrientation(orientGround,ground1);
         ground1->setPos(posSol);
         ground1->setData(1,"soltest");
         ground1->setData(2,"sol");
         m_pScene->addSpriteToScene(ground1);
 
-        Ground* groundOfGround = new Ground();
-        groundOfGround->configureOrientation(Ground::GROUND_OF_GROUND);
-        groundOfGround->setPos(posSol);
+        Sprite* groundOfGround = new Sprite();
+        configureOrientation(GROUND_OF_GROUND,groundOfGround);
+        groundOfGround->setPos(posSolDuSol);
         groundOfGround->setData(1,"soltest");
         groundOfGround->setData(2,"sol");
         m_pScene->addSpriteToScene(groundOfGround);
@@ -102,7 +133,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
         posSolDuSol.setX(posSol.x());
 
     }
-/*
+    /*
     Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solv2.png");
     Sol2->setData(1,"soltest");
     Sol2->setData(2,"sol");
@@ -317,6 +348,63 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     }
 }
 
+
+void GameCore::configureOrientation(orientation orientation, Sprite* &ground) {
+
+    //this = new Ground();
+
+    int sheetID = 0;
+    switch (orientation) {
+    case GROUND_UP:
+        sheetID = 0;
+
+        break;
+    case GROUND_DOWN:
+        sheetID = 1;
+        break;
+    case GROUND_LEFT:
+        sheetID = 2;
+        break;
+    case GROUND_RIGHT:
+        sheetID = 3;
+        break;
+    case CORNER_UP_RIGHT:
+        sheetID = 4;
+        break;
+    case CORNER_UP_LEFT:
+        sheetID = 5;
+        break;
+    case CORNER_DOWN_RIGHT:
+        sheetID = 6;
+        break;
+    case CORNER_DOWN_LEFT:
+        sheetID = 7;
+        break;
+    case GROUND_OF_GROUND:
+        sheetID = 8;
+        break;
+    }
+
+
+    qDebug() << "sheetID : " << sheetID;
+    QImage spriteSheet(GameFramework::imagesPath() +  "EveryGroundsV1.png");
+
+    // Découpage de la spritesheet
+    for (int frameIndex = 0; frameIndex <= FRAME_COUNT; frameIndex++) {
+
+        if(frameIndex == sheetID ){
+            QImage sprite = spriteSheet.copy((frameIndex % COLUMN_COUNT) * FRAME_WIDTH,
+                                             (frameIndex / COLUMN_COUNT) * FRAME_HEIGHT,
+                                             FRAME_WIDTH, FRAME_HEIGHT);
+
+            ground = new Sprite(QPixmap::fromImage(sprite.scaled(FRAME_WIDTH * 1,
+                                                                 FRAME_HEIGHT * 1,
+                                                                 Qt::IgnoreAspectRatio,
+                                                                 Qt::SmoothTransformation)));
+
+        }
+    }
+}
 
 //! La souris a été déplacée.
 //! Pour que cet événement soit pris en compte, la propriété MouseTracking de GameView
