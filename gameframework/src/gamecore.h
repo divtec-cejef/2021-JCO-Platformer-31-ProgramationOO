@@ -95,7 +95,7 @@ private:
     };
 
     void configureOrientation(orientation orientation, Sprite* &ground);
-    void generatorGround(int colonne,int ligne,int max,QPointF posGroupe);
+    void generatorGround(int colonne,int ligne,QPointF posGroupe);
 
 private slots:
 
