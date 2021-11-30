@@ -56,6 +56,22 @@ enum orientation{
 //static test
 static Sprite* WOODCAISSE_SPRITE;
 
+void GameCore::setGroundImages(){
+    qDebug()<<"ss";
+    QImage spriteSheet(GameFramework::imagesPath() +  "EveryGroundsV1.png");
+
+    // Découpage de la spritesheet
+    for (int frameIndex = 0; frameIndex <= FRAME_COUNT; frameIndex++) {
+
+        QImage CurrentGroundImage = spriteSheet.copy((frameIndex % COLUMN_COUNT) * FRAME_WIDTH,
+                                                     (frameIndex / COLUMN_COUNT) * FRAME_HEIGHT,
+                                                     FRAME_WIDTH, FRAME_HEIGHT);
+
+
+        this->m_groundImagesList.append(CurrentGroundImage);
+    }
+
+}
 
 //! Initialise le contrôleur de jeu.
 //! \param pGameCanvas  GameCanvas pour lequel cet objet travaille.
@@ -71,6 +87,9 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     // Trace un rectangle blanc tout autour des limites de la scène.
     m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::white));
+
+    //Initialisation de la liste groundImagesList
+    setGroundImages();
 
     // Instancier et initialiser les sprite ici :
     // ...
@@ -88,20 +107,15 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     QPointF posSol(0,600);
     QPointF posSolDuSol(0,posSol.y()+120);
 
-
-
-
     for(int i = 0; i <= 14; i++){
-        orientation orientGround;
+        orientation orientGround = GROUND_UP;
 
         Sprite* ground1 = new Sprite();
-        if(i == 0){
+
+        if(i == 0)
             orientGround = CORNER_UP_LEFT;
-        }else if(i == 14){
+        else if(i == 14)
             orientGround = CORNER_UP_RIGHT;
-        }else{
-            orientGround = GROUND_UP;
-        }
 
         configureOrientation(orientGround,ground1);
         ground1->setPos(posSol);
@@ -180,6 +194,8 @@ GameCore::~GameCore() {
     delete m_pScene;
     m_pScene = nullptr;
 }
+
+
 
 //! Traite la pression d'une touche.
 //! \param key Numéro de la touche (voir les constantes Qt)
@@ -357,7 +373,6 @@ void GameCore::configureOrientation(orientation orientation, Sprite* &ground) {
     switch (orientation) {
     case GROUND_UP:
         sheetID = 0;
-
         break;
     case GROUND_DOWN:
         sheetID = 1;
@@ -385,23 +400,98 @@ void GameCore::configureOrientation(orientation orientation, Sprite* &ground) {
         break;
     }
 
-
     qDebug() << "sheetID : " << sheetID;
-    QImage spriteSheet(GameFramework::imagesPath() +  "EveryGroundsV1.png");
+    ground = new Sprite(QPixmap::fromImage(m_groundImagesList.at(sheetID).scaled(FRAME_WIDTH * 1,
+                                                                                 FRAME_HEIGHT * 1,
+                                                                                 Qt::IgnoreAspectRatio,
+                                                                                 Qt::SmoothTransformation)));
 
-    // Découpage de la spritesheet
-    for (int frameIndex = 0; frameIndex <= FRAME_COUNT; frameIndex++) {
+}
 
-        if(frameIndex == sheetID ){
-            QImage sprite = spriteSheet.copy((frameIndex % COLUMN_COUNT) * FRAME_WIDTH,
-                                             (frameIndex / COLUMN_COUNT) * FRAME_HEIGHT,
-                                             FRAME_WIDTH, FRAME_HEIGHT);
+/**
+ * @brief GameCore::generatorGround génére un groupe de sol sur la map d'un niveau
+ * @param colonne nbr de colonne dans le bloque de de sol
+ * @param ligne nbr de colonne dans le bloque de de sol
+ * @param max nbr max de sol à généré
+ */
+void GameCore::generatorGround(int colonneMax,int ligneMax,int max,QPointF posGroupe){
 
-            ground = new Sprite(QPixmap::fromImage(sprite.scaled(FRAME_WIDTH * 1,
-                                                                 FRAME_HEIGHT * 1,
-                                                                 Qt::IgnoreAspectRatio,
-                                                                 Qt::SmoothTransformation)));
+    QPointF posCurrentGround = posGroupe;
 
+    QPointF posSolDuSol(posCurrentGround);
+
+    QPointF spriteSize(120,120);
+
+    posSolDuSol.setY(posSolDuSol.y() +120);
+
+    for(int currentLigne = 0; currentLigne <= ligneMax; currentLigne++ ) {
+        qDebug() <<" ligne actu " << currentLigne;
+
+        for(int currentColonne = 0; currentColonne <= colonneMax; currentColonne++){
+            orientation orientGround = GROUND_UP;
+
+            Sprite* pCurrentGround = new Sprite();
+
+
+            if(currentColonne == 0 &&  colonneMax > 0){
+                //définit un coté gauche quelconque
+                orientGround = GROUND_LEFT;
+
+
+                if(currentLigne == 0){
+                    //Définit le coin du haut à gauche
+                    orientGround = CORNER_UP_LEFT;
+
+
+                }else if(currentLigne == ligneMax){
+                    //Définit le coin du haut à droite
+                    orientGround = CORNER_DOWN_LEFT;
+                }
+
+            }else if(currentColonne == colonneMax){
+                //définit un coté droit quelconque
+                orientGround = GROUND_RIGHT;
+
+
+                if(currentLigne == 0){
+                    //Definit le coin du haut à droite
+                    orientGround = CORNER_UP_RIGHT;
+                }
+                if(currentLigne == ligneMax){
+                    //Definit le coin du bas à droite
+                    orientGround = CORNER_DOWN_RIGHT;
+                }
+            }
+
+
+            configureOrientation(orientGround,pCurrentGround);
+            pCurrentGround->setPos(posCurrentGround);
+            pCurrentGround->setData(1,"soltest");
+            pCurrentGround->setData(2,"sol");
+            m_pScene->addSpriteToScene(pCurrentGround);
+
+            //posCurrentGround += spriteSize;
+            posCurrentGround.setY(posCurrentGround.y()+120);
+
+
+            /*
+            configureOrientation(orientGround,ground1);
+            ground1->setPos(posSol);
+            ground1->setData(1,"soltest");
+            ground1->setData(2,"sol");
+            m_pScene->addSpriteToScene(ground1);
+
+            Sprite* groundOfGround = new Sprite();
+            configureOrientation(GROUND_OF_GROUND,groundOfGround);
+            groundOfGround->setPos(posSolDuSol);
+            groundOfGround->setData(1,"soltest");
+            groundOfGround->setData(2,"sol");
+            m_pScene->addSpriteToScene(groundOfGround);
+
+
+            posSol.setX(posSol.x() +120);
+            posSolDuSol.setX(posSol.x());
+            */
         }
     }
 }

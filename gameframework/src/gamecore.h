@@ -78,6 +78,9 @@ private:
     Ground* pGround = new Ground();
     QList<QGraphicsTransform*> m_transformsForFlip;
 
+    QList<QImage> m_groundImagesList;
+    void setGroundImages();
+
     enum orientation{
         GROUND_UP,
         GROUND_DOWN,
@@ -92,8 +95,7 @@ private:
     };
 
     void configureOrientation(orientation orientation, Sprite* &ground);
-
-
+    void generatorGround(int colonne,int ligne,int max,QPointF posGroupe);
 
 private slots:
 
