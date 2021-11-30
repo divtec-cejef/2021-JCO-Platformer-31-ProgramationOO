@@ -26,7 +26,8 @@
 #include "ground.h"
 
 //résolution de la fenetre
-const int SCENE_WIDTH = 3000;
+const int SCENE_WIDTH = 6000;
+const int SCENE_HEIGHT = 4000;
 
 const int PLAYER_SPEED = 10 ; // vitesse de déplacement du joueur en pixels/s
 const int PLAYER_JUMP= -10 ; //Vitesse du saute
@@ -81,7 +82,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pGameCanvas = pGameCanvas;
 
     // Créé la scène de base et indique au canvas qu'il faut l'afficher.
-    m_pScene = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
+    m_pScene = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_HEIGHT / GameFramework::screenRatio());
     pGameCanvas->setCurrentScene(m_pScene);
 
     // Trace un rectangle blanc tout autour des limites de la scène.
@@ -92,8 +93,11 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     // Instancier et initialiser les sprite ici :
 
-    QPointF posSolGroup1(480,600);
-    generatorGround(4,6,posSolGroup1);
+    QPointF posSolGroup1(0,1600);
+    generatorGround(8,6,posSolGroup1);
+
+    QPointF posSolGroup2(2200,1460);
+    generatorGround(8,5,posSolGroup2);
     /*
     Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solv2.png");
     Sol2->setData(1,"soltest");
@@ -103,20 +107,35 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     Sprite* platM1 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
     platM1->setData(1,"platforme");
     platM1->setData(2,"sol");
-    m_pScene->addSpriteToScene(platM1, 700,400);
+    m_pScene->addSpriteToScene(platM1, 1200,1650);
+
+    Sprite* platM2 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
+    platM2->setData(1,"platforme");
+    platM2->setData(2,"sol");
+    m_pScene->addSpriteToScene(platM2, 1500,1730);
+
+    Sprite* platM3 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
+    platM3->setData(1,"platforme");
+    platM3->setData(2,"sol");
+    m_pScene->addSpriteToScene(platM3, 1800,1600);
+
+    Sprite* platM4 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
+    platM4->setData(1,"platforme");
+    platM4->setData(2,"sol");
+    m_pScene->addSpriteToScene(platM4, 3700,1400);
 
     WOODCAISSE_SPRITE = new Sprite(GameFramework::imagesPath() + "CaisseV2.png");
     WOODCAISSE_SPRITE->setData(1,"Wood_caisse");
     WOODCAISSE_SPRITE->setData(2,"sol");
-    m_pScene->addSpriteToScene(WOODCAISSE_SPRITE, 500,520);
+    m_pScene->addSpriteToScene(WOODCAISSE_SPRITE, 500,1620);
 
     Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV2.png");
     caisseM1->setData(1,"Wood_caisse");
     caisseM1->setData(2,"Sol");
-    m_pScene->addSpriteToScene(caisseM1, 700,520);
+    m_pScene->addSpriteToScene(caisseM1, 700,1620);
 
     //Ajoute du joueur dans la scene
-    m_pScene->addSpriteToScene(pCharacter, 300,200);
+    m_pScene->addSpriteToScene(pCharacter, 300,1200);
     pCharacter->startAnimation(25);
 
 
@@ -272,7 +291,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     }
 
     // Détermine la prochaine position du sprite selon sa velocité
-    QPainterPath nextSpriteRect = pCharacter->globalShape().translated(pCharacter->m_velocity);
+    //QPainterPath
+    QRectF nextSpriteRect = pCharacter->globalBoundingBox().translated(pCharacter->m_velocity);
 
     // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
     auto listeFuturCollision = pCharacter->parentScene()->collidingSprites(nextSpriteRect);
@@ -364,12 +384,6 @@ void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
 
     QPointF posCurrentGround = posGroupe;
 
-    //QPointF posSolDuSol(posCurrentGround);
-
-    QPointF spriteSize(120,120);
-
-    //posSolDuSol.setY(posSolDuSol.y() +120);
-
     for(int currentLigne = 1; currentLigne <= ligneMax; currentLigne++ ) {
         qDebug() <<" ligne actu " << currentLigne;
 
@@ -402,7 +416,7 @@ void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
                 if(currentColonne == 1){
                     orientGround = GROUND_LEFT;
                 }else if (currentColonne == colonneMax) {
-                     orientGround = GROUND_RIGHT;
+                    orientGround = GROUND_RIGHT;
                 }
             }
 
@@ -417,7 +431,7 @@ void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
             posCurrentGround.setX(posCurrentGround.x() + FRAME_SIZE);
         }
         //Change de ligne
-        posCurrentGround.setX(0);
+        posCurrentGround.setX(posGroupe.x());
         posCurrentGround.setY(posCurrentGround.y()+FRAME_SIZE);
     }
 }
