@@ -287,28 +287,33 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             if(CollisionDetected->data(1) == "Wood_caisse"){
                 //QRectF bondingBox1;
                 //bondingBox1.intersected();
-                if(CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).height() > CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).width()){
+
+                qDebug() << "height collision :" << CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).height();
+                qDebug() << "width collision :" << CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).height();
+                if(CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).height() < CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).width()){
                    // velocity().setX
                     //CollisionDetected->setX(velocity.x());
 
-                     pCharacter->m_velocity.setX(5);
+
                      CollisionDetected->setX(CollisionDetected->x() + pCharacter->m_velocity.x());
+                     pCharacter->m_velocity.setX(!pCharacter->m_velocity.x());
+                     qDebug() << "POUSSE";
 
                 }
 
 
-
+                qDebug() << "BOIS";
             }
         }
     }
 
-    // Détermine la prochaine position du sprite selon sa velocité
+    // Détermine la prochaine position du sprite selon sa velwocité
     //QPainterPath
     QRectF nextSpriteRect = pCharacter->globalBoundingBox().translated(pCharacter->m_velocity);
 
     // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
     auto listeFuturCollision = pCharacter->parentScene()->collidingSprites(nextSpriteRect);
-    // Supprime le sprite lui-même, qui collisionne toujours avec sa boundingbox
+    // Supprime le sprite lui-même, qui collisionne toujours aawwawaawwwwwwwwwwvec sa boundingbox
     listeFuturCollision.removeAll(pCharacter);
 
     //récupère la valeur de liste (remplis/vide)
