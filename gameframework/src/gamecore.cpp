@@ -347,10 +347,18 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             }
 
             if (CollisionDetected->data(2) == "Piege") {
-                //Suite les déplacement du joueur dans la scene
+
                 m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
 
                 m_pScene->removeSpriteFromScene(pCharacter);
+
+                if(!isDeath)
+                    animationDeath();
+                else {
+
+}
+
+
                 isDeath = true;
             }
         }
@@ -363,6 +371,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     //Si le joueur ne touche pas le sol alors il est attiré vers le bas
     if (!isOnFloor){
         //qDebug() << "PAS SUR LE SOL";
+
         pCharacter->setPos(pCharacter->pos() + pCharacter->m_velocity * (elapsedTimeInMilliseconds/100.0));
         pCharacter->m_velocity+= gravity * (elapsedTimeInMilliseconds/100.0);
 
@@ -452,6 +461,42 @@ void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
         posCurrentGround.setX(posGroupe.x());
         posCurrentGround.setY(posCurrentGround.y()+FRAME_SIZE);
     }
+}
+
+Sprite* GameCore::setAnimationDeath()
+{
+
+    QImage spriteSheet(GameFramework::imagesPath() +  "deathAnimationV1.png");
+
+    QList<QImage> deathFrameList;
+    // Découpage de la spritesheet
+    for (int frameIndex = 0; frameIndex <= 8; frameIndex++) {
+
+        QImage CurrentFrameImage = spriteSheet.copy((frameIndex % 3) * 60,
+                                                    (frameIndex / 3) * 60,
+                                                    60, 60);
+
+
+        deathFrameList.append(CurrentFrameImage);
+    }
+
+    Sprite* ghost = new Sprite(QPixmap::fromImage(deathFrameList.at(0).scaled(60 * 1,
+                                                                                  60 * 1,
+                                                                                  Qt::IgnoreAspectRatio,
+                                                                                  Qt::SmoothTransformation)));
+
+    for (int i = 1;i <= 8;i++) {
+        ghost->addAnimationFrame(QPixmap::fromImage(deathFrameList.at(i).scaled(60 * 1,
+                                                                                    60 * 1,
+                                                                                    Qt::IgnoreAspectRatio,
+                                                                                    Qt::SmoothTransformation)));
+    }
+
+    ghost->startAnimation(50);
+    ghost->setPos(pCharacter->pos());
+
+    m_pScene->addSpriteToScene(ghost);
+
 }
 
 //! La souris a été déplacée.

@@ -76,9 +76,11 @@ private:
 
 
     Character* pCharacter = new Character();
-    Ground* pGround = new Ground();
-    QList<QGraphicsTransform*> m_transformsForFlip;
+    void animationDeath();
 
+     QList<QGraphicsTransform*> m_transformsForFlip;
+
+    //gestion de sol
     QList<QImage> m_groundImagesList;
     void setGroundImages();
 
@@ -94,7 +96,6 @@ private:
         GROUND_OF_GROUND
 
     };
-
     void configureOrientation(orientation orientation, Sprite* &ground);
     void generatorGround(int colonne,int ligne,QPointF posGroupe);
 
