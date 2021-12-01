@@ -252,3 +252,7 @@ void GameCanvas::onTick() {
     if (m_keepTicking)
         m_tickTimer.start();
 }
+
+GameView* GameCanvas::getView(){
+    return this->m_pView;
+}

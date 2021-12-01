@@ -103,7 +103,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     Sol2->setData(1,"soltest");
     Sol2->setData(2,"sol");
     m_pScene->addSpriteToScene(Sol2, 1280,600);
-*/
+    */
     Sprite* platM1 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
     platM1->setData(1,"platforme");
     platM1->setData(2,"sol");
@@ -181,11 +181,11 @@ GameCore::~GameCore() {
 //!
 void GameCore::keyPressed(int key) {
     emit notifyKeyPressed(key);
+    if(!isDeath){
+        Character::animation player;
 
-    Character::animation player;
-
-    switch(key) {
-    /*
+        switch(key) {
+        /*
     case Qt::Key_Left:
         pCharacter->m_velocity.setX(-PLAYER_SPEED);
         player = Character::DEPLA_GAUCHE;
@@ -196,79 +196,81 @@ void GameCore::keyPressed(int key) {
         player = Character::DEPLA_DROITE;
         break;
     */
-    case Qt::Key_W:
-        player = Character::SAUT;
-        pCharacter->m_velocity.setY(PLAYER_JUMP);
-        isJump = true;
-        break;
-
-    case Qt::Key_A:
-        pCharacter->m_velocity.setX(-PLAYER_SPEED);
-        player = Character::DEPLA_GAUCHE;
-        break;
-
-    case Qt::Key_D:
-        pCharacter->m_velocity.setX(PLAYER_SPEED);
-        player = Character::DEPLA_DROITE;
-        break;
-
-    case Qt::Key_Space:
-        if(isOnFloor){
+        case Qt::Key_W:
             player = Character::SAUT;
             pCharacter->m_velocity.setY(PLAYER_JUMP);
             isJump = true;
-            qDebug() << "isJump : " << isJump;
-        }else{
+            break;
+
+        case Qt::Key_A:
+            pCharacter->m_velocity.setX(-PLAYER_SPEED);
+            player = Character::DEPLA_GAUCHE;
+            break;
+
+        case Qt::Key_D:
+            pCharacter->m_velocity.setX(PLAYER_SPEED);
+            player = Character::DEPLA_DROITE;
+            break;
+
+        case Qt::Key_Space:
+            if(isOnFloor){
+                player = Character::SAUT;
+                pCharacter->m_velocity.setY(PLAYER_JUMP);
+                isJump = true;
+                qDebug() << "isJump : " << isJump;
+            }else{
+                player = Character::BASE;
+            }
+            break;
+
+        default:
             player = Character::BASE;
         }
-        break;
-
-    default:
-        player = Character::BASE;
+        //m_character(pCharacter).configureAnimation();
+        pCharacter->configureAnimation(player);
     }
-    //m_character(pCharacter).configureAnimation();
-    pCharacter->configureAnimation(player);
 }
 
 //! Traite le relâchement d'une touche.
 //! \param key Numéro de la touche (voir les constantes Qt)
 void GameCore::keyReleased(int key) {
     emit notifyKeyReleased(key);
+    if(!isDeath){
+        switch(key) {
+        case Qt::Key_Left:
+            pCharacter->m_velocity.setX(PLAYER_STOP);
+            //distanceLeft = PLAYER_STOP;
+            break;
 
-    switch(key) {
-    case Qt::Key_Left:
-        pCharacter->m_velocity.setX(PLAYER_STOP);
-        //distanceLeft = PLAYER_STOP;
-        break;
+        case Qt::Key_Right:
+            pCharacter->m_velocity.setX(PLAYER_STOP);
+            //distanceRight = PLAYER_STOP;
+            break;
+        case Qt::Key_Up:
+            pCharacter->m_velocity.setY(PLAYER_STOP);
+            //isJump = false;
+            //qDebug() << "isJump : " << isJump;
+            break;
 
-    case Qt::Key_Right:
-        pCharacter->m_velocity.setX(PLAYER_STOP);
-        //distanceRight = PLAYER_STOP;
-        break;
-    case Qt::Key_Up:
-        pCharacter->m_velocity.setY(PLAYER_STOP);
-        //isJump = false;
-        //qDebug() << "isJump : " << isJump;
-        break;
+        case Qt::Key_A:
+            pCharacter->m_velocity.setX(PLAYER_STOP);
+            break;
 
-    case Qt::Key_A:
-        pCharacter->m_velocity.setX(PLAYER_STOP);
-        break;
+        case Qt::Key_D:
+            pCharacter->m_velocity.setX(PLAYER_STOP);
+            break;
 
-    case Qt::Key_D:
-        pCharacter->m_velocity.setX(PLAYER_STOP);
-        break;
-
-    case Qt::Key_Space:
-        pCharacter->m_velocity.setY(PLAYER_STOP);
-        isJump = false;
-        break;
+        case Qt::Key_Space:
+            pCharacter->m_velocity.setY(PLAYER_STOP);
+            isJump = false;
+            break;
+        }
+        //if(!isOnFloor)
+        //pCharacter->configureAnimation(Character::SAUT);
+        //else {
+        pCharacter->configureAnimation(Character::BASE);
+        //}
     }
-    //if(!isOnFloor)
-    //pCharacter->configureAnimation(Character::SAUT);
-    //else {
-    pCharacter->configureAnimation(Character::BASE);
-    //}
 }
 
 //! Cadence.
@@ -277,10 +279,9 @@ void GameCore::keyReleased(int key) {
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
 
-    //Suite les déplacement du joueur dans la scene
-    m_pGameCanvas->m_pView->centerOn(m_pScene->sprites().takeAt(0)->pos());
 
-    pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
+    if(!isDeath)
+        pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
 
     // Récupère tous les sprites de la scène qui touche le joueur
     auto listeCurrentCollision = pCharacter->parentScene()->collidingSprites(pCharacter);
@@ -312,6 +313,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 }
                 qDebug() << "BOIS";
             }
+
+
         }
     }
 
@@ -342,9 +345,19 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             }else{
                 isOnFloor = false;
             }
+
+            if (CollisionDetected->data(2) == "Piege") {
+                //Suite les déplacement du joueur dans la scene
+                m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
+
+                m_pScene->removeSpriteFromScene(pCharacter);
+                isDeath = true;
+            }
         }
     }else {
         isOnFloor = false;
+        //Suite les déplacement du joueur dans la scene
+        m_pGameCanvas->getView()->centerOn(m_pScene->sprites().takeAt(0)->pos());
     }
 
     //Si le joueur ne touche pas le sol alors il est attiré vers le bas
@@ -352,6 +365,18 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         //qDebug() << "PAS SUR LE SOL";
         pCharacter->setPos(pCharacter->pos() + pCharacter->m_velocity * (elapsedTimeInMilliseconds/100.0));
         pCharacter->m_velocity+= gravity * (elapsedTimeInMilliseconds/100.0);
+
+        /*
+        for (int i;i <= m_pScene->sprites().count();i++) {
+            m_pScene->sprites().takeAt(i)->pos();
+            if(){
+                m_pScene->sprites().takeAt(i)->setPos(m_pScene->sprites().takeAt(i)->pos() + m_pScene->sprites().takeAt(i)-> * (elapsedTimeInMilliseconds/100.0));
+                        pCharacter->m_velocity+= gravity * (elapsedTimeInMilliseconds/100.0);
+            }
+        }
+
+        */
+
     }
 }
 

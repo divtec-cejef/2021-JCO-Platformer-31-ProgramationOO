@@ -64,10 +64,12 @@ public:
     void startTick(int tickInterval = KEEP_PREVIOUS_TICK_INTERVAL);
     void stopTick();
 
+    GameView* getView();
+
     void startMouseTracking();
     void stopMouseTracking();
     QPointF currentMousePosition() const;
-    GameView* m_pView;
+
 signals:
 
 public slots:
@@ -85,7 +87,7 @@ private:
     void mouseButtonPressed(QGraphicsSceneMouseEvent* pMouseEvent);
     void mouseButtonReleased(QGraphicsSceneMouseEvent* pMouseEvent);
 
-
+    GameView* m_pView;
     GameCore* m_pGameCore;
     QPointer<QGraphicsTextItem> m_pDetailedInfosItem; // Smart Pointer pour qu'il soit mis à zéro au cas où l'item est effacé par GameScene::clear()
 
