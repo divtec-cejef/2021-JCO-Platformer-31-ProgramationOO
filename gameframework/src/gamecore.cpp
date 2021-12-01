@@ -288,12 +288,13 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 //QRectF bondingBox1;
                 //bondingBox1.intersected();
 
-                qDebug() << "height collision :" << CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).height();
-                qDebug() << "width collision :" << CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).height();
+
                 if(CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).height() < CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).width()){
                    // velocity().setX
                     //CollisionDetected->setX(velocity.x());
 
+                    qDebug() << "height collision :" << CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).height();
+                    qDebug() << "width collision :" << CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).width();
 
                      CollisionDetected->setX(CollisionDetected->x() + pCharacter->m_velocity.x());
                      pCharacter->m_velocity.setX(!pCharacter->m_velocity.x());
