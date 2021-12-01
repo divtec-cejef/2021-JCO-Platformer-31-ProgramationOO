@@ -41,20 +41,20 @@ const int COLUMN_COUNT = 3;
 
 //Type de murs
 enum orientation{
-    GROUND_UP,
-    GROUND_DOWN,
-    GROUND_LEFT,
-    GROUND_RIGHT,
-    CORNER_UP_RIGHT,
-    CORNER_UP_LEFT,
-    CORNER_DOWN_RIGHT,
-    CORNER_DOWN_LEFT,
-    GROUND_OF_GROUND
+    GROUND_UP = 0,
+    GROUND_DOWN = 1,
+    GROUND_LEFT = 2,
+    GROUND_RIGHT = 3,
+    CORNER_UP_RIGHT = 4,
+    CORNER_UP_LEFT = 5,
+    CORNER_DOWN_RIGHT = 6,
+    CORNER_DOWN_LEFT = 7,
+    GROUND_OF_GROUND = 8
 
 };
 
 //static test
-static Sprite* WOODCAISSE_SPRITE;
+//static Sprite* WOODCAISSE_SPRITE;
 
 void GameCore::setGroundImages(){
     qDebug()<<"ss";
@@ -136,8 +136,18 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV2.png");
     caisseM1->setData(1,"Wood_caisse");
-    caisseM1->setData(2,"Sol");
+    caisseM1->setData(2,"sol");
     m_pScene->addSpriteToScene(caisseM1, 700,1520);
+
+    Sprite* lanceF1 = new Sprite(GameFramework::imagesPath() + "lanceFlammeV3.png");
+    lanceF1->setData(1,"Lance_flamme");
+    lanceF1->setData(2,"Piege");
+    m_pScene->addSpriteToScene(lanceF1, 800,1510);
+
+    Sprite* lanceF2 = new Sprite(GameFramework::imagesPath() + "lanceFlammeV3.png");
+    lanceF1->setData(1,"Lance_flamme");
+    lanceF1->setData(2,"Piege");
+    m_pScene->addSpriteToScene(lanceF2, 2400,1370);
 
     //Ajoute du joueur dans la scene
     m_pScene->addSpriteToScene(pCharacter, 300,1200);
@@ -285,24 +295,21 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         for (Sprite* CollisionDetected : listeCurrentCollision) {
 
             if(CollisionDetected->data(1) == "Wood_caisse"){
-                //QRectF bondingBox1;
-                //bondingBox1.intersected();
 
+                //Zone de collision entre le joueur et la caisse en bois
+                QRectF zoneDeCollision = CollisionDetected->boundingRect().intersected(pCharacter->boundingRect());
 
-                if(CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).height() < CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).width()){
-                   // velocity().setX
+                if(zoneDeCollision.height() > zoneDeCollision.width()){
+                    // velocity().setX
                     //CollisionDetected->setX(velocity.x());
 
                     qDebug() << "height collision :" << CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).height();
                     qDebug() << "width collision :" << CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).width();
 
-                     CollisionDetected->setX(CollisionDetected->x() + pCharacter->m_velocity.x());
-                     pCharacter->m_velocity.setX(!pCharacter->m_velocity.x());
-                     qDebug() << "POUSSE";
-
+                    CollisionDetected->setX(CollisionDetected->x() + pCharacter->m_velocity.x());
+                    pCharacter->m_velocity.setX(!pCharacter->m_velocity.x());
+                    qDebug() << "POUSSE";
                 }
-
-
                 qDebug() << "BOIS";
             }
         }
@@ -350,46 +357,11 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
 
 void GameCore::configureOrientation(orientation orientation, Sprite* &ground) {
-
-    //this = new Ground();
-
-    int sheetID = 0;
-    switch (orientation) {
-    case GROUND_UP:
-        sheetID = 0;
-        break;
-    case GROUND_DOWN:
-        sheetID = 1;
-        break;
-    case GROUND_LEFT:
-        sheetID = 2;
-        break;
-    case GROUND_RIGHT:
-        sheetID = 3;
-        break;
-    case CORNER_UP_RIGHT:
-        sheetID = 4;
-        break;
-    case CORNER_UP_LEFT:
-        sheetID = 5;
-        break;
-    case CORNER_DOWN_RIGHT:
-        sheetID = 6;
-        break;
-    case CORNER_DOWN_LEFT:
-        sheetID = 7;
-        break;
-    case GROUND_OF_GROUND:
-        sheetID = 8;
-        break;
-    }
-
-    qDebug() << "sheetID : " << sheetID;
-    ground = new Sprite(QPixmap::fromImage(m_groundImagesList.at(sheetID).scaled(FRAME_SIZE * 1,
-                                                                                 FRAME_SIZE * 1,
-                                                                                 Qt::IgnoreAspectRatio,
-                                                                                 Qt::SmoothTransformation)));
-
+    //Selectionne le sol demandé
+    ground = new Sprite(QPixmap::fromImage(m_groundImagesList.at(orientation).scaled(FRAME_SIZE * 1,
+                                                                                     FRAME_SIZE * 1,
+                                                                                     Qt::IgnoreAspectRatio,
+                                                                                     Qt::SmoothTransformation)));
 }
 
 /**
@@ -410,6 +382,7 @@ void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
 
             Sprite* pCurrentGround = new Sprite();
 
+            //Définit l'orientation du morceau de sol
             if(currentLigne == 1){
                 orientGround = GROUND_UP;
 
@@ -432,13 +405,15 @@ void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
                 }
             }else {
                 if(currentColonne == 1){
+                    //Définit le côté gauche de la ligne
                     orientGround = GROUND_LEFT;
                 }else if (currentColonne == colonneMax) {
+                    //Définit le côté gauche de la ligne
                     orientGround = GROUND_RIGHT;
                 }
             }
 
-
+            //Mise en place du sol dans la scène
             configureOrientation(orientGround,pCurrentGround);
             pCurrentGround->setPos(posCurrentGround);
             pCurrentGround->setData(1,"soltest");
