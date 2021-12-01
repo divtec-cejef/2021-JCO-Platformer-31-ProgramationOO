@@ -74,9 +74,9 @@ private:
 
     //QPointF p_position = QPointF(0,0);
 
-
+    Sprite* pGhost = new Sprite();
     Character* pCharacter = new Character();
-    void animationDeath();
+    void setAnimationDeath();
 
      QList<QGraphicsTransform*> m_transformsForFlip;
 
