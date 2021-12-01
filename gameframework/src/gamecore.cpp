@@ -122,7 +122,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     Sprite* platM4 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
     platM4->setData(1,"platforme");
     platM4->setData(2,"sol");
-    m_pScene->addSpriteToScene(platM4, 3700,1400);
+    m_pScene->addSpriteToScene(platM4, 3700,1320);
 
     Sprite* CaisseW1 = new Sprite(GameFramework::imagesPath() + "CaisseV2.png");
     CaisseW1->setData(1,"Wood_caisse");
@@ -132,7 +132,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     Sprite* CaisseW2 = new Sprite(GameFramework::imagesPath() + "CaisseV2.png");
     CaisseW2->setData(1,"Wood_caisse");
     CaisseW2->setData(2,"sol");
-    m_pScene->addSpriteToScene(CaisseW2, 2480,1380);
+    m_pScene->addSpriteToScene(CaisseW2, 2900,1380);
 
     Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV2.png");
     caisseM1->setData(1,"Wood_caisse");
@@ -266,15 +266,13 @@ void GameCore::keyReleased(int key) {
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
+
     //Suite les déplacement du joueur dans la scene
     m_pGameCanvas->m_pView->centerOn(m_pScene->sprites().takeAt(0)->pos());
-    //qDebug()  << "valu perso x"<< m_pScene->sprites().takeAt(0)->pos().x()
-    //          << "valu perso y"<< m_pScene->sprites().takeAt(0)->pos().y();
-
-    //m_pScene->sprites().takeAt(0)->addAnimationFrame(GameFramework::imagesPath()+"CaisseV1.png");
 
     pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
-    // Récupère tous les sprites de la scène qui touche ce sprite
+
+    // Récupère tous les sprites de la scène qui touche le joueur
     auto listeCurrentCollision = pCharacter->parentScene()->collidingSprites(pCharacter);
     // Supprimer le sprite lui-même
     listeCurrentCollision.removeAll(pCharacter);
@@ -287,9 +285,19 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         for (Sprite* CollisionDetected : listeCurrentCollision) {
 
             if(CollisionDetected->data(1) == "Wood_caisse"){
+                //QRectF bondingBox1;
+                //bondingBox1.intersected();
+                if(CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).height() > CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).width()){
+                   // velocity().setX
+                    //CollisionDetected->setX(velocity.x());
 
-                // WOODCAISSE_SPRITE->setX(WOODCAISSE_SPRITE->x() + pCharacter->m_velocity.x());
-                //p_position.setX(m_pCharacter->x() + 1);
+                     pCharacter->m_velocity.setX(5);
+                     CollisionDetected->setX(CollisionDetected->x() + pCharacter->m_velocity.x());
+
+                }
+
+
+
             }
         }
     }
