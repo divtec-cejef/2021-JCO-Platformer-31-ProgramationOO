@@ -49,26 +49,53 @@ Character::Character(QGraphicsItem* pParent) : Sprite(GameFramework::imagesPath(
 
 }
 
+/**
+ * @brief Character::getIsJump
+ * @return si le joueur saute.
+ */
 bool Character::getIsJump(){
     return this->isJump;
 }
 
+/**
+ * Permet de définir si le joueur est entrains de sauter ou non.
+ * @brief Character::setIsJump
+ * @param _isJump nouvelle état du joueur.
+ */
 void Character::setIsJump(bool _isJump){
     this->isJump = _isJump;
 }
 
+/**
+ * @brief Character::getIsOnFloor
+ * @return si le joueur est sur le sol.
+ */
 bool Character::getIsOnFloor(){
     return this->isOnFloor;
 }
 
+/**
+ * Permet de définir si le joueur est sur le sol ou non.
+ * @brief Character::setIsOnFloor
+ * @param _isOnFloor nouvelle état du joueur.
+ */
 void Character::setIsOnFloor(bool _isOnFloor){
     this->isOnFloor = _isOnFloor;
 }
 
+/**
+ * @brief Character::getIsDeath
+ * @return si le joueur est mort.
+ */
 bool Character::getIsDeath(){
     return this->isDeath;
 }
 
+/**
+ * Permet de définir si le joueur doit être en vie ou non.
+ * @brief Character::setIsDeath
+ * @param _isDeath nouvelle état du joueur.
+ */
 void Character::setIsDeath(bool _isDeath){
     this->isDeath = _isDeath;
 }
@@ -77,6 +104,11 @@ QPointF Character::getVelocity(){
     return m_velocity;
 };
 
+/**
+ * 
+ * @brief Character::configureAnimation
+ * @param player animation du joueur paramétrer
+ */
 void Character::configureAnimation(animation player) {
 
     clearAnimations();
@@ -127,7 +159,7 @@ void Character::setAnimationDeplacementList(){
 /*
     QString iSprite;
 
-    switch () {
+    switch (iSprite) {
     case DEPLA_GAUCHE:
         iSprite = "MarcheGaucheV9.png";
         break;
