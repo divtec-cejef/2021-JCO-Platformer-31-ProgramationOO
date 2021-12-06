@@ -336,36 +336,27 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             if (CollisionDetected->data(2) == "sol") {
 
                 if(!isOnFloor)
-                    //pCharacter->configureAnimation(Character::BASE);
                     isOnFloor = true;
+
                 pCharacter->m_velocity.setY(0.0);
                 isJump = false;
-
-                //qDebug() << "sol pas loin";
             }else{
                 isOnFloor = false;
             }
 
             if (CollisionDetected->data(2) == "Piege") {
 
-
-
                 if(!isDeath){
                     m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
 
-
                     setAnimationDeath();
-
                     pGhost->setPos(pCharacter->pos());
-
 
                     m_pScene->addSpriteToScene(pGhost);
                     m_pScene->removeSpriteFromScene(pCharacter);
                 }else {
                   pGhost->setY(pGhost->y() -5);
                 }
-
-
                 isDeath = true;
             }
         }
