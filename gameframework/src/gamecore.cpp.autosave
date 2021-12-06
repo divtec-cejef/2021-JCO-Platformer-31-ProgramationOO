@@ -29,23 +29,22 @@
 const int SCENE_WIDTH = 6000;
 const int SCENE_HEIGHT = 4000;
 
-const int PLAYER_SPEED = 10 ; // vitesse de déplacement du joueur en pixels/s
-const int PLAYER_JUMP= -10 ; //Vitesse du saute
-const int PLAYER_STOP = 0;
+const int PLAYER_SPEED = 10 ;   // vitesse de déplacement du joueur en pixels/s
+const int PLAYER_JUMP= -10 ;    //Vitesse du saute
+const int PLAYER_STOP = 0;      // Arrete le joueur
 
-//dimenssion de découpage des spriteSheets du sol
-const int FRAME_SIZE_GROUND = 120;
-const int FRAME_COUNT_GROUND = 9;
-const int COLUMN_COUNT_GROUND = 3;
-
-//dimenssion de découpage des spriteSheets du fantome
-const int FRAME_SIZE_GHOST= 60;
-const int FRAME_COUNT_GHOST = 7;
-const int COLUMN_COUNT_GHOST = 3;
+//dimenssion de découpage des spriteSheets du fantome.
+const int FRAME_SIZE_GHOST= 60;     //  Dimenssion de la frame
+const int FRAME_COUNT_GHOST = 7;    //  Nombres de frame à découper
+const int COLUMN_COUNT_GHOST = 3;   //  Nombres de colonne 
 
 
+//Dimenssion de découpage des spriteSheets du sol.
+const int FRAME_SIZE_GROUND = 120;      //  Dimenssion de la frame
+const int FRAME_COUNT_GROUND = 9;       //  Nombres de frame à découper
+const int COLUMN_COUNT_GROUND = 3;      //  Nombres de colonne 
 
-//Type de murs
+//Type de sol
 enum orientation{
     GROUND_UP = 0,
     GROUND_DOWN = 1,
@@ -59,9 +58,10 @@ enum orientation{
 
 };
 
-//static test
-//static Sprite* WOODCAISSE_SPRITE;
-
+/**
+ * Découpage des images pour les différentes orientations du sol.
+ * @brief GameCore::setGroundImages
+ */
 void GameCore::setGroundImages(){
     qDebug()<<"ss";
     QImage spriteSheet(GameFramework::imagesPath() +  "EveryGroundsV1.png");
@@ -396,7 +396,11 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     }
 }
 
-
+/**
+ * @brief GameCore::configureOrientation
+ * @param orientation du sol à selectionnée dans la liste
+ * @param ground sprite à appliqué la texture
+ */
 void GameCore::configureOrientation(orientation orientation, Sprite* &ground) {
     //Selectionne le sol demandé
     ground = new Sprite(QPixmap::fromImage(m_groundImagesList.at(orientation).scaled(FRAME_SIZE_GROUND * 1,
