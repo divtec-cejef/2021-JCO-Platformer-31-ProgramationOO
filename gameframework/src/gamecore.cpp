@@ -491,8 +491,8 @@ void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
             //Mise en place du sol dans la scène
             configureOrientation(orientGround,pCurrentGround);
             pCurrentGround->setPos(posCurrentGround);
-            pCurrentGround->setData(1,"soltest");
-            pCurrentGround->setData(2,"sol");
+            pCurrentGround->setData(1,"sol");
+            pCurrentGround->setData(2,"soltest");
             m_pScene->addSpriteToScene(pCurrentGround);
 
             //Changement de colonne
