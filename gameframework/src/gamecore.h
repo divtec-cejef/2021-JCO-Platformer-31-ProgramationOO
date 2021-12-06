@@ -60,18 +60,9 @@ private:
     GameScene* m_pScene;
     GameView* m_pView;
 
-
-    //Character m_character();
-
-    int distanceLeft = 0;
-    int distanceRight = 0;
-    int distanceJump = 0;
-    int m_playerDirection = 1;
-
-    //QPointF p_position = QPointF(0,0);
-
-    Sprite* pGhost = new Sprite();
+    //Joueur
     Character* pCharacter = new Character();
+    Sprite* pGhost = new Sprite();
     void setAnimationDeath();
 
      QList<QGraphicsTransform*> m_transformsForFlip;

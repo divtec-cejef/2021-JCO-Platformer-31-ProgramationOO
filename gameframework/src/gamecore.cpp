@@ -149,8 +149,8 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pScene->addSpriteToScene(lanceF1, 800,1510);
 
     Sprite* lanceF2 = new Sprite(GameFramework::imagesPath() + "lanceFlammeV3.png");
-    lanceF1->setData(1,"Lance_flamme");
-    lanceF1->setData(2,"Piege");
+    lanceF2->setData(1,"Lance_flamme");
+    lanceF2->setData(2,"Piege");
     m_pScene->addSpriteToScene(lanceF2, 2400,1370);
 
     //Ajoute du joueur dans la scene
