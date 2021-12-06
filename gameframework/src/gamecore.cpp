@@ -40,7 +40,7 @@ const int COLUMN_COUNT_GROUND = 3;
 
 //dimenssion de découpage des spriteSheets du fantome
 const int FRAME_SIZE_GHOST= 60;
-const int FRAME_COUNT_GHOST = 8;
+const int FRAME_COUNT_GHOST = 7;
 const int COLUMN_COUNT_GHOST = 3;
 
 //Type de murs
@@ -481,7 +481,7 @@ void GameCore::setAnimationDeath()
                                                                        FRAME_SIZE_GHOST * 1,
                                                                        Qt::IgnoreAspectRatio,
                                                                        Qt::SmoothTransformation)));
-    for (int i = 1;i <= 8;i++) {
+    for (int i = 1;i <= FRAME_COUNT_GHOST;i++) {
         pGhost->addAnimationFrame(QPixmap::fromImage(deathFrameList.at(i).scaled(FRAME_SIZE_GHOST * 1,
                                                                                  FRAME_SIZE_GHOST * 1,
                                                                                  Qt::IgnoreAspectRatio,
