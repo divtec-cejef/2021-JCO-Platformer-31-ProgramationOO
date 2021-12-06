@@ -26,26 +26,26 @@
 #include "ground.h"
 
 //résolution de la fenetre
-const int SCENE_WIDTH = 6000;
-const int SCENE_HEIGHT = 4000;
+const int SCENE_WIDTH   = 6000;
+const int SCENE_HEIGHT  = 4000;
 
-const int PLAYER_SPEED = 10 ; // vitesse de déplacement du joueur en pixels/s
-const int PLAYER_JUMP= -10 ; //Vitesse du saute
-const int PLAYER_STOP = 0;
+const int PLAYER_SPEED  = 10 ;     // Vitesse de déplacement du joueur en pixels/s
+const int PLAYER_JUMP   = -10 ;    // Vitesse du saute
+const int PLAYER_STOP   = 0;       // Arrete le joueur
 
-//dimenssion de découpage des spriteSheets du sol
-const int FRAME_SIZE_GROUND = 120;
-const int FRAME_COUNT_GROUND = 9;
-const int COLUMN_COUNT_GROUND = 3;
-
-//dimenssion de découpage des spriteSheets du fantome
-const int FRAME_SIZE_GHOST= 60;
-const int FRAME_COUNT_GHOST = 7;
-const int COLUMN_COUNT_GHOST = 3;
+//dimenssion de découpage des spriteSheets du fantome.
+const int FRAME_SIZE_GHOST   = 60;   //  Dimenssion de la frame
+const int FRAME_COUNT_GHOST  = 7;    //  Nombres de frame à découper
+const int COLUMN_COUNT_GHOST = 3;    //  Nombres de colonne
 
 
+//Dimenssion de découpage des spriteSheets du sol.
+const int FRAME_SIZE_GROUND   = 120;    //  Dimenssion de la frame
+const int FRAME_COUNT_GROUND  = 9;      //  Nombres de frame à découper
+const int COLUMN_COUNT_GROUND = 3;      //  Nombres de colonne
 
-//Type de murs
+
+//Type de sol
 enum orientation{
     GROUND_UP = 0,
     GROUND_DOWN = 1,
@@ -59,9 +59,10 @@ enum orientation{
 
 };
 
-//static test
-//static Sprite* WOODCAISSE_SPRITE;
-
+/**
+ * Découpage des images pour les différentes orientations du sol.
+ * @brief GameCore::setGroundImages
+ */
 void GameCore::setGroundImages(){
     qDebug()<<"ss";
     QImage spriteSheet(GameFramework::imagesPath() +  "EveryGroundsV1.png");
@@ -72,11 +73,8 @@ void GameCore::setGroundImages(){
         QImage CurrentGroundImage = spriteSheet.copy((frameIndex % COLUMN_COUNT_GROUND) * FRAME_SIZE_GROUND,
                                                      (frameIndex / COLUMN_COUNT_GROUND) * FRAME_SIZE_GROUND,
                                                      FRAME_SIZE_GROUND, FRAME_SIZE_GROUND);
-
-
         this->m_groundImagesList.append(CurrentGroundImage);
     }
-
 }
 
 //! Initialise le contrôleur de jeu.
@@ -98,6 +96,9 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     setGroundImages();
 
     // Instancier et initialiser les sprite ici :
+
+    QPointF posSolGroup0(0,750);
+    generatorGround(40,3,posSolGroup0);
 
     QPointF posSolGroup1(0,1600);
     generatorGround(8,6,posSolGroup1);
@@ -281,8 +282,6 @@ void GameCore::keyReleased(int key) {
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
-
-
     if(!pCharacter->getIsDeath()){
         pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
         //Suite les déplacement du joueur dans la scene
@@ -321,13 +320,10 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 }
                 qDebug() << "BOIS";
             }
-
-
         }
     }
 
     // Détermine la prochaine position du sprite selon sa velwocité
-    //QPainterPath
     QRectF nextSpriteRect = pCharacter->globalBoundingBox().translated(pCharacter->m_velocity);
 
     // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
@@ -357,7 +353,9 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 if(!pCharacter->getIsDeath()){
                     //qDebug() << "HO NON UN PIEGE AHHHH";
                     m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
+                    setupCharacterDeath();
 
+                    /*
                     setAnimationDeath();
                     pGhost->setPos(pCharacter->pos());
 
@@ -366,13 +364,13 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
                     m_deathCount += 1;
                     qDebug() << "Nbr de mort(s) : " << m_deathCount;
+                    */
                 }
                 pCharacter->setIsDeath(true);
             }
         }
     }else {
         pCharacter->setIsOnFloor(false);
-
     }
 
     //Si le joueur ne touche pas le sol alors il est attiré vers le bas
@@ -394,9 +392,18 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         */
 
     }
+
+    if((pCharacter->x() >= m_pScene->width() /*|| pCharacter->x() <= m_pScene->width()*/
+        || pCharacter->y() >= m_pScene->height() /*|| pCharacter->y() <= m_pScene->height()*/) && !pCharacter->getIsDeath()){
+     setupCharacterDeath();
+    }
 }
 
-
+/**
+ * @brief GameCore::configureOrientation
+ * @param orientation du sol à selectionnée dans la liste
+ * @param ground sprite à appliqué la texture
+ */
 void GameCore::configureOrientation(orientation orientation, Sprite* &ground) {
     //Selectionne le sol demandé
     ground = new Sprite(QPixmap::fromImage(m_groundImagesList.at(orientation).scaled(FRAME_SIZE_GROUND * 1,
@@ -480,19 +487,32 @@ void GameCore::setAnimationDeath()
         QImage CurrentFrameImage = spriteSheet.copy((frameIndex % COLUMN_COUNT_GHOST) * FRAME_SIZE_GHOST,
                                                     (frameIndex / COLUMN_COUNT_GHOST) * FRAME_SIZE_GHOST,
                                                     FRAME_SIZE_GHOST, FRAME_SIZE_GHOST);
-        deathFrameList.append(CurrentFrameImage);
+        if(frameIndex == 0){
+            pGhost = new Sprite(QPixmap::fromImage(CurrentFrameImage.scaled(FRAME_SIZE_GHOST * 1.5,
+                                                                            FRAME_SIZE_GHOST * 1.5,
+                                                                            Qt::IgnoreAspectRatio,
+                                                                            Qt::SmoothTransformation)));
+        }else{
+            pGhost->addAnimationFrame(QPixmap::fromImage(CurrentFrameImage.scaled(FRAME_SIZE_GHOST * 1.5,
+                                                                                  FRAME_SIZE_GHOST * 1.5,
+                                                                                  Qt::IgnoreAspectRatio,
+                                                                                  Qt::SmoothTransformation)));
+        }
     }
-    pGhost = new Sprite(QPixmap::fromImage(deathFrameList.at(0).scaled(FRAME_SIZE_GHOST * 1.5,
-                                                                       FRAME_SIZE_GHOST * 1.5,
-                                                                       Qt::IgnoreAspectRatio,
-                                                                       Qt::SmoothTransformation)));
-    for (int i = 1;i <= FRAME_COUNT_GHOST;i++) {
-        pGhost->addAnimationFrame(QPixmap::fromImage(deathFrameList.at(i).scaled(FRAME_SIZE_GHOST * 1.5,
-                                                                                 FRAME_SIZE_GHOST * 1.5,
-                                                                                 Qt::IgnoreAspectRatio,
-                                                                                 Qt::SmoothTransformation)));
-    }
-    pGhost->startAnimation(50);
+    pGhost->startAnimation(25);
+}
+
+void GameCore::setupCharacterDeath(){
+
+    setAnimationDeath();
+    pGhost->setPos(pCharacter->pos());
+
+    m_pScene->addSpriteToScene(pGhost);
+    m_pScene->removeSpriteFromScene(pCharacter);
+
+    m_deathCount += 1;
+    qDebug() << "Nbr de mort(s) : " << m_deathCount;
+
 }
 
 //! La souris a été déplacée.
