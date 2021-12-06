@@ -64,6 +64,7 @@ private:
     Character* pCharacter = new Character();
     Sprite* pGhost = new Sprite();
     void setAnimationDeath();
+    int m_deathCount = 0;
 
      QList<QGraphicsTransform*> m_transformsForFlip;
 

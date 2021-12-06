@@ -28,6 +28,7 @@ public:
     };
 
     void configureAnimation(animation player);
+    void respawn();
 
     QPointF m_velocity = QPointF(0,0);
     QPointF getVelocity();

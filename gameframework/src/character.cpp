@@ -159,6 +159,20 @@ void Character::configureAnimation(animation player) {
     startAnimation(25);
 }
 
+/**
+ * Reste tout les valeurs du joueur comme elles étaient à leur inisialisation.
+ * @brief Character::respawn
+ */
+void Character::respawn(){
+
+    this->setIsJump(false);
+    this->setIsOnFloor(false);
+    this->setIsDeath(false);
+
+    QPointF velocityReste = QPointF(0,0);
+    this->m_velocity = velocityReste;
+}
+
 void Character::setAnimationDeplacementList(){
 /*
     QString iSprite;

@@ -43,6 +43,8 @@ const int FRAME_SIZE_GHOST= 60;
 const int FRAME_COUNT_GHOST = 7;
 const int COLUMN_COUNT_GHOST = 3;
 
+
+
 //Type de murs
 enum orientation{
     GROUND_UP = 0,
@@ -185,6 +187,7 @@ GameCore::~GameCore() {
 //!
 void GameCore::keyPressed(int key) {
     emit notifyKeyPressed(key);
+
     if(!pCharacter->getIsDeath()){
         Character::animation player;
 
@@ -232,6 +235,13 @@ void GameCore::keyPressed(int key) {
         }
         //m_character(pCharacter).configureAnimation();
         pCharacter->configureAnimation(player);
+    }
+
+    if(key == Qt::Key_Space && pCharacter->getIsDeath()){
+        pCharacter->respawn();
+        m_pScene->removeSpriteFromScene(pGhost);
+        m_pScene->addSpriteToScene(pCharacter, 300,1200);
+        pCharacter->startAnimation(25);
     }
 }
 
@@ -288,6 +298,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
         //Suite les déplacement du joueur dans la scene
         m_pGameCanvas->getView()->centerOn(m_pScene->sprites().takeAt(0)->pos());
+    }else {
+        pGhost->setY(pGhost->y() -5);
     }
 
 
@@ -364,8 +376,9 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
                     m_pScene->addSpriteToScene(pGhost);
                     m_pScene->removeSpriteFromScene(pCharacter);
-                }else {
-                    pGhost->setY(pGhost->y() -5);
+
+                    m_deathCount += 1;
+                    qDebug() << "Nbr de mort(s) : " << m_deathCount;
                 }
                 pCharacter->setIsDeath(true);
             }
