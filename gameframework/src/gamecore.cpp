@@ -34,10 +34,14 @@ const int PLAYER_JUMP= -10 ; //Vitesse du saute
 const int PLAYER_STOP = 0;
 
 //dimenssion de découpage des spriteSheets du sol
-const int FRAME_SIZE = 120;
-const int FRAME_COUNT = 9;
-const int COLUMN_COUNT = 3;
+const int FRAME_SIZE_GROUND = 120;
+const int FRAME_COUNT_GROUND = 9;
+const int COLUMN_COUNT_GROUND = 3;
 
+//dimenssion de découpage des spriteSheets du fantome
+const int FRAME_SIZE_GHOST= 60;
+const int FRAME_COUNT_GHOST = 8;
+const int COLUMN_COUNT_GHOST = 3;
 
 //Type de murs
 enum orientation{
@@ -61,11 +65,11 @@ void GameCore::setGroundImages(){
     QImage spriteSheet(GameFramework::imagesPath() +  "EveryGroundsV1.png");
 
     // Découpage de la spritesheet
-    for (int frameIndex = 0; frameIndex <= FRAME_COUNT; frameIndex++) {
+    for (int frameIndex = 0; frameIndex <= FRAME_COUNT_GROUND; frameIndex++) {
 
-        QImage CurrentGroundImage = spriteSheet.copy((frameIndex % COLUMN_COUNT) * FRAME_SIZE,
-                                                     (frameIndex / COLUMN_COUNT) * FRAME_SIZE,
-                                                     FRAME_SIZE, FRAME_SIZE);
+        QImage CurrentGroundImage = spriteSheet.copy((frameIndex % COLUMN_COUNT_GROUND) * FRAME_SIZE_GROUND,
+                                                     (frameIndex / COLUMN_COUNT_GROUND) * FRAME_SIZE_GROUND,
+                                                     FRAME_SIZE_GROUND, FRAME_SIZE_GROUND);
 
 
         this->m_groundImagesList.append(CurrentGroundImage);
@@ -181,7 +185,7 @@ GameCore::~GameCore() {
 //!
 void GameCore::keyPressed(int key) {
     emit notifyKeyPressed(key);
-    if(!isDeath){
+    if(!pCharacter->getIsDeath()){
         Character::animation player;
 
         switch(key) {
@@ -199,7 +203,7 @@ void GameCore::keyPressed(int key) {
         case Qt::Key_W:
             player = Character::SAUT;
             pCharacter->m_velocity.setY(PLAYER_JUMP);
-            isJump = true;
+            pCharacter->setIsJump(true);
             break;
 
         case Qt::Key_A:
@@ -213,11 +217,11 @@ void GameCore::keyPressed(int key) {
             break;
 
         case Qt::Key_Space:
-            if(isOnFloor){
+            if(pCharacter->getIsOnFloor()){
                 player = Character::SAUT;
                 pCharacter->m_velocity.setY(PLAYER_JUMP);
-                isJump = true;
-                qDebug() << "isJump : " << isJump;
+                pCharacter->setIsJump(true);
+                qDebug() << "isJump : " << pCharacter->getIsJump();
             }else{
                 player = Character::BASE;
             }
@@ -235,7 +239,7 @@ void GameCore::keyPressed(int key) {
 //! \param key Numéro de la touche (voir les constantes Qt)
 void GameCore::keyReleased(int key) {
     emit notifyKeyReleased(key);
-    if(!isDeath){
+    if(!pCharacter->getIsDeath()){
         switch(key) {
         case Qt::Key_Left:
             pCharacter->m_velocity.setX(PLAYER_STOP);
@@ -262,7 +266,7 @@ void GameCore::keyReleased(int key) {
 
         case Qt::Key_Space:
             pCharacter->m_velocity.setY(PLAYER_STOP);
-            isJump = false;
+            pCharacter->setIsJump(false);
             break;
         }
         //if(!isOnFloor)
@@ -280,7 +284,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
 
 
-    if(!isDeath)
+    if(!pCharacter->getIsDeath())
         pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
 
     // Récupère tous les sprites de la scène qui touche le joueur
@@ -335,18 +339,18 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         for (Sprite* CollisionDetected : listeFuturCollision) {
             if (CollisionDetected->data(2) == "sol") {
 
-                if(!isOnFloor)
-                    isOnFloor = true;
+                if(!pCharacter->getIsJump())
+                    pCharacter->setIsOnFloor(true);
 
                 pCharacter->m_velocity.setY(0.0);
-                isJump = false;
+                pCharacter->setIsJump(false);
             }else{
-                isOnFloor = false;
+                 pCharacter->setIsOnFloor(false);
             }
 
             if (CollisionDetected->data(2) == "Piege") {
 
-                if(!isDeath){
+                if(!pCharacter->getIsDeath()){
                     m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
 
                     setAnimationDeath();
@@ -357,17 +361,17 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 }else {
                   pGhost->setY(pGhost->y() -5);
                 }
-                isDeath = true;
+                pCharacter->setIsDeath(true);
             }
         }
     }else {
-        isOnFloor = false;
+        pCharacter->setIsOnFloor(false);
         //Suite les déplacement du joueur dans la scene
         m_pGameCanvas->getView()->centerOn(m_pScene->sprites().takeAt(0)->pos());
     }
 
     //Si le joueur ne touche pas le sol alors il est attiré vers le bas
-    if (!isOnFloor){
+    if (!pCharacter->getIsOnFloor()){
         //qDebug() << "PAS SUR LE SOL";
 
         pCharacter->setPos(pCharacter->pos() + pCharacter->m_velocity * (elapsedTimeInMilliseconds/100.0));
@@ -390,8 +394,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
 void GameCore::configureOrientation(orientation orientation, Sprite* &ground) {
     //Selectionne le sol demandé
-    ground = new Sprite(QPixmap::fromImage(m_groundImagesList.at(orientation).scaled(FRAME_SIZE * 1,
-                                                                                     FRAME_SIZE * 1,
+    ground = new Sprite(QPixmap::fromImage(m_groundImagesList.at(orientation).scaled(FRAME_SIZE_GROUND * 1,
+                                                                                     FRAME_SIZE_GROUND * 1,
                                                                                      Qt::IgnoreAspectRatio,
                                                                                      Qt::SmoothTransformation)));
 }
@@ -453,44 +457,37 @@ void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
             m_pScene->addSpriteToScene(pCurrentGround);
 
             //Changement de colonne
-            posCurrentGround.setX(posCurrentGround.x() + FRAME_SIZE);
+            posCurrentGround.setX(posCurrentGround.x() + FRAME_SIZE_GROUND);
         }
         //Change de ligne
         posCurrentGround.setX(posGroupe.x());
-        posCurrentGround.setY(posCurrentGround.y()+FRAME_SIZE);
+        posCurrentGround.setY(posCurrentGround.y()+FRAME_SIZE_GROUND);
     }
 }
 void GameCore::setAnimationDeath()
 {
-
     QImage spriteSheet(GameFramework::imagesPath() +  "deathAnimationV1.png");
 
     QList<QImage> deathFrameList;
     // Découpage de la spritesheet
-    for (int frameIndex = 0; frameIndex <= 8; frameIndex++) {
+    for (int frameIndex = 0; frameIndex <= FRAME_COUNT_GHOST; frameIndex++) {
 
-        QImage CurrentFrameImage = spriteSheet.copy((frameIndex % 3) * 60,
-                                                    (frameIndex / 3) * 60,
-                                                    60, 60);
-
-
+        QImage CurrentFrameImage = spriteSheet.copy((frameIndex % COLUMN_COUNT_GHOST) * FRAME_SIZE_GHOST,
+                                                    (frameIndex / COLUMN_COUNT_GHOST) * FRAME_SIZE_GHOST,
+                                                    FRAME_SIZE_GHOST, FRAME_SIZE_GHOST);
         deathFrameList.append(CurrentFrameImage);
     }
-
-    pGhost = new Sprite(QPixmap::fromImage(deathFrameList.at(0).scaled(60 * 1,
-                                                                       60 * 1,
+    pGhost = new Sprite(QPixmap::fromImage(deathFrameList.at(0).scaled(FRAME_SIZE_GHOST * 1,
+                                                                       FRAME_SIZE_GHOST * 1,
                                                                        Qt::IgnoreAspectRatio,
                                                                        Qt::SmoothTransformation)));
-
     for (int i = 1;i <= 8;i++) {
-        pGhost->addAnimationFrame(QPixmap::fromImage(deathFrameList.at(i).scaled(60 * 1,
-                                                                                 60 * 1,
+        pGhost->addAnimationFrame(QPixmap::fromImage(deathFrameList.at(i).scaled(FRAME_SIZE_GHOST * 1,
+                                                                                 FRAME_SIZE_GHOST * 1,
                                                                                  Qt::IgnoreAspectRatio,
                                                                                  Qt::SmoothTransformation)));
     }
-
     pGhost->startAnimation(50);
-
 }
 
 //! La souris a été déplacée.

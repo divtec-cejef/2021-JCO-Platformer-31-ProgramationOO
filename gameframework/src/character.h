@@ -15,7 +15,6 @@ class Character: public Sprite
 public:
 
 
-
     Character(QGraphicsItem* pParent = nullptr);
 
     //Type d'animation du joueurs
@@ -30,24 +29,27 @@ public:
 
     void configureAnimation(animation player);
 
+    QPointF m_velocity = QPointF(0,0);
+    QPointF getVelocity();
     void updateCharacterVelocity();
 
-
-    QPointF m_velocity = QPointF(0,0);
-    //void setVelocity(QPointF m_velocity);
-    QPointF getVelocity();
-
-
     bool isOnFloor = false;
-    bool isJump = false;
+    bool getIsOnFloor();
+    void setIsOnFloor(bool _isOnFloor);
 
+    bool isJump = false;
+    bool getIsJump();
+    void setIsJump(bool _isJump);
+
+    bool isDeath = false;
+    bool getIsDeath();
+    void setIsDeath(bool _isDeath);
 
     /*
     bool m_keyUpPressed;
     bool m_keyDownPressed;
     bool m_keyLeftPressed;
     bool m_keyRightPressed;
-
     */
 
 public slots:

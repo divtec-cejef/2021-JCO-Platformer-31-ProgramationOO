@@ -43,10 +43,6 @@ public:
     //Physique
     QPointF gravity = QPointF(0,2);
     QPointF velocity = QPointF(0,0);
-    bool isOnFloor = false;
-    bool isJump = false;
-    bool isDeath = false;
-
 
     void tick(long long elapsedTimeInMilliseconds);
 

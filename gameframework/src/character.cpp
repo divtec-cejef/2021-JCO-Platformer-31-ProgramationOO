@@ -49,6 +49,29 @@ Character::Character(QGraphicsItem* pParent) : Sprite(GameFramework::imagesPath(
 
 }
 
+bool Character::getIsJump(){
+    return this->isJump;
+}
+
+void Character::setIsJump(bool _isJump){
+    this->isJump = _isJump;
+}
+
+bool Character::getIsOnFloor(){
+    return this->isOnFloor;
+}
+
+void Character::setIsOnFloor(bool _isOnFloor){
+    this->isOnFloor = _isOnFloor;
+}
+
+bool Character::getIsDeath(){
+    return this->isDeath;
+}
+
+void Character::setIsDeath(bool _isDeath){
+    this->isDeath = _isDeath;
+}
 
 QPointF Character::getVelocity(){
     return m_velocity;
