@@ -59,6 +59,9 @@ public slots:
 
 private:
      void configureTransformationMatrix();
+
+     QList<QImage>m_AnimationDeplacementList;
+     void setAnimationDeplacementList();
 };
 
 #endif // CHARACTER_H

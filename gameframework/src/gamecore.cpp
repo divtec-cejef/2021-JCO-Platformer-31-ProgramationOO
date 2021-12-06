@@ -284,8 +284,13 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
 
 
-    if(!pCharacter->getIsDeath())
+    if(!pCharacter->getIsDeath()){
         pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
+        //Suite les déplacement du joueur dans la scene
+        m_pGameCanvas->getView()->centerOn(m_pScene->sprites().takeAt(0)->pos());
+    }
+
+
 
     // Récupère tous les sprites de la scène qui touche le joueur
     auto listeCurrentCollision = pCharacter->parentScene()->collidingSprites(pCharacter);
@@ -345,12 +350,13 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 pCharacter->m_velocity.setY(0.0);
                 pCharacter->setIsJump(false);
             }else{
-                 pCharacter->setIsOnFloor(false);
+                pCharacter->setIsOnFloor(false);
             }
 
             if (CollisionDetected->data(2) == "Piege") {
 
                 if(!pCharacter->getIsDeath()){
+                    qDebug() << "HO NON UN PIEGE AHHHH";
                     m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
 
                     setAnimationDeath();
@@ -359,15 +365,14 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     m_pScene->addSpriteToScene(pGhost);
                     m_pScene->removeSpriteFromScene(pCharacter);
                 }else {
-                  pGhost->setY(pGhost->y() -5);
+                    pGhost->setY(pGhost->y() -5);
                 }
                 pCharacter->setIsDeath(true);
             }
         }
     }else {
         pCharacter->setIsOnFloor(false);
-        //Suite les déplacement du joueur dans la scene
-        m_pGameCanvas->getView()->centerOn(m_pScene->sprites().takeAt(0)->pos());
+
     }
 
     //Si le joueur ne touche pas le sol alors il est attiré vers le bas
@@ -482,8 +487,8 @@ void GameCore::setAnimationDeath()
                                                                        Qt::IgnoreAspectRatio,
                                                                        Qt::SmoothTransformation)));
     for (int i = 1;i <= FRAME_COUNT_GHOST;i++) {
-        pGhost->addAnimationFrame(QPixmap::fromImage(deathFrameList.at(i).scaled(FRAME_SIZE_GHOST * 1,
-                                                                                 FRAME_SIZE_GHOST * 1,
+        pGhost->addAnimationFrame(QPixmap::fromImage(deathFrameList.at(i).scaled(FRAME_SIZE_GHOST * 1.5,
+                                                                                 FRAME_SIZE_GHOST * 1.5,
                                                                                  Qt::IgnoreAspectRatio,
                                                                                  Qt::SmoothTransformation)));
     }
