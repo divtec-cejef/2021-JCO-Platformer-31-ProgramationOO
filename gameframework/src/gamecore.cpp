@@ -96,6 +96,9 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     // Instancier et initialiser les sprite ici :
 
+    ///////////////////////////
+    ////        SOL        ////
+    ///////////////////////////
     QPointF posSolGroup1_1erEtage(0,750);
     generatorGround(40,3,posSolGroup1_1erEtage);
 
@@ -121,9 +124,9 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pScene->addSpriteToScene(Sol2, 1280,600);
     */
 
-    /////////////////////////////////
+    //////////////////////////////////
     ////        PLATEFORME        ////
-    /////////////////////////////////
+    //////////////////////////////////
     Sprite* platM1 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
     platM1->setData(1,"sol");
     platM1->setData(2,"plateforme");
@@ -131,54 +134,53 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     Sprite* platM2 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
     platM2->setData(1,"sol");
-    platM2->setData(2,"sol");
+    platM2->setData(2,"plateforme");
     m_pScene->addSpriteToScene(platM2, 1500,1730);
 
     Sprite* platM3 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
     platM3->setData(1,"sol");
-    platM3->setData(2,"sol");
+    platM3->setData(2,"plateforme");
     m_pScene->addSpriteToScene(platM3, 1800,1600);
 
     Sprite* platM4 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
     platM4->setData(1,"sol");
-    platM4->setData(2,"sol");
+    platM4->setData(2,"plateforme");
     m_pScene->addSpriteToScene(platM4, 3700,1320);
 
     //////////////////////////////
     ////        CAISSE        ////
     //////////////////////////////
     Sprite* CaisseW1 = new Sprite(GameFramework::imagesPath() + "CaisseV2.png");
-    CaisseW1->setData(1,"Wood_caisse");
-    CaisseW1->setData(2,"sol");
+    CaisseW1->setData(1,"sol");
+    CaisseW1->setData(2,"Wood_caisse");
     m_pScene->addSpriteToScene(CaisseW1, 500,1520);
 
     Sprite* CaisseW2 = new Sprite(GameFramework::imagesPath() + "CaisseV2.png");
-    CaisseW2->setData(1,"Wood_caisse");
-    CaisseW2->setData(2,"sol");
+    CaisseW2->setData(1,"sol");
+    CaisseW2->setData(2,"Wood_caisse");
     m_pScene->addSpriteToScene(CaisseW2, 2900,1380);
 
     Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV2.png");
-    caisseM1->setData(1,"Wood_caisse");
-    caisseM1->setData(2,"sol");
+    caisseM1->setData(1,"sol");
+    caisseM1->setData(2,"Wood_caisse");
     m_pScene->addSpriteToScene(caisseM1, 700,1520);
 
     /////////////////////////////
     ////        PIEGE        ////
     /////////////////////////////
-
     Sprite* lanceF1 = new Sprite(GameFramework::imagesPath() + "lanceFlammeV3.png");
-    lanceF1->setData(1,"Lance_flamme");
-    lanceF1->setData(2,"Piege");
+    lanceF1->setData(1,"Piege");
+    lanceF1->setData(2,"Lance_flamme");
     m_pScene->addSpriteToScene(lanceF1, 800,1510);
 
     Sprite* lanceF2 = new Sprite(GameFramework::imagesPath() + "lanceFlammeV3.png");
-    lanceF2->setData(1,"Lance_flamme");
-    lanceF2->setData(2,"Piege");
+    lanceF2->setData(1,"Piege");
+    lanceF2->setData(2,"Lance_flamme");
     m_pScene->addSpriteToScene(lanceF2, 2400,1370);
 
     Sprite* lanceF3 = new Sprite(GameFramework::imagesPath() + "lanceFlammeV3.png");
-    lanceF3->setData(1,"Lance_flamme");
-    lanceF3->setData(2,"Piege");
+    lanceF3->setData(1,"Piege");
+    lanceF3->setData(2,"Lance_flamme");
     m_pScene->addSpriteToScene(lanceF3, 4580,1570);
 
     //Ajoute du joueur dans la scene
@@ -327,7 +329,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         //Cherche les collisions entre le joueurs les autres sprites
         for (Sprite* CollisionDetected : listeCurrentCollision) {
 
-            if(CollisionDetected->data(1) == "Wood_caisse"){
+            if(CollisionDetected->data(2) == "Wood_caisse"){
 
                 //Zone de collision entre le joueur et la caisse en bois
                 QRectF zoneDeCollision = CollisionDetected->boundingRect().intersected(pCharacter->boundingRect());
@@ -362,7 +364,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     if(futurCollision){
         //Cherche de potentielle futur collisions entre le joueur et les autres sprites
         for (Sprite* CollisionDetected : listeFuturCollision) {
-            if (CollisionDetected->data(2) == "sol") {
+            if (CollisionDetected->data(1) == "sol") {
 
                 if(!pCharacter->getIsJump())
                     pCharacter->setIsOnFloor(true);
@@ -373,7 +375,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 pCharacter->setIsOnFloor(false);
             }
 
-            if (CollisionDetected->data(2) == "Piege") {
+            if (CollisionDetected->data(1) == "Piege") {
 
                 if(!pCharacter->getIsDeath()){
                     //qDebug() << "HO NON UN PIEGE AHHHH";
