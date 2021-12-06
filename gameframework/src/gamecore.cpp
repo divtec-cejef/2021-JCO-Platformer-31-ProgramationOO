@@ -97,8 +97,11 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     // Instancier et initialiser les sprite ici :
 
-    QPointF posSolGroup0(0,750);
-    generatorGround(40,3,posSolGroup0);
+    QPointF posSolGroup1_1erEtage(0,750);
+    generatorGround(40,3,posSolGroup1_1erEtage);
+
+    QPointF posSolGroup2_1erEtage(5280,750);
+    generatorGround(6,3,posSolGroup2_1erEtage);
 
     QPointF posSolGroup1(0,1600);
     generatorGround(8,6,posSolGroup1);
