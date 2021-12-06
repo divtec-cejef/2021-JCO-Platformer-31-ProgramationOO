@@ -53,27 +53,25 @@ bool Character::getIsJump(){
     return this->isJump;
 }
 
-Character::setIsJump(bool isJump){
-    
+void Character::setIsJump(bool _isJump){
+    this->isJump = _isJump;
 }
 
 bool Character::getIsOnFloor(){
     return this->isOnFloor;
 }
 
-Character::setIsOnFloor(){
-    r
+void Character::setIsOnFloor(bool _isOnFloor){
+    this->isOnFloor = _isOnFloor;
 }
 
 bool Character::getIsDeath(){
     return this->isDeath;
 }
 
-Character::setIsDeath(){
-    
+void Character::setIsDeath(bool _isDeath){
+    this->isDeath = _isDeath;
 }
-
-
 
 QPointF Character::getVelocity(){
     return m_velocity;

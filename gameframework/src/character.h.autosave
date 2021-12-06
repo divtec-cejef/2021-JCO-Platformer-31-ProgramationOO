@@ -35,15 +35,15 @@ public:
 
     bool isOnFloor = false;
     bool getIsOnFloor();
-    void setIsOnFloor(bool isOnFloor);
+    void setIsOnFloor(bool _isOnFloor);
     
     bool isJump = false;
     bool getIsJump();
-    void setIsJump(bool isJump);
+    void setIsJump(bool _isJump);
 
     bool isDeath = false;
     bool getIsDeath();
-    void setIsDeath(bool isDeath);
+    void setIsDeath(bool _isDeath);
    
     /*
     bool m_keyUpPressed;
