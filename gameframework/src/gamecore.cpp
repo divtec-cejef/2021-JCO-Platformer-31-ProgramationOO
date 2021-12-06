@@ -64,7 +64,6 @@ enum orientation{
  * @brief GameCore::setGroundImages
  */
 void GameCore::setGroundImages(){
-    qDebug()<<"ss";
     QImage spriteSheet(GameFramework::imagesPath() +  "EveryGroundsV1.png");
 
     // Découpage de la spritesheet
@@ -108,32 +107,46 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     QPointF posSolGroup2(2200,1460);
     generatorGround(8,5,posSolGroup2);
+
+    QPointF posSolGroup3(3960,1460);
+    generatorGround(2,9,posSolGroup3);
+
+    QPointF posSolGroup4(4460,1660);
+    generatorGround(2,9,posSolGroup4);
+
     /*
     Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solv2.png");
     Sol2->setData(1,"soltest");
     Sol2->setData(2,"sol");
     m_pScene->addSpriteToScene(Sol2, 1280,600);
     */
+
+    /////////////////////////////////
+    ////        PLATEFORME        ////
+    /////////////////////////////////
     Sprite* platM1 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
-    platM1->setData(1,"platforme");
-    platM1->setData(2,"sol");
+    platM1->setData(1,"sol");
+    platM1->setData(2,"plateforme");
     m_pScene->addSpriteToScene(platM1, 1200,1600);
 
     Sprite* platM2 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
-    platM2->setData(1,"platforme");
+    platM2->setData(1,"sol");
     platM2->setData(2,"sol");
     m_pScene->addSpriteToScene(platM2, 1500,1730);
 
     Sprite* platM3 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
-    platM3->setData(1,"platforme");
+    platM3->setData(1,"sol");
     platM3->setData(2,"sol");
     m_pScene->addSpriteToScene(platM3, 1800,1600);
 
     Sprite* platM4 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
-    platM4->setData(1,"platforme");
+    platM4->setData(1,"sol");
     platM4->setData(2,"sol");
     m_pScene->addSpriteToScene(platM4, 3700,1320);
 
+    //////////////////////////////
+    ////        CAISSE        ////
+    //////////////////////////////
     Sprite* CaisseW1 = new Sprite(GameFramework::imagesPath() + "CaisseV2.png");
     CaisseW1->setData(1,"Wood_caisse");
     CaisseW1->setData(2,"sol");
@@ -149,6 +162,10 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     caisseM1->setData(2,"sol");
     m_pScene->addSpriteToScene(caisseM1, 700,1520);
 
+    /////////////////////////////
+    ////        PIEGE        ////
+    /////////////////////////////
+
     Sprite* lanceF1 = new Sprite(GameFramework::imagesPath() + "lanceFlammeV3.png");
     lanceF1->setData(1,"Lance_flamme");
     lanceF1->setData(2,"Piege");
@@ -158,6 +175,11 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     lanceF2->setData(1,"Lance_flamme");
     lanceF2->setData(2,"Piege");
     m_pScene->addSpriteToScene(lanceF2, 2400,1370);
+
+    Sprite* lanceF3 = new Sprite(GameFramework::imagesPath() + "lanceFlammeV3.png");
+    lanceF3->setData(1,"Lance_flamme");
+    lanceF3->setData(2,"Piege");
+    m_pScene->addSpriteToScene(lanceF3, 4580,1570);
 
     //Ajoute du joueur dans la scene
     m_pScene->addSpriteToScene(pCharacter, 300,1200);
@@ -331,7 +353,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
     // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
     auto listeFuturCollision = pCharacter->parentScene()->collidingSprites(nextSpriteRect);
-    // Supprime le sprite lui-même, qui collisionne toujours aawwawaawwwwwwwwwwvec sa boundingbox
+    // Supprime le sprite lui-même, qui collisionne toujours awdvec sa boundingbox
     listeFuturCollision.removeAll(pCharacter);
 
     //récupère la valeur de liste (remplis/vide)
@@ -502,7 +524,7 @@ void GameCore::setAnimationDeath()
                                                                                   Qt::SmoothTransformation)));
         }
     }
-    pGhost->startAnimation(25);
+    pGhost->startAnimation(50);
 }
 
 void GameCore::setupCharacterDeath(){
