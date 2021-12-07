@@ -158,7 +158,7 @@ void Character::configureAnimation(animation player) {
 
     }else {
 
-        if(m_velocity.x() < 0)
+        if(m_velocity.x() < 0 || m_lastVelocity.x() < 0)
             directionFrame = directionFrame.mirrored(true,false);
 
         addAnimationFrame(QPixmap::fromImage(directionFrame.scaled(FRAME_WIDTH * 1,

@@ -31,6 +31,7 @@ public:
     void respawn();
 
     QPointF m_velocity = QPointF(0,0);
+    QPointF m_lastVelocity = m_velocity;
     QPointF getVelocity();
     void updateCharacterVelocity();
 

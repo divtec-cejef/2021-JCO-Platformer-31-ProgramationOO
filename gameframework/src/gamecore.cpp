@@ -258,27 +258,14 @@ void GameCore::keyReleased(int key) {
     emit notifyKeyReleased(key);
     if(!pCharacter->getIsDeath()){
         switch(key) {
-        case Qt::Key_Left:
-            pCharacter->m_velocity.setX(PLAYER_STOP);
-            //distanceLeft = PLAYER_STOP;
-            break;
-
-        case Qt::Key_Right:
-            pCharacter->m_velocity.setX(PLAYER_STOP);
-            //distanceRight = PLAYER_STOP;
-            break;
-        case Qt::Key_Up:
-            pCharacter->m_velocity.setY(PLAYER_STOP);
-            //isJump = false;
-            //qDebug() << "isJump : " << isJump;
-            break;
-
         case Qt::Key_A:
             pCharacter->m_velocity.setX(PLAYER_STOP);
+            pCharacter->m_lastVelocity.setX(-PLAYER_SPEED);
             break;
 
         case Qt::Key_D:
             pCharacter->m_velocity.setX(PLAYER_STOP);
+            pCharacter->m_lastVelocity.setX(PLAYER_SPEED);
             break;
 
         case Qt::Key_Space:
