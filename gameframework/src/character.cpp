@@ -16,13 +16,15 @@
 #include "resources.h"
 
 //Type d'animation du joueurs
+const int NBR_ANIMATION = 6;
 enum animation{
-    SAUT,
-    DEPLA_GAUCHE,
-    DEPLA_DROITE,
-    ATTA_GAUCHE,
-    ATTA_DROITE,
-    BASE
+    BASE = 0,
+    DEPLA_GAUCHE = 1,
+    DEPLA_DROITE = 2,
+    SAUT = 3,
+    ATTA_GAUCHE = 4,
+    ATTA_DROITE = 5,
+
 };
 
 //spriteSheet animation de marche à gauche/droite
@@ -120,7 +122,7 @@ void Character::configureAnimation(animation player) {
 
     switch (player) {
     case DEPLA_GAUCHE:
-        iSprite = "MarcheGaucheV9.png";
+        iSprite = "MarcheDroiteV9.png" /*"MarcheGaucheV9.png"*/;
         break;
     case DEPLA_DROITE:
         iSprite =  "MarcheDroiteV9.png";
@@ -132,27 +134,37 @@ void Character::configureAnimation(animation player) {
         iSprite = "BasicPoseV4.png";
         break;
     }
-
-    if(iSprite == "MarcheDroiteV9.png" || iSprite == "MarcheGaucheV9.png"){
+    QImage directionFrame(GameFramework::imagesPath() + iSprite);
+    if(iSprite == "MarcheDroiteV9.png"/* || iSprite == "MarcheGaucheV9.png"*/){
 
         QImage spriteSheet(GameFramework::imagesPath() + iSprite);
 
         // Découpage de la spritesheet
         for (int frameIndex = 0; frameIndex < FRAME_COUNT; frameIndex++) {
-            QImage sprite = spriteSheet.copy((frameIndex % COLUMN_COUNT) * FRAME_WIDTH,
+            QImage frameSheet = spriteSheet.copy((frameIndex % COLUMN_COUNT) * FRAME_WIDTH,
                                              (frameIndex / COLUMN_COUNT) * FRAME_HEIGHT,
                                              FRAME_WIDTH, FRAME_HEIGHT);
 
-            addAnimationFrame(QPixmap::fromImage(sprite.scaled(FRAME_WIDTH * 1,
+            if(m_velocity.x() < 0)
+                directionFrame = frameSheet.mirrored(true,false);
+            else
+                directionFrame = frameSheet;
+
+            addAnimationFrame(QPixmap::fromImage(directionFrame.scaled(FRAME_WIDTH * 1,
                                                                         FRAME_HEIGHT * 1,
                                                                         Qt::IgnoreAspectRatio,
                                                                         Qt::SmoothTransformation)));
         }
 
-        // qDebug() << "MARCHE "<< iSprite;
     }else {
-        //pSprite = new Sprite(GameFramework::imagesPath() + "BasicPoseV1.png");
-        addAnimationFrame(GameFramework::imagesPath() + iSprite);
+
+        if(m_velocity.x() < 0)
+            directionFrame = directionFrame.mirrored(true,false);
+
+        addAnimationFrame(QPixmap::fromImage(directionFrame.scaled(FRAME_WIDTH * 1,
+                                                                     FRAME_HEIGHT * 1,
+                                                                     Qt::IgnoreAspectRatio,
+                                                                     Qt::SmoothTransformation)));
         //qDebug() << "BASE " << iSprite;
 
     }
@@ -177,7 +189,7 @@ void Character::setAnimationDeplacementList(){
 /*
     QString iSprite;
 
-    switch (iSprite) {
+    switch () {
     case DEPLA_GAUCHE:
         iSprite = "MarcheGaucheV9.png";
         break;
@@ -191,22 +203,26 @@ void Character::setAnimationDeplacementList(){
         iSprite = "BasicPoseV4.png";
         break;
     }
+    for (int i;i <= NBR_ANIMATION;i++) {
 
-    if(iSprite == "MarcheDroiteV9.png" || iSprite == "MarcheGaucheV9.png"){
+        if(i >= NBR_ANIMATION){
+            QImage spriteSheet(GameFramework::imagesPath() + iSprite);
 
-        QImage spriteSheet(GameFramework::imagesPath() + iSprite);
+            //iSprite == "MarcheDroiteV9.png" || iSprite == "MarcheGaucheV9.png"
+            // Découpage de la spritesheet
+            for (int frameIndex = 0; frameIndex < FRAME_COUNT; frameIndex++) {
+                QImage CurrentAnimImage = spriteSheet.copy((frameIndex % COLUMN_COUNT) * FRAME_WIDTH,
+                                                 (frameIndex / COLUMN_COUNT) * FRAME_HEIGHT,
+                                                 FRAME_WIDTH, FRAME_HEIGHT);
 
-        // Découpage de la spritesheet
-        for (int frameIndex = 0; frameIndex < FRAME_COUNT; frameIndex++) {
-            QImage sprite = spriteSheet.copy((frameIndex % COLUMN_COUNT) * FRAME_WIDTH,
-                                             (frameIndex / COLUMN_COUNT) * FRAME_HEIGHT,
-                                             FRAME_WIDTH, FRAME_HEIGHT);
 
-            QImage CurrentAnimImage(QPixmap::fromImage(sprite.scaled(FRAME_WIDTH * 1,
-                                                                        FRAME_HEIGHT * 1,
-                                                                        Qt::IgnoreAspectRatio,
-            m_AnimationDeplacementList.append(CurrentAnimImage);                                                         Qt::SmoothTransformation)));
+                 m_listAnimation.append(CurrentAnimImage);
+            }
+
+    }else {
+            m_listAnimation.append()
         }
+
 */
 }
 

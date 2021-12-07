@@ -117,13 +117,6 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     QPointF posSolGroup4(4460,1660);
     generatorGround(2,9,posSolGroup4);
 
-    /*
-    Sprite* Sol2 = new Sprite(GameFramework::imagesPath() + "solv2.png");
-    Sol2->setData(1,"soltest");
-    Sol2->setData(2,"sol");
-    m_pScene->addSpriteToScene(Sol2, 1280,600);
-    */
-
     //////////////////////////////////
     ////        PLATEFORME        ////
     //////////////////////////////////
@@ -146,6 +139,11 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     platM4->setData(1,"sol");
     platM4->setData(2,"plateforme");
     m_pScene->addSpriteToScene(platM4, 3700,1320);
+
+    Sprite* platM5 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
+    platM5->setData(1,"sol");
+    platM5->setData(2,"plateforme");
+    m_pScene->addSpriteToScene(platM5, 4800,1085);
 
     //////////////////////////////
     ////        CAISSE        ////
@@ -186,13 +184,6 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     //Ajoute du joueur dans la scene
     m_pScene->addSpriteToScene(pCharacter, 300,1200);
     pCharacter->startAnimation(25);
-
-    /*
-    Sprite* caisseM2 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV1.png");
-    caisseM2->setData(1,"caisseM");
-    caisseM2->setData(2,"Sol");
-    m_pScene->addSpriteToScene(caisseM2, 700,465);
-    */
 
     // ...
     // Démarre le tick pour que les animations qui en dépendent fonctionnent correctement.
@@ -250,7 +241,6 @@ void GameCore::keyPressed(int key) {
         default:
             player = Character::BASE;
         }
-        //m_character(pCharacter).configureAnimation();
         pCharacter->configureAnimation(player);
     }
 
@@ -335,8 +325,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 QRectF zoneDeCollision = CollisionDetected->boundingRect().intersected(pCharacter->boundingRect());
 
                 if(zoneDeCollision.height() > zoneDeCollision.width()){
-                    // velocity().setX
-                    //CollisionDetected->setX(velocity.x());
 
                     qDebug() << "height collision :" << CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).height();
                     qDebug() << "width collision :" << CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).width();
@@ -381,17 +369,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     //qDebug() << "HO NON UN PIEGE AHHHH";
                     m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
                     setupCharacterDeath();
-
-                    /*
-                    setAnimationDeath();
-                    pGhost->setPos(pCharacter->pos());
-
-                    m_pScene->addSpriteToScene(pGhost);
-                    m_pScene->removeSpriteFromScene(pCharacter);
-
-                    m_deathCount += 1;
-                    qDebug() << "Nbr de mort(s) : " << m_deathCount;
-                    */
                 }
                 pCharacter->setIsDeath(true);
             }
