@@ -187,6 +187,14 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pScene->addSpriteToScene(pCharacter, 300,1200);
     pCharacter->startAnimation(25);
 
+    //////////////////////////////
+    ////        ENEMIE        ////
+    //////////////////////////////
+    Sprite* enemie1 = new Sprite(GameFramework::imagesPath() + "bastienbulioV1.png");
+    enemie1->setData(1,"enemie");
+    enemie1->setData(2,"bulio");
+    m_pScene->addSpriteToScene(enemie1, 2500,1460);
+    
     // ...
     // Démarre le tick pour que les animations qui en dépendent fonctionnent correctement.
     // Attention : il est important que l'enclenchement du tick soit fait vers la fin de cette fonction,
@@ -375,6 +383,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     }else {
         pGhost->setY(pGhost->y() -5);
     }
+    
+    
 }
 
 

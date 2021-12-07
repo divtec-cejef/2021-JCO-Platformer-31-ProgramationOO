@@ -107,16 +107,16 @@ void Character::incrementDeathCount(){
 //!
 //! @brief Character::getVelocity
 //! @return la velocité actuel du joueur
- */
+//!
 QPointF Character::getVelocity(){
     return m_velocity;
 };
 
-/**
- * Définit l'animation dans la quel le sprite du joueur doit être.
- * @brief Character::configureAnimation
- * @param player animation du joueur paramétrer
- */
+//!
+//! Définit l'animation dans la quel le sprite du joueur doit être.
+//! @brief Character::configureAnimation
+//! @param player animation du joueur paramétrer
+//!
 void Character::configureAnimation(animation player) {
 
     clearAnimations();
@@ -171,10 +171,10 @@ void Character::configureAnimation(animation player) {
     startAnimation(25);
 }
 
-/**
- * Reste tout les valeurs du joueur comme elles étaient à leur inisialisation.
- * @brief Character::respawn
- */
+//!
+//! Reste tout les valeurs du joueur comme elles étaient à leur inisialisation.
+//! @brief Character::respawn
+//!
 void Character::respawn(){
 
     this->setIsJump(false);
