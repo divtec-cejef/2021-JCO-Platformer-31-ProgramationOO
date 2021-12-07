@@ -100,7 +100,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     ////        SOL        ////
     ///////////////////////////
     QPointF posSolGroup1_1erEtage(0,750);
-    generatorGround(40,30,posSolGroup1_1erEtage);
+    generatorGround(40,3,posSolGroup1_1erEtage);
 
     QPointF posSolGroup2_1erEtage(5280,750);
     generatorGround(6,3,posSolGroup2_1erEtage);
@@ -290,7 +290,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         //Suite les déplacement du joueur dans la scene
         m_pGameCanvas->getView()->centerOn(m_pScene->sprites().takeAt(0)->pos());
 
-
         // Récupère tous les sprites de la scène qui touche le joueur
         auto listeCurrentCollision = pCharacter->parentScene()->collidingSprites(pCharacter);
         // Supprimer le sprite lui-même
@@ -359,7 +358,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                         //qDebug() << "HO NON UN PIEGE AHHHH";
                         m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
                     }
-                    pCharacter->setIsDeath(true);
+                   setupCharacterDeath();
                 }
             }
         }else {
@@ -368,16 +367,26 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
         //Si le joueur ne touche pas le sol alors il est attiré vers le bas
         if (!pCharacter->getIsOnFloor()){
-            //qDebug() << "PAS SUR LE SOL";
-
             //Attire le joueur vers le bas de l'écran
-            pCharacter->setPos(pCharacter->pos() + pCharacter->m_velocity * (elapsedTimeInMilliseconds/100.0));
-            pCharacter->m_velocity+= gravity * (elapsedTimeInMilliseconds/100.0);
+            gravityApplied(pCharacter,pCharacter->m_velocity,elapsedTimeInMilliseconds);
+            //pCharacter->setPos(pCharacter->pos() + pCharacter->m_velocity * (elapsedTimeInMilliseconds/100.0));
+            //pCharacter->m_velocity += m_gravity * (elapsedTimeInMilliseconds/100.0);
         }
     }else {
         pGhost->setY(pGhost->y() -5);
     }
+
+
 }
+
+
+void GameCore::gravityApplied(Sprite* entity,QPointF &enti_velocity,long long elapsedTime){
+    entity->setPos(entity->pos() + enti_velocity * (elapsedTime/100.0));
+    enti_velocity += m_gravity * (elapsedTime/100.0);
+    qDebug() << "a";
+}
+
+
 
 /**
  * @brief GameCore::configureOrientation
@@ -504,6 +513,8 @@ void GameCore::setupCharacterDeath(){
     //Ajoute d'une mort au compteur.
     pCharacter->incrementDeathCount();
 }
+
+
 
 //! La souris a été déplacée.
 //! Pour que cet événement soit pris en compte, la propriété MouseTracking de GameView

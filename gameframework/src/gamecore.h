@@ -41,8 +41,10 @@ public:
 
 
     //Physique
-    QPointF gravity = QPointF(0,2);
+    QPointF m_gravity = QPointF(0,2);
     //QPointF velocity = QPointF(0,0);
+
+    void gravityApplied(Sprite* entity,QPointF &enti_velocity,long long elapsedTime);
 
     void tick(long long elapsedTimeInMilliseconds);
 
@@ -59,6 +61,13 @@ private:
     GameCanvas* m_pGameCanvas;
     GameScene* m_pScene;
     GameView* m_pView;
+
+    //Collision
+
+    //Actuelle
+    //void currentCollision(Sprite* entity);
+    //Future
+    //void futurCollision(Sprite* entity);
 
     //Joueur
     Character* pCharacter = new Character();
