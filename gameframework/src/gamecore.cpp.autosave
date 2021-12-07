@@ -45,7 +45,9 @@ const int FRAME_COUNT_GROUND  = 9;      //  Nombres de frame à découper
 const int COLUMN_COUNT_GROUND = 3;      //  Nombres de colonne
 
 
-//Type de sol
+//! Type d'orientation du sol.
+//! \brief The orientation enum
+//!
 enum orientation{
     GROUND_UP = 0,
     GROUND_DOWN = 1,
@@ -59,10 +61,10 @@ enum orientation{
 
 };
 
-/**
- * Découpage des images pour les différentes orientations du sol.
- * @brief GameCore::setGroundImages
- */
+//!
+//! Découpage des images pour les différentes orientations du sol.
+//! @brief GameCore::setGroundImages
+//!
 void GameCore::setGroundImages(){
     QImage spriteSheet(GameFramework::imagesPath() +  "EveryGroundsV1.png");
 
@@ -377,6 +379,11 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
 
 //!
+//! \brief GameCore::gravityApplied
+//! \param entity sprite au quel on applique la gravité
+//! \param enti_velocity velocité du sprite
+//! \param elapsedTime temps écoulé entre chaque tick.
+//!@brief GameCore::gravityApplied
 void GameCore::gravityApplied(Sprite* entity,QPointF &enti_velocity,long long elapsedTime){
     entity->setPos(entity->pos() + enti_velocity * (elapsedTime/100.0));
     enti_velocity += m_gravity * (elapsedTime/100.0);
@@ -385,11 +392,11 @@ void GameCore::gravityApplied(Sprite* entity,QPointF &enti_velocity,long long el
 
 
 
-/**
- * @brief GameCore::configureOrientation
- * @param orientation du sol à selectionnée dans la liste
- * @param ground sprite à appliqué la texture
- */
+//!
+//! @brief GameCore::configureOrientation
+//! @param orientation du sol à selectionnée dans la liste
+//! @param ground sprite à appliqué la texture
+//!
 void GameCore::configureOrientation(orientation orientation, Sprite* &ground) {
     //Selectionne le sol demandé
     ground = new Sprite(QPixmap::fromImage(m_groundImagesList.at(orientation).scaled(FRAME_SIZE_GROUND * 1,
@@ -398,12 +405,12 @@ void GameCore::configureOrientation(orientation orientation, Sprite* &ground) {
                                                                                      Qt::SmoothTransformation)));
 }
 
-/**
- * @brief GameCore::generatorGround génére un groupe de sol sur la map d'un niveau
- * @param colonne nbr de colonne dans le bloque de de sol
- * @param ligne nbr de colonne dans le bloque de de sol
- * @param max nbr max de sol à généré
- */
+//!
+//! @brief GameCore::generatorGround génére un groupe de sol sur la map d'un niveau
+//! @param colonne nbr de colonne dans le bloque de de sol
+//! @param ligne nbr de colonne dans le bloque de de sol
+//! @param max nbr max de sol à généré
+//!
 void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
 
     QPointF posCurrentGround = posGroupe;
@@ -462,10 +469,10 @@ void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
         posCurrentGround.setY(posCurrentGround.y()+FRAME_SIZE_GROUND);
     }
 }
-/**
- * Créé un sprite pour symbolisé la mort du joueur.
- * @brief GameCore::setAnimationDeath
- */
+//!
+//! Créé un sprite pour symbolisé la mort du joueur.
+//! @brief GameCore::setAnimationDeath
+//!
 void GameCore::setAnimationDeath()
 {
     QImage spriteSheet(GameFramework::imagesPath() +  "deathAnimationV1.png");
@@ -492,10 +499,10 @@ void GameCore::setAnimationDeath()
     pGhost->startAnimation(50);
 }
 
-/**
- * Mets en place tout les éléments symbolisant la mort du joueur.
- * @brief GameCore::setupCharacterDeath
- */
+//!
+//! Mets en place tout les éléments symbolisant la mort du joueur.
+//! @brief GameCore::setupCharacterDeath
+//!
 void GameCore::setupCharacterDeath(){
     //Le joueur est considéré comme mort.
     pCharacter->setIsDeath(true);
