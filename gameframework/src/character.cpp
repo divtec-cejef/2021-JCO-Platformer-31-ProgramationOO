@@ -19,12 +19,9 @@
 const int NBR_ANIMATION = 6;
 enum animation{
     BASE = 0,
-    DEPLA_GAUCHE = 1,
-    DEPLA_DROITE = 2,
+    DEPLACEMENT = 1,
     SAUT = 3,
-    ATTA_GAUCHE = 4,
-    ATTA_DROITE = 5,
-
+    ATTAQUE = 4,
 };
 
 //spriteSheet animation de marche à gauche/droite
@@ -111,7 +108,7 @@ QPointF Character::getVelocity(){
 };
 
 /**
- *
+ * Définit l'animation dans la quel le sprite du joueur doit être.
  * @brief Character::configureAnimation
  * @param player animation du joueur paramétrer
  */
@@ -121,11 +118,8 @@ void Character::configureAnimation(animation player) {
     QString iSprite;
 
     switch (player) {
-    case DEPLA_GAUCHE:
-        iSprite = "MarcheDroiteV9.png" /*"MarcheGaucheV9.png"*/;
-        break;
-    case DEPLA_DROITE:
-        iSprite =  "MarcheDroiteV9.png";
+    case DEPLACEMENT:
+        iSprite = "MarcheDroiteV9.png";
         break;
     case SAUT:
         iSprite = "SautDroiteV7.png";
@@ -134,17 +128,20 @@ void Character::configureAnimation(animation player) {
         iSprite = "BasicPoseV4.png";
         break;
     }
+
     QImage directionFrame(GameFramework::imagesPath() + iSprite);
-    if(iSprite == "MarcheDroiteV9.png"/* || iSprite == "MarcheGaucheV9.png"*/){
+    if(iSprite == "MarcheDroiteV9.png"){
 
         QImage spriteSheet(GameFramework::imagesPath() + iSprite);
 
+        //QList<QImage> listFrame;
         // Découpage de la spritesheet
         for (int frameIndex = 0; frameIndex < FRAME_COUNT; frameIndex++) {
             QImage frameSheet = spriteSheet.copy((frameIndex % COLUMN_COUNT) * FRAME_WIDTH,
                                              (frameIndex / COLUMN_COUNT) * FRAME_HEIGHT,
                                              FRAME_WIDTH, FRAME_HEIGHT);
 
+            //Oriente l'animation selon la velocité du joueur
             if(m_velocity.x() < 0)
                 directionFrame = frameSheet.mirrored(true,false);
             else
@@ -157,7 +154,7 @@ void Character::configureAnimation(animation player) {
         }
 
     }else {
-
+        //Oriente l'animation selon l'actuel ou l'ancienne velocité du joueur
         if(m_velocity.x() < 0 || m_lastVelocity.x() < 0)
             directionFrame = directionFrame.mirrored(true,false);
 
@@ -165,8 +162,6 @@ void Character::configureAnimation(animation player) {
                                                                      FRAME_HEIGHT * 1,
                                                                      Qt::IgnoreAspectRatio,
                                                                      Qt::SmoothTransformation)));
-        //qDebug() << "BASE " << iSprite;
-
     }
     startAnimation(25);
 }

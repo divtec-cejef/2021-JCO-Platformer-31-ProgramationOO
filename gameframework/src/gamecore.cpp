@@ -309,7 +309,10 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             if(CollisionDetected->data(2) == "Wood_caisse"){
 
                 //Zone de collision entre le joueur et la caisse en bois
-                QRectF zoneDeCollision = CollisionDetected->boundingRect().intersected(pCharacter->boundingRect());
+                QRectF zoneDeCollision = pCharacter->boundingRect().intersected(CollisionDetected->boundingRect());
+                qDebug() << "height collision :" << zoneDeCollision.height();
+                qDebug() << "width collision :" << zoneDeCollision.width();
+
 
                 if(zoneDeCollision.height() > zoneDeCollision.width()){
 
@@ -320,7 +323,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     pCharacter->m_velocity.setX(!pCharacter->m_velocity.x());
                     qDebug() << "POUSSE";
                 }
-                qDebug() << "BOIS";
+
             }
         }
     }
