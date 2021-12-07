@@ -269,7 +269,6 @@ void GameCore::keyReleased(int key) {
             break;
 
         case Qt::Key_Space:
-            pCharacter->m_velocity.setY(PLAYER_STOP);
             pCharacter->setIsJump(false);
             break;
         }
@@ -327,10 +326,12 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
         // Détermine la prochaine position du sprite selon sa velwocité
         QRectF nextSpriteRect = pCharacter->globalBoundingBox().translated(pCharacter->m_velocity);
+
         if(!pCharacter->parentScene()->isInsideScene(nextSpriteRect)){
-            pCharacter->setIsDeath(true);
+
            setupCharacterDeath();
         }
+
         // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
         auto listeFuturCollision = pCharacter->parentScene()->collidingSprites(nextSpriteRect);
         // Supprime le sprite lui-même, qui collisionne toujours awdvec sa boundingbox
@@ -350,8 +351,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
                     pCharacter->m_velocity.setY(0.0);
                     pCharacter->setIsJump(false);
-                }else{
-                    pCharacter->setIsOnFloor(false);
                 }
 
                 if (CollisionDetected->data(1) == "Piege") {
@@ -359,12 +358,9 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     if(!pCharacter->getIsDeath()){
                         //qDebug() << "HO NON UN PIEGE AHHHH";
                         m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
-
                     }
                     pCharacter->setIsDeath(true);
                 }
-
-
             }
         }else {
             pCharacter->setIsOnFloor(false);
@@ -495,6 +491,8 @@ void GameCore::setAnimationDeath()
  * @brief GameCore::setupCharacterDeath
  */
 void GameCore::setupCharacterDeath(){
+    //Le joueur est considéré comme mort.
+    pCharacter->setIsDeath(true);
     //Créé le fantôme dans la scene.
     setAnimationDeath();
     //Positionne le fantôme à la place du joueur
