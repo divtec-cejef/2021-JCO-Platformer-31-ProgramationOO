@@ -290,102 +290,97 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
         //Suite les déplacement du joueur dans la scene
         m_pGameCanvas->getView()->centerOn(m_pScene->sprites().takeAt(0)->pos());
+
+
+        // Récupère tous les sprites de la scène qui touche le joueur
+        auto listeCurrentCollision = pCharacter->parentScene()->collidingSprites(pCharacter);
+        // Supprimer le sprite lui-même
+        listeCurrentCollision.removeAll(pCharacter);
+
+        //récupère la valeur de liste (remplis/vide)
+        bool currentCollision  = !listeCurrentCollision.isEmpty();
+
+        if(currentCollision){
+            //Cherche les collisions entre le joueurs les autres sprites
+            for (Sprite* CollisionDetected : listeCurrentCollision) {
+
+                if(CollisionDetected->data(2) == "Wood_caisse"){
+
+                    //Zone de collision entre le joueur et la caisse en bois
+                    QRectF zoneDeCollision = pCharacter->boundingRect().intersected(CollisionDetected->boundingRect());
+                    qDebug() << "height collision :" << zoneDeCollision.height();
+                    qDebug() << "width collision :" << zoneDeCollision.width();
+
+
+                    if(zoneDeCollision.height() > zoneDeCollision.width()){
+
+                        qDebug() << "height collision :" << CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).height();
+                        qDebug() << "width collision :" << CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).width();
+
+                        CollisionDetected->setX(CollisionDetected->x() + pCharacter->m_velocity.x());
+                        pCharacter->m_velocity.setX(!pCharacter->m_velocity.x());
+                        qDebug() << "POUSSE";
+                    }
+                }
+            }
+        }
+
+        // Détermine la prochaine position du sprite selon sa velwocité
+        QRectF nextSpriteRect = pCharacter->globalBoundingBox().translated(pCharacter->m_velocity);
+        if(!pCharacter->parentScene()->isInsideScene(nextSpriteRect)){
+            pCharacter->setIsDeath(true);
+           setupCharacterDeath();
+        }
+        // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
+        auto listeFuturCollision = pCharacter->parentScene()->collidingSprites(nextSpriteRect);
+        // Supprime le sprite lui-même, qui collisionne toujours awdvec sa boundingbox
+        listeFuturCollision.removeAll(pCharacter);
+
+        //récupère la valeur de liste (remplis/vide)
+        bool futurCollision = !listeFuturCollision.isEmpty();
+
+        if(futurCollision){
+            //Cherche de potentielle futur collisions entre le joueur et les autres sprites
+            for (Sprite* CollisionDetected : listeFuturCollision) {
+
+                if (CollisionDetected->data(1) == "sol") {
+
+                    if(!pCharacter->getIsJump())
+                        pCharacter->setIsOnFloor(true);
+
+                    pCharacter->m_velocity.setY(0.0);
+                    pCharacter->setIsJump(false);
+                }else{
+                    pCharacter->setIsOnFloor(false);
+                }
+
+                if (CollisionDetected->data(1) == "Piege") {
+
+                    if(!pCharacter->getIsDeath()){
+                        //qDebug() << "HO NON UN PIEGE AHHHH";
+                        m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
+
+                    }
+                    pCharacter->setIsDeath(true);
+                }
+
+
+            }
+        }else {
+            pCharacter->setIsOnFloor(false);
+        }
+
+        //Si le joueur ne touche pas le sol alors il est attiré vers le bas
+        if (!pCharacter->getIsOnFloor()){
+            //qDebug() << "PAS SUR LE SOL";
+
+            //Attire le joueur vers le bas de l'écran
+            pCharacter->setPos(pCharacter->pos() + pCharacter->m_velocity * (elapsedTimeInMilliseconds/100.0));
+            pCharacter->m_velocity+= gravity * (elapsedTimeInMilliseconds/100.0);
+        }
     }else {
         pGhost->setY(pGhost->y() -5);
     }
-
-    // Récupère tous les sprites de la scène qui touche le joueur
-    auto listeCurrentCollision = pCharacter->parentScene()->collidingSprites(pCharacter);
-    // Supprimer le sprite lui-même
-    listeCurrentCollision.removeAll(pCharacter);
-
-    //récupère la valeur de liste (remplis/vide)
-    bool currentCollision  = !listeCurrentCollision.isEmpty();
-
-    if(currentCollision){
-        //Cherche les collisions entre le joueurs les autres sprites
-        for (Sprite* CollisionDetected : listeCurrentCollision) {
-
-            if(CollisionDetected->data(2) == "Wood_caisse"){
-
-                //Zone de collision entre le joueur et la caisse en bois
-                QRectF zoneDeCollision = pCharacter->boundingRect().intersected(CollisionDetected->boundingRect());
-                qDebug() << "height collision :" << zoneDeCollision.height();
-                qDebug() << "width collision :" << zoneDeCollision.width();
-
-
-                if(zoneDeCollision.height() > zoneDeCollision.width()){
-
-                    qDebug() << "height collision :" << CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).height();
-                    qDebug() << "width collision :" << CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).width();
-
-                    CollisionDetected->setX(CollisionDetected->x() + pCharacter->m_velocity.x());
-                    pCharacter->m_velocity.setX(!pCharacter->m_velocity.x());
-                    qDebug() << "POUSSE";
-                }
-            }
-        }
-    }
-
-    // Détermine la prochaine position du sprite selon sa velwocité
-    QRectF nextSpriteRect = pCharacter->globalBoundingBox().translated(pCharacter->m_velocity);
-
-    // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
-    auto listeFuturCollision = pCharacter->parentScene()->collidingSprites(nextSpriteRect);
-    // Supprime le sprite lui-même, qui collisionne toujours awdvec sa boundingbox
-    listeFuturCollision.removeAll(pCharacter);
-
-    //récupère la valeur de liste (remplis/vide)
-    bool futurCollision = !listeFuturCollision.isEmpty();
-
-    if(futurCollision){
-        //Cherche de potentielle futur collisions entre le joueur et les autres sprites
-        for (Sprite* CollisionDetected : listeFuturCollision) {
-            if (CollisionDetected->data(1) == "sol") {
-
-                if(!pCharacter->getIsJump())
-                    pCharacter->setIsOnFloor(true);
-
-                pCharacter->m_velocity.setY(0.0);
-                pCharacter->setIsJump(false);
-            }else{
-                pCharacter->setIsOnFloor(false);
-            }
-
-            if (CollisionDetected->data(1) == "Piege") {
-
-                if(!pCharacter->getIsDeath()){
-                    //qDebug() << "HO NON UN PIEGE AHHHH";
-                    m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
-                    setupCharacterDeath();
-                }
-                pCharacter->setIsDeath(true);
-            }
-
-            if(!pCharacter->parentScene()->isInsideScene(nextSpriteRect)){
-                pCharacter->setIsDeath(true);
-                m_pScene->removeSpriteFromScene(pCharacter);
-                pCharacter->incrementDeathCount();
-            }
-        }
-    }else {
-        pCharacter->setIsOnFloor(false);
-    }
-
-    //Si le joueur ne touche pas le sol alors il est attiré vers le bas
-    if (!pCharacter->getIsOnFloor()){
-        //qDebug() << "PAS SUR LE SOL";
-
-        //Attire le joueur vers le bas de l'écran
-        pCharacter->setPos(pCharacter->pos() + pCharacter->m_velocity * (elapsedTimeInMilliseconds/100.0));
-        pCharacter->m_velocity+= gravity * (elapsedTimeInMilliseconds/100.0);
-    }
-    /*
-    if((pCharacter->x() >= m_pScene->width() || pCharacter->x() <= m_pScene->width()
-        || pCharacter->y() >= m_pScene->height() || pCharacter->y() <= m_pScene->height()) && !pCharacter->getIsDeath()){
-        setupCharacterDeath();
-    }
-    */
 }
 
 /**
@@ -465,6 +460,10 @@ void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
         posCurrentGround.setY(posCurrentGround.y()+FRAME_SIZE_GROUND);
     }
 }
+/**
+ * Créé un sprite pour symbolisé la mort du joueur.
+ * @brief GameCore::setAnimationDeath
+ */
 void GameCore::setAnimationDeath()
 {
     QImage spriteSheet(GameFramework::imagesPath() +  "deathAnimationV1.png");
@@ -491,6 +490,10 @@ void GameCore::setAnimationDeath()
     pGhost->startAnimation(50);
 }
 
+/**
+ * Mets en place tout les éléments symbolisant la mort du joueur.
+ * @brief GameCore::setupCharacterDeath
+ */
 void GameCore::setupCharacterDeath(){
     //Créé le fantôme dans la scene.
     setAnimationDeath();
