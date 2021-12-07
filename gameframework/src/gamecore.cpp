@@ -219,12 +219,12 @@ void GameCore::keyPressed(int key) {
 
         case Qt::Key_A:
             pCharacter->m_velocity.setX(-PLAYER_SPEED);
-            player = Character::DEPLA_GAUCHE;
+            player = Character::DEPLACEMENT;
             break;
 
         case Qt::Key_D:
             pCharacter->m_velocity.setX(PLAYER_SPEED);
-            player = Character::DEPLA_DROITE;
+            player = Character::DEPLACEMENT;
             break;
 
         case Qt::Key_Space:
@@ -323,7 +323,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     pCharacter->m_velocity.setX(!pCharacter->m_velocity.x());
                     qDebug() << "POUSSE";
                 }
-
             }
         }
     }
@@ -362,6 +361,12 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 }
                 pCharacter->setIsDeath(true);
             }
+
+            if(!pCharacter->parentScene()->isInsideScene(nextSpriteRect)){
+                pCharacter->setIsDeath(true);
+                m_pScene->removeSpriteFromScene(pCharacter);
+                pCharacter->incrementDeathCount();
+            }
         }
     }else {
         pCharacter->setIsOnFloor(false);
@@ -371,26 +376,16 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     if (!pCharacter->getIsOnFloor()){
         //qDebug() << "PAS SUR LE SOL";
 
+        //Attire le joueur vers le bas de l'écran
         pCharacter->setPos(pCharacter->pos() + pCharacter->m_velocity * (elapsedTimeInMilliseconds/100.0));
         pCharacter->m_velocity+= gravity * (elapsedTimeInMilliseconds/100.0);
-
-        /*
-        for (int i;i <= m_pScene->sprites().count();i++) {
-            m_pScene->sprites().takeAt(i)->pos();
-            if(){
-                m_pScene->sprites().takeAt(i)->setPos(m_pScene->sprites().takeAt(i)->pos() + m_pScene->sprites().takeAt(i)-> * (elapsedTimeInMilliseconds/100.0));
-                        pCharacter->m_velocity+= gravity * (elapsedTimeInMilliseconds/100.0);
-            }
-        }
-
-        */
-
     }
-
-    if((pCharacter->x() >= m_pScene->width() /*|| pCharacter->x() <= m_pScene->width()*/
-        || pCharacter->y() >= m_pScene->height() /*|| pCharacter->y() <= m_pScene->height()*/) && !pCharacter->getIsDeath()){
-     setupCharacterDeath();
+    /*
+    if((pCharacter->x() >= m_pScene->width() || pCharacter->x() <= m_pScene->width()
+        || pCharacter->y() >= m_pScene->height() || pCharacter->y() <= m_pScene->height()) && !pCharacter->getIsDeath()){
+        setupCharacterDeath();
     }
+    */
 }
 
 /**
@@ -497,16 +492,16 @@ void GameCore::setAnimationDeath()
 }
 
 void GameCore::setupCharacterDeath(){
-
+    //Créé le fantôme dans la scene.
     setAnimationDeath();
+    //Positionne le fantôme à la place du joueur
     pGhost->setPos(pCharacter->pos());
-
-    m_pScene->addSpriteToScene(pGhost);
+    //Supprime le joueur de la scene.
     m_pScene->removeSpriteFromScene(pCharacter);
-
-    m_deathCount += 1;
-    qDebug() << "Nbr de mort(s) : " << m_deathCount;
-
+    //Ajoute du fantome à la scene.
+    m_pScene->addSpriteToScene(pGhost);
+    //Ajoute d'une mort au compteur.
+    pCharacter->incrementDeathCount();
 }
 
 //! La souris a été déplacée.

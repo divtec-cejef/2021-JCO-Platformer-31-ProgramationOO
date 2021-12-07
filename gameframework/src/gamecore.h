@@ -42,7 +42,7 @@ public:
 
     //Physique
     QPointF gravity = QPointF(0,2);
-    QPointF velocity = QPointF(0,0);
+    //QPointF velocity = QPointF(0,0);
 
     void tick(long long elapsedTimeInMilliseconds);
 
@@ -65,7 +65,6 @@ private:
     Sprite* pGhost = new Sprite();
     void setAnimationDeath();
     void setupCharacterDeath();
-    int m_deathCount = 0;
 
      QList<QGraphicsTransform*> m_transformsForFlip;
 

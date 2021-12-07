@@ -19,12 +19,10 @@ public:
 
     //Type d'animation du joueurs
     enum animation{
-        SAUT,
-        DEPLA_GAUCHE,
-        DEPLA_DROITE,
-        ATTA_GAUCHE,
-        ATTA_DROITE,
-        BASE
+        BASE = 0,
+        DEPLACEMENT = 1,
+        SAUT = 3,
+        ATTAQUE = 4,
     };
 
     void configureAnimation(animation player);
@@ -35,17 +33,23 @@ public:
     QPointF getVelocity();
     void updateCharacterVelocity();
 
-    bool isOnFloor = false;
+    bool m_isOnFloor = false;
     bool getIsOnFloor();
     void setIsOnFloor(bool _isOnFloor);
 
-    bool isJump = false;
+    bool m_isJump = false;
     bool getIsJump();
     void setIsJump(bool _isJump);
 
-    bool isDeath = false;
+    //Mort
+    bool m_isDeath = false;
     bool getIsDeath();
     void setIsDeath(bool _isDeath);
+
+    //Compteur de mort(s)
+    int m_deathCount = 0;
+    int getDeathCount();
+    void incrementDeathCount();
 
     /*
     bool m_keyUpPressed;

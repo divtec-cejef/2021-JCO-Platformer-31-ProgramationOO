@@ -17,12 +17,7 @@
 
 //Type d'animation du joueurs
 const int NBR_ANIMATION = 6;
-enum animation{
-    BASE = 0,
-    DEPLACEMENT = 1,
-    SAUT = 3,
-    ATTAQUE = 4,
-};
+
 
 //spriteSheet animation de marche à gauche/droite
 const int FRAME_WIDTH = 60;
@@ -53,7 +48,7 @@ Character::Character(QGraphicsItem* pParent) : Sprite(GameFramework::imagesPath(
  * @return si le joueur saute.
  */
 bool Character::getIsJump(){
-    return this->isJump;
+    return this->m_isJump;
 }
 
 /**
@@ -62,7 +57,7 @@ bool Character::getIsJump(){
  * @param _isJump nouvelle état du joueur.
  */
 void Character::setIsJump(bool _isJump){
-    this->isJump = _isJump;
+    this->m_isJump = _isJump;
 }
 
 /**
@@ -70,7 +65,7 @@ void Character::setIsJump(bool _isJump){
  * @return si le joueur est sur le sol.
  */
 bool Character::getIsOnFloor(){
-    return this->isOnFloor;
+    return this->m_isOnFloor;
 }
 
 /**
@@ -79,7 +74,7 @@ bool Character::getIsOnFloor(){
  * @param _isOnFloor nouvelle état du joueur.
  */
 void Character::setIsOnFloor(bool _isOnFloor){
-    this->isOnFloor = _isOnFloor;
+    this->m_isOnFloor = _isOnFloor;
 }
 
 /**
@@ -87,7 +82,7 @@ void Character::setIsOnFloor(bool _isOnFloor){
  * @return si le joueur est mort.
  */
 bool Character::getIsDeath(){
-    return this->isDeath;
+    return this->m_isDeath;
 }
 
 /**
@@ -96,7 +91,17 @@ bool Character::getIsDeath(){
  * @param _isDeath nouvelle état du joueur.
  */
 void Character::setIsDeath(bool _isDeath){
-    this->isDeath = _isDeath;
+    this->m_isDeath = _isDeath;
+}
+
+int Character::getDeathCount(){
+    qDebug() << this->m_deathCount;
+    return this->m_deathCount;
+}
+void Character::incrementDeathCount(){
+    this->m_deathCount++;
+    qDebug() << "Nombre de mort(s) : " << this->m_deathCount;
+
 }
 
 /**
