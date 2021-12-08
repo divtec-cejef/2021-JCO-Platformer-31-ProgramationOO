@@ -18,7 +18,6 @@
 //Type d'animation du joueurs
 const int NBR_ANIMATION = 6;
 
-
 //! spriteSheet animation de marche à gauche/droite
 const int FRAME_WIDTH = 60;
 const int FRAME_HEIGHT = 60;

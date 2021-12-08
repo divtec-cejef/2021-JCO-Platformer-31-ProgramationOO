@@ -44,7 +44,7 @@ public:
     QPointF m_gravity = QPointF(0,2);
     //QPointF velocity = QPointF(0,0);
 
-    void gravityApplied(Sprite* entity,QPointF &enti_velocity,long long elapsedTime);
+    void gravityApplied(Entity* entity,QPointF &enti_velocity,long long elapsedTime);
 
     void tick(long long elapsedTimeInMilliseconds);
 
@@ -98,8 +98,8 @@ private:
     void generatorGround(int colonne,int ligne,QPointF posGroupe);
 
     //Collision
-    void currentCollision(Sprite* entity,QRectF enti_velocity);
-    void futureCollision(Sprite* entity,QRectF enti_velocity);
+    void currentCollision(Entity* entity,QRectF enti_velocity);
+    void futureCollision(Entity* entity,QRectF enti_velocity);
 
 
 private slots:

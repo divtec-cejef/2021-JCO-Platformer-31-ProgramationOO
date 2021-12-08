@@ -21,7 +21,7 @@ const int FRAME_HEIGHT = 48;
 const int FRAME_COUNT = 2;
 const int COLUMN_COUNT = 1;
 
-Bulio::Bulio(QGraphicsItem* pParent) : Entity(GameFramework::imagesPath() + "bastienbulioV1.png", pParent)
+Bulio::Bulio(QGraphicsItem* pParent) : Entity(GameFramework::imagesPath() + "bastienbulioBaseV1.png", pParent)
 {
 
 }

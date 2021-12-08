@@ -24,7 +24,7 @@
 //Ajoute Supp
 #include <QString>
 #include "ground.h"
-#include "entity.h"
+#include "bulio.h"
 
 //résolution de la fenetre
 const int SCENE_WIDTH   = 6000;
@@ -188,10 +188,10 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     //////////////////////////////
     ////        ENEMIE        ////
     //////////////////////////////
-    Sprite* enemie1 = new Sprite(GameFramework::imagesPath() + "bastienbulioBaseV1.png");
+    Bulio* enemie1 = new Bulio();
     enemie1->setData(1,"enemie");
     enemie1->setData(2,"bulio");
-    m_pScene->addSpriteToScene(enemie1, 2500,1460);
+    m_pScene->addSpriteToScene(enemie1, 2500,1410);
 
     //Ajoute du joueur dans la scene
     m_pScene->addSpriteToScene(pCharacter, 300,1200);

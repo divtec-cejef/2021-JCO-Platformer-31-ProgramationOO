@@ -26,7 +26,6 @@ public:
 
     void configureAnimation(animation bulio);
 
-
     QPointF getVelocity();
     void updateCharacterVelocity();
 
