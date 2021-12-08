@@ -298,6 +298,7 @@ void GameCore::keyReleased(int key) {
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
+    qDebug() << "joueur mort "<< pCharacter->getIsDeath();
     if(!pCharacter->getIsDeath()){
         pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
         //Suite les déplacement du joueur dans la scene
@@ -535,6 +536,7 @@ void GameCore::setupCharacterDeath(){
     //Ajoute d'une mort au compteur.
     pCharacter->incrementDeathCount();
 }
+
 /*
 //!
 //! \brief GameCore::currentCollision

@@ -20,3 +20,24 @@ Entity::Entity(const QPixmap& rPixmap, QGraphicsItem* pParent) : Sprite(pParent)
 {
 
 }
+
+void Entity::configureAnimation(){
+
+}
+
+bool Entity::getIsOnFloor(){
+    return this->m_isOnFloor;
+}
+
+void Entity::setIsOnFloor(bool _isOnFloor){
+    this->m_isOnFloor = _isOnFloor;
+}
+
+bool Entity::getIsDeath(){
+    return this->m_isOnFloor;
+}
+
+void Entity::setIsDeath(bool _isOnFloor){
+    this->m_isOnFloor = _isOnFloor;
+}
+

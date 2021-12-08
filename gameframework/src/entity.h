@@ -19,33 +19,32 @@ public:
 
 
 
-    void configureAnimation();
+    virtual void configureAnimation();
 
 
     QPointF m_velocity = QPointF(0,0);
     QPointF m_lastVelocity = m_velocity;
+
     QPointF getVelocity();
     void updateCharacterVelocity();
 
 
     bool getIsOnFloor();
-    void setIsOnFloor(bool _isOnFloor);
+    virtual void setIsOnFloor(bool _isOnFloor);
 
-
-    bool getIsJump();
-    void setIsJump(bool _isJump);
 
      //Mort
     bool getIsDeath();
-    void setIsDeath(bool _isDeath);
+    virtual void setIsDeath(bool _isDeath);
 
 private:
 
+     void setAnimationDeplacementList();
+
+
+protected:
      bool m_isDeath = false;
      bool m_isOnFloor = false;
-
-
-     void setAnimationDeplacementList();
 
 
 };

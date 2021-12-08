@@ -57,9 +57,8 @@ public slots:
 
 private:
 
-    bool m_isDeath = false;
     bool m_isJump = false;
-    bool m_isOnFloor = false;
+
 
     int m_deathCount = 0;
 
