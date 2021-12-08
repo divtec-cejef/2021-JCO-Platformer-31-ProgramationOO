@@ -1,5 +1,6 @@
 release/main.o
 release/character.o
+release/entity.o
 release/ground.o
 release/keytickhandler.o
 release/mainfrm.o

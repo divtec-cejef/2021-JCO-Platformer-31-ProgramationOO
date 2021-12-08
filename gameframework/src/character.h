@@ -8,9 +8,10 @@
 #include <QList>
 
 #include <sprite.h>
+#include <entity.h>
 
 
-class Character: public Sprite
+class Character: public Entity
 {
 public:
 
@@ -26,37 +27,28 @@ public:
     };
 
     void configureAnimation(animation player);
-    void respawn();
 
-    QPointF m_velocity = QPointF(0,0);
-    QPointF m_lastVelocity = m_velocity;
+
     QPointF getVelocity();
     void updateCharacterVelocity();
 
-    bool m_isOnFloor = false;
+
     bool getIsOnFloor();
     void setIsOnFloor(bool _isOnFloor);
 
-    bool m_isJump = false;
+
     bool getIsJump();
     void setIsJump(bool _isJump);
 
     //Mort
-    bool m_isDeath = false;
     bool getIsDeath();
     void setIsDeath(bool _isDeath);
 
     //Compteur de mort(s)
-    int m_deathCount = 0;
     int getDeathCount();
     void incrementDeathCount();
 
-    /*
-    bool m_keyUpPressed;
-    bool m_keyDownPressed;
-    bool m_keyLeftPressed;
-    bool m_keyRightPressed;
-    */
+    void respawn();
 
 public slots:
 
@@ -64,10 +56,17 @@ public slots:
     void onKeyReleased(int key);
 
 private:
-     void configureTransformationMatrix();
 
-     QList<QImage>m_listAnimation;
-     void setAnimationDeplacementList();
+    bool m_isDeath = false;
+    bool m_isJump = false;
+    bool m_isOnFloor = false;
+
+    int m_deathCount = 0;
+
+    void configureTransformationMatrix();
+
+    QList<QImage>m_listAnimation;
+    void setAnimationDeplacementList();
 };
 
 #endif // CHARACTER_H

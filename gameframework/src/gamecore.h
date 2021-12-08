@@ -64,6 +64,7 @@ private:
 
     //Collision
 
+
     //Actuelle
     //void currentCollision(Sprite* entity);
     //Future
@@ -95,6 +96,11 @@ private:
     };
     void configureOrientation(orientation orientation, Sprite* &ground);
     void generatorGround(int colonne,int ligne,QPointF posGroupe);
+
+    //Collision
+    void currentCollision(Sprite* entity,QRectF enti_velocity);
+    void futureCollision(Sprite* entity,QRectF enti_velocity);
+
 
 private slots:
 

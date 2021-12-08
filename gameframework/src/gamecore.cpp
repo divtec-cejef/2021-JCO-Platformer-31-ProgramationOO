@@ -24,6 +24,7 @@
 //Ajoute Supp
 #include <QString>
 #include "ground.h"
+#include "entity.h"
 
 //résolution de la fenetre
 const int SCENE_WIDTH   = 6000;
@@ -365,11 +366,10 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     qDebug() << "Y collision :" << zoneDeCollision.y();
                     qDebug() << "X collision :" << zoneDeCollision.x();
 
-
                     if(zoneDeCollision.height() < zoneDeCollision.width()){
-
+                          qDebug() << "Collision de haut/bas";
                     }else if(zoneDeCollision.height() > zoneDeCollision.width()){
-
+                            qDebug() << "Collision de côté";
                     }
                 }
 
@@ -535,9 +535,66 @@ void GameCore::setupCharacterDeath(){
     //Ajoute d'une mort au compteur.
     pCharacter->incrementDeathCount();
 }
+/*
+//!
+//! \brief GameCore::currentCollision
+//! \param entity entité dont on veut savoir avec quoi elle rentre en collision.
+//! \param enti_velocity velocité de l'entité.
+//!
+void GameCore::currentCollision(Sprite* entity,QRectF enti_velocity){
 
+}
 
+void GameCore::futureCollision(Sprite* entity,QRectF enti_velocity){
 
+    // Détermine la prochaine position du sprite selon sa velwocité
+    QRectF nextSpriteRect = entity->globalBoundingBox().translated(entity->m_velocity);
+
+    // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
+    auto listeFuturCollision = entity->parentScene()->collidingSprites(nextSpriteRect);
+    // Supprime le sprite lui-même, qui collisionne toujours awdvec sa boundingbox
+    listeFuturCollision.removeAll(entity);
+
+    //récupère la valeur de liste (remplis/vide)
+    bool futurCollision = !listeFuturCollision.isEmpty();
+
+    if(futurCollision){
+        //Cherche de potentielle futur collisions entre le joueur et les autres sprites
+        for (Sprite* CollisionDetected : listeFuturCollision) {
+
+            if (CollisionDetected->data(1) == "sol") {
+
+                if(!pCharacter->getIsJump())
+                    pCharacter->setIsOnFloor(true);
+
+                pCharacter->m_velocity.setY(0.0);
+                pCharacter->setIsJump(false);
+
+                QRectF zoneDeCollision = pCharacter->boundingRect().intersected(CollisionDetected->boundingRect());
+                qDebug() << "Y collision :" << zoneDeCollision.y();
+                qDebug() << "X collision :" << zoneDeCollision.x();
+
+                if(zoneDeCollision.height() < zoneDeCollision.width()){
+                      qDebug() << "Collision de haut/bas";
+                }else if(zoneDeCollision.height() > zoneDeCollision.width()){
+                        qDebug() << "Collision de côté";
+                }
+            }
+
+            if (CollisionDetected->data(1) == "Piege") {
+
+                if(!pCharacter->getIsDeath()){
+                    //qDebug() << "HO NON UN PIEGE AHHHH";
+                    m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
+                }
+                setupCharacterDeath();
+            }
+        }
+    }else {
+        pCharacter->setIsOnFloor(false);
+    }
+}
+*/
 //! La souris a été déplacée.
 //! Pour que cet événement soit pris en compte, la propriété MouseTracking de GameView
 //! doit être enclenchée avec GameCanvas::startMouseTracking().

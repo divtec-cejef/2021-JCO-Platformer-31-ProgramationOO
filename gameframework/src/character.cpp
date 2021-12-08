@@ -38,7 +38,7 @@ struct collisionDistance{
 //! @brief Character::Character
 //! @param   pParent Pointeur sur le parent (afin d'obtenir une destruction automatique de cet objet).
 //!
-Character::Character(QGraphicsItem* pParent) : Sprite(GameFramework::imagesPath() + "BasicPoseV4.png", pParent)
+Character::Character(QGraphicsItem* pParent) : Entity(GameFramework::imagesPath() + "BasicPoseV4.png", pParent)
 {
 
 }

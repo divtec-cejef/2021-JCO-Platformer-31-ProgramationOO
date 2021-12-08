@@ -18,6 +18,7 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     character.cpp \
+    entity.cpp \
     ground.cpp \
     keytickhandler.cpp \
         mainfrm.cpp \
@@ -41,6 +42,7 @@ SOURCES += main.cpp\
 
 HEADERS  += mainfrm.h \
     character.h \
+    entity.h \
     gamescene.h \
     ground.h \
     keytickhandler.h \

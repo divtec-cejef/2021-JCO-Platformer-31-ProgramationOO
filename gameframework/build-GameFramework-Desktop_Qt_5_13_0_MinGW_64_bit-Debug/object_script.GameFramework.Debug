@@ -1,5 +1,6 @@
 debug/main.o
 debug/character.o
+debug/entity.o
 debug/ground.o
 debug/keytickhandler.o
 debug/mainfrm.o
