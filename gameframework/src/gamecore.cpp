@@ -188,7 +188,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     //////////////////////////////
     ////        ENEMIE        ////
     //////////////////////////////
-    Sprite* enemie1 = new Sprite(GameFramework::imagesPath() + "bastienbulioV1.png");
+    Sprite* enemie1 = new Sprite(GameFramework::imagesPath() + "bastienbulioBaseV1.png");
     enemie1->setData(1,"enemie");
     enemie1->setData(2,"bulio");
     m_pScene->addSpriteToScene(enemie1, 2500,1460);
@@ -294,7 +294,7 @@ void GameCore::keyReleased(int key) {
 }
 
 //! Cadence.
-//! éplace le joueur en fonction de la touche préssé.
+//! Déplace le joueur en fonction de la touche préssé.
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
 

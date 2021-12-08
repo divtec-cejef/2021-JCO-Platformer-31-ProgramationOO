@@ -17,6 +17,7 @@ TEMPLATE = app
 #DEFINES += DEPLOY # Pour une compilation dans un but de déploiement
 
 SOURCES += main.cpp\
+    bulio.cpp \
     character.cpp \
     entity.cpp \
     ground.cpp \
@@ -41,6 +42,7 @@ SOURCES += main.cpp\
     automaticwalkinghandler.cpp
 
 HEADERS  += mainfrm.h \
+    bulio.h \
     character.h \
     entity.h \
     gamescene.h \

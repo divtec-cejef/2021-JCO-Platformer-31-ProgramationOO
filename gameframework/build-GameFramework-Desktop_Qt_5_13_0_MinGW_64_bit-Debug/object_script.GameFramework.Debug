@@ -1,4 +1,5 @@
 debug/main.o
+debug/bulio.o
 debug/character.o
 debug/entity.o
 debug/ground.o

@@ -1,4 +1,5 @@
 release/main.o
+release/bulio.o
 release/character.o
 release/entity.o
 release/ground.o
