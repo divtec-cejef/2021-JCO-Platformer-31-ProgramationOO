@@ -19,7 +19,7 @@
 const int NBR_ANIMATION = 6;
 
 
-//spriteSheet animation de marche à gauche/droite
+//! spriteSheet animation de marche à gauche/droite
 const int FRAME_WIDTH = 60;
 const int FRAME_HEIGHT = 60;
 const int FRAME_COUNT = 4;
@@ -33,63 +33,63 @@ struct collisionDistance{
 
 };
 
-/**
- * Construit le character du joueur et l'initialise.
- * @brief Character::Character
- * @param   pParent Pointeur sur le parent (afin d'obtenir une destruction automatique de cet objet).
- */
+//!
+//! Construit le character du joueur et l'initialise.
+//! @brief Character::Character
+//! @param   pParent Pointeur sur le parent (afin d'obtenir une destruction automatique de cet objet).
+//!
 Character::Character(QGraphicsItem* pParent) : Sprite(GameFramework::imagesPath() + "BasicPoseV4.png", pParent)
 {
 
 }
 
-/**
- * @brief Character::getIsJump
- * @return si le joueur saute.
- */
+//!
+//! @brief Character::getIsJump
+//! @return si le joueur saute.
+//!
 bool Character::getIsJump(){
     return this->m_isJump;
 }
 
-/**
- * Permet de définir si le joueur est entrains de sauter ou non.
- * @brief Character::setIsJump
- * @param _isJump nouvelle état du joueur.
- */
+//!
+//! Permet de définir si le joueur est entrains de sauter ou non.
+//! @brief Character::setIsJump
+//! @param _isJump nouvelle état du joueur.
+//!
 void Character::setIsJump(bool _isJump){
     this->m_isJump = _isJump;
 }
 
-/**
- * @brief Character::getIsOnFloor
- * @return si le joueur est sur le sol.
- */
+//!
+//! @brief Character::getIsOnFloor
+//! @return si le joueur est sur le sol.
+//!
 bool Character::getIsOnFloor(){
     return this->m_isOnFloor;
 }
 
-/**
- * Permet de définir si le joueur est sur le sol ou non.
- * @brief Character::setIsOnFloor
- * @param _isOnFloor nouvelle état du joueur.
- */
+//!
+//! Permet de définir si le joueur est sur le sol ou non.
+//! @brief Character::setIsOnFloor
+//! @param _isOnFloor nouvelle état du joueur.
+//!
 void Character::setIsOnFloor(bool _isOnFloor){
     this->m_isOnFloor = _isOnFloor;
 }
 
-/**
- * @brief Character::getIsDeath
- * @return si le joueur est mort.
- */
+//!
+//! @brief Character::getIsDeath
+//! @return si le joueur est mort.
+//!
 bool Character::getIsDeath(){
     return this->m_isDeath;
 }
 
-/**
- * Permet de définir si le joueur doit être en vie ou non.
- * @brief Character::setIsDeath
- * @param _isDeath nouvelle état du joueur.
- */
+//!
+//! Permet de définir si le joueur doit être en vie ou non.
+//! @brief Character::setIsDeath
+//! @param _isDeath nouvelle état du joueur.
+//!
 void Character::setIsDeath(bool _isDeath){
     this->m_isDeath = _isDeath;
 }
@@ -104,19 +104,19 @@ void Character::incrementDeathCount(){
 
 }
 
-/**
- * @brief Character::getVelocity
- * @return la velocité actuel du joueur
- */
+//!
+//! @brief Character::getVelocity
+//! @return la velocité actuel du joueur
+//!
 QPointF Character::getVelocity(){
     return m_velocity;
 };
 
-/**
- * Définit l'animation dans la quel le sprite du joueur doit être.
- * @brief Character::configureAnimation
- * @param player animation du joueur paramétrer
- */
+//!
+//! Définit l'animation dans la quel le sprite du joueur doit être.
+//! @brief Character::configureAnimation
+//! @param player animation du joueur paramétrer
+//!
 void Character::configureAnimation(animation player) {
 
     clearAnimations();
@@ -171,10 +171,10 @@ void Character::configureAnimation(animation player) {
     startAnimation(25);
 }
 
-/**
- * Reste tout les valeurs du joueur comme elles étaient à leur inisialisation.
- * @brief Character::respawn
- */
+//!
+//! Reste tout les valeurs du joueur comme elles étaient à leur inisialisation.
+//! @brief Character::respawn
+//!
 void Character::respawn(){
 
     this->setIsJump(false);

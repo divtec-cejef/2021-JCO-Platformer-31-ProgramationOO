@@ -45,7 +45,9 @@ const int FRAME_COUNT_GROUND  = 9;      //  Nombres de frame à découper
 const int COLUMN_COUNT_GROUND = 3;      //  Nombres de colonne
 
 
-//Type de sol
+//! Type d'orientation du sol.
+//! \brief The orientation enum
+//!
 enum orientation{
     GROUND_UP = 0,
     GROUND_DOWN = 1,
@@ -59,10 +61,10 @@ enum orientation{
 
 };
 
-/**
- * Découpage des images pour les différentes orientations du sol.
- * @brief GameCore::setGroundImages
- */
+//!
+//! Découpage des images pour les différentes orientations du sol.
+//! @brief GameCore::setGroundImages
+//!
 void GameCore::setGroundImages(){
     QImage spriteSheet(GameFramework::imagesPath() +  "EveryGroundsV1.png");
 
@@ -181,9 +183,19 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     lanceF3->setData(2,"Lance_flamme");
     m_pScene->addSpriteToScene(lanceF3, 4580,1570);
 
+
+    //////////////////////////////
+    ////        ENEMIE        ////
+    //////////////////////////////
+    Sprite* enemie1 = new Sprite(GameFramework::imagesPath() + "bastienbulioV1.png");
+    enemie1->setData(1,"enemie");
+    enemie1->setData(2,"bulio");
+    m_pScene->addSpriteToScene(enemie1, 2500,1460);
+
     //Ajoute du joueur dans la scene
     m_pScene->addSpriteToScene(pCharacter, 300,1200);
     pCharacter->startAnimation(25);
+
 
     // ...
     // Démarre le tick pour que les animations qui en dépendent fonctionnent correctement.
@@ -305,18 +317,16 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 if(CollisionDetected->data(2) == "Wood_caisse"){
 
                     //Zone de collision entre le joueur et la caisse en bois
+                    //pCharacter->boundingRect().intersected(CollisionDetected->boundingRect());
                     QRectF zoneDeCollision = pCharacter->boundingRect().intersected(CollisionDetected->boundingRect());
-                    qDebug() << "height collision :" << zoneDeCollision.height();
-                    qDebug() << "width collision :" << zoneDeCollision.width();
+                    qDebug() << "Y collision :" << zoneDeCollision.y();
+                    qDebug() << "X collision :" << zoneDeCollision.x();
 
 
                     if(zoneDeCollision.height() > zoneDeCollision.width()){
 
-                        qDebug() << "height collision :" << CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).height();
-                        qDebug() << "width collision :" << CollisionDetected->boundingRect().intersected(pCharacter->boundingRect()).width();
-
                         CollisionDetected->setX(CollisionDetected->x() + pCharacter->m_velocity.x());
-                        pCharacter->m_velocity.setX(!pCharacter->m_velocity.x());
+                        //pCharacter->m_velocity.setX(!pCharacter->m_velocity.x());
                         qDebug() << "POUSSE";
                     }
                 }
@@ -328,7 +338,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
         if(!pCharacter->parentScene()->isInsideScene(nextSpriteRect)){
 
-           setupCharacterDeath();
+            setupCharacterDeath();
         }
 
         // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
@@ -350,6 +360,17 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
                     pCharacter->m_velocity.setY(0.0);
                     pCharacter->setIsJump(false);
+
+                    QRectF zoneDeCollision = pCharacter->boundingRect().intersected(CollisionDetected->boundingRect());
+                    qDebug() << "Y collision :" << zoneDeCollision.y();
+                    qDebug() << "X collision :" << zoneDeCollision.x();
+
+
+                    if(zoneDeCollision.height() < zoneDeCollision.width()){
+
+                    }else if(zoneDeCollision.height() > zoneDeCollision.width()){
+
+                    }
                 }
 
                 if (CollisionDetected->data(1) == "Piege") {
@@ -358,7 +379,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                         //qDebug() << "HO NON UN PIEGE AHHHH";
                         m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
                     }
-                   setupCharacterDeath();
+                    setupCharacterDeath();
                 }
             }
         }else {
@@ -369,30 +390,31 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         if (!pCharacter->getIsOnFloor()){
             //Attire le joueur vers le bas de l'écran
             gravityApplied(pCharacter,pCharacter->m_velocity,elapsedTimeInMilliseconds);
-            //pCharacter->setPos(pCharacter->pos() + pCharacter->m_velocity * (elapsedTimeInMilliseconds/100.0));
-            //pCharacter->m_velocity += m_gravity * (elapsedTimeInMilliseconds/100.0);
         }
     }else {
         pGhost->setY(pGhost->y() -5);
     }
-
-
 }
 
 
+//!
+//! \brief GameCore::gravityApplied
+//! \param entity sprite au quel on applique la gravité
+//! \param enti_velocity velocité du sprite
+//! \param elapsedTime temps écoulé entre chaque tick.
+//!@brief GameCore::gravityApplied
 void GameCore::gravityApplied(Sprite* entity,QPointF &enti_velocity,long long elapsedTime){
     entity->setPos(entity->pos() + enti_velocity * (elapsedTime/100.0));
     enti_velocity += m_gravity * (elapsedTime/100.0);
-    qDebug() << "a";
 }
 
 
 
-/**
- * @brief GameCore::configureOrientation
- * @param orientation du sol à selectionnée dans la liste
- * @param ground sprite à appliqué la texture
- */
+//!
+//! @brief GameCore::configureOrientation
+//! @param orientation du sol à selectionnée dans la liste
+//! @param ground sprite à appliqué la texture
+//!
 void GameCore::configureOrientation(orientation orientation, Sprite* &ground) {
     //Selectionne le sol demandé
     ground = new Sprite(QPixmap::fromImage(m_groundImagesList.at(orientation).scaled(FRAME_SIZE_GROUND * 1,
@@ -401,12 +423,12 @@ void GameCore::configureOrientation(orientation orientation, Sprite* &ground) {
                                                                                      Qt::SmoothTransformation)));
 }
 
-/**
- * @brief GameCore::generatorGround génére un groupe de sol sur la map d'un niveau
- * @param colonne nbr de colonne dans le bloque de de sol
- * @param ligne nbr de colonne dans le bloque de de sol
- * @param max nbr max de sol à généré
- */
+//!
+//! @brief GameCore::generatorGround génére un groupe de sol sur la map d'un niveau
+//! @param colonne nbr de colonne dans le bloque de de sol
+//! @param ligne nbr de colonne dans le bloque de de sol
+//! @param max nbr max de sol à généré
+//!
 void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
 
     QPointF posCurrentGround = posGroupe;
@@ -465,10 +487,10 @@ void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
         posCurrentGround.setY(posCurrentGround.y()+FRAME_SIZE_GROUND);
     }
 }
-/**
- * Créé un sprite pour symbolisé la mort du joueur.
- * @brief GameCore::setAnimationDeath
- */
+//!
+//! Créé un sprite pour symbolisé la mort du joueur.
+//! @brief GameCore::setAnimationDeath
+//!
 void GameCore::setAnimationDeath()
 {
     QImage spriteSheet(GameFramework::imagesPath() +  "deathAnimationV1.png");
@@ -495,10 +517,10 @@ void GameCore::setAnimationDeath()
     pGhost->startAnimation(50);
 }
 
-/**
- * Mets en place tout les éléments symbolisant la mort du joueur.
- * @brief GameCore::setupCharacterDeath
- */
+//!
+//! Mets en place tout les éléments symbolisant la mort du joueur.
+//! @brief GameCore::setupCharacterDeath
+//!
 void GameCore::setupCharacterDeath(){
     //Le joueur est considéré comme mort.
     pCharacter->setIsDeath(true);
