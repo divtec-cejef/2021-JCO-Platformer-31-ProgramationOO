@@ -78,24 +78,8 @@ private:
 
      QList<QGraphicsTransform*> m_transformsForFlip;
 
-    //gestion de sol
-    QList<QImage> m_groundImagesList;
-    void setGroundImages();
+    Ground* m_Grounds = new Ground;
 
-    enum orientation{
-        GROUND_UP,
-        GROUND_DOWN,
-        GROUND_LEFT,
-        GROUND_RIGHT,
-        CORNER_UP_RIGHT,
-        CORNER_UP_LEFT,
-        CORNER_DOWN_RIGHT,
-        CORNER_DOWN_LEFT,
-        GROUND_OF_GROUND
-
-    };
-    void configureOrientation(orientation orientation, Sprite* &ground);
-    void generatorGround(int colonne,int ligne,QPointF posGroupe);
 
     //Collision
     void currentCollision(Entity* entity,QRectF enti_velocity);

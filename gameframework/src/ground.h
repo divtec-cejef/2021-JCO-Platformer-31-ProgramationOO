@@ -13,9 +13,7 @@
 class Ground : public Sprite
 {
 public:
-
-    QList<QImage> m_groundImagesList;
-    void setGroundImages();
+    Ground(GameScene* CurrentScene);
 
     //! Type d'orientation du sol.
     //! \brief The orientation enum
@@ -32,12 +30,19 @@ public:
         GROUND_OF_GROUND = 8
 
     };
-    void configureOrientation(orientation orientation, Sprite* &ground);
-    void generatorGround(int colonne,int ligne,QPointF posGroupe);
+    void generated(int colonne,int ligne,QPointF posGroupe);
+
+    void setScene(GameScene* CurrentScene);
 
     Ground(QGraphicsItem* pParent = nullptr);
     void configureOrientation(orientation ground);
 
+private:
+    GameScene* m_pScene;
+    QList<QImage> m_groundImagesList;
+    void setGroundImages();
+
+    void configureOrientation(orientation orientation, Sprite* &ground);
 };
 
 #endif // GROUND_H

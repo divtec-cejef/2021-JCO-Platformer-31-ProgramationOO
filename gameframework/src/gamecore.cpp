@@ -45,40 +45,6 @@ const int FRAME_SIZE_GROUND   = 120;    //  Dimenssion de la frame
 const int FRAME_COUNT_GROUND  = 9;      //  Nombres de frame à découper
 const int COLUMN_COUNT_GROUND = 3;      //  Nombres de colonne
 
-
-//! Type d'orientation du sol.
-//! \brief The orientation enum
-//!
-enum orientation{
-    GROUND_UP = 0,
-    GROUND_DOWN = 1,
-    GROUND_LEFT = 2,
-    GROUND_RIGHT = 3,
-    CORNER_UP_RIGHT = 4,
-    CORNER_UP_LEFT = 5,
-    CORNER_DOWN_RIGHT = 6,
-    CORNER_DOWN_LEFT = 7,
-    GROUND_OF_GROUND = 8
-
-};
-
-//!
-//! Découpage des images pour les différentes orientations du sol.
-//! @brief GameCore::setGroundImages
-//!
-void GameCore::setGroundImages(){
-    QImage spriteSheet(GameFramework::imagesPath() +  "EveryGroundsV1.png");
-
-    // Découpage de la spritesheet
-    for (int frameIndex = 0; frameIndex <= FRAME_COUNT_GROUND; frameIndex++) {
-
-        QImage CurrentGroundImage = spriteSheet.copy((frameIndex % COLUMN_COUNT_GROUND) * FRAME_SIZE_GROUND,
-                                                     (frameIndex / COLUMN_COUNT_GROUND) * FRAME_SIZE_GROUND,
-                                                     FRAME_SIZE_GROUND, FRAME_SIZE_GROUND);
-        this->m_groundImagesList.append(CurrentGroundImage);
-    }
-}
-
 //! Initialise le contrôleur de jeu.
 //! \param pGameCanvas  GameCanvas pour lequel cet objet travaille.
 //! \param pParent      Pointeur sur le parent (afin d'obtenir une destruction automatique de cet objet).
@@ -94,8 +60,8 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     // Trace un rectangle blanc tout autour des limites de la scène.
     m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::white));
 
-    //Initialisation de la liste groundImagesList
-    setGroundImages();
+    // Inistilisation de la scene dans m_Grounds.
+    m_Grounds->setScene(m_pScene);
 
     // Instancier et initialiser les sprite ici :
 
@@ -103,22 +69,22 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     ////        SOL        ////
     ///////////////////////////
     QPointF posSolGroup1_1erEtage(0,750);
-    generatorGround(40,3,posSolGroup1_1erEtage);
+    m_Grounds->generated(40,3,posSolGroup1_1erEtage);
 
     QPointF posSolGroup2_1erEtage(5280,750);
-    generatorGround(6,3,posSolGroup2_1erEtage);
+    m_Grounds->generated(6,3,posSolGroup2_1erEtage);
 
     QPointF posSolGroup1(0,1600);
-    generatorGround(8,6,posSolGroup1);
+    m_Grounds->generated(8,6,posSolGroup1);
 
     QPointF posSolGroup2(2200,1460);
-    generatorGround(8,5,posSolGroup2);
+    m_Grounds->generated(8,5,posSolGroup2);
 
     QPointF posSolGroup3(3960,1460);
-    generatorGround(2,9,posSolGroup3);
+    m_Grounds->generated(2,9,posSolGroup3);
 
     QPointF posSolGroup4(4460,1660);
-    generatorGround(2,9,posSolGroup4);
+    m_Grounds->generated(2,9,posSolGroup4);
 
     //////////////////////////////////
     ////        PLATEFORME        ////
@@ -403,90 +369,12 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 //! \param enti_velocity velocité du sprite
 //! \param elapsedTime temps écoulé entre chaque tick.
 //!@brief GameCore::gravityApplied
-void GameCore::gravityApplied(Sprite* entity,QPointF &enti_velocity,long long elapsedTime){
+void GameCore::gravityApplied(Entity* entity,QPointF &enti_velocity,long long elapsedTime){
     entity->setPos(entity->pos() + enti_velocity * (elapsedTime/100.0));
     enti_velocity += m_gravity * (elapsedTime/100.0);
 }
 
 
-
-//!
-//! @brief GameCore::configureOrientation
-//! @param orientation du sol à selectionnée dans la liste
-//! @param ground sprite à appliqué la texture
-//!
-void GameCore::configureOrientation(orientation orientation, Sprite* &ground) {
-    //Selectionne le sol demandé
-    ground = new Sprite(QPixmap::fromImage(m_groundImagesList.at(orientation).scaled(FRAME_SIZE_GROUND * 1,
-                                                                                     FRAME_SIZE_GROUND * 1,
-                                                                                     Qt::IgnoreAspectRatio,
-                                                                                     Qt::SmoothTransformation)));
-}
-
-//!
-//! @brief GameCore::generatorGround génére un groupe de sol sur la map d'un niveau
-//! @param colonne nbr de colonne dans le bloque de de sol
-//! @param ligne nbr de colonne dans le bloque de de sol
-//! @param max nbr max de sol à généré
-//!
-void GameCore::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
-
-    QPointF posCurrentGround = posGroupe;
-
-    for(int currentLigne = 1; currentLigne <= ligneMax; currentLigne++ ) {
-        qDebug() <<" ligne actu " << currentLigne;
-
-        for(int currentColonne = 1; currentColonne <= colonneMax; currentColonne++){
-            orientation orientGround = GROUND_OF_GROUND;
-
-            Sprite* pCurrentGround = new Sprite();
-
-            //Définit l'orientation du morceau de sol
-            if(currentLigne == 1){
-                orientGround = GROUND_UP;
-
-                if(currentColonne == 1){
-                    //Definit le coin du haut à gauche
-                    orientGround = CORNER_UP_LEFT;
-                }else if (currentColonne == colonneMax) {
-                    //Definit le coin du haut à droite
-                    orientGround = CORNER_UP_RIGHT;
-                }
-            }else if(currentLigne == ligneMax){
-                orientGround = GROUND_DOWN;
-
-                if(currentColonne == 1){
-                    //Definit le coin du bas à gauche
-                    orientGround = CORNER_DOWN_LEFT;
-                }else if (currentColonne == colonneMax) {
-                    //Definit le coin du bas à droite
-                    orientGround = CORNER_DOWN_RIGHT;
-                }
-            }else {
-                if(currentColonne == 1){
-                    //Définit le côté gauche de la ligne
-                    orientGround = GROUND_LEFT;
-                }else if (currentColonne == colonneMax) {
-                    //Définit le côté gauche de la ligne
-                    orientGround = GROUND_RIGHT;
-                }
-            }
-
-            //Mise en place du sol dans la scène
-            configureOrientation(orientGround,pCurrentGround);
-            pCurrentGround->setPos(posCurrentGround);
-            pCurrentGround->setData(1,"sol");
-            pCurrentGround->setData(2,"soltest");
-            m_pScene->addSpriteToScene(pCurrentGround);
-
-            //Changement de colonne
-            posCurrentGround.setX(posCurrentGround.x() + FRAME_SIZE_GROUND);
-        }
-        //Change de ligne
-        posCurrentGround.setX(posGroupe.x());
-        posCurrentGround.setY(posCurrentGround.y()+FRAME_SIZE_GROUND);
-    }
-}
 //!
 //! Créé un sprite pour symbolisé la mort du joueur.
 //! @brief GameCore::setAnimationDeath

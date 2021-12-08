@@ -130,4 +130,5 @@ void Bulio::configureAnimation(animation bulio) {
                                                                      Qt::SmoothTransformation)));
     }
     startAnimation(25);
+
 }

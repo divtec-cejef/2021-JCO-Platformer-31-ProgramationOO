@@ -29,6 +29,18 @@ const int COLUMN_COUNT_GROUND = 3;      //  Nombres de colonne
 //! Découpage des images pour les différentes orientations du sol.
 //! @brief GameCore::setGroundImages
 //!
+
+
+Ground::Ground(QGraphicsItem* pParent) : Sprite(GameFramework::imagesPath() + "EveryGroundsV1.png", pParent)
+{
+    setGroundImages();
+
+}
+
+void Ground::setScene(GameScene* CurrentScene){
+    this->m_pScene = CurrentScene;
+}
+
 void Ground::setGroundImages(){
     QImage spriteSheet(GameFramework::imagesPath() +  "EveryGroundsV1.png");
 
@@ -42,11 +54,6 @@ void Ground::setGroundImages(){
     }
 }
 
-Ground::Ground(QGraphicsItem* pParent) : Sprite(GameFramework::imagesPath() + "EveryGroundsV1.png", pParent)
-{
-
-}
-/*
 //!
 //! @brief GameCore::configureOrientation
 //! @param orientation du sol à selectionnée dans la liste
@@ -66,7 +73,7 @@ void Ground::configureOrientation(orientation orientation, Sprite* &ground) {
 //! @param ligne nbr de colonne dans le bloque de de sol
 //! @param max nbr max de sol à généré
 //!
-void Ground::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
+void Ground::generated(int colonneMax,int ligneMax,QPointF posGroupe){
 
     QPointF posCurrentGround = posGroupe;
 
@@ -124,5 +131,5 @@ void Ground::generatorGround(int colonneMax,int ligneMax,QPointF posGroupe){
         posCurrentGround.setY(posCurrentGround.y()+FRAME_SIZE_GROUND);
     }
 }
-}*/
+
 
