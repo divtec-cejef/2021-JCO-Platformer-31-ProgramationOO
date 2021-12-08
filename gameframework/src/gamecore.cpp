@@ -298,7 +298,6 @@ void GameCore::keyReleased(int key) {
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
-    qDebug() << "joueur mort "<< pCharacter->getIsDeath();
     if(!pCharacter->getIsDeath()){
         pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
         //Suite les déplacement du joueur dans la scene
@@ -339,7 +338,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         QRectF nextSpriteRect = pCharacter->globalBoundingBox().translated(pCharacter->m_velocity);
 
         if(!pCharacter->parentScene()->isInsideScene(nextSpriteRect)){
-
+            qDebug() << "Le joueur est sortit de la scene";
             setupCharacterDeath();
         }
 

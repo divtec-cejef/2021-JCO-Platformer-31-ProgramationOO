@@ -16,7 +16,7 @@
 #include "gamecanvas.h"
 #include "resources.h"
 
-Entity::Entity(const QPixmap& rPixmap, QGraphicsItem* pParent) : Sprite(pParent)
+Entity::Entity(const QPixmap& rPixmap, QGraphicsItem* pParent) : Sprite(rPixmap,pParent)
 {
 
 }
