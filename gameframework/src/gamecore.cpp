@@ -40,11 +40,6 @@ const int FRAME_COUNT_GHOST  = 7;    //  Nombres de frame à découper
 const int COLUMN_COUNT_GHOST = 3;    //  Nombres de colonne
 
 
-//Dimenssion de découpage des spriteSheets du sol.
-const int FRAME_SIZE_GROUND   = 120;    //  Dimenssion de la frame
-const int FRAME_COUNT_GROUND  = 9;      //  Nombres de frame à découper
-const int COLUMN_COUNT_GROUND = 3;      //  Nombres de colonne
-
 //! Initialise le contrôleur de jeu.
 //! \param pGameCanvas  GameCanvas pour lequel cet objet travaille.
 //! \param pParent      Pointeur sur le parent (afin d'obtenir une destruction automatique de cet objet).
