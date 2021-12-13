@@ -11,6 +11,9 @@
 #include "gamecanvas.h"
 #include "resources.h"
 
+// Vitesse des bulio
+const int VITESSE_DEPLACEMENT = 5;
+
 //Type d'animation du joueurs
 const int NBR_ANIMATION = 2;
 
@@ -133,6 +136,10 @@ void Bulio::configureAnimation(animation bulio) {
 
 }
 
+///!
+//! \brief Bulio::collisionDetection
+//! \param rect position de l'entité dans l'espace.
+//!
 void Bulio::collisionDetection(QRectF rect){
 
     // ////////////////// //
@@ -155,41 +162,42 @@ void Bulio::collisionDetection(QRectF rect){
 
             QRectF intersected = rect.intersected(CollisionDetected->globalBoundingBox());
 
-                       if (intersected.width() > intersected.height() && intersected.width() > 10) {
-                           if (intersected.center().y() < rect.center().y())
-                               uniqueSide(collidingSides, hitSide::UP);
-                           else
-                               uniqueSide(collidingSides, hitSide::DOWN);
-                       } else if (intersected.width() < intersected.height() && intersected.height() > 10){
-                           if (intersected.center().x() < rect.center().x())
-                               uniqueSide(collidingSides, hitSide::LEFT);
-                           else
-                               uniqueSide(collidingSides, hitSide::RIGHT);
-                       }
+            if (intersected.width() > intersected.height() && intersected.width() > 10) {
+                if (intersected.center().y() < rect.center().y())
+                    uniqueSide(collidingSides, hitSide::UP);
+                else
+                    uniqueSide(collidingSides, hitSide::DOWN);
+            } else if (intersected.width() < intersected.height() && intersected.height() > 10){
+                if (intersected.center().x() < rect.center().x())
+                    uniqueSide(collidingSides, hitSide::LEFT);
+                else
+                    uniqueSide(collidingSides, hitSide::RIGHT);
+            }
 
-            if (CollisionDetected->data(1) == "sol") {
+            //if (CollisionDetected->data(1) == "sol") {
 
                 if(!this->getIsJump())
                     this->setIsOnFloor(true);
 
                 for (int CurrentSide : collidingSides) {
 
-                    collidingSides.takeAt(CurrentSide);
-                }
-
-                this->m_velocity.setY(0.0);
-                this->setIsJump(false);
-
-                QRectF zoneDeCollision = this->boundingRect().intersected(CollisionDetected->boundingRect());
-                //qDebug() << "Y collision :" << zoneDeCollision.y();
-                //qDebug() << "X collision :" << zoneDeCollision.x();
-
-                if(zoneDeCollision.height() < zoneDeCollision.width()){
-                    qDebug() << "Collision de haut/bas";
-                }else if(zoneDeCollision.height() > zoneDeCollision.width()){
-                    qDebug() << "Collision de côté";
-                }
-            }
+                    switch (collidingSides.takeAt(CurrentSide)) {
+                    case hitSide::DOWN:
+                        this->m_velocity.setY(0.0);
+                        this->setIsJump(false);
+                        break;
+                    case  hitSide::UP:
+                        this->m_velocity.setY(0.0);
+                        break;
+                    case hitSide::RIGHT :
+                        this->m_velocity.setX(-VITESSE_DEPLACEMENT);
+                        break;
+                    case hitSide::LEFT :
+                        this->m_velocity.setX(VITESSE_DEPLACEMENT);
+                        break;
+                    }
+               }
+            //}
         }
     }else {
         this->setIsOnFloor(false);

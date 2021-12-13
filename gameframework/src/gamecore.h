@@ -76,14 +76,13 @@ private:
     void setAnimationDeath();
     void setupCharacterDeath();
 
-     QList<QGraphicsTransform*> m_transformsForFlip;
+    QList<QGraphicsTransform*> m_transformsForFlip;
 
     Ground* m_Grounds = new Ground;
 
-
     //Collision
-    void currentCollision(Entity* entity,QRectF enti_velocity);
-    void futureCollision(Entity* entity,QRectF enti_velocity);
+    void currentCollision(Entity* entity);
+    void futureCollision(Entity* entity);
 
 
 private slots:

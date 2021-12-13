@@ -16,6 +16,13 @@
 #include "gamecanvas.h"
 #include "resources.h"
 
+enum hitSide{
+    UP,
+    DOWN,
+    RIGHT,
+    LEFT
+};
+
 //!
 //! \brief Entity::Entity
 //! \param rPixmap
@@ -63,5 +70,27 @@ bool Entity::getIsDeath(){
 //!
 void Entity::setIsDeath(bool _isDeath){
     this->m_isDeath = _isDeath;
+}
+
+//! Permet de rendre les éléments de la liste unique
+//! \brief uniqueSide
+//! \param collidingSidesList liste à testé
+//! \param appendToSide élément à apprendre
+//!
+void uniqueSide(QList<hitSide>* &collidingSidesList, hitSide appendToSide){
+    if (!collidingSidesList->contains(appendToSide)) {
+            collidingSidesList->append(appendToSide);
+        }
+}
+
+//!
+//! \brief GameCore::gravityApplied
+//! \param entity sprite au quel on applique la gravité
+//! \param enti_velocity velocité du sprite
+//! \param elapsedTime temps écoulé entre chaque tick.
+//!@brief GameCore::gravityApplied
+void Entity::gravityApplied(long long elapsedTime){
+    this->setPos(this->pos() + this->m_velocity * (elapsedTime/100.0));
+    this->m_velocity += m_gravity * (elapsedTime/100.0);
 }
 

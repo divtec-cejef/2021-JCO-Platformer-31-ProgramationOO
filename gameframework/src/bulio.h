@@ -47,6 +47,9 @@ public:
 
     void respawn();
 
+    //void futureCollision();
+    void collisionDetection(QRectF rect);
+
 public slots:
 
     void onKeyPressed(int key);
@@ -63,6 +66,7 @@ private:
 
     QList<QImage>m_listAnimation;
     void setAnimationDeplacementList();
+    void tickHandler(long long elapsedTimeInMilliseconds);
 };
 
 

@@ -40,9 +40,12 @@ public:
     bool getIsJump();
     void setIsJump(bool _isJump);
 
+    void futureCollision();
+
     //Mort
     bool getIsDeath();
     void setIsDeath(bool _isDeath);
+    void setupCharacterDeath();
 
     //Compteur de mort(s)
     int getDeathCount();

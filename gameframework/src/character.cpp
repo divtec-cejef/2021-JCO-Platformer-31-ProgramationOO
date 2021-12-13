@@ -224,7 +224,80 @@ void Character::setAnimationDeplacementList(){
 
 */
 }
+/*
+void Character::futureCollision(){
 
+    // Détermine la prochaine position du sprite selon sa velwocité
+    QRectF nextSpriteRect = this->globalBoundingBox().translated(this->m_velocity);
 
+    if(!this->parentScene()->isInsideScene(nextSpriteRect)){
+        qDebug() << "Le joueur est sortit de la scene";
+        setupCharacterDeath();
+    }
 
+    // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
+    auto listeFuturCollision = this->parentScene()->collidingSprites(nextSpriteRect);
+    // Supprime le sprite lui-même, qui collisionne toujours awdvec sa boundingbox
+    listeFuturCollision.removeAll(this);
+
+    //récupère la valeur de liste (remplis/vide)
+    bool futurCollision = !listeFuturCollision.isEmpty();
+
+    if(futurCollision){
+        //Cherche de potentielle futur collisions entre le joueur et les autres sprites
+        for (Sprite* CollisionDetected : listeFuturCollision) {
+
+            if (CollisionDetected->data(1) == "sol") {
+
+                if(!this->getIsJump())
+                    this->setIsOnFloor(true);
+
+                this->m_velocity.setY(0.0);
+                this->setIsJump(false);
+
+                QRectF zoneDeCollision = this->boundingRect().intersected(CollisionDetected->boundingRect());
+                qDebug() << "Y collision :" << zoneDeCollision.y();
+                qDebug() << "X collision :" << zoneDeCollision.x();
+
+                if(zoneDeCollision.height() < zoneDeCollision.width()){
+                      qDebug() << "Collision de haut/bas";
+                }else if(zoneDeCollision.height() > zoneDeCollision.width()){
+                        qDebug() << "Collision de côté";
+                }
+            }
+
+            if (CollisionDetected->data(1) == "Piege") {
+
+                if(!this->getIsDeath()){
+                    //qDebug() << "HO NON UN PIEGE AHHHH";
+                    m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
+                }
+                setupCharacterDeath();
+            }
+        }
+    }else {
+        this->setIsOnFloor(false);
+    }
+
+}
+
+//!
+//! Mets en place tout les éléments symbolisant la mort du joueur.
+//! @brief GameCore::setupCharacterDeath
+//!
+void Character::setupCharacterDeath(GameScene pScene){
+    //Le joueur est considéré comme mort.
+    this->setIsDeath(true);
+    //Créé le fantôme dans la scene.
+    setAnimationDeath();
+    //Positionne le fantôme à la place du joueur
+    pGhost->setPos(this->pos());
+    //Supprime le joueur de la scene.
+    m_pScene->removeSpriteFromScene(pCharacter);
+    //Ajoute du fantome à la scene.
+    m_pScene->addSpriteToScene(pGhost);
+    //Ajoute d'une mort au compteur.
+    pCharacter->incrementDeathCount();
+}
+*/
 

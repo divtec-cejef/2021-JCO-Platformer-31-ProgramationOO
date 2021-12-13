@@ -22,15 +22,20 @@ public:
 
      Entity(const QPixmap& rPixmap, QGraphicsItem* pParent = nullptr);
 
+     enum hitSide{
+         UP,
+         DOWN,
+         RIGHT,
+         LEFT
+     };
+
     virtual void configureAnimation();
+    void uniqueSide(QList<hitSide> collidingSidesList, hitSide appendToSide);
 
-
-    QPointF m_velocity = QPointF(0,0);
+    QPointF m_velocity;
     QPointF m_lastVelocity = m_velocity;
-
     QPointF getVelocity();
     void updateCharacterVelocity();
-
 
     bool getIsOnFloor();
     virtual void setIsOnFloor(bool _isOnFloor);
@@ -38,9 +43,15 @@ public:
     bool getIsDeath();
     virtual void setIsDeath(bool _isDeath);
 
-private:
+    //Collision
+    //virtual void currentCollision();
+    virtual void collisionDetection(QRectF rect);
 
+private:
+     QPointF m_gravity = QPointF(0,2);
      void setAnimationDeplacementList();
+     void gravityApplied(long long elapsedTime);
+
 
 
 protected:
