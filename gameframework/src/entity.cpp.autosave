@@ -16,6 +16,13 @@
 #include "gamecanvas.h"
 #include "resources.h"
 
+enum hitSide{
+    UP,
+    DOWN,
+    RIGHT,
+    LEFT
+};
+
 //!
 //! \brief Entity::Entity
 //! \param rPixmap
@@ -65,8 +72,14 @@ void Entity::setIsDeath(bool _isDeath){
     this->m_isDeath = _isDeath;
 }
 
-
-void Entity::futureCollision(){
-    
+//! Permet de rendre les éléments de la liste unique
+//! \brief uniqueSide
+//! \param collidingSidesList liste à testé
+//! \param appendToSide élément à apprendre
+//!
+void uniqueSide(QList<hitSide>* &collidingSidesList, hitSide appendToSide){
+    if (!collidingSidesList->contains(appendToSide)) {
+            collidingSidesList->append(appendToSide);
+        }
 }
 

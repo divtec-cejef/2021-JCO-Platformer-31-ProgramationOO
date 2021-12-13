@@ -104,8 +104,8 @@ void Bulio::configureAnimation(animation bulio) {
         // Découpage de la spritesheet
         for (int frameIndex = 0; frameIndex < FRAME_COUNT; frameIndex++) {
             QImage frameSheet = spriteSheet.copy((frameIndex % COLUMN_COUNT) * FRAME_WIDTH,
-                                             (frameIndex / COLUMN_COUNT) * FRAME_HEIGHT,
-                                             FRAME_WIDTH, FRAME_HEIGHT);
+                                                 (frameIndex / COLUMN_COUNT) * FRAME_HEIGHT,
+                                                 FRAME_WIDTH, FRAME_HEIGHT);
 
             //Oriente l'animation selon la velocité du joueur
             if(m_velocity.x() < 0)
@@ -114,9 +114,9 @@ void Bulio::configureAnimation(animation bulio) {
                 directionFrame = frameSheet;
 
             addAnimationFrame(QPixmap::fromImage(directionFrame.scaled(FRAME_WIDTH * 1,
-                                                                        FRAME_HEIGHT * 1,
-                                                                        Qt::IgnoreAspectRatio,
-                                                                        Qt::SmoothTransformation)));
+                                                                       FRAME_HEIGHT * 1,
+                                                                       Qt::IgnoreAspectRatio,
+                                                                       Qt::SmoothTransformation)));
         }
 
     }else {
@@ -125,10 +125,77 @@ void Bulio::configureAnimation(animation bulio) {
             directionFrame = directionFrame.mirrored(true,false);
 
         addAnimationFrame(QPixmap::fromImage(directionFrame.scaled(FRAME_WIDTH * 1,
-                                                                     FRAME_HEIGHT * 1,
-                                                                     Qt::IgnoreAspectRatio,
-                                                                     Qt::SmoothTransformation)));
+                                                                   FRAME_HEIGHT * 1,
+                                                                   Qt::IgnoreAspectRatio,
+                                                                   Qt::SmoothTransformation)));
     }
     startAnimation(25);
+
+}
+
+void Bulio::collisionDetection(QRectF rect){
+
+    // ////////////////// //
+    // CURRENT COLLISION  //
+    // ////////////////// //
+
+    QList<hitSide> collidingSides = QList<hitSide>();
+
+    // Récupère tous les sprites de la scène qui touche le joueur
+    auto listeCurrentCollisionEnnemie = this->parentScene()->collidingSprites(this);
+    // Supprimer le sprite lui-même
+    listeCurrentCollisionEnnemie.removeAll(this);
+
+    //récupère la valeur de liste (remplis/vide)
+    bool currentCollision  = !listeCurrentCollisionEnnemie.isEmpty();
+
+    if(currentCollision){
+        //Cherche les collisions entre le joueurs les autres sprites
+        for (Sprite* CollisionDetected : listeCurrentCollisionEnnemie) {
+
+            QRectF intersected = rect.intersected(CollisionDetected->globalBoundingBox());
+
+                       if (intersected.width() > intersected.height() && intersected.width() > 10) {
+                           if (intersected.center().y() < rect.center().y())
+                               uniqueSide(collidingSides, hitSide::UP);
+                           else
+                               uniqueSide(collidingSides, hitSide::DOWN);
+                       } else if (intersected.width() < intersected.height() && intersected.height() > 10){
+                           if (intersected.center().x() < rect.center().x())
+                               uniqueSide(collidingSides, hitSide::LEFT);
+                           else
+                               uniqueSide(collidingSides, hitSide::RIGHT);
+                       }
+
+            if (CollisionDetected->data(1) == "sol") {
+
+                if(!this->getIsJump())
+                    this->setIsOnFloor(true);
+
+                for (int CurrentSide : collidingSides) {
+
+                    collidingSides.takeAt(CurrentSide);
+                }
+
+                this->m_velocity.setY(0.0);
+                this->setIsJump(false);
+
+                QRectF zoneDeCollision = this->boundingRect().intersected(CollisionDetected->boundingRect());
+                //qDebug() << "Y collision :" << zoneDeCollision.y();
+                //qDebug() << "X collision :" << zoneDeCollision.x();
+
+                if(zoneDeCollision.height() < zoneDeCollision.width()){
+                    qDebug() << "Collision de haut/bas";
+                }else if(zoneDeCollision.height() > zoneDeCollision.width()){
+                    qDebug() << "Collision de côté";
+                }
+            }
+        }
+    }else {
+        this->setIsOnFloor(false);
+    }
+}
+
+void Bulio::tickHandler(long long elapsedTimeInMilliseconds){
 
 }
