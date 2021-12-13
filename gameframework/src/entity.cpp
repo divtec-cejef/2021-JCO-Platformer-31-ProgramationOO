@@ -16,13 +16,6 @@
 #include "gamecanvas.h"
 #include "resources.h"
 
-enum hitSide{
-    UP,
-    DOWN,
-    RIGHT,
-    LEFT
-};
-
 //!
 //! \brief Entity::Entity
 //! \param rPixmap
@@ -61,7 +54,7 @@ void Entity::setIsOnFloor(bool _isOnFloor){
 //! \return un booléane
 //!
 bool Entity::getIsDeath(){
-    return this->m_isOnFloor;
+    return this->m_isDeath;
 }
 
 //! Permet de définir si l'entité doit périre ou non.
@@ -77,7 +70,7 @@ void Entity::setIsDeath(bool _isDeath){
 //! \param collidingSidesList liste à testé
 //! \param appendToSide élément à apprendre
 //!
-void uniqueSide(QList<hitSide>* &collidingSidesList, hitSide appendToSide){
+void Entity::uniqueSide(QList<hitSide>* collidingSidesList, hitSide appendToSide){
     if (!collidingSidesList->contains(appendToSide)) {
             collidingSidesList->append(appendToSide);
         }
@@ -94,3 +87,7 @@ void Entity::gravityApplied(long long elapsedTime){
     this->m_velocity += m_gravity * (elapsedTime/100.0);
 }
 
+void Entity::setScene(GameScene* newScene){
+    m_pScene = newScene;
+
+}

@@ -20,14 +20,14 @@ class Entity: public Sprite
 {
 public:
 
-     Entity(const QPixmap& rPixmap, QGraphicsItem* pParent = nullptr);
+    Entity(const QPixmap& rPixmap, QGraphicsItem* pParent = nullptr);
 
-     enum hitSide{
-         UP,
-         DOWN,
-         RIGHT,
-         LEFT
-     };
+    enum hitSide{
+        UP,
+        DOWN,
+        RIGHT,
+        LEFT
+    };
 
     virtual void configureAnimation();
     void uniqueSide(QList<hitSide> collidingSidesList, hitSide appendToSide);
@@ -42,21 +42,32 @@ public:
 
     bool getIsDeath();
     virtual void setIsDeath(bool _isDeath);
+    //virtual void setupDeath();
+
+
+    void setScene(GameScene* m_pScene);
 
     //Collision
     //virtual void currentCollision();
     virtual void collisionDetection(QRectF rect);
 
+    static void uniqueSide(QList<hitSide>* collidingSidesList, hitSide appendToSide);
+
 private:
-     QPointF m_gravity = QPointF(0,2);
-     void setAnimationDeplacementList();
-     void gravityApplied(long long elapsedTime);
+
+    void setAnimationDeplacementList();
+
 
 
 
 protected:
-     bool m_isDeath = false;
-     bool m_isOnFloor = false;
+    GameScene* m_pScene = nullptr;
+    QPointF m_gravity = QPointF(0,2);
+    bool m_isDeath = false;
+    bool m_isOnFloor = false;
+    void gravityApplied(long long elapsedTime);
+
+
 
 
 };

@@ -45,7 +45,7 @@ public:
     //Mort
     bool getIsDeath();
     void setIsDeath(bool _isDeath);
-    void setupCharacterDeath();
+    //void setupDeath();
 
     //Compteur de mort(s)
     int getDeathCount();

@@ -285,7 +285,7 @@ void Character::futureCollision(){
 //! Mets en place tout les éléments symbolisant la mort du joueur.
 //! @brief GameCore::setupCharacterDeath
 //!
-void Character::setupCharacterDeath(GameScene pScene){
+void Character::setupDeath(GameScene pScene){
     //Le joueur est considéré comme mort.
     this->setIsDeath(true);
     //Créé le fantôme dans la scene.

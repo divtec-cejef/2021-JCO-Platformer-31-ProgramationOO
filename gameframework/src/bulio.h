@@ -1,5 +1,5 @@
 #ifndef BULIO_H
-#define BULIO_H
+#define BULIO_H4
 
 #include <QObject>
 #include <QPointF>

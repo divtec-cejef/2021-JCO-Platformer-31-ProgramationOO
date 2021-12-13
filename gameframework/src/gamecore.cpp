@@ -155,6 +155,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pScene->addSpriteToScene(enemie1, 2500,1410);
 
     //Ajoute du joueur dans la scene
+    pCharacter->setData(1,"joueur");
     m_pScene->addSpriteToScene(pCharacter, 300,1200);
     pCharacter->startAnimation(25);
 
