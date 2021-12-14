@@ -167,7 +167,6 @@ void Bulio::collisionDetection(QRectF rect){
             }
 
             if (CollisionDetected->data(1) == "sol") {
-
                 for (hitSide CurrentSide : collidingSides) {
 
                     switch (collidingSides.takeAt(CurrentSide)) {
@@ -187,7 +186,7 @@ void Bulio::collisionDetection(QRectF rect){
                     }
                }
             }else if (CollisionDetected->data(1) == "joueur") {
-
+                qDebug()<<"NON PAS LUI";
                 for (hitSide CurrentSide : collidingSides) {
 
                     if(CurrentSide == hitSide::UP){
@@ -200,18 +199,17 @@ void Bulio::collisionDetection(QRectF rect){
     }else {
         this->setIsOnFloor(false);
     }
-
-
 }
 
-void Bulio::tickHandler(long long elapsedTimeInMilliseconds){
+
+void Bulio::move(long long elapsedTimeInMilliseconds){
+
      this->setPos(this->pos()+ this->m_velocity);
 
     if (!this->getIsOnFloor()){
         //Attire le joueur vers le bas de l'écran
         gravityApplied(elapsedTimeInMilliseconds);
     }
-
     collisionDetection(globalBoundingBox().translated(m_velocity));
 }
 

@@ -15,6 +15,7 @@
 #include "character.h"
 #include "gameview.h"
 #include "ground.h"
+#include "bulio.h"
 
 class GameCanvas;
 class GameScene;
@@ -77,6 +78,8 @@ private:
     void setupCharacterDeath();
 
     QList<QGraphicsTransform*> m_transformsForFlip;
+
+    QList<Bulio*> m_pBulioList;
 
     Ground* m_Grounds = new Ground;
 

@@ -1,5 +1,5 @@
 #ifndef BULIO_H
-#define BULIO_H4
+#define BULIO_H
 
 #include <QObject>
 #include <QPointF>
@@ -9,6 +9,8 @@
 
 #include <sprite.h>
 #include <entity.h>
+
+#include "buliotickhandler.h"
 
 class Bulio: public Entity
 {
@@ -49,6 +51,7 @@ public:
 
     //void futureCollision();
     void collisionDetection(QRectF rect);
+    void move(long long elapsedTimeInMilliseconds);
 
 public slots:
 
@@ -66,7 +69,7 @@ private:
 
     QList<QImage>m_listAnimation;
     void setAnimationDeplacementList();
-    void tickHandler(long long elapsedTimeInMilliseconds);
+
 };
 
 

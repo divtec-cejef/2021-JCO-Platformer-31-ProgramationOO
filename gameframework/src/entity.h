@@ -23,10 +23,10 @@ public:
     Entity(const QPixmap& rPixmap, QGraphicsItem* pParent = nullptr);
 
     enum hitSide{
-        UP,
-        DOWN,
-        RIGHT,
-        LEFT
+        UP =0,
+        DOWN =1,
+        RIGHT=2,
+        LEFT =3
     };
 
     virtual void configureAnimation();
@@ -56,9 +56,6 @@ public:
 private:
 
     void setAnimationDeplacementList();
-
-
-
 
 protected:
     GameScene* m_pScene = nullptr;

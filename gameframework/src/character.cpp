@@ -24,6 +24,8 @@ const int FRAME_HEIGHT = 60;
 const int FRAME_COUNT = 4;
 const int COLUMN_COUNT = 2;
 
+const int PLAYER_SPEED  = 10 ;
+
 struct collisionDistance{
     double top;
     double down;
@@ -301,3 +303,10 @@ void Character::setupDeath(GameScene pScene){
 }
 */
 
+///!
+//! \brief Bulio::collisionDetection
+//! \param rect position de l'entité dans l'espace.
+//!
+void Entity::collisionDetection(QRectF rect){
+    qDebug() << "y a pas à print comme ça"<< rect;
+}

@@ -26,6 +26,7 @@
 #include "ground.h"
 #include "bulio.h"
 
+
 //résolution de la fenetre
 const int SCENE_WIDTH   = 6000;
 const int SCENE_HEIGHT  = 4000;
@@ -159,6 +160,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pScene->addSpriteToScene(pCharacter, 300,1200);
     pCharacter->startAnimation(25);
 
+    m_pBulioList.append(enemie1);
 
     // ...
     // Démarre le tick pour que les animations qui en dépendent fonctionnent correctement.
@@ -264,7 +266,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
         //Suite les déplacement du joueur dans la scene
         m_pGameCanvas->getView()->centerOn(m_pScene->sprites().takeAt(0)->pos());
-
+        /*
         // Récupère tous les sprites de la scène qui touche le joueur
         auto listeCurrentCollision = pCharacter->parentScene()->collidingSprites(pCharacter);
         // Supprimer le sprite lui-même
@@ -303,7 +305,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             qDebug() << "Le joueur est sortit de la scene";
             setupCharacterDeath();
         }
-
+*//*
         // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
         auto listeFuturCollision = pCharacter->parentScene()->collidingSprites(nextSpriteRect);
         // Supprime le sprite lui-même, qui collisionne toujours awdvec sa boundingbox
@@ -325,14 +327,16 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     pCharacter->setIsJump(false);
 
                     QRectF zoneDeCollision = pCharacter->boundingRect().intersected(CollisionDetected->boundingRect());
-                    qDebug() << "Y collision :" << zoneDeCollision.y();
-                    qDebug() << "X collision :" << zoneDeCollision.x();
+                    //qDebug() << "Y collision :" << zoneDeCollision.y();
+                    //qDebug() << "X collision :" << zoneDeCollision.x();
 
                     if(zoneDeCollision.height() < zoneDeCollision.width()){
                         qDebug() << "Collision de haut/bas";
                     }else if(zoneDeCollision.height() > zoneDeCollision.width()){
                         qDebug() << "Collision de côté";
                     }
+
+
                 }
 
                 if (CollisionDetected->data(1) == "Piege") {
@@ -343,7 +347,71 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     }
                     setupCharacterDeath();
                 }
+            }*/
+        QRectF nextSpriteRect = pCharacter->globalBoundingBox().translated(pCharacter->m_velocity);
+        QList<Entity::hitSide> collidingSides = QList<Entity::hitSide>();
+
+        // Récupère tous les sprites de la scène qui touche le joueur
+        auto listeCurrentCollisionEnnemie = pCharacter->parentScene()->collidingSprites(pCharacter);
+        // Supprimer le sprite lui-même
+        listeCurrentCollisionEnnemie.removeAll(pCharacter);
+
+        //récupère la valeur de liste (remplis/vide)
+        bool currentCollision  = !listeCurrentCollisionEnnemie.isEmpty();
+
+        if(currentCollision){
+            //Cherche les collisions entre le joueurs les autres sprites
+            for (Sprite* CollisionDetected : listeCurrentCollisionEnnemie) {
+            qDebug()<<"parcourt la liste des collision";
+                QRectF intersected = nextSpriteRect.intersected(CollisionDetected->globalBoundingBox());
+
+                if (intersected.width() > intersected.height() && intersected.width() > 10) {
+                     qDebug()<<"collision HAUT/BAS";
+                    if (intersected.center().y() < nextSpriteRect.center().y())
+                        Entity::uniqueSide(&collidingSides, Entity::hitSide::UP);
+                    else
+                        Entity::uniqueSide(&collidingSides, Entity::hitSide::DOWN);
+                } else if (intersected.width() < intersected.height() && intersected.height() > 10){
+                     qDebug()<<"collision GAUCHE/DROITE";
+                    if (intersected.center().x() < nextSpriteRect.center().x())
+                        Entity::uniqueSide(&collidingSides, Entity::hitSide::LEFT);
+                    else
+                        Entity::uniqueSide(&collidingSides, Entity::hitSide::RIGHT);
+                }
+
+                if (CollisionDetected->data(1) == "sol") {
+                    qDebug()<<"DU SOL";
+                    for (int i =0;i < collidingSides.count();i++) {
+
+                        qDebug()<<"le sol est touché depuis le " << i;
+                        switch (collidingSides.takeAt(i)) {
+                        case Entity::hitSide::DOWN:
+                            qDebug()<<"bas";
+                            pCharacter->m_velocity.setY(0.0);
+                            //this->setIsJump(false);
+                            break;
+                        case  Entity::hitSide::UP:
+                            pCharacter->m_velocity.setY(0.0);
+                            break;
+                        case Entity::hitSide::RIGHT :
+                            pCharacter->m_velocity.setX(0);
+                            break;
+                        case Entity::hitSide::LEFT :
+                            pCharacter->m_velocity.setX(0);
+                            break;
+                        }
+                   }
+                }else if (CollisionDetected->data(1) == "enemie") {
+                    qDebug()<<"NON PAS LUI";
+                    for (Entity::hitSide CurrentSide : collidingSides) {
+
+                        if(CurrentSide == Entity::hitSide::LEFT){
+                            setupCharacterDeath();
+                        }
+                   }
+                }
             }
+
         }else {
             pCharacter->setIsOnFloor(false);
         }
@@ -355,8 +423,9 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     }else {
         pGhost->setY(pGhost->y() -5);
     }
-
-
+    for (int i = 0;i <= m_pBulioList.count();i++ ) {
+       // m_pBulioList.takeAt(i)->move(elapsedTimeInMilliseconds);
+    }
 }
 
 
@@ -421,21 +490,6 @@ void GameCore::setupCharacterDeath(){
     pCharacter->incrementDeathCount();
 }
 
-
-//!
-//! \brief GameCore::currentCollision
-//! \param entity entité dont on veut savoir avec quoi elle rentre en collision.
-//! \param enti_velocity velocité de l'entité.
-//!
-void GameCore::currentCollision(Entity* entity){
-
-}
-
-void GameCore::futureCollision(Entity* entity){
-
-
-
-}
 
 //! La souris a été déplacée.
 //! Pour que cet événement soit pris en compte, la propriété MouseTracking de GameView

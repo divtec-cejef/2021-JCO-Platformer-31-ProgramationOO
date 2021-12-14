@@ -12,8 +12,8 @@ TARGET = GameFramework
 TEMPLATE = app
 
 #DEFINES += DEBUG_SPRITE_COUNT
-#DEFINES += DEBUG_BBOX
-#DEFINES += DEBUG_SHAPE
+DEFINES += DEBUG_BBOX
+DEFINES += DEBUG_SHAPE
 #DEFINES += DEPLOY # Pour une compilation dans un but de déploiement
 
 SOURCES += main.cpp\
@@ -43,6 +43,7 @@ SOURCES += main.cpp\
 
 HEADERS  += mainfrm.h \
     bulio.h \
+    buliotickhandler.h \
     character.h \
     entity.h \
     gamescene.h \
