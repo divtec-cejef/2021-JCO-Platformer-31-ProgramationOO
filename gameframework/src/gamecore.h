@@ -51,6 +51,8 @@ public:
 
     //Collision
     void getCollisonLocate(QList<Entity::hitSide>&collisionLocateList,QRectF posSprite,QRectF intersected);
+    //void commonInteraction(Entity* CurrentEntity, Sprite* sprite,QRectF posSprite,QRectF intersected);
+
 signals:
     void notifyMouseMoved(QPointF newMousePosition);
     void notifyMouseButtonPressed(QPointF mousePosition, Qt::MouseButtons buttons);
