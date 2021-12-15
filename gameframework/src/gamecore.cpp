@@ -266,88 +266,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
         //Suite les déplacement du joueur dans la scene
         m_pGameCanvas->getView()->centerOn(m_pScene->sprites().takeAt(0)->pos());
-        /*
-        // Récupère tous les sprites de la scène qui touche le joueur
-        auto listeCurrentCollision = pCharacter->parentScene()->collidingSprites(pCharacter);
-        // Supprimer le sprite lui-même
-        listeCurrentCollision.removeAll(pCharacter);
 
-        //récupère la valeur de liste (remplis/vide)
-        bool currentCollision  = !listeCurrentCollision.isEmpty();
-
-        if(currentCollision){
-            //Cherche les collisions entre le joueurs les autres sprites
-            for (Sprite* CollisionDetected : listeCurrentCollision) {
-
-                if(CollisionDetected->data(2) == "Wood_caisse"){
-
-                    //Zone de collision entre le joueur et la caisse en bois
-                    //pCharacter->boundingRect().intersected(CollisionDetected->boundingRect());
-                    QRectF zoneDeCollision = pCharacter->boundingRect().intersected(CollisionDetected->boundingRect());
-                    //qDebug() << "Y collision :" << zoneDeCollision.y();
-                    //qDebug() << "X collision :" << zoneDeCollision.x();
-
-
-                    if(zoneDeCollision.height() > zoneDeCollision.width()){
-
-                        CollisionDetected->setX(CollisionDetected->x() + pCharacter->m_velocity.x());
-                        //pCharacter->m_velocity.setX(!pCharacter->m_velocity.x());
-                        qDebug() << "POUSSE";
-                    }
-                }
-            }
-        }
-
-        // Détermine la prochaine position du sprite selon sa velwocité
-        QRectF nextSpriteRect = pCharacter->globalBoundingBox().translated(pCharacter->m_velocity);
-
-        if(!pCharacter->parentScene()->isInsideScene(nextSpriteRect)){
-            qDebug() << "Le joueur est sortit de la scene";
-            setupCharacterDeath();
-        }
-*//*
-        // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
-        auto listeFuturCollision = pCharacter->parentScene()->collidingSprites(nextSpriteRect);
-        // Supprime le sprite lui-même, qui collisionne toujours awdvec sa boundingbox
-        listeFuturCollision.removeAll(pCharacter);
-
-        //récupère la valeur de liste (remplis/vide)
-        bool futurCollision = !listeFuturCollision.isEmpty();
-
-        if(futurCollision){
-            //Cherche de potentielle futur collisions entre le joueur et les autres sprites
-            for (Sprite* CollisionDetected : listeFuturCollision) {
-
-                if (CollisionDetected->data(1) == "sol") {
-
-                    if(!pCharacter->getIsJump())
-                        pCharacter->setIsOnFloor(true);
-
-                    pCharacter->m_velocity.setY(0.0);
-                    pCharacter->setIsJump(false);
-
-                    QRectF zoneDeCollision = pCharacter->boundingRect().intersected(CollisionDetected->boundingRect());
-                    //qDebug() << "Y collision :" << zoneDeCollision.y();
-                    //qDebug() << "X collision :" << zoneDeCollision.x();
-
-                    if(zoneDeCollision.height() < zoneDeCollision.width()){
-                        qDebug() << "Collision de haut/bas";
-                    }else if(zoneDeCollision.height() > zoneDeCollision.width()){
-                        qDebug() << "Collision de côté";
-                    }
-
-
-                }
-
-                if (CollisionDetected->data(1) == "Piege") {
-
-                    if(!pCharacter->getIsDeath()){
-                        //qDebug() << "HO NON UN PIEGE AHHHH";
-                        m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
-                    }
-                    setupCharacterDeath();
-                }
-            }*/
         QRectF nextSpriteRect = pCharacter->globalBoundingBox().translated(pCharacter->m_velocity);
         QList<Entity::hitSide> collidingSides = QList<Entity::hitSide>();
 
@@ -362,32 +281,23 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         if(currentCollision){
             //Cherche les collisions entre le joueurs les autres sprites
             for (Sprite* CollisionDetected : listeCurrentCollisionEnnemie) {
-            qDebug()<<"parcourt la liste des collision";
+                qDebug()<<"parcourt la liste des collision";
                 QRectF intersected = nextSpriteRect.intersected(CollisionDetected->globalBoundingBox());
 
-                if (intersected.width() > intersected.height() && intersected.width() > 10) {
-                     qDebug()<<"collision HAUT/BAS";
-                    if (intersected.center().y() < nextSpriteRect.center().y())
-                        Entity::uniqueSide(&collidingSides, Entity::hitSide::UP);
-                    else
-                        Entity::uniqueSide(&collidingSides, Entity::hitSide::DOWN);
-                } else if (intersected.width() < intersected.height() && intersected.height() > 10){
-                     qDebug()<<"collision GAUCHE/DROITE";
-                    if (intersected.center().x() < nextSpriteRect.center().x())
-                        Entity::uniqueSide(&collidingSides, Entity::hitSide::LEFT);
-                    else
-                        Entity::uniqueSide(&collidingSides, Entity::hitSide::RIGHT);
-                }
+                getCollisonLocate(collidingSides,nextSpriteRect,intersected);
 
                 if (CollisionDetected->data(1) == "sol") {
-                    qDebug()<<"DU SOL";
+
                     for (int i =0;i < collidingSides.count();i++) {
 
-                        qDebug()<<"le sol est touché depuis le " << i;
                         switch (collidingSides.takeAt(i)) {
                         case Entity::hitSide::DOWN:
-                            qDebug()<<"bas";
                             pCharacter->m_velocity.setY(0.0);
+                            if(!pCharacter->getIsJump())
+                                pCharacter->setIsOnFloor(true);
+
+                            pCharacter->m_velocity.setY(0.0);
+                            pCharacter->setIsJump(false);
                             //this->setIsJump(false);
                             break;
                         case  Entity::hitSide::UP:
@@ -400,20 +310,75 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                             pCharacter->m_velocity.setX(0);
                             break;
                         }
-                   }
-                }else if (CollisionDetected->data(1) == "enemie") {
-                    qDebug()<<"NON PAS LUI";
-                    for (Entity::hitSide CurrentSide : collidingSides) {
+                    }
+                }
+                if (CollisionDetected->data(1) == "enemie") {
 
-                        if(CurrentSide == Entity::hitSide::LEFT){
+                    for (int i =0;i < collidingSides.count();i++) {
+
+                        switch (collidingSides.takeAt(i)) {
+                        case Entity::hitSide::DOWN:
+                            m_pScene->removeSpriteFromScene(CollisionDetected);
+                            //this->setIsJump(false);
+                            break;
+                        case  Entity::hitSide::UP:
                             setupCharacterDeath();
+                            break;
+                        case Entity::hitSide::RIGHT :
+                            setupCharacterDeath();
+                            break;
+                        case Entity::hitSide::LEFT :
+                            setupCharacterDeath();
+                            break;
                         }
-                   }
+                    }
+                }
+                if (CollisionDetected->data(1) == "Piege") {
+
+                    if(!pCharacter->getIsDeath()){
+                        //qDebug() << "HO NON UN PIEGE AHHHH";
+                        m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
+                    }
+                    setupCharacterDeath();
+                }
+
+                if (CollisionDetected->data(1) == "Wood_caisse") {
+
+                    for (int i =0;i < collidingSides.count();i++) {
+
+                        switch (collidingSides.takeAt(i)) {
+                        case Entity::hitSide::DOWN:
+                            pCharacter->m_velocity.setY(0.0);
+                            if(!pCharacter->getIsJump())
+                                pCharacter->setIsOnFloor(true);
+
+                            pCharacter->m_velocity.setY(0.0);
+                            pCharacter->setIsJump(false);
+                            //this->setIsJump(false);
+                            break;
+                        case  Entity::hitSide::UP:
+                            pCharacter->m_velocity.setY(0.0);
+                            break;
+                        case Entity::hitSide::RIGHT :
+                            pCharacter->m_velocity.setX(5);
+                            CollisionDetected->setX(CollisionDetected->x() + pCharacter->m_velocity.x());
+                            break;
+                        case Entity::hitSide::LEFT :
+                            pCharacter->m_velocity.setX(-5);
+                            CollisionDetected->setX(CollisionDetected->x() + pCharacter->m_velocity.x());
+                            break;
+                        }
+                    }
                 }
             }
 
+
         }else {
             pCharacter->setIsOnFloor(false);
+        }
+        if(!pCharacter->parentScene()->isInsideScene(nextSpriteRect)){
+            qDebug() << "Le joueur est sortit de la scene";
+            setupCharacterDeath();
         }
         //Si le joueur ne touche pas le sol alors il est attiré vers le bas
         if (!pCharacter->getIsOnFloor()){
@@ -424,10 +389,30 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         pGhost->setY(pGhost->y() -5);
     }
     for (int i = 0;i <= m_pBulioList.count();i++ ) {
-       // m_pBulioList.takeAt(i)->move(elapsedTimeInMilliseconds);
+        // m_pBulioList.takeAt(i)->move(elapsedTimeInMilliseconds);
     }
 }
 
+void GameCore::getCollisonLocate(QList<Entity::hitSide>&collisionLocateList,
+                                 QRectF posSprite,QRectF intersected){
+
+    if (intersected.width() > intersected.height() && intersected.width() > 10) {
+        if (intersected.center().y() < posSprite.center().y())
+            //Haut
+            Entity::uniqueSide(&collisionLocateList, Entity::hitSide::UP);
+        else
+            //Bas
+            Entity::uniqueSide(&collisionLocateList, Entity::hitSide::DOWN);
+    } else if (intersected.width() < intersected.height() && intersected.height() > 10){
+        if (intersected.center().x() < posSprite.center().x())
+            //Gauche
+            Entity::uniqueSide(&collisionLocateList, Entity::hitSide::LEFT);
+        else
+            //Droite
+            Entity::uniqueSide(&collisionLocateList, Entity::hitSide::RIGHT);
+    }
+
+}
 
 //!
 //! \brief GameCore::gravityApplied

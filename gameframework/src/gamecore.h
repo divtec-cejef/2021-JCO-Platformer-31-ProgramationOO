@@ -49,7 +49,8 @@ public:
 
     void tick(long long elapsedTimeInMilliseconds);
 
-
+    //Collision
+    void getCollisonLocate(QList<Entity::hitSide>&collisionLocateList,QRectF posSprite,QRectF intersected);
 signals:
     void notifyMouseMoved(QPointF newMousePosition);
     void notifyMouseButtonPressed(QPointF mousePosition, Qt::MouseButtons buttons);
