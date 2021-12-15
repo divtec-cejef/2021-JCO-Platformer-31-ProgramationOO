@@ -379,17 +379,14 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             qDebug() << "Le joueur est sortit de la scene";
             setupCharacterDeath();
         }
-        //Si le joueur ne touche pas le sol alors il est attiré vers le bas
-        if (!pCharacter->getIsOnFloor()){
-            //Attire le joueur vers le bas de l'écran
-            gravityApplied(pCharacter,pCharacter->m_velocity,elapsedTimeInMilliseconds,pCharacter->getIsOnFloor());
-        }
+        //Attire le joueur vers le bas de l'écran
+        gravityApplied(pCharacter,pCharacter->m_velocity,elapsedTimeInMilliseconds);
     }else {
         pGhost->setY(pGhost->y() -5);
     }
     for (int i = 0;i <= m_pBulioList.count();i++ ) {
 
-         Bulio* CurrentBulio = new Bulio(m_pBulioList.takeAt(i));
+        Bulio* CurrentBulio = new Bulio(m_pBulioList.takeAt(i));
 
         QRectF nextSpriteRect = CurrentBulio->globalBoundingBox().translated(CurrentBulio->m_velocity);
         QList<Entity::hitSide> collidingSides = QList<Entity::hitSide>();
@@ -416,7 +413,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                         switch (collidingSides.takeAt(i)) {
                         case Entity::hitSide::DOWN:
                             CurrentBulio->m_velocity.setY(0.0);
-                                CurrentBulio->setIsOnFloor(true);
+                            CurrentBulio->setIsOnFloor(true);
 
                             CurrentBulio->m_velocity.setY(0.0);
 
@@ -460,7 +457,7 @@ void GameCore::getCollisonLocate(QList<Entity::hitSide>&collisionLocateList,
             //Détermine le bas
             Entity::uniqueSide(&collisionLocateList, Entity::hitSide::DOWN);
 
-    //Sinon si la collision est plus haut que large est horizontal.
+        //Sinon si la collision est plus haut que large est horizontal.
     } else if (intersected.width() < intersected.height() && intersected.height() > 10){
         if (intersected.center().x() < posSprite.center().x())
             //Détermine la gauche
@@ -478,14 +475,13 @@ void GameCore::getCollisonLocate(QList<Entity::hitSide>&collisionLocateList,
 //! \param enti_velocity velocité du sprite
 //! \param elapsedTime temps écoulé entre chaque tick.
 //!@brief GameCore::gravityApplied
-void GameCore::gravityApplied(Entity* entity,QPointF &enti_velocity,long long elapsedTime,bool isOnFloor){
+void GameCore::gravityApplied(Entity* entity,QPointF &enti_velocity,long long elapsedTime){
 
-    if (!pCharacter->getIsOnFloor()){
+    if (!entity->getIsOnFloor()){
         //Attire le joueur vers le bas de l'écran
         entity->setPos(entity->pos() + enti_velocity * (elapsedTime/100.0));
         enti_velocity += m_gravity * (elapsedTime/100.0);
     }
-
 }
 
 
