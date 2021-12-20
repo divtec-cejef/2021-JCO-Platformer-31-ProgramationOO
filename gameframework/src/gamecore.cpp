@@ -153,7 +153,8 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     Bulio* enemie1 = new Bulio();
     enemie1->setData(1,"enemie");
     enemie1->setData(2,"bulio");
-    m_pScene->addSpriteToScene(enemie1, 2500,1410);
+    // m_pScene->addSpriteToScene(enemie1, 2500,1410);
+    m_pScene->addSpriteToScene(enemie1, 500,1200);
 
     //Ajoute du joueur dans la scene
     pCharacter->setData(1,"joueur");
@@ -167,7 +168,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     // Attention : il est important que l'enclenchement du tick soit fait vers la fin de cette fonction,
     // sinon le temps passé jusqu'au premier tick (ElapsedTime) peut être élevé et provoquer de gros
     // déplacements, surtout si le déboggueur est démarré.
-    m_pGameCanvas->startTick();
+    m_pGameCanvas->startTick(10);
 }
 
 //! Destructeur de GameCore : efface les scènes
@@ -350,7 +351,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                             if(!pCharacter->getIsJump())
                                 pCharacter->setIsOnFloor(true);
 
-                            pCharacter->m_velocity.setY(0.0);
                             pCharacter->setIsJump(false);
                             //this->setIsJump(false);
                             break;
@@ -358,12 +358,14 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                             pCharacter->m_velocity.setY(0.0);
                             break;
                         case Entity::hitSide::RIGHT :
-                            pCharacter->m_velocity.setX(0);
+
                             CollisionDetected->setX(CollisionDetected->x() + pCharacter->m_velocity.x());
+                            pCharacter->m_velocity.setX(5);
                             break;
                         case Entity::hitSide::LEFT :
-                            pCharacter->m_velocity.setX(0);
+
                             CollisionDetected->setX(CollisionDetected->x() + pCharacter->m_velocity.x());
+                            pCharacter->m_velocity.setX(-5);
                             break;
                         }
                     }
@@ -383,22 +385,21 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         pGhost->setY(pGhost->y() -5);
     }
 
-    /*
     for (int i = 0;i < m_pBulioList.length();i++) {
         qDebug() << "Bulio" << i;
         //Bulio* CurrentBulio = m_pBulioList.takeAt(i);
         qDebug() << "Current Bulio : " << i;
         qDebug() << "Nbr de Bulio : " << m_pBulioList.count();
-        QRectF nextSpriteRect = m_pBulioList.takeAt(i)->globalBoundingBox().translated(m_pBulioList.takeAt(i)->m_velocity);
+        QRectF nextSpriteRect = m_pBulioList.at(i)->globalBoundingBox().translated(m_pBulioList.at(i)->pos());
         QList<Entity::hitSide> collidingSides = QList<Entity::hitSide>();
 
         // Récupère tous les sprites de la scène qui touche le joueur
-        auto listeCurrentCollisionBulio = m_pBulioList.takeAt(i)->parentScene()->collidingSprites(m_pBulioList.takeAt(i));
+        auto listeCurrentCollisionBulio = m_pScene->collidingSprites(nextSpriteRect);
                                         //pCharacter->parentScene()->collidingSprites(pCharacter)
         qDebug() << "listeCurrentCollisionBulio ajouté";
 
         // Supprimer le sprite lui-même
-        listeCurrentCollisionBulio.removeAll(m_pBulioList.takeAt(i));
+        listeCurrentCollisionBulio.removeAll(m_pBulioList.at(i));
 
         //récupère la valeur de liste (remplis/vide)
         bool currentCollision  = !listeCurrentCollisionBulio.isEmpty();
@@ -415,40 +416,40 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 //if (CollisionDetected->data(1) == "sol") {
 
                 for (int i =0;i < collidingSides.length();i++) {
-                    switch (collidingSides.takeAt(i)) {
+                    switch (collidingSides.at(i)) {
                     case Entity::hitSide::DOWN:
-                        m_pBulioList.takeAt(i)->m_velocity.setY(0.0);
-                        m_pBulioList.takeAt(i)->setIsOnFloor(true);
+                        m_pBulioList.at(i)->m_velocity.setY(0.0);
+                        m_pBulioList.at(i)->setIsOnFloor(true);
 
-                        m_pBulioList.takeAt(i)->m_velocity.setY(0.0);
+                        m_pBulioList.at(i)->m_velocity.setY(0.0);
 
                         break;
                     case  Entity::hitSide::UP:
-                        m_pBulioList.takeAt(i)->m_velocity.setY(0.0);
+                        m_pBulioList.at(i)->m_velocity.setY(0.0);
                         break;
                     case Entity::hitSide::RIGHT :
-                        m_pBulioList.takeAt(i)->m_velocity.setX(-5);
+                        m_pBulioList.at(i)->m_velocity.setX(-5);
                         break;
                     case Entity::hitSide::LEFT :
-                        m_pBulioList.takeAt(i)->m_velocity.setX(5);
+                        m_pBulioList.at(i)->m_velocity.setX(5);
                         break;
                     }
                 }
             }
-            m_pBulioList.takeAt(i)->setY(0);
-            m_pBulioList.takeAt(i)->setIsOnFloor(true);
+            m_pBulioList.at(i)->setY(0);
+            m_pBulioList.at(i)->setIsOnFloor(true);
 
         }else {
-            m_pBulioList.takeAt(i)->setIsOnFloor(false);
+            m_pBulioList.at(i)->setIsOnFloor(false);
         }
         //Attire le bulio vers le bas de l'écran
-        gravityApplied(m_pBulioList.takeAt(i),m_pBulioList.takeAt(i)->m_velocity,elapsedTimeInMilliseconds);
+        gravityApplied(m_pBulioList.at(i),m_pBulioList.at(i)->m_velocity,elapsedTimeInMilliseconds);
         //Déplace le bulio
-        m_pBulioList.takeAt(i)->setPos(m_pBulioList.takeAt(i)->pos()+ m_pBulioList.takeAt(i)->m_velocity);
+        m_pBulioList.at(i)->setPos(m_pBulioList.at(i)->pos()+ m_pBulioList.at(i)->m_velocity);
 
         //}
     }
-    */
+
 
     //Attire le joueur vers le bas de l'écran
     gravityApplied(pCharacter,pCharacter->m_velocity,elapsedTimeInMilliseconds);
