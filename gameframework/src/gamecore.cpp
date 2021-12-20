@@ -266,7 +266,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     if(!pCharacter->getIsDeath()){
         pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
         //Suite les déplacement du joueur dans la scene
-        m_pGameCanvas->getView()->centerOn(m_pScene->sprites().takeAt(0)->pos());
+        m_pGameCanvas->getView()->centerOn(m_pScene->sprites().at(0)->pos());
 
         QRectF nextSpriteRect = pCharacter->globalBoundingBox().translated(pCharacter->m_velocity);
         QList<Entity::hitSide> collidingSides = QList<Entity::hitSide>();
@@ -289,7 +289,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 if (CollisionDetected->data(1) == "sol") {
 
                     for (int i =0;i < collidingSides.count();i++) {
-                        switch (collidingSides.takeAt(i)) {
+                        switch (collidingSides.at(i)) {
                         case Entity::hitSide::DOWN:
                             pCharacter->m_velocity.setY(0.0);
                             if(!pCharacter->getIsJump())
@@ -315,7 +315,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
                     for (int i =0;i < collidingSides.count();i++) {
 
-                        switch (collidingSides.takeAt(i)) {
+                        switch (collidingSides.at(i)) {
                         case Entity::hitSide::DOWN:
                             m_pScene->removeSpriteFromScene(CollisionDetected);
                             //this->setIsJump(false);
@@ -345,7 +345,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
                     for (int i =0;i < collidingSides.length();i++) {
 
-                        switch (collidingSides.takeAt(i)) {
+                        switch (collidingSides.at(i)) {
                         case Entity::hitSide::DOWN:
                             pCharacter->m_velocity.setY(0.0);
                             if(!pCharacter->getIsJump())
@@ -371,8 +371,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     }
                 }
             }
-
-
         }else {
             pCharacter->setIsOnFloor(false);
         }
@@ -386,16 +384,16 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     }
 
     for (int i = 0;i < m_pBulioList.length();i++) {
-        qDebug() << "Bulio" << i;
+        //qDebug() << "Bulio" << i;
         //Bulio* CurrentBulio = m_pBulioList.takeAt(i);
-        qDebug() << "Current Bulio : " << i;
-        qDebug() << "Nbr de Bulio : " << m_pBulioList.count();
+        // qDebug() << "Current Bulio : " << i;
+        // qDebug() << "Nbr de Bulio : " << m_pBulioList.count();
         QRectF nextSpriteRect = m_pBulioList.at(i)->globalBoundingBox().translated(m_pBulioList.at(i)->pos());
         QList<Entity::hitSide> collidingSides = QList<Entity::hitSide>();
 
         // Récupère tous les sprites de la scène qui touche le joueur
         auto listeCurrentCollisionBulio = m_pScene->collidingSprites(nextSpriteRect);
-                                        //pCharacter->parentScene()->collidingSprites(pCharacter)
+        //pCharacter->parentScene()->collidingSprites(pCharacter)
         qDebug() << "listeCurrentCollisionBulio ajouté";
 
         // Supprimer le sprite lui-même
@@ -403,9 +401,10 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
         //récupère la valeur de liste (remplis/vide)
         bool currentCollision  = !listeCurrentCollisionBulio.isEmpty();
-
+        qDebug() << "currentCollision" << currentCollision;
         if(currentCollision){
             //Cherche les collisions entre le joueurs les autres sprites
+
 
             for (Sprite* CollisionDetected : listeCurrentCollisionBulio) {
 
@@ -413,35 +412,38 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
                 getCollisionLocate(collidingSides,nextSpriteRect,intersected);
 
-                //if (CollisionDetected->data(1) == "sol") {
+                if (CollisionDetected->data(1) == "sol") {
+                    for (int i =0;i < collidingSides.length();i++) {
+                        switch (collidingSides.at(i)) {
+                        case Entity::hitSide::DOWN:
+                            m_pBulioList.at(i)->m_velocity.setY(0.0);
+                            m_pBulioList.at(i)->setIsOnFloor(true);
 
-                for (int i =0;i < collidingSides.length();i++) {
-                    switch (collidingSides.at(i)) {
-                    case Entity::hitSide::DOWN:
-                        m_pBulioList.at(i)->m_velocity.setY(0.0);
-                        m_pBulioList.at(i)->setIsOnFloor(true);
+                            m_pBulioList.at(i)->m_velocity.setY(0.0);
 
-                        m_pBulioList.at(i)->m_velocity.setY(0.0);
+                            qDebug() << "touche le sool";
 
-                        break;
-                    case  Entity::hitSide::UP:
-                        m_pBulioList.at(i)->m_velocity.setY(0.0);
-                        break;
-                    case Entity::hitSide::RIGHT :
-                        m_pBulioList.at(i)->m_velocity.setX(-5);
-                        break;
-                    case Entity::hitSide::LEFT :
-                        m_pBulioList.at(i)->m_velocity.setX(5);
-                        break;
+                            break;
+                        case  Entity::hitSide::UP:
+                            m_pBulioList.at(i)->m_velocity.setY(0.0);
+                            break;
+                        case Entity::hitSide::RIGHT :
+                            m_pBulioList.at(i)->m_velocity.setX(-5);
+                            break;
+                        case Entity::hitSide::LEFT :
+                            m_pBulioList.at(i)->m_velocity.setX(5);
+                            break;
+                        }
                     }
                 }
             }
-            m_pBulioList.at(i)->setY(0);
-            m_pBulioList.at(i)->setIsOnFloor(true);
+            //m_pBulioList.at(i)->setY(0);
+            //m_pBulioList.at(i)->setIsOnFloor(true);
 
         }else {
             m_pBulioList.at(i)->setIsOnFloor(false);
         }
+
         //Attire le bulio vers le bas de l'écran
         gravityApplied(m_pBulioList.at(i),m_pBulioList.at(i)->m_velocity,elapsedTimeInMilliseconds);
         //Déplace le bulio
@@ -449,124 +451,122 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
         //}
     }
-
-
     //Attire le joueur vers le bas de l'écran
     gravityApplied(pCharacter,pCharacter->m_velocity,elapsedTimeInMilliseconds);
 }
 
-    //! Ajoute à une liste la localisation des collision entre deux sprite.
-    //! \brief GameCore::getCollisonLocate
-    //! \param collisionLocateList
-    //! \param posSprite Position du Sprite principal.
-    //! \param intersected zone de collision entre les deux sprites.
-    //!
-    void GameCore::getCollisionLocate(QList<Entity::hitSide>&collisionLocateList,
-                                     QRectF posSprite,QRectF intersected){
+//! Ajoute à une liste la localisation des collision entre deux sprite.
+//! \brief GameCore::getCollisonLocate
+//! \param collisionLocateList
+//! \param posSprite Position du Sprite principal.
+//! \param intersected zone de collision entre les deux sprites.
+//!
+void GameCore::getCollisionLocate(QList<Entity::hitSide>&collisionLocateList,
+                                  QRectF posSprite,QRectF intersected){
 
-        //Si l'intersected est plus large la collision est vertical.
-        if (intersected.width() > intersected.height() && intersected.width() > 10) {
-            if (intersected.center().y() < posSprite.center().y())
-                //Détermine le haut
-                Entity::uniqueSide(&collisionLocateList, Entity::hitSide::UP);
-            else
-                //Détermine le bas
-                Entity::uniqueSide(&collisionLocateList, Entity::hitSide::DOWN);
+    //Si l'intersected est plus large la collision est vertical.
+    if (intersected.width() > intersected.height() && intersected.width() > 10) {
+        if (intersected.center().y() < posSprite.center().y())
+            //Détermine le haut
+            Entity::uniqueSide(&collisionLocateList, Entity::hitSide::UP);
+        else
+            //Détermine le bas
+            Entity::uniqueSide(&collisionLocateList, Entity::hitSide::DOWN);
 
-            //Sinon si la collision est plus haut que large est horizontal.
-        } else if (intersected.width() < intersected.height() && intersected.height() > 10){
-            if (intersected.center().x() < posSprite.center().x())
-                //Détermine la gauche
-                Entity::uniqueSide(&collisionLocateList, Entity::hitSide::LEFT);
-            else
-                //Détermine la droite
-                Entity::uniqueSide(&collisionLocateList, Entity::hitSide::RIGHT);
+        //Sinon si la collision est plus haut que large est horizontal.
+    } else if (intersected.width() < intersected.height() && intersected.height() > 10){
+        if (intersected.center().x() < posSprite.center().x())
+            //Détermine la gauche
+            Entity::uniqueSide(&collisionLocateList, Entity::hitSide::LEFT);
+        else
+            //Détermine la droite
+            Entity::uniqueSide(&collisionLocateList, Entity::hitSide::RIGHT);
+    }
+
+}
+
+//!
+//! \brief GameCore::gravityApplied
+//! \param entity sprite au quel on applique la gravité
+//! \param enti_velocity velocité du sprite
+//! \param elapsedTime temps écoulé entre chaque tick.
+//!@brief GameCore::gravityApplied
+void GameCore::gravityApplied(Entity* entity,QPointF &enti_velocity,long long elapsedTime){
+
+    if (!entity->getIsOnFloor()){
+        //Attire le joueur vers le bas de l'écran
+        entity->setPos(entity->pos() + enti_velocity * (elapsedTime/100.0));
+        enti_velocity += m_gravity * (elapsedTime/100.0);
+    }
+}
+
+
+//!
+//! Créé un sprite pour symbolisé la mort du joueur.
+//! @brief GameCore::setAnimationDeath
+//!
+void GameCore::setAnimationDeath()
+{
+    QImage spriteSheet(GameFramework::imagesPath() +  "deathAnimationV1.png");
+
+    QList<QImage> deathFrameList;
+    // Découpage de la spritesheet
+    for (int frameIndex = 0; frameIndex <= FRAME_COUNT_GHOST; frameIndex++) {
+
+        QImage CurrentFrameImage = spriteSheet.copy((frameIndex % COLUMN_COUNT_GHOST) * FRAME_SIZE_GHOST,
+                                                    (frameIndex / COLUMN_COUNT_GHOST) * FRAME_SIZE_GHOST,
+                                                    FRAME_SIZE_GHOST, FRAME_SIZE_GHOST);
+        if(frameIndex == 0){
+            pGhost = new Sprite(QPixmap::fromImage(CurrentFrameImage.scaled(FRAME_SIZE_GHOST * 1.5,
+                                                                            FRAME_SIZE_GHOST * 1.5,
+                                                                            Qt::IgnoreAspectRatio,
+                                                                            Qt::SmoothTransformation)));
+        }else{
+            pGhost->addAnimationFrame(QPixmap::fromImage(CurrentFrameImage.scaled(FRAME_SIZE_GHOST * 1.5,
+                                                                                  FRAME_SIZE_GHOST * 1.5,
+                                                                                  Qt::IgnoreAspectRatio,
+                                                                                  Qt::SmoothTransformation)));
         }
-
     }
+    pGhost->startAnimation(50);
+}
 
-    //!
-    //! \brief GameCore::gravityApplied
-    //! \param entity sprite au quel on applique la gravité
-    //! \param enti_velocity velocité du sprite
-    //! \param elapsedTime temps écoulé entre chaque tick.
-    //!@brief GameCore::gravityApplied
-    void GameCore::gravityApplied(Entity* entity,QPointF &enti_velocity,long long elapsedTime){
-
-        if (!entity->getIsOnFloor()){
-            //Attire le joueur vers le bas de l'écran
-            entity->setPos(entity->pos() + enti_velocity * (elapsedTime/100.0));
-            enti_velocity += m_gravity * (elapsedTime/100.0);
-        }
-    }
-
-
-    //!
-    //! Créé un sprite pour symbolisé la mort du joueur.
-    //! @brief GameCore::setAnimationDeath
-    //!
-    void GameCore::setAnimationDeath()
-    {
-        QImage spriteSheet(GameFramework::imagesPath() +  "deathAnimationV1.png");
-
-        QList<QImage> deathFrameList;
-        // Découpage de la spritesheet
-        for (int frameIndex = 0; frameIndex <= FRAME_COUNT_GHOST; frameIndex++) {
-
-            QImage CurrentFrameImage = spriteSheet.copy((frameIndex % COLUMN_COUNT_GHOST) * FRAME_SIZE_GHOST,
-                                                        (frameIndex / COLUMN_COUNT_GHOST) * FRAME_SIZE_GHOST,
-                                                        FRAME_SIZE_GHOST, FRAME_SIZE_GHOST);
-            if(frameIndex == 0){
-                pGhost = new Sprite(QPixmap::fromImage(CurrentFrameImage.scaled(FRAME_SIZE_GHOST * 1.5,
-                                                                                FRAME_SIZE_GHOST * 1.5,
-                                                                                Qt::IgnoreAspectRatio,
-                                                                                Qt::SmoothTransformation)));
-            }else{
-                pGhost->addAnimationFrame(QPixmap::fromImage(CurrentFrameImage.scaled(FRAME_SIZE_GHOST * 1.5,
-                                                                                      FRAME_SIZE_GHOST * 1.5,
-                                                                                      Qt::IgnoreAspectRatio,
-                                                                                      Qt::SmoothTransformation)));
-            }
-        }
-        pGhost->startAnimation(50);
-    }
-
-    //!
-    //! Mets en place tout les éléments symbolisant la mort du joueur.
-    //! @brief GameCore::setupCharacterDeath
-    //!
-    void GameCore::setupCharacterDeath(){
-        //Le joueur est considéré comme mort.
-        pCharacter->setIsDeath(true);
-        //Créé le fantôme dans la scene.
-        setAnimationDeath();
-        //Positionne le fantôme à la place du joueur
-        pGhost->setPos(pCharacter->pos());
-        //Supprime le joueur de la scene.
-        m_pScene->removeSpriteFromScene(pCharacter);
-        //Ajoute du fantome à la scene.
-        m_pScene->addSpriteToScene(pGhost);
-        //Ajoute d'une mort au compteur.
-        pCharacter->incrementDeathCount();
-    }
+//!
+//! Mets en place tout les éléments symbolisant la mort du joueur.
+//! @brief GameCore::setupCharacterDeath
+//!
+void GameCore::setupCharacterDeath(){
+    //Le joueur est considéré comme mort.
+    pCharacter->setIsDeath(true);
+    //Créé le fantôme dans la scene.
+    setAnimationDeath();
+    //Positionne le fantôme à la place du joueur
+    pGhost->setPos(pCharacter->pos());
+    //Supprime le joueur de la scene.
+    m_pScene->removeSpriteFromScene(pCharacter);
+    //Ajoute du fantome à la scene.
+    m_pScene->addSpriteToScene(pGhost);
+    //Ajoute d'une mort au compteur.
+    pCharacter->incrementDeathCount();
+}
 
 
-    //! La souris a été déplacée.
-    //! Pour que cet événement soit pris en compte, la propriété MouseTracking de GameView
-    //! doit être enclenchée avec GameCanvas::startMouseTracking().
-    void GameCore::mouseMoved(QPointF newMousePosition) {
-        emit notifyMouseMoved(newMousePosition);
-    }
+//! La souris a été déplacée.
+//! Pour que cet événement soit pris en compte, la propriété MouseTracking de GameView
+//! doit être enclenchée avec GameCanvas::startMouseTracking().
+void GameCore::mouseMoved(QPointF newMousePosition) {
+    emit notifyMouseMoved(newMousePosition);
+}
 
-    //! Traite l'appui sur un bouton de la souris.
-    void GameCore::mouseButtonPressed(QPointF mousePosition, Qt::MouseButtons buttons) {
-        emit notifyMouseButtonPressed(mousePosition, buttons);
-    }
+//! Traite l'appui sur un bouton de la souris.
+void GameCore::mouseButtonPressed(QPointF mousePosition, Qt::MouseButtons buttons) {
+    emit notifyMouseButtonPressed(mousePosition, buttons);
+}
 
-    //! Traite le relâchement d'un bouton de la souris.
-    void GameCore::mouseButtonReleased(QPointF mousePosition, Qt::MouseButtons buttons) {
-        emit notifyMouseButtonReleased(mousePosition, buttons);
-    }
+//! Traite le relâchement d'un bouton de la souris.
+void GameCore::mouseButtonReleased(QPointF mousePosition, Qt::MouseButtons buttons) {
+    emit notifyMouseButtonReleased(mousePosition, buttons);
+}
 
 
 
