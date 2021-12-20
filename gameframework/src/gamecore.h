@@ -50,7 +50,7 @@ public:
     void tick(long long elapsedTimeInMilliseconds);
 
     //Collision
-    void getCollisonLocate(QList<Entity::hitSide>&collisionLocateList,QRectF posSprite,QRectF intersected);
+    void getCollisionLocate(QList<Entity::hitSide>&collisionLocateList,QRectF posSprite,QRectF intersected);
     //void commonInteraction(Entity* CurrentEntity, Sprite* sprite,QRectF posSprite,QRectF intersected);
 
 signals:
@@ -83,6 +83,7 @@ private:
     QList<QGraphicsTransform*> m_transformsForFlip;
 
     QList<Bulio*> m_pBulioList;
+    //Bulio* enemie1 = new Bulio();
 
     Ground* m_Grounds = new Ground;
 
