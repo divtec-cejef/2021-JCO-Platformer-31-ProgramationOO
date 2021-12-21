@@ -12,10 +12,10 @@
 #include "resources.h"
 
 // Vitesse des bulio
-const int VITESSE_DEPLACEMENT = 5;
+const int VITESSE_DEPLACEMENT = 2;
 
-//Type d'animation du joueurs
-const int NBR_ANIMATION = 2;
+//Vitesse d'animation
+const int VITESSE_ANIM = 100;
 
 //! spriteSheet animation de marche à gauche/droite
 const int FRAME_WIDTH = 76;
@@ -30,7 +30,7 @@ Bulio::Bulio(QGraphicsItem* pParent) : Entity(GameFramework::imagesPath() + "bas
 }
 
 
-//!
+//! Permet de savoir si le joueur est sur le sol.
 //! @return si le joueur est sur le sol.
 //!
 bool Bulio::getIsOnFloor(){
@@ -39,7 +39,6 @@ bool Bulio::getIsOnFloor(){
 
 //!
 //! Permet de définir si le joueur est sur le sol ou non.
-//! @brief Bulio::setIsOnFloor
 //! @param _isOnFloor nouvelle état du joueur.
 //!
 void Bulio::setIsOnFloor(bool _isOnFloor){
@@ -47,7 +46,7 @@ void Bulio::setIsOnFloor(bool _isOnFloor){
 }
 
 //!
-//! @brief Bulio::getIsDeath
+//! Permet de savoir l'états du joueur si il est en vie ou non.
 //! @return si le joueur est mort.
 //!
 bool Bulio::getIsDeath(){
@@ -64,7 +63,6 @@ void Bulio::setIsDeath(bool _isDeath){
 }
 
 //!
-//! @brief Character::getVelocity
 //! @return la velocité actuel du joueur
 //!
 QPointF Bulio::getVelocity(){
@@ -89,6 +87,14 @@ void Bulio::configureAnimation(animation bulio) {
         iSprite = "bastienbulioBaseV1.png";
         break;
     }
+
+    /*
+    if(m_velocity.x() != 0){
+        iSprite = "bastienbulioDeplacementV3.png";
+    }else {
+        iSprite = "bastienbulioBaseV1.png";
+    }
+    */
 
     QImage directionFrame(GameFramework::imagesPath() + iSprite);
     if(iSprite == "bastienbulioDeplacementV3.png"){
@@ -124,12 +130,11 @@ void Bulio::configureAnimation(animation bulio) {
                                                                    Qt::IgnoreAspectRatio,
                                                                    Qt::SmoothTransformation)));
     }
-    startAnimation(100);
+    startAnimation(VITESSE_ANIM);
 
 }
 
 ///!
-//! \brief Bulio::collisionDetection
 //! \param rect position de l'entité dans l'espace.
 //!
 void Bulio::collisionDetection(QRectF rect){
@@ -202,6 +207,10 @@ void Bulio::collisionDetection(QRectF rect){
 }
 
 
+//!
+//! \brief Bulio::move
+//! \param elapsedTimeInMilliseconds
+//!
 void Bulio::move(long long elapsedTimeInMilliseconds){
 
      this->setPos(this->pos()+ this->m_velocity);
