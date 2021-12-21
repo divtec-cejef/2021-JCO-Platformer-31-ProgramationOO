@@ -18,19 +18,19 @@ const int VITESSE_DEPLACEMENT = 5;
 const int NBR_ANIMATION = 2;
 
 //! spriteSheet animation de marche à gauche/droite
-const int FRAME_WIDTH = 38;
+const int FRAME_WIDTH = 76;
 const int FRAME_HEIGHT = 48;
 const int FRAME_COUNT = 2;
 const int COLUMN_COUNT = 1;
 
 Bulio::Bulio(QGraphicsItem* pParent) : Entity(GameFramework::imagesPath() + "bastienbulioBaseV1.png", pParent)
 {
-
+    m_velocity.setX(VITESSE_DEPLACEMENT);
+    configureAnimation(DEPLACEMENT);
 }
 
 
 //!
-//! @brief Bulio::getIsOnFloor
 //! @return si le joueur est sur le sol.
 //!
 bool Bulio::getIsOnFloor(){
@@ -83,7 +83,7 @@ void Bulio::configureAnimation(animation bulio) {
 
     switch (bulio) {
     case DEPLACEMENT:
-        iSprite = "bastienbulioDeplacementV1.png";
+        iSprite = "bastienbulioDeplacementV3.png";
         break;
     default:
         iSprite = "bastienbulioBaseV1.png";
@@ -91,7 +91,7 @@ void Bulio::configureAnimation(animation bulio) {
     }
 
     QImage directionFrame(GameFramework::imagesPath() + iSprite);
-    if(iSprite == "bastienbulioV1.png"){
+    if(iSprite == "bastienbulioDeplacementV3.png"){
 
         QImage spriteSheet(GameFramework::imagesPath() + iSprite);
 
@@ -124,7 +124,7 @@ void Bulio::configureAnimation(animation bulio) {
                                                                    Qt::IgnoreAspectRatio,
                                                                    Qt::SmoothTransformation)));
     }
-    startAnimation(25);
+    startAnimation(100);
 
 }
 

@@ -29,7 +29,8 @@ public:
     void configureAnimation(animation bulio);
 
     QPointF getVelocity();
-    void updateCharacterVelocity();
+    void updateVelocity();
+
 
 
     bool getIsOnFloor();

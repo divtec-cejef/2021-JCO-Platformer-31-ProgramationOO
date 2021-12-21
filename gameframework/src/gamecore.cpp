@@ -383,17 +383,13 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     }
 
     for (int i = 0;i < m_pBulioList.length();i++) {
-        //qDebug() << "Bulio" << i;
-        //Bulio* CurrentBulio = m_pBulioList.takeAt(i);
-        // qDebug() << "Current Bulio : " << i;
-        // qDebug() << "Nbr de Bulio : " << m_pBulioList.count();
+
+        //m_pBulioList.at(i)->setPos(m_pBulioList.at(i)->pos()+ m_pBulioList.at(i)->m_velocity);
+
         QRectF nextSpriteRect = m_pBulioList.at(i)->globalBoundingBox().translated(m_pBulioList.at(i)->pos());
-        QList<Entity::hitSide> collidingSides = QList<Entity::hitSide>();
 
         // Récupère tous les sprites de la scène qui touche le joueur
         auto listeCurrentCollisionBulio = m_pBulioList.at(i)->parentScene()->collidingSprites(m_pBulioList.at(i));
-        //pCharacter->parentScene()->collidingSprites(pCharacter)
-        //qDebug() << "listeCurrentCollisionBulio ajouté";
 
         // Supprimer le sprite lui-même
         listeCurrentCollisionBulio.removeAll(m_pBulioList.at(i));
@@ -401,11 +397,16 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         //récupère la valeur de liste (remplis/vide)
         bool currentCollision  = !listeCurrentCollisionBulio.isEmpty();
         qDebug() << "currentCollision" << currentCollision;
-        if(currentCollision){
-            //Cherche les collisions entre le joueurs les autres sprites
 
+        if(currentCollision){
+
+            //Cherche les collisions entre le bulio les autres sprites
             for (Sprite* CollisionDetected : listeCurrentCollisionBulio) {
 
+                //Liste des côtés touché.
+                QList<Entity::hitSide> collidingSides = QList<Entity::hitSide>();
+
+                //Zone de collision entre les 2 sprites.
                 QRectF intersected = nextSpriteRect.intersected(CollisionDetected->globalBoundingBox());
                 getCollisionLocate(collidingSides,nextSpriteRect,intersected);
 
@@ -433,17 +434,13 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     }
                 }
             }
-            //m_pBulioList.at(i)->setY(0);
-            //m_pBulioList.at(i)->setIsOnFloor(true);
-
         }else {
             m_pBulioList.at(i)->setIsOnFloor(false);
         }
 
         //Attire le bulio vers le bas de l'écran
-        gravityApplied(m_pBulioList.at(i),m_pBulioList.at(i)->m_velocity,elapsedTimeInMilliseconds);
+        //gravityApplied(m_pBulioList.at(i),m_pBulioList.at(i)->m_velocity,elapsedTimeInMilliseconds);
         //Déplace le bulio
-        m_pBulioList.at(i)->setPos(m_pBulioList.at(i)->pos()+ m_pBulioList.at(i)->m_velocity);
 
         //}
     }
