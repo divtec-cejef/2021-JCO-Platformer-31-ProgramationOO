@@ -268,7 +268,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         //Suite les déplacement du joueur dans la scene
         m_pGameCanvas->getView()->centerOn(m_pScene->sprites().at(0)->pos());
 
-        QRectF nextSpriteRect = pCharacter->globalBoundingBox().translated(pCharacter->m_velocity);
+        QRectF nextSpriteRect =
+                pCharacter->globalBoundingBox().translated(pCharacter->m_velocity);
 
 
         // Récupère tous les sprites de la scène qui touche le joueur
@@ -290,12 +291,14 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 QList<Entity::hitSide> collidingSidesL = QList<Entity::hitSide>();
                 getCollisionLocate(collidingSidesL,nextSpriteRect,intersected);
 
+                //qDebug() << "la liste est vide Amogus: " << collidingSidesL.isEmpty();
+
                 if (CollisionDetected->data(1) == "sol") {
 
                     for (int i =0;i < collidingSidesL.count();i++) {
                         switch (collidingSidesL.at(i)) {
                         case Entity::hitSide::DOWN:
-                            pCharacter->m_velocity.setY(0.0);
+                            pCharacter->m_velocity.setY(2.0);
                             if(!pCharacter->getIsJump())
                                 pCharacter->setIsOnFloor(true);
 
@@ -394,7 +397,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         m_pBulioList.at(i)->setPos(m_pBulioList.at(i)->pos()+ m_pBulioList.at(i)->m_velocity);
 
         //Prochaine position du bulio.
-        QRectF nextSpriteRect = m_pBulioList.at(i)->globalBoundingBox().translated(m_pBulioList.at(i)->pos());
+        QRectF nextSpriteRect =
+                m_pBulioList.at(i)->globalBoundingBox().translated(m_pBulioList.at(i)->m_velocity);
 
         // Récupère tous les sprites de la scène qui touche le joueur.
         auto listeCurrentCollisionBulio = m_pBulioList.at(i)->parentScene()->collidingSprites(m_pBulioList.at(i));
@@ -408,48 +412,47 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         if(currentCollision){
             //Cherche les collisions entre le bulio les autres sprites
             for (Sprite* CollisionDetected : listeCurrentCollisionBulio) {
-                qDebug() << "parcourt de la liste";
-                //Liste des côtés touché.
-                QList<Entity::hitSide> collidingSidesL = QList<Entity::hitSide>();
 
                 //Zone de collision entre les 2 sprites.
                 QRectF intersected = nextSpriteRect.intersected(CollisionDetected->globalBoundingBox());
+
+                //Liste des côtés touché.
+                QList<Entity::hitSide> collidingSidesL = QList<Entity::hitSide>();
+                //Remplissage de la liste.
                 getCollisionLocate(collidingSidesL,nextSpriteRect,intersected);
 
-                if (CollisionDetected->data(1) == "sol") {
-                    qDebug() << "Sol";
-                    for (int i =collidingSidesL.count() ;i > 0;i--) {
-                        qDebug() << "zone touché : " << i;
-                        switch (collidingSidesL.at(i)) {
-                        case Entity::hitSide::DOWN:
-                            m_pBulioList.at(i)->m_velocity.setY(0.0);
-                            m_pBulioList.at(i)->setIsOnFloor(true);
-                            qDebug() << "touche les pied";
-                            break;
-                        case  Entity::hitSide::UP:
-                            m_pBulioList.at(i)->m_velocity.setY(0.0);
-                            qDebug() << "touche la tete";
-                            break;
-                        case Entity::hitSide::RIGHT:
-                            m_pBulioList.at(i)->m_velocity.setX(-5);
-                            qDebug() << "touche coté droit";
-                            break;
-                        case Entity::hitSide::LEFT:
-                            m_pBulioList.at(i)->m_velocity.setX(5);
-                            qDebug() << "touche coté gauche";
-                            break;
-                        }
+                qDebug() << "la liste est vide : " << collidingSidesL.isEmpty();
 
+                for (int i =0;i < collidingSidesL.count();i++) {
+                    qDebug() << "zone touché : " << i;
+                    switch (collidingSidesL.at(i)) {
+                    case Entity::hitSide::DOWN:
+                        m_pBulioList.at(i)->m_velocity.setY(2.0);
+                        m_pBulioList.at(i)->setIsOnFloor(true);
+                        qDebug() << "touche les pied";
+                        break;
+                    case  Entity::hitSide::UP:
+                        m_pBulioList.at(i)->m_velocity.setY(0.0);
+                        qDebug() << "touche la tete";
+                        break;
+                    case Entity::hitSide::RIGHT:
+                        m_pBulioList.at(i)->m_velocity.setX(-5);
+                        qDebug() << "touche coté droit";
+                        break;
+                    case Entity::hitSide::LEFT:
+                        m_pBulioList.at(i)->m_velocity.setX(5);
+                        qDebug() << "touche coté gauche";
+                        break;
                     }
-                    m_pBulioList.at(i)->setIsOnFloor(true);
-                     m_pBulioList.at(i)->m_velocity.setY(0.0);
                 }
+                m_pBulioList.at(i)->setIsOnFloor(true);
+                m_pBulioList.at(i)->m_velocity.setY(0.0);
                 collidingSidesL.clear();
             }
         }else {
             m_pBulioList.at(i)->setIsOnFloor(false);
         }
-         qDebug() << "le bulio touche le sol : " << m_pBulioList.at(i)->getIsOnFloor();
+       // qDebug() << "le bulio touche le sol : " << m_pBulioList.at(i)->getIsOnFloor();
         //Attire le bulio vers le bas de l'écran
         gravityApplied(m_pBulioList.at(i),m_pBulioList.at(i)->m_velocity,elapsedTimeInMilliseconds);
         //}
@@ -464,26 +467,26 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 //! \param posSprite Position du Sprite principal.
 //! \param intersected zone de collision entre les deux sprites.
 //!
-void GameCore::getCollisionLocate(QList<Entity::hitSide>&collisionLocateList,
+void GameCore::getCollisionLocate(QList<Entity::hitSide>&collisionLocateL,
                                   QRectF posSprite,QRectF intersected){
 
     //Si l'intersected est plus large la collision est vertical.
     if (intersected.width() > intersected.height() && intersected.width() > 10) {
         if (intersected.center().y() < posSprite.center().y())
             //Détermine le haut
-            Entity::uniqueSide(&collisionLocateList, Entity::hitSide::UP);
+            Entity::uniqueSide(&collisionLocateL, Entity::hitSide::UP);
         else
             //Détermine le bas
-            Entity::uniqueSide(&collisionLocateList, Entity::hitSide::DOWN);
+            Entity::uniqueSide(&collisionLocateL, Entity::hitSide::DOWN);
 
-        //Sinon si la collision est plus haut que large est horizontal.
+      //Sinon si la collision est plus haut que large est horizontal.
     } else if (intersected.width() < intersected.height() && intersected.height() > 10){
         if (intersected.center().x() < posSprite.center().x())
             //Détermine la gauche
-            Entity::uniqueSide(&collisionLocateList, Entity::hitSide::LEFT);
+            Entity::uniqueSide(&collisionLocateL, Entity::hitSide::LEFT);
         else
             //Détermine la droite
-            Entity::uniqueSide(&collisionLocateList, Entity::hitSide::RIGHT);
+            Entity::uniqueSide(&collisionLocateL, Entity::hitSide::RIGHT);
     }
 
 }
