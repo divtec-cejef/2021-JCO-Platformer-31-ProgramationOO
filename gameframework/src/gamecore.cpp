@@ -378,7 +378,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             qDebug() << "Le joueur est sortit de la scene";
             setupCharacterDeath();
         }
-
     }else {
         pGhost->setY(pGhost->y() -5);
     }
@@ -392,9 +391,9 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         QList<Entity::hitSide> collidingSides = QList<Entity::hitSide>();
 
         // Récupère tous les sprites de la scène qui touche le joueur
-        auto listeCurrentCollisionBulio = m_pScene->collidingSprites(nextSpriteRect);
+        auto listeCurrentCollisionBulio = m_pBulioList.at(i)->parentScene()->collidingSprites(m_pBulioList.at(i));
         //pCharacter->parentScene()->collidingSprites(pCharacter)
-        qDebug() << "listeCurrentCollisionBulio ajouté";
+        //qDebug() << "listeCurrentCollisionBulio ajouté";
 
         // Supprimer le sprite lui-même
         listeCurrentCollisionBulio.removeAll(m_pBulioList.at(i));
@@ -405,11 +404,9 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         if(currentCollision){
             //Cherche les collisions entre le joueurs les autres sprites
 
-
             for (Sprite* CollisionDetected : listeCurrentCollisionBulio) {
 
                 QRectF intersected = nextSpriteRect.intersected(CollisionDetected->globalBoundingBox());
-
                 getCollisionLocate(collidingSides,nextSpriteRect,intersected);
 
                 if (CollisionDetected->data(1) == "sol") {
@@ -420,7 +417,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                             m_pBulioList.at(i)->setIsOnFloor(true);
 
                             m_pBulioList.at(i)->m_velocity.setY(0.0);
-
                             qDebug() << "touche le sool";
 
                             break;

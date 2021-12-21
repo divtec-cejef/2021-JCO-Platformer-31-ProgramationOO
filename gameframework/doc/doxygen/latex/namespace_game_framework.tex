@@ -1,0 +1,122 @@
+\hypertarget{namespace_game_framework}{}\doxysection{Game\+Framework Namespace Reference}
+\label{namespace_game_framework}\index{GameFramework@{GameFramework}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+QString \mbox{\hyperlink{namespace_game_framework_a0c59d547af7a5c977f8879c1514c4351}{resources\+Path}} ()
+\item 
+QString \mbox{\hyperlink{namespace_game_framework_ad9258f3ab92cd03e443344a86166140a}{images\+Path}} ()
+\item 
+double \mbox{\hyperlink{namespace_game_framework_a6dcaeb9dcf289c26ee8c850a5a8a646c}{screen\+Ratio}} ()
+\item 
+QSize \mbox{\hyperlink{namespace_game_framework_acb4300b4a55bc48be92bd5e19894385f}{screen\+Size}} ()
+\item 
+void \mbox{\hyperlink{namespace_game_framework_aa9d3b3bf5f16a48a45b31e98b731b2f4}{hide\+Mouse\+Cursor}} ()
+\item 
+void \mbox{\hyperlink{namespace_game_framework_a9cb2d5b685acea208af9d856e0fe1bf4}{show\+Mouse\+Cursor}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Espace de noms contenant les fonctions utilitaires pour les ressources.
+
+Espace de noms contenant les fonctions utilitaires. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespace_game_framework_aa9d3b3bf5f16a48a45b31e98b731b2f4}\label{namespace_game_framework_aa9d3b3bf5f16a48a45b31e98b731b2f4}} 
+\index{GameFramework@{GameFramework}!hideMouseCursor@{hideMouseCursor}}
+\index{hideMouseCursor@{hideMouseCursor}!GameFramework@{GameFramework}}
+\doxysubsubsection{\texorpdfstring{hideMouseCursor()}{hideMouseCursor()}}
+{\footnotesize\ttfamily void Game\+Framework\+::hide\+Mouse\+Cursor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Cache le curseur de la souris. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{namespace_game_framework_a9cb2d5b685acea208af9d856e0fe1bf4}{show\+Mouse\+Cursor()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{namespace_game_framework_ad9258f3ab92cd03e443344a86166140a}\label{namespace_game_framework_ad9258f3ab92cd03e443344a86166140a}} 
+\index{GameFramework@{GameFramework}!imagesPath@{imagesPath}}
+\index{imagesPath@{imagesPath}!GameFramework@{GameFramework}}
+\doxysubsubsection{\texorpdfstring{imagesPath()}{imagesPath()}}
+{\footnotesize\ttfamily QString Game\+Framework\+::images\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+une chaîne de caractères contenant le chemin absolu du répertoire des images. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespace_game_framework_a0c59d547af7a5c977f8879c1514c4351}\label{namespace_game_framework_a0c59d547af7a5c977f8879c1514c4351}} 
+\index{GameFramework@{GameFramework}!resourcesPath@{resourcesPath}}
+\index{resourcesPath@{resourcesPath}!GameFramework@{GameFramework}}
+\doxysubsubsection{\texorpdfstring{resourcesPath()}{resourcesPath()}}
+{\footnotesize\ttfamily QString Game\+Framework\+::resources\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Cette fonction retourne le chemin absolu du répertoire res. Si la pseudo-\/constante DEPLOY est définie, elle se base sur la structure de répertoires suivante \+: \begin{DoxyVerb}+--ce_projet/
+   |
+   +--res/
+   +ce_projet.exe
+\end{DoxyVerb}
+
+
+Si la pseudo-\/constante DEPLOY n\textquotesingle{}est pas définie, elle se base sur la structure de répertoires suivante sous Windows \+: \begin{DoxyVerb}+--pendu/
+   |
+   +--build-ce_projet.../
+   |  |
+   |  +--debug/
+   |  |  |
+   |  |  +ce_projet.exe
+   |  |
+   |  +--release/
+   |     |
+   |     +ce_projet.exe
+   |
+   +--doc/
+   +--res/
+   +--src/
+\end{DoxyVerb}
+
+
+Si la pseudo-\/constante DEPLOY n\textquotesingle{}est pas définie, elle se base sur la structure de répertoires suivante sous Linux \+: \begin{DoxyVerb}+--pendu/
+   |
+   +--build-ce_projet.../
+   |  |
+   |  +ce_projet.exe
+   |
+   +--doc/
+   +--res/
+   +--src/
+\end{DoxyVerb}
+
+
+La pseudo-\/constante DEPLOY ne devrait être définie que lors de la génération de l\textquotesingle{}exécutable en vue du déploiement.
+
+Cette constante peut être définie au moment de la génération des Make\+File, avec la commande qmake. Voici un exemple d\textquotesingle{}utilisation possible \+: \begin{DoxyVerb}qmake -config release "DEFINES+=DEPLOY" ..\..\src\GameFramwork.pro
+\end{DoxyVerb}
+ Cette commande génère les fichiers Make\+File, nécessaires pour l\textquotesingle{}étape de compilation, en s\textquotesingle{}assurant que la compilation se fasse en mode {\itshape Release} et que le pseudo-\/constante {\ttfamily DEPLOY} soit définie.
+
+\begin{DoxyReturn}{Returns}
+une chaîne de caractères contenant le chemin absolu du répertoire res. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespace_game_framework_a6dcaeb9dcf289c26ee8c850a5a8a646c}\label{namespace_game_framework_a6dcaeb9dcf289c26ee8c850a5a8a646c}} 
+\index{GameFramework@{GameFramework}!screenRatio@{screenRatio}}
+\index{screenRatio@{screenRatio}!GameFramework@{GameFramework}}
+\doxysubsubsection{\texorpdfstring{screenRatio()}{screenRatio()}}
+{\footnotesize\ttfamily double Game\+Framework\+::screen\+Ratio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+le rapport entre la largeur de l\textquotesingle{}écran et sa hauteur. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespace_game_framework_acb4300b4a55bc48be92bd5e19894385f}\label{namespace_game_framework_acb4300b4a55bc48be92bd5e19894385f}} 
+\index{GameFramework@{GameFramework}!screenSize@{screenSize}}
+\index{screenSize@{screenSize}!GameFramework@{GameFramework}}
+\doxysubsubsection{\texorpdfstring{screenSize()}{screenSize()}}
+{\footnotesize\ttfamily QSize Game\+Framework\+::screen\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+la taille en pixels de l\textquotesingle{}écran. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespace_game_framework_a9cb2d5b685acea208af9d856e0fe1bf4}\label{namespace_game_framework_a9cb2d5b685acea208af9d856e0fe1bf4}} 
+\index{GameFramework@{GameFramework}!showMouseCursor@{showMouseCursor}}
+\index{showMouseCursor@{showMouseCursor}!GameFramework@{GameFramework}}
+\doxysubsubsection{\texorpdfstring{showMouseCursor()}{showMouseCursor()}}
+{\footnotesize\ttfamily void Game\+Framework\+::show\+Mouse\+Cursor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Rend apparent le curseur de la souris. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{namespace_game_framework_aa9d3b3bf5f16a48a45b31e98b731b2f4}{hide\+Mouse\+Cursor()}} 
+\end{DoxySeeAlso}

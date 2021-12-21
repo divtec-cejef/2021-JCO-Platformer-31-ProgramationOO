@@ -36,7 +36,6 @@ struct collisionDistance{
 
 //!
 //! Construit le character du joueur et l'initialise.
-//! @brief Character::Character
 //! @param   pParent Pointeur sur le parent (afin d'obtenir une destruction automatique de cet objet).
 //!
 Character::Character(QGraphicsItem* pParent) : Entity(GameFramework::imagesPath() + "BasicPoseV4.png", pParent)
@@ -45,7 +44,6 @@ Character::Character(QGraphicsItem* pParent) : Entity(GameFramework::imagesPath(
 }
 
 //!
-//! @brief Character::getIsJump
 //! @return si le joueur saute.
 //!
 bool Character::getIsJump(){
@@ -54,7 +52,6 @@ bool Character::getIsJump(){
 
 //!
 //! Permet de définir si le joueur est entrains de sauter ou non.
-//! @brief Character::setIsJump
 //! @param _isJump nouvelle état du joueur.
 //!
 void Character::setIsJump(bool _isJump){
@@ -62,7 +59,6 @@ void Character::setIsJump(bool _isJump){
 }
 
 //!
-//! @brief Character::getIsOnFloor
 //! @return si le joueur est sur le sol.
 //!
 bool Character::getIsOnFloor(){
@@ -71,15 +67,13 @@ bool Character::getIsOnFloor(){
 
 //!
 //! Permet de définir si le joueur est sur le sol ou non.
-//! @brief Character::setIsOnFloor
 //! @param _isOnFloor nouvelle état du joueur.
 //!
 void Character::setIsOnFloor(bool _isOnFloor){
     this->m_isOnFloor = _isOnFloor;
 }
 
-//!
-//! @brief Character::getIsDeath
+//! Permet de retourner l'état actuelle du joueur.
 //! @return si le joueur est mort.
 //!
 bool Character::getIsDeath(){

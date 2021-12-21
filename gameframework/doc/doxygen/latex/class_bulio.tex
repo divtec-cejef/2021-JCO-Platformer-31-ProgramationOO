@@ -1,0 +1,189 @@
+\hypertarget{class_bulio}{}\doxysection{Bulio Class Reference}
+\label{class_bulio}\index{Bulio@{Bulio}}
+Inheritance diagram for Bulio\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_bulio}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_bulio_a9d35f27cf05516c480d2cc8b7a3485c5}\label{class_bulio_a9d35f27cf05516c480d2cc8b7a3485c5}} 
+enum {\bfseries animation} \{ {\bfseries BASE} = 0
+, {\bfseries DEPLACEMENT} = 1
+, {\bfseries SAUT} = 3
+, {\bfseries ATTAQUE} = 4
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_bulio_a87bb257ee2750f1a03af8ae3f44e640a}\label{class_bulio_a87bb257ee2750f1a03af8ae3f44e640a}} 
+void {\bfseries on\+Key\+Pressed} (int key)
+\item 
+\mbox{\Hypertarget{class_bulio_a175d3e41df4ca908cd527e23ce1cc01b}\label{class_bulio_a175d3e41df4ca908cd527e23ce1cc01b}} 
+void {\bfseries on\+Key\+Released} (int key)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_bulio_ac3eca2d6a1d3d9d3c6e0d930d456ccb6}\label{class_bulio_ac3eca2d6a1d3d9d3c6e0d930d456ccb6}} 
+{\bfseries Bulio} (QGraphics\+Item $\ast$p\+Parent=nullptr)
+\item 
+void \mbox{\hyperlink{class_bulio_acbcd5088596eb2496a3c53271895468b}{configure\+Animation}} (animation bulio)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_character_a9ef016109b99ab9867954969167addd4}{Character\+::configure\+Animation}}. \end{DoxyCompactList}\item 
+QPointF \mbox{\hyperlink{class_bulio_a39cb4426a7911d776532406cda8dd270}{get\+Velocity}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_character_a82adc8c7bc0de8e8a2026edc3b645eca}{Character\+::get\+Velocity}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_bulio_aa68becd19a9dbaaf6d92f56f418d3c03}\label{class_bulio_aa68becd19a9dbaaf6d92f56f418d3c03}} 
+void {\bfseries update\+Character\+Velocity} ()
+\item 
+bool \mbox{\hyperlink{class_bulio_acc34f17312a235c247f60efc13e940bd}{get\+Is\+On\+Floor}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_bulio_acc34f17312a235c247f60efc13e940bd}{Bulio\+::get\+Is\+On\+Floor}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_bulio_a36707053633b3bbe763cd94f840cfdd1}{set\+Is\+On\+Floor}} (bool \+\_\+is\+On\+Floor)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_bulio_a36707053633b3bbe763cd94f840cfdd1}{Bulio\+::set\+Is\+On\+Floor}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_bulio_a3390d222ae27319dc63d233870bbabc8}\label{class_bulio_a3390d222ae27319dc63d233870bbabc8}} 
+bool {\bfseries get\+Is\+Jump} ()
+\item 
+\mbox{\Hypertarget{class_bulio_ab96cf11f5e5fd7769b65f95ea4b2bd63}\label{class_bulio_ab96cf11f5e5fd7769b65f95ea4b2bd63}} 
+void {\bfseries set\+Is\+Jump} (bool \+\_\+is\+Jump)
+\item 
+bool \mbox{\hyperlink{class_bulio_a96a1dc1e514c6d33d57db44dc3a6b8ff}{get\+Is\+Death}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_bulio_a96a1dc1e514c6d33d57db44dc3a6b8ff}{Bulio\+::get\+Is\+Death}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_bulio_aa3ca4ad37ad2e79caaa1aeaf58ef5ebf}{set\+Is\+Death}} (bool \+\_\+is\+Death)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_bulio_aa3ca4ad37ad2e79caaa1aeaf58ef5ebf}{Bulio\+::set\+Is\+Death}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_bulio_aab6bbbf6f632983cf4ac5db60644bd3c}\label{class_bulio_aab6bbbf6f632983cf4ac5db60644bd3c}} 
+int {\bfseries get\+Death\+Count} ()
+\item 
+\mbox{\Hypertarget{class_bulio_a5431ced9f555eafae29636f3749cd631}\label{class_bulio_a5431ced9f555eafae29636f3749cd631}} 
+void {\bfseries increment\+Death\+Count} ()
+\item 
+\mbox{\Hypertarget{class_bulio_a668249a57bc534327c4b753992c15b1d}\label{class_bulio_a668249a57bc534327c4b753992c15b1d}} 
+void {\bfseries respawn} ()
+\item 
+void \mbox{\hyperlink{class_bulio_ab275f160fe50afb37b16cef8632e8db2}{collision\+Detection}} (QRectF rect)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_bulio_ab275f160fe50afb37b16cef8632e8db2}{Bulio\+::collision\+Detection}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_bulio_ad7834056849ea1e4c74f6a6021a9cb3f}\label{class_bulio_ad7834056849ea1e4c74f6a6021a9cb3f}} 
+void {\bfseries move} (long long elapsed\+Time\+In\+Milliseconds)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_bulio_ab275f160fe50afb37b16cef8632e8db2}\label{class_bulio_ab275f160fe50afb37b16cef8632e8db2}} 
+\index{Bulio@{Bulio}!collisionDetection@{collisionDetection}}
+\index{collisionDetection@{collisionDetection}!Bulio@{Bulio}}
+\doxysubsubsection{\texorpdfstring{collisionDetection()}{collisionDetection()}}
+{\footnotesize\ttfamily void Bulio\+::collision\+Detection (\begin{DoxyParamCaption}\item[{QRectF}]{rect }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{class_bulio_ab275f160fe50afb37b16cef8632e8db2}{Bulio\+::collision\+Detection}}. 
+
+! 
+\begin{DoxyParams}{Parameters}
+{\em rect} & position de l\textquotesingle{}entité dans l\textquotesingle{}espace. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_entity_a3da2cea7c23068f6f67382110dd4da6c}{Entity}}.
+
+\mbox{\Hypertarget{class_bulio_acbcd5088596eb2496a3c53271895468b}\label{class_bulio_acbcd5088596eb2496a3c53271895468b}} 
+\index{Bulio@{Bulio}!configureAnimation@{configureAnimation}}
+\index{configureAnimation@{configureAnimation}!Bulio@{Bulio}}
+\doxysubsubsection{\texorpdfstring{configureAnimation()}{configureAnimation()}}
+{\footnotesize\ttfamily void Bulio\+::configure\+Animation (\begin{DoxyParamCaption}\item[{animation}]{bulio }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_character_a9ef016109b99ab9867954969167addd4}{Character\+::configure\+Animation}}. 
+
+Définit l\textquotesingle{}animation dans la quel le sprite du joueur doit être. 
+\begin{DoxyParams}{Parameters}
+{\em player} & animation du joueur paramétrer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_bulio_a96a1dc1e514c6d33d57db44dc3a6b8ff}\label{class_bulio_a96a1dc1e514c6d33d57db44dc3a6b8ff}} 
+\index{Bulio@{Bulio}!getIsDeath@{getIsDeath}}
+\index{getIsDeath@{getIsDeath}!Bulio@{Bulio}}
+\doxysubsubsection{\texorpdfstring{getIsDeath()}{getIsDeath()}}
+{\footnotesize\ttfamily bool Bulio\+::get\+Is\+Death (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_bulio_a96a1dc1e514c6d33d57db44dc3a6b8ff}{Bulio\+::get\+Is\+Death}}. 
+
+\begin{DoxyReturn}{Returns}
+si le joueur est mort. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bulio_acc34f17312a235c247f60efc13e940bd}\label{class_bulio_acc34f17312a235c247f60efc13e940bd}} 
+\index{Bulio@{Bulio}!getIsOnFloor@{getIsOnFloor}}
+\index{getIsOnFloor@{getIsOnFloor}!Bulio@{Bulio}}
+\doxysubsubsection{\texorpdfstring{getIsOnFloor()}{getIsOnFloor()}}
+{\footnotesize\ttfamily bool Bulio\+::get\+Is\+On\+Floor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_bulio_acc34f17312a235c247f60efc13e940bd}{Bulio\+::get\+Is\+On\+Floor}}. 
+
+\begin{DoxyReturn}{Returns}
+si le joueur est sur le sol. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bulio_a39cb4426a7911d776532406cda8dd270}\label{class_bulio_a39cb4426a7911d776532406cda8dd270}} 
+\index{Bulio@{Bulio}!getVelocity@{getVelocity}}
+\index{getVelocity@{getVelocity}!Bulio@{Bulio}}
+\doxysubsubsection{\texorpdfstring{getVelocity()}{getVelocity()}}
+{\footnotesize\ttfamily QPointF Bulio\+::get\+Velocity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_character_a82adc8c7bc0de8e8a2026edc3b645eca}{Character\+::get\+Velocity}}. 
+
+\begin{DoxyReturn}{Returns}
+la velocité actuel du joueur 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bulio_aa3ca4ad37ad2e79caaa1aeaf58ef5ebf}\label{class_bulio_aa3ca4ad37ad2e79caaa1aeaf58ef5ebf}} 
+\index{Bulio@{Bulio}!setIsDeath@{setIsDeath}}
+\index{setIsDeath@{setIsDeath}!Bulio@{Bulio}}
+\doxysubsubsection{\texorpdfstring{setIsDeath()}{setIsDeath()}}
+{\footnotesize\ttfamily void Bulio\+::set\+Is\+Death (\begin{DoxyParamCaption}\item[{bool}]{\+\_\+is\+Death }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{class_bulio_aa3ca4ad37ad2e79caaa1aeaf58ef5ebf}{Bulio\+::set\+Is\+Death}}. 
+
+Permet de définir si le joueur doit être en vie ou non. 
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+is\+Death} & nouvelle état du joueur. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_entity_a58b7b2981e65030805e14f9be227467f}{Entity}}.
+
+\mbox{\Hypertarget{class_bulio_a36707053633b3bbe763cd94f840cfdd1}\label{class_bulio_a36707053633b3bbe763cd94f840cfdd1}} 
+\index{Bulio@{Bulio}!setIsOnFloor@{setIsOnFloor}}
+\index{setIsOnFloor@{setIsOnFloor}!Bulio@{Bulio}}
+\doxysubsubsection{\texorpdfstring{setIsOnFloor()}{setIsOnFloor()}}
+{\footnotesize\ttfamily void Bulio\+::set\+Is\+On\+Floor (\begin{DoxyParamCaption}\item[{bool}]{\+\_\+is\+On\+Floor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{class_bulio_a36707053633b3bbe763cd94f840cfdd1}{Bulio\+::set\+Is\+On\+Floor}}. 
+
+Permet de définir si le joueur est sur le sol ou non. 
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+is\+On\+Floor} & nouvelle état du joueur. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_entity_a0ad4da29d70e01f0688c0d1f0d866721}{Entity}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/kuttleo/\+DIVTEC/\+EMT Informatique -\/ 2019-\/2023/\+Kuttel Leo/\+Atelier/31-\/\+Programation\+OO/\+Le\+Jeu/gameframework/src/bulio.\+h\item 
+C\+:/\+Users/kuttleo/\+DIVTEC/\+EMT Informatique -\/ 2019-\/2023/\+Kuttel Leo/\+Atelier/31-\/\+Programation\+OO/\+Le\+Jeu/gameframework/src/bulio.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,37 @@
+\hypertarget{player_8h_source}{}\doxysection{player.\+h}
+\label{player_8h_source}\index{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/player.h@{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/player.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef PLAYER\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define PLAYER\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{sprite_8h}{sprite.h}}"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{class }\mbox{\hyperlink{class_player}{Player}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_sprite}{Sprite}}}
+\DoxyCodeLine{7 \{}
+\DoxyCodeLine{8     Q\_OBJECT}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{public}:}
+\DoxyCodeLine{11     \mbox{\hyperlink{class_player}{Player}}(QGraphicsItem* pParent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_player_a3f1533a29039e16b2d4da279b874d311}{tick}}(\textcolor{keywordtype}{long} \textcolor{keywordtype}{long} elapsedTimeInMilliseconds);}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{16     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_player_ac3890515bf42426c6478327ab10c2ab7}{onKeyPressed}}(\textcolor{keywordtype}{int} key);}
+\DoxyCodeLine{17     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_player_a2a5c6492c02cd2091f397817904647b4}{onKeyReleased}}(\textcolor{keywordtype}{int} key);}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{keyword}{private}:}
+\DoxyCodeLine{20     \textcolor{keywordtype}{void} configureAnimation();}
+\DoxyCodeLine{21     \textcolor{keywordtype}{void} updateBallVelocity();}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     QPointF m\_ballVelocity;}
+\DoxyCodeLine{24     \textcolor{keywordtype}{bool} m\_keyUpPressed;}
+\DoxyCodeLine{25     \textcolor{keywordtype}{bool} m\_keyDownPressed;}
+\DoxyCodeLine{26     \textcolor{keywordtype}{bool} m\_keyLeftPressed;}
+\DoxyCodeLine{27     \textcolor{keywordtype}{bool} m\_keyRightPressed;}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \};}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// PLAYER\_H}}
+
+\end{DoxyCode}

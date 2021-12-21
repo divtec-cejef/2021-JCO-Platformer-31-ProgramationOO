@@ -1,0 +1,220 @@
+\hypertarget{class_character}{}\doxysection{Character Class Reference}
+\label{class_character}\index{Character@{Character}}
+Inheritance diagram for Character\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_character}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_character_a71afaf2ec44dd1ee429497306b82053d}\label{class_character_a71afaf2ec44dd1ee429497306b82053d}} 
+enum {\bfseries animation} \{ {\bfseries BASE} = 0
+, {\bfseries DEPLACEMENT} = 1
+, {\bfseries SAUT} = 3
+, {\bfseries ATTAQUE} = 4
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_character_a5a0f895e36fdce0d40372d4890268aff}\label{class_character_a5a0f895e36fdce0d40372d4890268aff}} 
+void {\bfseries on\+Key\+Pressed} (int key)
+\item 
+\mbox{\Hypertarget{class_character_a6a5c07e59f0f21f55359cce37ece5a60}\label{class_character_a6a5c07e59f0f21f55359cce37ece5a60}} 
+void {\bfseries on\+Key\+Released} (int key)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_character_a1aaf71cf19e80a5788d42073d7219a04}{Character}} (QGraphics\+Item $\ast$p\+Parent=nullptr)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_character_a1aaf71cf19e80a5788d42073d7219a04}{Character\+::\+Character}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_character_a9ef016109b99ab9867954969167addd4}{configure\+Animation}} (animation player)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_character_a9ef016109b99ab9867954969167addd4}{Character\+::configure\+Animation}}. \end{DoxyCompactList}\item 
+QPointF \mbox{\hyperlink{class_character_a82adc8c7bc0de8e8a2026edc3b645eca}{get\+Velocity}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_character_a82adc8c7bc0de8e8a2026edc3b645eca}{Character\+::get\+Velocity}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_character_a9bab01e5b4fdcaa08cd009043eb485a2}\label{class_character_a9bab01e5b4fdcaa08cd009043eb485a2}} 
+void {\bfseries update\+Character\+Velocity} ()
+\item 
+bool \mbox{\hyperlink{class_character_a1a94c7a10912ad73b291d179a4d6974b}{get\+Is\+On\+Floor}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_character_a1a94c7a10912ad73b291d179a4d6974b}{Character\+::get\+Is\+On\+Floor}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_character_a8df37d038371ddd117a629a2075b012c}{set\+Is\+On\+Floor}} (bool \+\_\+is\+On\+Floor)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_character_a8df37d038371ddd117a629a2075b012c}{Character\+::set\+Is\+On\+Floor}}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_character_aa8afbda57c5dc601a162a9831d24dd19}{get\+Is\+Jump}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_character_aa8afbda57c5dc601a162a9831d24dd19}{Character\+::get\+Is\+Jump}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_character_abd5085d14e509b2ac8da29c667510d66}{set\+Is\+Jump}} (bool \+\_\+is\+Jump)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_character_abd5085d14e509b2ac8da29c667510d66}{Character\+::set\+Is\+Jump}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_character_a307b9e23dd76d480be9ed7fdf2107b03}\label{class_character_a307b9e23dd76d480be9ed7fdf2107b03}} 
+void {\bfseries future\+Collision} ()
+\item 
+bool \mbox{\hyperlink{class_character_ad02024124c37fa811e16d17190456173}{get\+Is\+Death}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_character_ad02024124c37fa811e16d17190456173}{Character\+::get\+Is\+Death}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_character_aa5f5f164aa9b0dbeb30ee7abcb52f34d}{set\+Is\+Death}} (bool \+\_\+is\+Death)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_character_aa5f5f164aa9b0dbeb30ee7abcb52f34d}{Character\+::set\+Is\+Death}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_character_a5d25bc67e90e591bcf27a1dcab975580}\label{class_character_a5d25bc67e90e591bcf27a1dcab975580}} 
+int {\bfseries get\+Death\+Count} ()
+\item 
+\mbox{\Hypertarget{class_character_ae6aa3f61adb1a975ba2e7d5399546ef9}\label{class_character_ae6aa3f61adb1a975ba2e7d5399546ef9}} 
+void {\bfseries increment\+Death\+Count} ()
+\item 
+void \mbox{\hyperlink{class_character_a6953345fc6ebe0ded6039fe84e449a1c}{respawn}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_character_a6953345fc6ebe0ded6039fe84e449a1c}{Character\+::respawn}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_character_a1aaf71cf19e80a5788d42073d7219a04}\label{class_character_a1aaf71cf19e80a5788d42073d7219a04}} 
+\index{Character@{Character}!Character@{Character}}
+\index{Character@{Character}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{Character()}{Character()}}
+{\footnotesize\ttfamily Character\+::\+Character (\begin{DoxyParamCaption}\item[{QGraphics\+Item $\ast$}]{p\+Parent = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_character_a1aaf71cf19e80a5788d42073d7219a04}{Character\+::\+Character}}. 
+
+Construit le character du joueur et l\textquotesingle{}initialise. 
+\begin{DoxyParams}{Parameters}
+{\em p\+Parent} & Pointeur sur le parent (afin d\textquotesingle{}obtenir une destruction automatique de cet objet). \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_character_a9ef016109b99ab9867954969167addd4}\label{class_character_a9ef016109b99ab9867954969167addd4}} 
+\index{Character@{Character}!configureAnimation@{configureAnimation}}
+\index{configureAnimation@{configureAnimation}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{configureAnimation()}{configureAnimation()}}
+{\footnotesize\ttfamily void Character\+::configure\+Animation (\begin{DoxyParamCaption}\item[{animation}]{player }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_character_a9ef016109b99ab9867954969167addd4}{Character\+::configure\+Animation}}. 
+
+Définit l\textquotesingle{}animation dans la quel le sprite du joueur doit être. 
+\begin{DoxyParams}{Parameters}
+{\em player} & animation du joueur paramétrer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_character_ad02024124c37fa811e16d17190456173}\label{class_character_ad02024124c37fa811e16d17190456173}} 
+\index{Character@{Character}!getIsDeath@{getIsDeath}}
+\index{getIsDeath@{getIsDeath}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{getIsDeath()}{getIsDeath()}}
+{\footnotesize\ttfamily bool Character\+::get\+Is\+Death (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_character_ad02024124c37fa811e16d17190456173}{Character\+::get\+Is\+Death}}. 
+
+\begin{DoxyReturn}{Returns}
+si le joueur est mort. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_character_aa8afbda57c5dc601a162a9831d24dd19}\label{class_character_aa8afbda57c5dc601a162a9831d24dd19}} 
+\index{Character@{Character}!getIsJump@{getIsJump}}
+\index{getIsJump@{getIsJump}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{getIsJump()}{getIsJump()}}
+{\footnotesize\ttfamily bool Character\+::get\+Is\+Jump (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_character_aa8afbda57c5dc601a162a9831d24dd19}{Character\+::get\+Is\+Jump}}. 
+
+\begin{DoxyReturn}{Returns}
+si le joueur saute. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_character_a1a94c7a10912ad73b291d179a4d6974b}\label{class_character_a1a94c7a10912ad73b291d179a4d6974b}} 
+\index{Character@{Character}!getIsOnFloor@{getIsOnFloor}}
+\index{getIsOnFloor@{getIsOnFloor}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{getIsOnFloor()}{getIsOnFloor()}}
+{\footnotesize\ttfamily bool Character\+::get\+Is\+On\+Floor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_character_a1a94c7a10912ad73b291d179a4d6974b}{Character\+::get\+Is\+On\+Floor}}. 
+
+\begin{DoxyReturn}{Returns}
+si le joueur est sur le sol. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_character_a82adc8c7bc0de8e8a2026edc3b645eca}\label{class_character_a82adc8c7bc0de8e8a2026edc3b645eca}} 
+\index{Character@{Character}!getVelocity@{getVelocity}}
+\index{getVelocity@{getVelocity}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{getVelocity()}{getVelocity()}}
+{\footnotesize\ttfamily QPointF Character\+::get\+Velocity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_character_a82adc8c7bc0de8e8a2026edc3b645eca}{Character\+::get\+Velocity}}. 
+
+\begin{DoxyReturn}{Returns}
+la velocité actuel du joueur 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_character_a6953345fc6ebe0ded6039fe84e449a1c}\label{class_character_a6953345fc6ebe0ded6039fe84e449a1c}} 
+\index{Character@{Character}!respawn@{respawn}}
+\index{respawn@{respawn}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{respawn()}{respawn()}}
+{\footnotesize\ttfamily void Character\+::respawn (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_character_a6953345fc6ebe0ded6039fe84e449a1c}{Character\+::respawn}}. 
+
+Reste tout les valeurs du joueur comme elles étaient à leur inisialisation. \mbox{\Hypertarget{class_character_aa5f5f164aa9b0dbeb30ee7abcb52f34d}\label{class_character_aa5f5f164aa9b0dbeb30ee7abcb52f34d}} 
+\index{Character@{Character}!setIsDeath@{setIsDeath}}
+\index{setIsDeath@{setIsDeath}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{setIsDeath()}{setIsDeath()}}
+{\footnotesize\ttfamily void Character\+::set\+Is\+Death (\begin{DoxyParamCaption}\item[{bool}]{\+\_\+is\+Death }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{class_character_aa5f5f164aa9b0dbeb30ee7abcb52f34d}{Character\+::set\+Is\+Death}}. 
+
+Permet de définir si le joueur doit être en vie ou non. 
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+is\+Death} & nouvelle état du joueur. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_entity_a58b7b2981e65030805e14f9be227467f}{Entity}}.
+
+\mbox{\Hypertarget{class_character_abd5085d14e509b2ac8da29c667510d66}\label{class_character_abd5085d14e509b2ac8da29c667510d66}} 
+\index{Character@{Character}!setIsJump@{setIsJump}}
+\index{setIsJump@{setIsJump}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{setIsJump()}{setIsJump()}}
+{\footnotesize\ttfamily void Character\+::set\+Is\+Jump (\begin{DoxyParamCaption}\item[{bool}]{\+\_\+is\+Jump }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_character_abd5085d14e509b2ac8da29c667510d66}{Character\+::set\+Is\+Jump}}. 
+
+Permet de définir si le joueur est entrains de sauter ou non. 
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+is\+Jump} & nouvelle état du joueur. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_character_a8df37d038371ddd117a629a2075b012c}\label{class_character_a8df37d038371ddd117a629a2075b012c}} 
+\index{Character@{Character}!setIsOnFloor@{setIsOnFloor}}
+\index{setIsOnFloor@{setIsOnFloor}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{setIsOnFloor()}{setIsOnFloor()}}
+{\footnotesize\ttfamily void Character\+::set\+Is\+On\+Floor (\begin{DoxyParamCaption}\item[{bool}]{\+\_\+is\+On\+Floor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{class_character_a8df37d038371ddd117a629a2075b012c}{Character\+::set\+Is\+On\+Floor}}. 
+
+Permet de définir si le joueur est sur le sol ou non. 
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+is\+On\+Floor} & nouvelle état du joueur. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_entity_a0ad4da29d70e01f0688c0d1f0d866721}{Entity}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/kuttleo/\+DIVTEC/\+EMT Informatique -\/ 2019-\/2023/\+Kuttel Leo/\+Atelier/31-\/\+Programation\+OO/\+Le\+Jeu/gameframework/src/character.\+h\item 
+C\+:/\+Users/kuttleo/\+DIVTEC/\+EMT Informatique -\/ 2019-\/2023/\+Kuttel Leo/\+Atelier/31-\/\+Programation\+OO/\+Le\+Jeu/gameframework/src/character.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,134 @@
+\hypertarget{sprite_8h_source}{}\doxysection{sprite.\+h}
+\label{sprite_8h_source}\index{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/sprite.h@{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/sprite.h}}
+\mbox{\hyperlink{sprite_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#ifndef SPRITE\_H}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#define SPRITE\_H}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{comment}{// décommenter pour rendre la boundingbox de tous les sprites visible.}}
+\DoxyCodeLine{11 \textcolor{comment}{//\#define DEBUG\_BBOX}}
+\DoxyCodeLine{12 \textcolor{comment}{// décommenter pour rendre la shape de tous les sprites visible.}}
+\DoxyCodeLine{13 \textcolor{comment}{//\#define DEBUG\_SHAPE}}
+\DoxyCodeLine{14 \textcolor{comment}{// décommenter pour afficher dans la sortie de debug le nombre de sprites existants}}
+\DoxyCodeLine{15 \textcolor{comment}{//\#define DEBUG\_SPRITE\_COUNT}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <QGraphicsPixmapItem>}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <QObject>}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <QPixmap>}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <QTimer>}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{keyword}{class }\mbox{\hyperlink{class_game_scene}{GameScene}};}
+\DoxyCodeLine{23 \textcolor{keyword}{class }\mbox{\hyperlink{class_sprite_tick_handler}{SpriteTickHandler}};}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{90 \textcolor{keyword}{class }\mbox{\hyperlink{class_sprite}{Sprite}} : \textcolor{keyword}{public} QObject, \textcolor{keyword}{public} QGraphicsPixmapItem}
+\DoxyCodeLine{91 \{}
+\DoxyCodeLine{92     Q\_OBJECT}
+\DoxyCodeLine{93     Q\_PROPERTY(qreal opacity READ opacity WRITE setOpacity NOTIFY opacityChanged FINAL)}
+\DoxyCodeLine{94     Q\_PROPERTY(\textcolor{keywordtype}{bool} enabled READ isEnabled WRITE setEnabled NOTIFY enabledChanged)}
+\DoxyCodeLine{95     Q\_PROPERTY(\textcolor{keywordtype}{bool} visible READ isVisible WRITE setVisible NOTIFY visibleChanged FINAL)}
+\DoxyCodeLine{96     Q\_PROPERTY(QPointF pos READ pos WRITE setPos FINAL)}
+\DoxyCodeLine{97     Q\_PROPERTY(qreal x READ x WRITE setX NOTIFY xChanged FINAL)}
+\DoxyCodeLine{98     Q\_PROPERTY(qreal y READ y WRITE setY NOTIFY yChanged FINAL)}
+\DoxyCodeLine{99     Q\_PROPERTY(qreal z READ zValue WRITE setZValue NOTIFY zChanged FINAL)}
+\DoxyCodeLine{100     Q\_PROPERTY(qreal rotation READ rotation WRITE setRotation NOTIFY rotationChanged)}
+\DoxyCodeLine{101     Q\_PROPERTY(qreal scale READ scale WRITE setScale NOTIFY scaleChanged)}
+\DoxyCodeLine{102     Q\_PROPERTY(QPointF transformOriginPoint READ transformOriginPoint WRITE setTransformOriginPoint)}
+\DoxyCodeLine{103     Q\_PROPERTY(\textcolor{keywordtype}{int} currentAnimationFrame READ currentAnimationFrame WRITE \mbox{\hyperlink{class_sprite_a7dc5279506894215965f386b01e4dd2b}{setCurrentAnimationFrame}})}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 \textcolor{keyword}{public}:}
+\DoxyCodeLine{106     \mbox{\hyperlink{class_sprite_ada1c078eb2f8d53a21cf1546570bb95b}{Sprite}}(QGraphicsItem* pParent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{107     \mbox{\hyperlink{class_sprite_ada1c078eb2f8d53a21cf1546570bb95b}{Sprite}}(\textcolor{keyword}{const} QPixmap\& rPixmap, QGraphicsItem* pParent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{108     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_sprite_a8accab430f9d90ae5117b57d67e32b84}{\string~Sprite}}();}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sprite_ad382222eee275aa4bf98bdbeb6b0fc66}{addAnimationFrame}}(\textcolor{keyword}{const} QPixmap\& rPixmap);}
+\DoxyCodeLine{111     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sprite_a7dc5279506894215965f386b01e4dd2b}{setCurrentAnimationFrame}}(\textcolor{keywordtype}{int} frameIndex);}
+\DoxyCodeLine{112     \textcolor{keywordtype}{int} currentAnimationFrame() \textcolor{keyword}{const};}
+\DoxyCodeLine{113     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sprite_a469d5c309dbd48895b4b98dfdb7e1917}{clearAnimationFrames}}();}
+\DoxyCodeLine{114     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sprite_ad9817e2be70640236e55aaa83ade0dbf}{showNextAnimationFrame}}();}
+\DoxyCodeLine{115     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sprite_aa27e28e0a1ed0153f4fcc9a9a3402e0f}{setAnimationSpeed}}(\textcolor{keywordtype}{int} frameDuration);}
+\DoxyCodeLine{116     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sprite_a7fc484c57aa07b95311eacf27d789a0c}{stopAnimation}}();}
+\DoxyCodeLine{117     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sprite_ac7d053af8f5cf1221d3cf016a4c65874}{startAnimation}}();}
+\DoxyCodeLine{118     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sprite_ac7d053af8f5cf1221d3cf016a4c65874}{startAnimation}}(\textcolor{keywordtype}{int} frameDuration);}
+\DoxyCodeLine{119     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_sprite_a08c30dd5ac15ec2b9366afff46cc64c4}{isAnimationRunning}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sprite_a4047b63d33642d0f04d7856b12ad873e}{addAnimation}}();}
+\DoxyCodeLine{122     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sprite_a38a5549e535c3250db75f66bd32cdb3c}{clearAnimations}}();}
+\DoxyCodeLine{123     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_sprite_afe18f94d14e60caf9d3e463e584fc786}{animationCount}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{124     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sprite_a4559f867e583934a097cca9ace923785}{setActiveAnimation}}(\textcolor{keywordtype}{int} index);}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sprite_a93d7b808a1bcb070fa0b484a9f0ab35b}{setEmitSignalEndOfAnimationEnabled}}(\textcolor{keywordtype}{bool} enabled);}
+\DoxyCodeLine{127     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_sprite_a8161492c75be0a4c785a77c9ca52e112}{isEmitSignalEndOfAnimationEnabled}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129     QRectF globalBoundingBox()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} mapRectToScene(boundingRect());  \}}
+\DoxyCodeLine{130     QPainterPath globalShape()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} mapToScene(shape()); \}}
+\DoxyCodeLine{131     \textcolor{keywordtype}{int} width()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(globalBoundingBox().width()); \}}
+\DoxyCodeLine{132     \textcolor{keywordtype}{int} height()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(globalBoundingBox().height()); \}}
+\DoxyCodeLine{133     \textcolor{keywordtype}{int} left()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(globalBoundingBox().left()); \}}
+\DoxyCodeLine{134     \textcolor{keywordtype}{int} top()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(globalBoundingBox().top()); \}}
+\DoxyCodeLine{135     \textcolor{keywordtype}{int} right()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(globalBoundingBox().right()); \}}
+\DoxyCodeLine{136     \textcolor{keywordtype}{int} bottom()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(globalBoundingBox().bottom()); \}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sprite_aac03f276e13a568726b6d4f4419326f2}{setParentScene}}(\mbox{\hyperlink{class_game_scene}{GameScene}}* pScene);}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140     \textcolor{keyword}{enum} \{ SpriteItemType = UserType + 1 \};}
+\DoxyCodeLine{141     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} type()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} SpriteItemType; \}}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sprite_a613ffe7e1cfea09977d5985104a94d46}{tick}}(\textcolor{keywordtype}{long} \textcolor{keywordtype}{long} elapsedTimeInMilliseconds);}
+\DoxyCodeLine{144     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sprite_ad7b9cb1b2fea3a130b3ceb322d46f8e1}{registerForTick}}();}
+\DoxyCodeLine{145     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sprite_ab8ad9166332d3552b4be37416b6eb6f4}{unregisterFromTick}}();}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sprite_a824c82dee03274adfee1287bda73ff66}{setTickHandler}}(\mbox{\hyperlink{class_sprite_tick_handler}{SpriteTickHandler}}* pTickHandler);}
+\DoxyCodeLine{148     \mbox{\hyperlink{class_sprite_tick_handler}{SpriteTickHandler}}* \mbox{\hyperlink{class_sprite_aef81d20c2b5b6d307eb56c0679f2b4fd}{tickHandler}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{149     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sprite_aa4f515244ff52da72e5fb58a9042ea84}{removeTickHandler}}();}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151     \mbox{\hyperlink{class_game_scene}{GameScene}}* \mbox{\hyperlink{class_sprite_a62f3d63b0ce906fa1caa71efd847ffec}{parentScene}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153 \textcolor{preprocessor}{\#if defined(DEBUG\_BBOX) || defined(DEBUG\_SHAPE)}}
+\DoxyCodeLine{154     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} paint(QPainter* pPainter, \textcolor{keyword}{const} QStyleOptionGraphicsItem* pOption, QWidget* pWidget = 0);}
+\DoxyCodeLine{155 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157 signals:}
+\DoxyCodeLine{158     \textcolor{keywordtype}{void} animationFinished();}
+\DoxyCodeLine{159     \textcolor{keywordtype}{void} opacityChanged();}
+\DoxyCodeLine{160     \textcolor{keywordtype}{void} visibleChanged();}
+\DoxyCodeLine{161     \textcolor{keywordtype}{void} enabledChanged();}
+\DoxyCodeLine{162     \textcolor{keywordtype}{void} xChanged();}
+\DoxyCodeLine{163     \textcolor{keywordtype}{void} yChanged();}
+\DoxyCodeLine{164     \textcolor{keywordtype}{void} zChanged();}
+\DoxyCodeLine{165     \textcolor{keywordtype}{void} rotationChanged();}
+\DoxyCodeLine{166     \textcolor{keywordtype}{void} scaleChanged();}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{169     QList<Sprite*> \mbox{\hyperlink{class_sprite_aaf606dfaaf05fba692b467ade8db69c9}{collidingSprites}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{170     QList<Sprite*> \mbox{\hyperlink{class_sprite_aaf606dfaaf05fba692b467ade8db69c9}{collidingSprites}}(\textcolor{keyword}{const} QRectF\& rRect) \textcolor{keyword}{const};}
+\DoxyCodeLine{171     QList<Sprite*> \mbox{\hyperlink{class_sprite_aaf606dfaaf05fba692b467ade8db69c9}{collidingSprites}}(\textcolor{keyword}{const} QPainterPath\& rShape) \textcolor{keyword}{const};}
+\DoxyCodeLine{172     \mbox{\hyperlink{class_game_scene}{GameScene}}* m\_pParentScene;}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174 \textcolor{keyword}{private}:}
+\DoxyCodeLine{175     \textcolor{keyword}{static} \textcolor{keywordtype}{int} s\_spriteCount;}
+\DoxyCodeLine{176     \textcolor{keyword}{static} \textcolor{keywordtype}{void} displaySpriteCount();}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178     \textcolor{keywordtype}{void} init();}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180     \mbox{\hyperlink{class_sprite_tick_handler}{SpriteTickHandler}}* m\_pTickHandler;}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182     QTimer m\_animationTimer;}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184     \textcolor{keywordtype}{bool} m\_emitSignalEOA;}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{186     QList<QList <QPixmap>> m\_animationList;}
+\DoxyCodeLine{187     \textcolor{keywordtype}{int} m\_frameDuration;}
+\DoxyCodeLine{188     \textcolor{keywordtype}{int} m\_currentAnimationFrame;}
+\DoxyCodeLine{189     \textcolor{keywordtype}{int} m\_currentAnimationIndex;}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191     \textcolor{keywordtype}{int} m\_customType;}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{194     \textcolor{keywordtype}{void} onNextAnimationFrame();}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196 \};}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// SPRITE\_H}}
+
+\end{DoxyCode}
