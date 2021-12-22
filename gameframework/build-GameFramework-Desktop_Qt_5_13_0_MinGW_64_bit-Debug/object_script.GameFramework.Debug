@@ -3,6 +3,7 @@ debug/bulio.o
 debug/buliotickhandler.o
 debug/character.o
 debug/entity.o
+debug/entitytickhandler.o
 debug/ground.o
 debug/keytickhandler.o
 debug/mainfrm.o

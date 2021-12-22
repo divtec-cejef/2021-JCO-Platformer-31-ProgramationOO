@@ -30,7 +30,7 @@ public:
     };
 
     virtual void configureAnimation();
-    void uniqueSide(QList<hitSide> collidingSidesList, hitSide appendToSide);
+    //void uniqueSide(QList<hitSide> collidingSidesList, hitSide appendToSide);
 
     QPointF m_velocity;
     QPointF m_lastVelocity = m_velocity;
@@ -53,6 +53,10 @@ public:
 
     static void uniqueSide(QList<hitSide>* collidingSidesList, hitSide appendToSide);
 
+    void getCollisionLocate(QList<Entity::hitSide>&collisionLocateL,
+                                      QRectF posSprite,QRectF intersected);
+    void gravityApplied(long long elapsedTime);
+
 private:
 
     void setAnimationDeplacementList();
@@ -62,7 +66,7 @@ protected:
     QPointF m_gravity = QPointF(0,2);
     bool m_isDeath = false;
     bool m_isOnFloor = false;
-    void gravityApplied(long long elapsedTime);
+
 
 
 

@@ -6,7 +6,7 @@
 */
 #ifndef SPRITETICKHANDLER_H
 #define SPRITETICKHANDLER_H
-#include <entity.h>
+
 
 class Sprite;
 
@@ -26,19 +26,16 @@ class SpriteTickHandler
 {
 public:
     SpriteTickHandler(Sprite* pParentSprite = nullptr);
-    SpriteTickHandler(Entity* pParentEntity = nullptr);
     virtual ~SpriteTickHandler();
 
 public:
     virtual void setParentSprite(Sprite* pParentSprite);
-    virtual void setParentSprite(Entity* pParentEntity);
 
     virtual void init() {}
     virtual void tick(long long elapsedTimeInMilliseconds) = 0;
 
 protected:
     Sprite* m_pParentSprite;
-    Entity* m_pParentEntity;
 };
 
 #endif // SPRITETICKHANDLER_H

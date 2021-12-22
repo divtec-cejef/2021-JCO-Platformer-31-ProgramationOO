@@ -64,7 +64,7 @@ void Entity::setIsDeath(bool _isDeath){
 //! \param posSprite Position du Sprite principal.
 //! \param intersected zone de collision entre les deux sprites.
 //!
-void getCollisionLocate(QList<Entity::hitSide>&collisionLocateL,
+void Entity::getCollisionLocate(QList<Entity::hitSide>&collisionLocateL,
                                   QRectF posSprite,QRectF intersected){
 
     //Si l'intersected est plus large la collision est vertical.

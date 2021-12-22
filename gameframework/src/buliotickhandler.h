@@ -3,10 +3,10 @@
 
 #include <QPointF>
 #include <bulio.h>
-#include "spritetickhandler.h"
+#include "entitytickhandler.h"
 
 
-class BulioTickHandler : public SpriteTickHandler
+class BulioTickHandler : public EntityTickHandler
 {
 public:
     BulioTickHandler(Entity* pParentSprite = nullptr);
