@@ -152,30 +152,30 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     ////        ENEMIE        ////
     //////////////////////////////
     Bulio* enemie1 = new Bulio();
-    enemie1->setData(1,"enemie");
+    enemie1->setData(1,"ennemie");
     enemie1->setData(2,"bulio");
     //m_pScene->addSpriteToScene(enemie1, 2500,1410);
     m_pScene->addSpriteToScene(enemie1, 500,1300);
 
     Bulio* enemie2 = new Bulio();
-    enemie2->setData(1,"enemie");
+    enemie2->setData(1,"ennemie");
     enemie2->setData(2,"bulio");
     m_pScene->addSpriteToScene(enemie2, 2500,1410);
 
     Bulio* enemie3 = new Bulio();
-    enemie3->setData(1,"enemie");
+    enemie3->setData(1,"ennemie");
     enemie3->setData(2,"bulio");
     m_pScene->addSpriteToScene(enemie3, 400,1410);
 
     Bulio* enemie4 = new Bulio();
-    enemie4->setData(1,"enemie");
+    enemie4->setData(1,"ennemie");
     enemie4->setData(2,"bulio");
     m_pScene->addSpriteToScene(enemie4, 500,1410);
 
-   m_pBulioL.append(enemie1);
+    m_pBulioL.append(enemie1);
     m_pBulioL.append(enemie2);
     m_pBulioL.append(enemie3);
-     m_pBulioL.append(enemie4);
+    m_pBulioL.append(enemie4);
 
     //Ajoute du joueur dans la scene
     pCharacter->setData(1,"joueur");
@@ -307,17 +307,21 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
                 //intersected entre ls prochaine position du joueur et le sprite touché.
                 QRectF intersected = nextSpriteRect.intersected(CollisionDetected->globalBoundingBox());
-
+                qDebug() << intersected.height();
                 //List des coté touché
                 QList<Entity::hitSide> collidingSidesL = QList<Entity::hitSide>();
                 getCollisionLocate(collidingSidesL,nextSpriteRect,intersected);
 
                 if (CollisionDetected->data(1) == "sol") {
-
+                    //Parcourt la list des local collision
                     for (int i =0;i < collidingSidesL.count();i++) {
+
                         switch (collidingSidesL.at(i)) {
                         case Entity::hitSide::DOWN:
                             pCharacter->m_velocity.setY(-0.2);
+
+                            //Truc de doryan bizarre
+                            //pCharacter->setY(CollisionDetected->y()-pCharacter->height()*pCharacter->scale());
                             if(!pCharacter->getIsJump())
                                 pCharacter->setIsOnFloor(true);
                             pCharacter->setIsJump(false);
@@ -327,10 +331,12 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                             pCharacter->m_velocity.setY(2);
                             break;
                         case Entity::hitSide::RIGHT :
-                            pCharacter->m_velocity.setX(0);
+                            if(intersected.height() < 30)
+                                pCharacter->m_velocity.setX(0);
                             break;
                         case Entity::hitSide::LEFT :
-                            pCharacter->m_velocity.setX(0);
+                            if(intersected.height() < 30)
+                                pCharacter->m_velocity.setX(0);
                             break;
                         }
                     }
@@ -373,6 +379,25 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                         }
                     }
                 }
+
+                if (CollisionDetected->data(1) == "ennemie") {
+
+                    for (int i =0;i < collidingSidesL.count();i++) {
+                        switch (collidingSidesL.at(i)) {
+                        case Entity::hitSide::DOWN:
+
+                            break;
+                        case  Entity::hitSide::UP:
+                            setupCharacterDeath();
+                            break;
+                        case Entity::hitSide::RIGHT :
+                             setupCharacterDeath();
+                            break;
+                        case Entity::hitSide::LEFT :
+                             setupCharacterDeath();
+                        }
+                    }
+                }
                 collidingSidesL.clear();
             }
         }else {
@@ -389,8 +414,10 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
     //Parcourt la liste des Bulio de la scene.
     for (int i = 0;i < m_pBulioL.count();i++) {
-        BulioTickHandler* bTick = new BulioTickHandler(m_pBulioL.at(i));
+        BulioTickHandler* bTick = new BulioTickHandler(m_pBulioL.at(i),this);
         bTick->tick(elapsedTimeInMilliseconds);
+        if(m_pBulioL.at(i)->getIsDeath())
+            m_pBulioL.removeAt(i);
     }
 
     /*
@@ -586,7 +613,7 @@ void GameCore::setAnimationDeath()
 //! Mets en place tout les éléments symbolisant la mort du joueur.
 //! @brief GameCore::setupCharacterDeath
 //!
-void GameCore::setupCharacterDeath(){
+ void GameCore::setupCharacterDeath(){
     //Le joueur est considéré comme mort.
     pCharacter->setIsDeath(true);
     //Créé le fantôme dans la scene.

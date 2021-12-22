@@ -6,10 +6,11 @@
 */
 #include "buliotickhandler.h"
 #include "gamescene.h"
+#include "gamecore.h"
 
-BulioTickHandler::BulioTickHandler(Entity* pParentEntity) : EntityTickHandler (pParentEntity)
+BulioTickHandler::BulioTickHandler(Entity* pParentEntity,GameCore* newGameCore) : EntityTickHandler (pParentEntity)
 {
-
+    setGameCore(newGameCore);
 }
 
 //! Cadence : détermine le mouvement que fait le sprite durant le temps écoulé,
@@ -18,8 +19,6 @@ void BulioTickHandler::tick(long long elapsedTimeInMilliseconds) {
 
     //Déplace le bulio.
     m_pParentEntity->setPos(m_pParentEntity->pos()+ m_pParentEntity->m_velocity);
-
-    qDebug() << "le bulio touche le sol : " << m_pParentEntity->getIsOnFloor();
 
     //Attire le bulio vers le bas de l'écran
     m_pParentEntity->gravityApplied(elapsedTimeInMilliseconds);
@@ -72,7 +71,7 @@ void BulioTickHandler::tick(long long elapsedTimeInMilliseconds) {
             }
 
             if (CollisionDetected->data(1) == "joueur") {
-
+                /*
                 for (int i =0;i < collidingSidesL.count();i++) {
                     if (collidingSidesL.at(i) ==  Entity::hitSide::UP) {
                         m_pParentEntity->setIsDeath(true);
@@ -81,6 +80,22 @@ void BulioTickHandler::tick(long long elapsedTimeInMilliseconds) {
                 //m_pBulioL.at(i)->setIsOnFloor(true);
                 //m_pBulioL.at(i)->m_velocity.setY(0.0);
                 collidingSidesL.clear();
+*/
+                for (int i =0;i < collidingSidesL.count();i++) {
+                    switch (collidingSidesL.at(i)) {
+                    case Entity::hitSide::DOWN:
+                        m_pGameCore->setupCharacterDeath();
+                        break;
+                    case  Entity::hitSide::UP:
+                        m_pParentEntity->setIsDeath(true);
+                        break;
+                    case Entity::hitSide::RIGHT :
+                        m_pGameCore->setupCharacterDeath();
+                        break;
+                    case Entity::hitSide::LEFT :
+                        m_pGameCore->setupCharacterDeath();
+                    }
+                }
             }
         }
     }else {
@@ -98,4 +113,6 @@ void BulioTickHandler::tick(long long elapsedTimeInMilliseconds) {
     }
 }
 
-
+void BulioTickHandler::setGameCore(GameCore* newGameCore){
+    m_pGameCore = newGameCore;
+}

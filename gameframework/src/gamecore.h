@@ -39,7 +39,7 @@ public:
     void mouseMoved(QPointF newMousePosition);
     void mouseButtonPressed(QPointF mousePosition, Qt::MouseButtons buttons);
     void mouseButtonReleased(QPointF mousePosition, Qt::MouseButtons buttons);
-
+    void setupCharacterDeath();
 
     //Physique
     QPointF m_gravity = QPointF(0,2);
@@ -78,7 +78,7 @@ private:
     Character* pCharacter = new Character();
     Sprite* pGhost = new Sprite();
     void setAnimationDeath();
-    void setupCharacterDeath();
+
 
     QList<QGraphicsTransform*> m_transformsForFlip;
 
