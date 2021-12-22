@@ -272,13 +272,14 @@ void GameCore::keyReleased(int key) {
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
     if(!pCharacter->getIsDeath()){
+
         pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
         //Suite les déplacement du joueur dans la scene
         m_pGameCanvas->getView()->centerOn(m_pScene->sprites().at(0)->pos());
 
+        //Prochaine position du joueur
         QRectF nextSpriteRect =
                 pCharacter->globalBoundingBox().translated(pCharacter->m_velocity);
-
 
         // Récupère tous les sprites de la scène qui touche le joueur
         auto listeCurrentCollisionCharacter = pCharacter->parentScene()->collidingSprites(pCharacter);
@@ -298,8 +299,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 //List des coté touché
                 QList<Entity::hitSide> collidingSidesL = QList<Entity::hitSide>();
                 getCollisionLocate(collidingSidesL,nextSpriteRect,intersected);
-
-                //qDebug() << "la liste est vide Amogus: " << collidingSidesL.isEmpty();
 
                 if (CollisionDetected->data(1) == "sol") {
 
@@ -326,29 +325,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                         }
                     }
                 }
-                /* if (CollisionDetected->data(1) == "enemie") {
-
-                    for (int i =0;i < collidingSidesL.count();i++) {
-
-                        switch (collidingSidesL.at(i)) {
-                        case Entity::hitSide::DOWN:
-                            m_pScene->removeSpriteFromScene(CollisionDetected);
-                            pCharacter->m_velocity.setY(-7);
-                            pCharacter->setIsJump(true);
-                            //this->setIsJump(false);
-                            break;
-                        case  Entity::hitSide::UP:
-                            setupCharacterDeath();
-                            break;
-                        case Entity::hitSide::RIGHT :
-                            setupCharacterDeath();
-                            break;
-                        case Entity::hitSide::LEFT :
-                            setupCharacterDeath();
-                            break;
-                        }
-                    }
-                }*/
                 if (CollisionDetected->data(1) == "Piege") {
 
                     if(!pCharacter->getIsDeath()){
@@ -400,10 +376,11 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         pGhost->setY(pGhost->y() -5);
     }
 
-    int countBulio = m_pBulioL.count();
+    //Nbr de Bulio dans la liste.
+    int bulioCount = m_pBulioL.count();
 
     //Parcourt la liste des Bulio de la scene.
-    for (int i = 0;i < countBulio;i++) {
+    for (int i = 0;i < bulioCount;i++) {
 
         qDebug() << "Bulio " << i;
         //Déplace le bulio.
@@ -438,12 +415,12 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 for (int i =0;i < collidingSidesL.count();i++) {
                     switch (collidingSidesL.at(i)) {
                     case Entity::hitSide::DOWN:
-                        m_pBulioL.at(i)->m_velocity.setY(-2.0);
+                        m_pBulioL.at(i)->m_velocity.setY(0.0);
                         m_pBulioL.at(i)->setIsOnFloor(true);
                         qDebug() << "touche les pied";
                         break;
                     case  Entity::hitSide::UP:
-                        m_pBulioL.at(i)->m_velocity.setY(0.0);
+                        //m_pBulioL.at(i)->m_velocity.setY(0.0);
                         qDebug() << "touche la tete";
                         break;
                     case Entity::hitSide::RIGHT:
@@ -460,12 +437,9 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 if (CollisionDetected->data(1) == "joueur") {
 
                     for (int i =0;i < collidingSidesL.count();i++) {
-
                         switch (collidingSidesL.at(i)) {
                         case Entity::hitSide::DOWN:
-                            setupCharacterDeath();
-
-                            //this->setIsJump(false);
+                            setupCharacterDeath();;
                             break;
                         case  Entity::hitSide::UP:
                             m_pBulioL.at(i)->setIsDeath(true);
@@ -482,9 +456,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                         }
                     }
                 }
-
-                m_pBulioL.at(i)->setIsOnFloor(true);
-                m_pBulioL.at(i)->m_velocity.setY(0.0);
+                //m_pBulioL.at(i)->setIsOnFloor(true);
+                //m_pBulioL.at(i)->m_velocity.setY(0.0);
                 collidingSidesL.clear();
             }
         }else {
@@ -496,20 +469,20 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             m_pBulioL.at(i)->setIsDeath(true);
         }
 
-        // qDebug() << "le bulio touche le sol : " << m_pBulioList.at(i)->getIsOnFloor();
+        qDebug() << "le bulio " << i << " touche le sol : " << m_pBulioL.at(i)->getIsOnFloor();
         //Attire le bulio vers le bas de l'écran
-        gravityApplied(m_pBulioL.at(i),m_pBulioL.at(i)->m_velocity,elapsedTimeInMilliseconds);
+        gravityApplied(m_pBulioL.at(i),elapsedTimeInMilliseconds);
 
         if(m_pBulioL.at(i)->getIsDeath()){
-            //Retire l'enemie de la scene
+            //Retire l'ennemie de la scene
             m_pScene->removeSpriteFromScene(m_pBulioL.at(i));
             //Retire l'ennemie de la liste
             m_pBulioL.removeAt(i);
-            countBulio--;
+            bulioCount--;
         }
     }
     //Attire le joueur vers le bas de l'écran
-    gravityApplied(pCharacter,pCharacter->m_velocity,elapsedTimeInMilliseconds);
+    gravityApplied(pCharacter,elapsedTimeInMilliseconds);
 }
 
 //! Ajoute à une liste la localisation des collision entre deux sprite.
@@ -548,12 +521,12 @@ void GameCore::getCollisionLocate(QList<Entity::hitSide>&collisionLocateL,
 //! \param enti_velocity velocité du sprite
 //! \param elapsedTime temps écoulé entre chaque tick.
 //!@brief GameCore::gravityApplied
-void GameCore::gravityApplied(Entity* entity,QPointF &enti_velocity,long long elapsedTime){
+void GameCore::gravityApplied(Entity* entity,long long elapsedTime){
 
     if (!entity->getIsOnFloor()){
         //Attire le joueur vers le bas de l'écran
-        entity->setPos(entity->pos() + enti_velocity * (elapsedTime/100.0));
-        enti_velocity += m_gravity * (elapsedTime/100.0);
+        entity->setPos(entity->pos() + entity->m_velocity * (elapsedTime/100.0));
+        entity->m_velocity += m_gravity * (elapsedTime/100.0);
     }
 }
 

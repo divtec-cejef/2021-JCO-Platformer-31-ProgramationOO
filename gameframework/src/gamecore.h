@@ -45,7 +45,7 @@ public:
     QPointF m_gravity = QPointF(0,2);
     //QPointF velocity = QPointF(0,0);
 
-    void gravityApplied(Entity* entity,QPointF &enti_velocity,long long elapsedTime);
+    void gravityApplied(Entity* entity,long long elapsedTime);
 
     void tick(long long elapsedTimeInMilliseconds);
 
