@@ -114,18 +114,18 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     ////        CAISSE        ////
     //////////////////////////////
     Sprite* CaisseW1 = new Sprite(GameFramework::imagesPath() + "CaisseV2.png");
-    CaisseW1->setData(1,"sol");
-    CaisseW1->setData(2,"Wood_caisse");
+    //CaisseW1->setData(1,"sol");
+    CaisseW1->setData(1,"Wood_caisse");
     m_pScene->addSpriteToScene(CaisseW1, 500,1520);
 
     Sprite* CaisseW2 = new Sprite(GameFramework::imagesPath() + "CaisseV2.png");
-    CaisseW2->setData(1,"sol");
-    CaisseW2->setData(2,"Wood_caisse");
+    //CaisseW2->setData(1,"sol");
+    CaisseW2->setData(1,"Wood_caisse");
     m_pScene->addSpriteToScene(CaisseW2, 2900,1380);
 
     Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV2.png");
     caisseM1->setData(1,"sol");
-    caisseM1->setData(2,"Wood_caisse");
+    //caisseM1->setData(2,"Wood_caisse");
     m_pScene->addSpriteToScene(caisseM1, 700,1520);
 
     /////////////////////////////
@@ -161,8 +161,23 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     enemie2->setData(2,"bulio");
     m_pScene->addSpriteToScene(enemie2, 2500,1410);
 
+    Bulio* enemie3 = new Bulio();
+    enemie3->setData(1,"enemie");
+    enemie3->setData(2,"bulio");
+    m_pScene->addSpriteToScene(enemie3, 400,1410);
+
+    Bulio* enemie4 = new Bulio();
+    enemie4->setData(1,"enemie");
+    enemie4->setData(2,"bulio");
+    m_pScene->addSpriteToScene(enemie4, 500,1410);
+
     m_pBulioL.append(enemie1);
-    m_pBulioL.append(enemie2);
+    //m_pBulioL.append(enemie2);
+    m_pBulioL.append(enemie3);
+     m_pBulioL.append(enemie4);
+
+
+
 
     //Ajoute du joueur dans la scene
     pCharacter->setData(1,"joueur");
@@ -330,9 +345,9 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     setupCharacterDeath();
                 }
 
-                if (CollisionDetected->data(2) == "Wood_caisse") {
+                if (CollisionDetected->data(1) == "Wood_caisse") {
 
-                    qDebug()<<"aaaaaaa";
+                    //qDebug()<<"aaaaaaa";
                     for (int i =0;i < collidingSidesL.count();i++) {
 
                         switch (collidingSidesL.at(i)) {
@@ -381,7 +396,10 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         //Déplace le bulio.
         m_pBulioL.at(i)->setPos(m_pBulioL.at(i)->pos()+ m_pBulioL.at(i)->m_velocity);
 
-        qDebug() << "le bulio " << i << " touche le sol : " << m_pBulioL.at(i)->getIsOnFloor();
+        if(i == 2){
+             qDebug() << "le bulio " << i << " touche le sol : " << m_pBulioL.at(i)->getIsOnFloor();
+        }
+
         //Attire le bulio vers le bas de l'écran
         gravityApplied(m_pBulioL.at(i),elapsedTimeInMilliseconds);
 
