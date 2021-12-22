@@ -400,10 +400,11 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         pGhost->setY(pGhost->y() -5);
     }
 
-    int countBulio = m_pBulioL.count();
+    //Nbr de Bulio dans la liste.
+    int bulioCount = m_pBulioL.count();
 
     //Parcourt la liste des Bulio de la scene.
-    for (int i = 0;i < countBulio;i++) {
+    for (int i = 0;i < bulioCount;i++) {
 
         qDebug() << "Bulio " << i;
         //Déplace le bulio.
@@ -505,7 +506,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             m_pScene->removeSpriteFromScene(m_pBulioL.at(i));
             //Retire l'ennemie de la liste
             m_pBulioL.removeAt(i);
-            countBulio--;
+            //l
+            bulioCount--;
         }
     }
     //Attire le joueur vers le bas de l'écran
