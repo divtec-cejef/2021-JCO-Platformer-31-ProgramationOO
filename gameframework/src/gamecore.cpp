@@ -153,7 +153,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     Bulio* enemie1 = new Bulio();
     enemie1->setData(1,"enemie");
     enemie1->setData(2,"bulio");
-    // m_pScene->addSpriteToScene(enemie1, 2500,1410);
+    //m_pScene->addSpriteToScene(enemie1, 2500,1410);
     m_pScene->addSpriteToScene(enemie1, 500,1300);
 
     Bulio* enemie2 = new Bulio();
@@ -168,8 +168,6 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     pCharacter->setData(1,"joueur");
     m_pScene->addSpriteToScene(pCharacter, 300,1200);
     pCharacter->startAnimation(25);
-
-
 
     // ...
     // Démarre le tick pour que les animations qui en dépendent fonctionnent correctement.
@@ -305,11 +303,9 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     for (int i =0;i < collidingSidesL.count();i++) {
                         switch (collidingSidesL.at(i)) {
                         case Entity::hitSide::DOWN:
-                            pCharacter->m_velocity.setY(-2.0);
+                            pCharacter->m_velocity.setY(-0.2);
                             if(!pCharacter->getIsJump())
                                 pCharacter->setIsOnFloor(true);
-
-                            pCharacter->m_velocity.setY(0.0);
                             pCharacter->setIsJump(false);
                             //this->setIsJump(false);
                             break;
@@ -382,9 +378,12 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     //Parcourt la liste des Bulio de la scene.
     for (int i = 0;i < bulioCount;i++) {
 
-        qDebug() << "Bulio " << i;
         //Déplace le bulio.
         m_pBulioL.at(i)->setPos(m_pBulioL.at(i)->pos()+ m_pBulioL.at(i)->m_velocity);
+
+        qDebug() << "le bulio " << i << " touche le sol : " << m_pBulioL.at(i)->getIsOnFloor();
+        //Attire le bulio vers le bas de l'écran
+        gravityApplied(m_pBulioL.at(i),elapsedTimeInMilliseconds);
 
         //Prochaine position du bulio.
         QRectF nextSpriteRect =
@@ -417,7 +416,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     case Entity::hitSide::DOWN:
                         m_pBulioL.at(i)->m_velocity.setY(0.0);
                         m_pBulioL.at(i)->setIsOnFloor(true);
-                        qDebug() << "touche les pied";
+                        //qDebug() << "touche les pied";
                         break;
                     case  Entity::hitSide::UP:
                         //m_pBulioL.at(i)->m_velocity.setY(0.0);
@@ -443,7 +442,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                             break;
                         case  Entity::hitSide::UP:
                             m_pBulioL.at(i)->setIsDeath(true);
-
                             pCharacter->m_velocity.setY(-7);
                             pCharacter->setIsJump(true);
                             break;
@@ -469,9 +467,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             m_pBulioL.at(i)->setIsDeath(true);
         }
 
-        qDebug() << "le bulio " << i << " touche le sol : " << m_pBulioL.at(i)->getIsOnFloor();
-        //Attire le bulio vers le bas de l'écran
-        gravityApplied(m_pBulioL.at(i),elapsedTimeInMilliseconds);
+
 
         if(m_pBulioL.at(i)->getIsDeath()){
             //Retire l'ennemie de la scene
