@@ -3,6 +3,7 @@ release/bulio.o
 release/buliotickhandler.o
 release/character.o
 release/entity.o
+release/entitytickhandler.o
 release/ground.o
 release/keytickhandler.o
 release/mainfrm.o
@@ -14,7 +15,6 @@ release/sprite.o
 release/gamecore.o
 release/resources.o
 release/gameview.o
-release/spritetickhandler_copy.o
 release/utilities.o
 release/gamecanvas.o
 release/walkingman.o

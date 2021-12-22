@@ -25,6 +25,7 @@
 #include <QString>
 #include "ground.h"
 #include "bulio.h"
+#include <buliotickhandler.h>
 
 
 //résolution de la fenetre
@@ -171,10 +172,10 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     enemie4->setData(2,"bulio");
     m_pScene->addSpriteToScene(enemie4, 500,1410);
 
-   // m_pBulioL.append(enemie1);
+   m_pBulioL.append(enemie1);
     m_pBulioL.append(enemie2);
-    //m_pBulioL.append(enemie3);
-    // m_pBulioL.append(enemie4);
+    m_pBulioL.append(enemie3);
+     m_pBulioL.append(enemie4);
 
     //Ajoute du joueur dans la scene
     pCharacter->setData(1,"joueur");
@@ -385,6 +386,14 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         pGhost->setY(pGhost->y() -5);
     }
 
+
+    //Parcourt la liste des Bulio de la scene.
+    for (int i = 0;i < m_pBulioL.count();i++) {
+        BulioTickHandler* bTick = new BulioTickHandler(m_pBulioL.at(i));
+        bTick->tick(elapsedTimeInMilliseconds);
+    }
+
+    /*
     //Nbr de Bulio dans la liste.
     int bulioCount = m_pBulioL.count();
 
@@ -493,6 +502,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             bulioCount--;
         }
     }
+*/
+
     //Attire le joueur vers le bas de l'écran
     gravityApplied(pCharacter,elapsedTimeInMilliseconds);
 }

@@ -15,7 +15,6 @@ debug/sprite.o
 debug/gamecore.o
 debug/resources.o
 debug/gameview.o
-debug/spritetickhandler_copy.o
 debug/utilities.o
 debug/gamecanvas.o
 debug/walkingman.o

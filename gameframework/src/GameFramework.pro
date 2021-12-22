@@ -33,7 +33,6 @@ SOURCES += main.cpp\
     gamecore.cpp \
     resources.cpp \
     gameview.cpp \
-    spritetickhandler_copy.cpp \
     utilities.cpp \
     gamecanvas.cpp \
     walkingman.cpp \
