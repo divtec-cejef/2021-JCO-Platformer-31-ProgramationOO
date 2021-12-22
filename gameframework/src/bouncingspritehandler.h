@@ -11,7 +11,6 @@
 //!
 
 #include <QPointF>
-
 #include "spritetickhandler.h"
 
 class BouncingSpriteHandler : public SpriteTickHandler

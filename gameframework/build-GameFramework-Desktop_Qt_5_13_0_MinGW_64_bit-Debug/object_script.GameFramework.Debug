@@ -1,5 +1,6 @@
 debug/main.o
 debug/bulio.o
+debug/buliotickhandler.o
 debug/character.o
 debug/entity.o
 debug/ground.o
@@ -13,6 +14,7 @@ debug/sprite.o
 debug/gamecore.o
 debug/resources.o
 debug/gameview.o
+debug/spritetickhandler_copy.o
 debug/utilities.o
 debug/gamecanvas.o
 debug/walkingman.o

@@ -18,8 +18,10 @@ DEFINES += DEBUG_SHAPE
 
 SOURCES += main.cpp\
     bulio.cpp \
+    buliotickhandler.cpp \
     character.cpp \
     entity.cpp \
+    entitytickhandler.cpp \
     ground.cpp \
     keytickhandler.cpp \
         mainfrm.cpp \
@@ -31,6 +33,7 @@ SOURCES += main.cpp\
     gamecore.cpp \
     resources.cpp \
     gameview.cpp \
+    spritetickhandler_copy.cpp \
     utilities.cpp \
     gamecanvas.cpp \
     walkingman.cpp \
@@ -46,6 +49,7 @@ HEADERS  += mainfrm.h \
     buliotickhandler.h \
     character.h \
     entity.h \
+    entitytickhandler.h \
     gamescene.h \
     ground.h \
     keytickhandler.h \

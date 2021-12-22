@@ -17,7 +17,6 @@
 #include "resources.h"
 
 //!
-//! \brief Entity::Entity
 //! \param rPixmap
 //! \param pParent
 //!
@@ -27,14 +26,12 @@ Entity::Entity(const QPixmap& rPixmap, QGraphicsItem* pParent) : Sprite(rPixmap,
 }
 
 ///!Permet de configurer l'animation d'une entité
-//! \brief Entity::configureAnimation
 //!
 void Entity::configureAnimation(){
 
 }
 
 //! Permet de savoir si l'entité touche le sol
-//! \brief Entity::getIsOnFloor
 //! \return un booléane
 //!
 bool Entity::getIsOnFloor(){
@@ -42,7 +39,6 @@ bool Entity::getIsOnFloor(){
 }
 
 //! Permet de définir si l'entité touche le sol ou non
-//! \brief Entity::setIsOnFloor
 //! \param _isOnFloor  la nouvelle valeur de m_isOnFloor
 //!
 void Entity::setIsOnFloor(bool _isOnFloor){
@@ -50,7 +46,6 @@ void Entity::setIsOnFloor(bool _isOnFloor){
 }
 
 //! Permet de s'avoir si l'entité est morte
-//! \brief Entity::getIsDeath
 //! \return un booléane
 //!
 bool Entity::getIsDeath(){
@@ -58,15 +53,41 @@ bool Entity::getIsDeath(){
 }
 
 //! Permet de définir si l'entité doit périre ou non.
-//! \brief Entity::setIsDeath
 //! \param _isOnFloor la nouvelle valeur de m_isDeath.
 //!
 void Entity::setIsDeath(bool _isDeath){
     this->m_isDeath = _isDeath;
 }
 
+//! Ajoute à une liste la localisation des collision entre deux sprite.
+//! \param collisionLocateList
+//! \param posSprite Position du Sprite principal.
+//! \param intersected zone de collision entre les deux sprites.
+//!
+void getCollisionLocate(QList<Entity::hitSide>&collisionLocateL,
+                                  QRectF posSprite,QRectF intersected){
+
+    //Si l'intersected est plus large la collision est vertical.
+    if (intersected.width() > intersected.height() && intersected.width() > 10) {
+        if (intersected.center().y() < posSprite.center().y())
+            //Détermine le haut
+            Entity::uniqueSide(&collisionLocateL, Entity::hitSide::UP);
+        else
+            //Détermine le bas
+            Entity::uniqueSide(&collisionLocateL, Entity::hitSide::DOWN);
+
+      //Sinon si la collision est plus haut que large est horizontal.
+    } else if (intersected.width() < intersected.height() && intersected.height() > 10){
+        if (intersected.center().x() < posSprite.center().x())
+            //Détermine la gauche
+            Entity::uniqueSide(&collisionLocateL, Entity::hitSide::LEFT);
+        else
+            //Détermine la droite
+            Entity::uniqueSide(&collisionLocateL, Entity::hitSide::RIGHT);
+    }
+}
+
 //! Permet de rendre les éléments de la liste unique
-//! \brief uniqueSide
 //! \param collidingSidesList liste à testé
 //! \param appendToSide élément à apprendre
 //!
@@ -76,15 +97,16 @@ void Entity::uniqueSide(QList<hitSide>* collidingSidesList, hitSide appendToSide
         }
 }
 
-//!
-//! \brief GameCore::gravityApplied
+//! Applique la gravité à l'entité.
 //! \param entity sprite au quel on applique la gravité
 //! \param enti_velocity velocité du sprite
 //! \param elapsedTime temps écoulé entre chaque tick.
-//!@brief GameCore::gravityApplied
 void Entity::gravityApplied(long long elapsedTime){
+
+    if (!this->getIsOnFloor()){
     this->setPos(this->pos() + this->m_velocity * (elapsedTime/100.0));
     this->m_velocity += m_gravity * (elapsedTime/100.0);
+    }
 }
 
 void Entity::setScene(GameScene* newScene){

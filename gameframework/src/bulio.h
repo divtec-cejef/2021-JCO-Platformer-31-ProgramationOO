@@ -10,7 +10,7 @@
 #include <sprite.h>
 #include <entity.h>
 
-#include "buliotickhandler.h"
+//#include "buliotickhandler.h"
 
 class Bulio: public Entity
 {

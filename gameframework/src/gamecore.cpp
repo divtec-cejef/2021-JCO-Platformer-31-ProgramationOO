@@ -171,13 +171,10 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     enemie4->setData(2,"bulio");
     m_pScene->addSpriteToScene(enemie4, 500,1410);
 
-    m_pBulioL.append(enemie1);
-    //m_pBulioL.append(enemie2);
-    m_pBulioL.append(enemie3);
-     m_pBulioL.append(enemie4);
-
-
-
+   // m_pBulioL.append(enemie1);
+    m_pBulioL.append(enemie2);
+    //m_pBulioL.append(enemie3);
+    // m_pBulioL.append(enemie4);
 
     //Ajoute du joueur dans la scene
     pCharacter->setData(1,"joueur");
@@ -190,6 +187,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     // sinon le temps passé jusqu'au premier tick (ElapsedTime) peut être élevé et provoquer de gros
     // déplacements, surtout si le déboggueur est démarré.
     m_pGameCanvas->startTick(10);
+
 }
 
 //! Destructeur de GameCore : efface les scènes
@@ -500,7 +498,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 }
 
 //! Ajoute à une liste la localisation des collision entre deux sprite.
-//! \brief GameCore::getCollisonLocate
 //! \param collisionLocateList
 //! \param posSprite Position du Sprite principal.
 //! \param intersected zone de collision entre les deux sprites.
@@ -530,7 +527,6 @@ void GameCore::getCollisionLocate(QList<Entity::hitSide>&collisionLocateL,
 }
 
 //!
-//! \brief GameCore::gravityApplied
 //! \param entity sprite au quel on applique la gravité
 //! \param enti_velocity velocité du sprite
 //! \param elapsedTime temps écoulé entre chaque tick.
