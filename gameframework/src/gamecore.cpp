@@ -330,8 +330,9 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     setupCharacterDeath();
                 }
 
-                if (CollisionDetected->data(1) == "Wood_caisse") {
+                if (CollisionDetected->data(2) == "Wood_caisse") {
 
+                    qDebug()<<"aaaaaaa";
                     for (int i =0;i < collidingSidesL.count();i++) {
 
                         switch (collidingSidesL.at(i)) {
@@ -348,13 +349,12 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                             break;
                         case Entity::hitSide::RIGHT :
 
-                            CollisionDetected->setX(CollisionDetected->x() + pCharacter->m_velocity.x());
-                            pCharacter->m_velocity.setX(5);
+                            CollisionDetected->setX(CollisionDetected->x() + 5);
                             break;
                         case Entity::hitSide::LEFT :
 
-                            CollisionDetected->setX(CollisionDetected->x() + pCharacter->m_velocity.x());
-                            pCharacter->m_velocity.setX(-5);
+                            CollisionDetected->setX(CollisionDetected->x() + -5);
+
                             break;
                         }
                     }
