@@ -326,7 +326,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                         }
                     }
                 }
-                if (CollisionDetected->data(1) == "enemie") {
+               /* if (CollisionDetected->data(1) == "enemie") {
 
                     for (int i =0;i < collidingSidesL.count();i++) {
 
@@ -348,7 +348,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                             break;
                         }
                     }
-                }
+                }*/
                 if (CollisionDetected->data(1) == "Piege") {
 
                     if(!pCharacter->getIsDeath()){
@@ -401,8 +401,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     }
 
     //Parcourt la liste des Bulio de la scene.
-    for (int i = 0;i < m_pBulioL.length();i++) {
-
+    for (int i = 0;i < m_pBulioL.count();i++) {
+        qDebug() << "Bulio " << i;
         //Déplace le bulio.
         m_pBulioL.at(i)->setPos(m_pBulioL.at(i)->pos()+ m_pBulioL.at(i)->m_velocity);
 
@@ -423,7 +423,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             //Cherche les collisions entre le bulio les autres sprites
             for (Sprite* CollisionDetected : listeCurrentCollisionBulio) {
 
-                qDebug() << "Bulio " << i;
+
                 //Zone de collision entre les 2 sprites.
                 QRectF intersected = nextSpriteRect.intersected(CollisionDetected->globalBoundingBox());
 
@@ -453,6 +453,36 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                         break;
                     }
                 }
+
+                if (CollisionDetected->data(1) == "joueur") {
+
+                    for (int i =0;i < collidingSidesL.count();i++) {
+
+                        switch (collidingSidesL.at(i)) {
+                        case Entity::hitSide::DOWN:
+                            setupCharacterDeath();
+
+                            //this->setIsJump(false);
+                            break;
+                        case  Entity::hitSide::UP:
+                            //Retire l'enemie de la scene
+                            m_pScene->removeSpriteFromScene(m_pBulioL.at(i));
+                            //Retire l'ennemie de la liste
+                            m_pBulioL.removeAt(i);
+
+                            pCharacter->m_velocity.setY(-7);
+                            pCharacter->setIsJump(true);
+                            break;
+                        case Entity::hitSide::RIGHT :
+                            setupCharacterDeath();
+                            break;
+                        case Entity::hitSide::LEFT :
+                            setupCharacterDeath();
+                            break;
+                        }
+                    }
+                }
+
                 m_pBulioL.at(i)->setIsOnFloor(true);
                 m_pBulioL.at(i)->m_velocity.setY(0.0);
                 collidingSidesL.clear();
@@ -460,7 +490,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         }else {
             m_pBulioL.at(i)->setIsOnFloor(false);
         }
-       // qDebug() << "le bulio touche le sol : " << m_pBulioList.at(i)->getIsOnFloor();
+        // qDebug() << "le bulio touche le sol : " << m_pBulioList.at(i)->getIsOnFloor();
         //Attire le bulio vers le bas de l'écran
         gravityApplied(m_pBulioL.at(i),m_pBulioL.at(i)->m_velocity,elapsedTimeInMilliseconds);
         //}
@@ -487,7 +517,7 @@ void GameCore::getCollisionLocate(QList<Entity::hitSide>&collisionLocateL,
             //Détermine le bas
             Entity::uniqueSide(&collisionLocateL, Entity::hitSide::DOWN);
 
-      //Sinon si la collision est plus haut que large est horizontal.
+        //Sinon si la collision est plus haut que large est horizontal.
     } else if (intersected.width() < intersected.height() && intersected.height() > 10){
         if (intersected.center().x() < posSprite.center().x())
             //Détermine la gauche
