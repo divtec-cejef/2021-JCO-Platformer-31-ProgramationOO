@@ -154,14 +154,22 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     enemie1->setData(1,"enemie");
     enemie1->setData(2,"bulio");
     // m_pScene->addSpriteToScene(enemie1, 2500,1410);
-    m_pScene->addSpriteToScene(enemie1, 500,1200);
+    m_pScene->addSpriteToScene(enemie1, 500,1300);
+
+    Bulio* enemie2 = new Bulio();
+    enemie2->setData(1,"enemie");
+    enemie2->setData(2,"bulio");
+    m_pScene->addSpriteToScene(enemie2, 2500,1410);
+
+    m_pBulioL.append(enemie1);
+    m_pBulioL.append(enemie2);
 
     //Ajoute du joueur dans la scene
     pCharacter->setData(1,"joueur");
     m_pScene->addSpriteToScene(pCharacter, 300,1200);
     pCharacter->startAnimation(25);
 
-    m_pBulioList.append(enemie1);
+
 
     // ...
     // Démarre le tick pour que les animations qui en dépendent fonctionnent correctement.
@@ -298,7 +306,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     for (int i =0;i < collidingSidesL.count();i++) {
                         switch (collidingSidesL.at(i)) {
                         case Entity::hitSide::DOWN:
-                            pCharacter->m_velocity.setY(2.0);
+                            pCharacter->m_velocity.setY(-2.0);
                             if(!pCharacter->getIsJump())
                                 pCharacter->setIsOnFloor(true);
 
@@ -325,6 +333,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                         switch (collidingSidesL.at(i)) {
                         case Entity::hitSide::DOWN:
                             m_pScene->removeSpriteFromScene(CollisionDetected);
+                            pCharacter->m_velocity.setY(-7);
+                            pCharacter->setIsJump(true);
                             //this->setIsJump(false);
                             break;
                         case  Entity::hitSide::UP:
@@ -391,20 +401,20 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     }
 
     //Parcourt la liste des Bulio de la scene.
-    for (int i = 0;i < m_pBulioList.length();i++) {
+    for (int i = 0;i < m_pBulioL.length();i++) {
 
         //Déplace le bulio.
-        m_pBulioList.at(i)->setPos(m_pBulioList.at(i)->pos()+ m_pBulioList.at(i)->m_velocity);
+        m_pBulioL.at(i)->setPos(m_pBulioL.at(i)->pos()+ m_pBulioL.at(i)->m_velocity);
 
         //Prochaine position du bulio.
         QRectF nextSpriteRect =
-                m_pBulioList.at(i)->globalBoundingBox().translated(m_pBulioList.at(i)->m_velocity);
+                m_pBulioL.at(i)->globalBoundingBox().translated(m_pBulioL.at(i)->m_velocity);
 
         // Récupère tous les sprites de la scène qui touche le joueur.
-        auto listeCurrentCollisionBulio = m_pBulioList.at(i)->parentScene()->collidingSprites(m_pBulioList.at(i));
+        auto listeCurrentCollisionBulio = m_pBulioL.at(i)->parentScene()->collidingSprites(m_pBulioL.at(i));
 
         // Supprimer le sprite lui-même.
-        listeCurrentCollisionBulio.removeAll(m_pBulioList.at(i));
+        listeCurrentCollisionBulio.removeAll(m_pBulioL.at(i));
 
         //Récupère la valeur de liste (remplis/vide).
         bool currentCollision  = !listeCurrentCollisionBulio.isEmpty();
@@ -413,6 +423,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             //Cherche les collisions entre le bulio les autres sprites
             for (Sprite* CollisionDetected : listeCurrentCollisionBulio) {
 
+                qDebug() << "Bulio " << i;
                 //Zone de collision entre les 2 sprites.
                 QRectF intersected = nextSpriteRect.intersected(CollisionDetected->globalBoundingBox());
 
@@ -421,40 +432,37 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 //Remplissage de la liste.
                 getCollisionLocate(collidingSidesL,nextSpriteRect,intersected);
 
-                qDebug() << "la liste est vide : " << collidingSidesL.isEmpty();
-
                 for (int i =0;i < collidingSidesL.count();i++) {
-                    qDebug() << "zone touché : " << i;
                     switch (collidingSidesL.at(i)) {
                     case Entity::hitSide::DOWN:
-                        m_pBulioList.at(i)->m_velocity.setY(2.0);
-                        m_pBulioList.at(i)->setIsOnFloor(true);
+                        m_pBulioL.at(i)->m_velocity.setY(-2.0);
+                        m_pBulioL.at(i)->setIsOnFloor(true);
                         qDebug() << "touche les pied";
                         break;
                     case  Entity::hitSide::UP:
-                        m_pBulioList.at(i)->m_velocity.setY(0.0);
+                        m_pBulioL.at(i)->m_velocity.setY(0.0);
                         qDebug() << "touche la tete";
                         break;
                     case Entity::hitSide::RIGHT:
-                        m_pBulioList.at(i)->m_velocity.setX(-5);
+                        m_pBulioL.at(i)->m_velocity.setX(-5);
                         qDebug() << "touche coté droit";
                         break;
                     case Entity::hitSide::LEFT:
-                        m_pBulioList.at(i)->m_velocity.setX(5);
+                        m_pBulioL.at(i)->m_velocity.setX(5);
                         qDebug() << "touche coté gauche";
                         break;
                     }
                 }
-                m_pBulioList.at(i)->setIsOnFloor(true);
-                m_pBulioList.at(i)->m_velocity.setY(0.0);
+                m_pBulioL.at(i)->setIsOnFloor(true);
+                m_pBulioL.at(i)->m_velocity.setY(0.0);
                 collidingSidesL.clear();
             }
         }else {
-            m_pBulioList.at(i)->setIsOnFloor(false);
+            m_pBulioL.at(i)->setIsOnFloor(false);
         }
        // qDebug() << "le bulio touche le sol : " << m_pBulioList.at(i)->getIsOnFloor();
         //Attire le bulio vers le bas de l'écran
-        gravityApplied(m_pBulioList.at(i),m_pBulioList.at(i)->m_velocity,elapsedTimeInMilliseconds);
+        gravityApplied(m_pBulioL.at(i),m_pBulioL.at(i)->m_velocity,elapsedTimeInMilliseconds);
         //}
     }
     //Attire le joueur vers le bas de l'écran

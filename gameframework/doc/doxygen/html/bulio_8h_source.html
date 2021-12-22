@@ -100,58 +100,60 @@ $(function() {
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_entity.html#a7e13400ff06e108f2fd0278690dc61bd">configureAnimation</a>(animation bulio);</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    QPointF <a class="code hl_function" href="class_bulio.html#a39cb4426a7911d776532406cda8dd270">getVelocity</a>();</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">void</span> updateCharacterVelocity();</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">void</span> updateVelocity();</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_bulio.html#acc34f17312a235c247f60efc13e940bd">getIsOnFloor</a>();</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_bulio.html#a36707053633b3bbe763cd94f840cfdd1">setIsOnFloor</a>(<span class="keywordtype">bool</span> _isOnFloor);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_bulio.html#acc34f17312a235c247f60efc13e940bd">getIsOnFloor</a>();</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_bulio.html#a36707053633b3bbe763cd94f840cfdd1">setIsOnFloor</a>(<span class="keywordtype">bool</span> _isOnFloor);</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">bool</span> getIsJump();</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">void</span> setIsJump(<span class="keywordtype">bool</span> _isJump);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="comment">//Mort</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_bulio.html#a96a1dc1e514c6d33d57db44dc3a6b8ff">getIsDeath</a>();</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_bulio.html#aa3ca4ad37ad2e79caaa1aeaf58ef5ebf">setIsDeath</a>(<span class="keywordtype">bool</span> _isDeath);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="comment">//Compteur de mort(s)</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">int</span> getDeathCount();</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">void</span> incrementDeathCount();</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">void</span> respawn();</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="comment">//void futureCollision();</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_bulio.html#ab275f160fe50afb37b16cef8632e8db2">collisionDetection</a>(QRectF rect);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">void</span> move(<span class="keywordtype">long</span> <span class="keywordtype">long</span> elapsedTimeInMilliseconds);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keyword">public</span> slots:</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">void</span> onKeyPressed(<span class="keywordtype">int</span> key);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordtype">void</span> onKeyReleased(<span class="keywordtype">int</span> key);</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">bool</span> m_isJump = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">bool</span> getIsJump();</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">void</span> setIsJump(<span class="keywordtype">bool</span> _isJump);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="comment">//Mort</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_bulio.html#a96a1dc1e514c6d33d57db44dc3a6b8ff">getIsDeath</a>();</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_bulio.html#aa3ca4ad37ad2e79caaa1aeaf58ef5ebf">setIsDeath</a>(<span class="keywordtype">bool</span> _isDeath);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="comment">//Compteur de mort(s)</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">int</span> getDeathCount();</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> incrementDeathCount();</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordtype">void</span> respawn();</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="comment">//void futureCollision();</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_bulio.html#ab275f160fe50afb37b16cef8632e8db2">collisionDetection</a>(QRectF rect);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_bulio.html#ad7834056849ea1e4c74f6a6021a9cb3f">move</a>(<span class="keywordtype">long</span> <span class="keywordtype">long</span> elapsedTimeInMilliseconds);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keyword">public</span> slots:</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordtype">void</span> onKeyPressed(<span class="keywordtype">int</span> key);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">void</span> onKeyReleased(<span class="keywordtype">int</span> key);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordtype">bool</span> m_isJump = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">int</span> m_deathCount = 0;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">void</span> configureTransformationMatrix();</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    QList&lt;QImage&gt;m_listAnimation;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordtype">void</span> setAnimationDeplacementList();</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>};</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">int</span> m_deathCount = 0;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">void</span> configureTransformationMatrix();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    QList&lt;QImage&gt;m_listAnimation;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordtype">void</span> setAnimationDeplacementList();</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>};</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#endif </span><span class="comment">// BULIO_H</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#endif </span><span class="comment">// BULIO_H</span></div>
 <div class="ttc" id="aclass_bulio_html"><div class="ttname"><a href="class_bulio.html">Bulio</a></div><div class="ttdef"><b>Definition:</b> bulio.h:16</div></div>
-<div class="ttc" id="aclass_bulio_html_a36707053633b3bbe763cd94f840cfdd1"><div class="ttname"><a href="class_bulio.html#a36707053633b3bbe763cd94f840cfdd1">Bulio::setIsOnFloor</a></div><div class="ttdeci">void setIsOnFloor(bool _isOnFloor)</div><div class="ttdoc">Bulio::setIsOnFloor.</div><div class="ttdef"><b>Definition:</b> bulio.cpp:45</div></div>
-<div class="ttc" id="aclass_bulio_html_a39cb4426a7911d776532406cda8dd270"><div class="ttname"><a href="class_bulio.html#a39cb4426a7911d776532406cda8dd270">Bulio::getVelocity</a></div><div class="ttdeci">QPointF getVelocity()</div><div class="ttdoc">Character::getVelocity.</div><div class="ttdef"><b>Definition:</b> bulio.cpp:70</div></div>
-<div class="ttc" id="aclass_bulio_html_a96a1dc1e514c6d33d57db44dc3a6b8ff"><div class="ttname"><a href="class_bulio.html#a96a1dc1e514c6d33d57db44dc3a6b8ff">Bulio::getIsDeath</a></div><div class="ttdeci">bool getIsDeath()</div><div class="ttdoc">Bulio::getIsDeath.</div><div class="ttdef"><b>Definition:</b> bulio.cpp:53</div></div>
-<div class="ttc" id="aclass_bulio_html_aa3ca4ad37ad2e79caaa1aeaf58ef5ebf"><div class="ttname"><a href="class_bulio.html#aa3ca4ad37ad2e79caaa1aeaf58ef5ebf">Bulio::setIsDeath</a></div><div class="ttdeci">void setIsDeath(bool _isDeath)</div><div class="ttdoc">Bulio::setIsDeath.</div><div class="ttdef"><b>Definition:</b> bulio.cpp:62</div></div>
-<div class="ttc" id="aclass_bulio_html_ab275f160fe50afb37b16cef8632e8db2"><div class="ttname"><a href="class_bulio.html#ab275f160fe50afb37b16cef8632e8db2">Bulio::collisionDetection</a></div><div class="ttdeci">void collisionDetection(QRectF rect)</div><div class="ttdoc">Bulio::collisionDetection.</div><div class="ttdef"><b>Definition:</b> bulio.cpp:135</div></div>
-<div class="ttc" id="aclass_bulio_html_acc34f17312a235c247f60efc13e940bd"><div class="ttname"><a href="class_bulio.html#acc34f17312a235c247f60efc13e940bd">Bulio::getIsOnFloor</a></div><div class="ttdeci">bool getIsOnFloor()</div><div class="ttdoc">Bulio::getIsOnFloor.</div><div class="ttdef"><b>Definition:</b> bulio.cpp:36</div></div>
+<div class="ttc" id="aclass_bulio_html_a36707053633b3bbe763cd94f840cfdd1"><div class="ttname"><a href="class_bulio.html#a36707053633b3bbe763cd94f840cfdd1">Bulio::setIsOnFloor</a></div><div class="ttdeci">void setIsOnFloor(bool _isOnFloor)</div><div class="ttdef"><b>Definition:</b> bulio.cpp:44</div></div>
+<div class="ttc" id="aclass_bulio_html_a39cb4426a7911d776532406cda8dd270"><div class="ttname"><a href="class_bulio.html#a39cb4426a7911d776532406cda8dd270">Bulio::getVelocity</a></div><div class="ttdeci">QPointF getVelocity()</div><div class="ttdef"><b>Definition:</b> bulio.cpp:68</div></div>
+<div class="ttc" id="aclass_bulio_html_a96a1dc1e514c6d33d57db44dc3a6b8ff"><div class="ttname"><a href="class_bulio.html#a96a1dc1e514c6d33d57db44dc3a6b8ff">Bulio::getIsDeath</a></div><div class="ttdeci">bool getIsDeath()</div><div class="ttdef"><b>Definition:</b> bulio.cpp:52</div></div>
+<div class="ttc" id="aclass_bulio_html_aa3ca4ad37ad2e79caaa1aeaf58ef5ebf"><div class="ttname"><a href="class_bulio.html#aa3ca4ad37ad2e79caaa1aeaf58ef5ebf">Bulio::setIsDeath</a></div><div class="ttdeci">void setIsDeath(bool _isDeath)</div><div class="ttdoc">Bulio::setIsDeath.</div><div class="ttdef"><b>Definition:</b> bulio.cpp:61</div></div>
+<div class="ttc" id="aclass_bulio_html_ab275f160fe50afb37b16cef8632e8db2"><div class="ttname"><a href="class_bulio.html#ab275f160fe50afb37b16cef8632e8db2">Bulio::collisionDetection</a></div><div class="ttdeci">void collisionDetection(QRectF rect)</div><div class="ttdef"><b>Definition:</b> bulio.cpp:140</div></div>
+<div class="ttc" id="aclass_bulio_html_acc34f17312a235c247f60efc13e940bd"><div class="ttname"><a href="class_bulio.html#acc34f17312a235c247f60efc13e940bd">Bulio::getIsOnFloor</a></div><div class="ttdeci">bool getIsOnFloor()</div><div class="ttdef"><b>Definition:</b> bulio.cpp:36</div></div>
+<div class="ttc" id="aclass_bulio_html_ad7834056849ea1e4c74f6a6021a9cb3f"><div class="ttname"><a href="class_bulio.html#ad7834056849ea1e4c74f6a6021a9cb3f">Bulio::move</a></div><div class="ttdeci">void move(long long elapsedTimeInMilliseconds)</div><div class="ttdoc">Bulio::move.</div><div class="ttdef"><b>Definition:</b> bulio.cpp:214</div></div>
 <div class="ttc" id="aclass_entity_html"><div class="ttname"><a href="class_entity.html">Entity</a></div><div class="ttdoc">The Entity class Cette classe est permet de crée une entité et de la géré avec différente méthode....</div><div class="ttdef"><b>Definition:</b> entity.h:20</div></div>
 <div class="ttc" id="aclass_entity_html_a7e13400ff06e108f2fd0278690dc61bd"><div class="ttname"><a href="class_entity.html#a7e13400ff06e108f2fd0278690dc61bd">Entity::configureAnimation</a></div><div class="ttdeci">virtual void configureAnimation()</div><div class="ttdoc">Entity::configureAnimation.</div><div class="ttdef"><b>Definition:</b> entity.cpp:32</div></div>
 <div class="ttc" id="asprite_8h_html"><div class="ttname"><a href="sprite_8h.html">sprite.h</a></div><div class="ttdoc">Déclaration de la classe Sprite.</div></div>

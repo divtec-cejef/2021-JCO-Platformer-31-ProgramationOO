@@ -82,7 +82,7 @@ private:
 
     QList<QGraphicsTransform*> m_transformsForFlip;
 
-    QList<Bulio*> m_pBulioList;
+    QList<Bulio*> m_pBulioL;
     //Bulio* enemie1 = new Bulio();
 
     Ground* m_Grounds = new Ground;
