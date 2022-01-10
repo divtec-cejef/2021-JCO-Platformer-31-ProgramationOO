@@ -29,11 +29,11 @@ public:
     void configureAnimation(animation player);
 
 
-    QPointF getVelocity();
+    //QPointF getVelocity();
     void updateCharacterVelocity();
 
 
-    bool getIsOnFloor();
+    //bool getIsOnFloor();
     void setIsOnFloor(bool _isOnFloor);
 
 
@@ -43,7 +43,7 @@ public:
     void futureCollision();
 
     //Mort
-    bool getIsDeath();
+    //bool getIsDeath();
     void setIsDeath(bool _isDeath);
     //void setupDeath();
 

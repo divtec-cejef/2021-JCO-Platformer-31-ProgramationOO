@@ -59,25 +59,11 @@ void Character::setIsJump(bool _isJump){
 }
 
 //!
-//! @return si le joueur est sur le sol.
-//!
-bool Character::getIsOnFloor(){
-    return this->m_isOnFloor;
-}
-
-//!
 //! Permet de définir si le joueur est sur le sol ou non.
 //! @param _isOnFloor nouvelle état du joueur.
 //!
 void Character::setIsOnFloor(bool _isOnFloor){
     this->m_isOnFloor = _isOnFloor;
-}
-
-//! Permet de retourner l'état actuelle du joueur.
-//! @return si le joueur est mort.
-//!
-bool Character::getIsDeath(){
-    return this->m_isDeath;
 }
 
 //!
@@ -98,14 +84,6 @@ void Character::incrementDeathCount(){
     qDebug() << "Nombre de mort(s) : " << this->m_deathCount;
 
 }
-
-//!
-//! @brief Character::getVelocity
-//! @return la velocité actuel du joueur
-//!
-QPointF Character::getVelocity(){
-    return m_velocity;
-};
 
 //!
 //! Définit l'animation dans la quel le sprite du joueur doit être.

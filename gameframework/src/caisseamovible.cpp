@@ -18,12 +18,6 @@ caisseAmovible::caisseAmovible(QGraphicsItem* pParent) : Entity(GameFramework::i
 
 }
 
-//! Permet de savoir si la caisse est sur le sol.
-//! @return si la caisse est sur le sol.
-//!
-bool caisseAmovible::getIsOnFloor(){
-    return this->m_isOnFloor;
-}
 
 //!
 //! Permet de définir si la caisse est sur le sol ou non.
@@ -33,13 +27,6 @@ void caisseAmovible::setIsOnFloor(bool _isOnFloor){
     this->m_isOnFloor = _isOnFloor;
 }
 
-//!
-//! Permet de savoir l'états de la caisse.
-//! @return si la caisse est détruite ou non.
-//!
-bool caisseAmovible::getIsDeath(){
-    return this->m_isDeath;
-}
 
 //!
 //! Permet de définir si le bulio doit être en vie ou non.

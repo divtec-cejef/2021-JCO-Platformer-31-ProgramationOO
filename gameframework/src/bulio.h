@@ -37,7 +37,7 @@ public:
     //void move(long long elapsedTimeInMilliseconds);
 
 
-    bool getIsOnFloor();
+    //bool getIsOnFloor();
     void setIsOnFloor(bool _isOnFloor);
 
 
@@ -45,7 +45,7 @@ public:
     void setIsJump(bool _isJump);
 
     //Définit si le Bulio doit être détruite ou non.
-    bool getIsDeath();
+    //bool getIsDeath();
     void setIsDeath(bool _isDeath);
 
     void respawn();

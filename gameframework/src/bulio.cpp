@@ -29,14 +29,6 @@ Bulio::Bulio(QGraphicsItem* pParent) : Entity(GameFramework::imagesPath() + "bas
     configureAnimation(DEPLACEMENT);
 }
 
-
-//! Permet de savoir si le bulio est sur le sol.
-//! @return si le bulio est sur le sol.
-//!
-bool Bulio::getIsOnFloor(){
-    return this->m_isOnFloor;
-}
-
 //!
 //! Permet de définir si le bulio est sur le sol ou non.
 //! @param _isOnFloor nouvelle état du bulio.
@@ -45,13 +37,6 @@ void Bulio::setIsOnFloor(bool _isOnFloor){
     this->m_isOnFloor = _isOnFloor;
 }
 
-//!
-//! Permet de savoir l'états du bulio si il est en vie ou non.
-//! @return si le bulio est mort.
-//!
-bool Bulio::getIsDeath(){
-    return this->m_isDeath;
-}
 
 //!
 //! Permet de définir si le bulio doit être en vie ou non.
@@ -61,13 +46,6 @@ bool Bulio::getIsDeath(){
 void Bulio::setIsDeath(bool _isDeath){
     this->m_isDeath = _isDeath;
 }
-
-//!
-//! @return la velocité actuel du bulio
-//!
-QPointF Bulio::getVelocity(){
-    return m_velocity;
-};
 
 //!
 //! Définit l'animation dans la quel le sprite du bulio doit être.
@@ -205,21 +183,4 @@ void Bulio::collisionDetection(QRectF rect){
         this->setIsOnFloor(false);
     }
 }
-
-/*
-//! Application des déplacement de l'entité dans le jeu.
-//! \brief Bulio::move
-//! \param elapsedTimeInMilliseconds
-//!
-void Bulio::move(long long elapsedTimeInMilliseconds){
-
-     this->setPos(this->pos()+ this->m_velocity);
-
-    if (!this->getIsOnFloor()){
-        //Attire le joueur vers le bas de l'écran
-        gravityApplied(elapsedTimeInMilliseconds);
-    }
-    collisionDetection(globalBoundingBox().translated(m_velocity));
-}
-*/
 
