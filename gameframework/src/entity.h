@@ -14,7 +14,12 @@
 //! Cette classe est permet de crée une entité et de la géré avec différente méthode.
 //! Une entité est un sprite qui à des fonctions qui lui son propre elle peut avoir pluiseur aniamtion,une velocité
 //! qui lui est propre.
-//!
+//! \section1 Déplacement d'une entité
+//! Une entité peut se mouvoire dans un espace donnée(la scene sur la quelle elle a été assigné).
+//! Ses déplacement sont géré par la méthodes updateVelocity() qui modifie la variable m_velocity qui
+//! enregistre la vitesse actuel qu'elle a dans la scene.
+//! \section2 Mort de l'entité
+//! La mort d'une entité consite à renvoyé un booléan qui redéfinit sont état et le détruit de la scene sur la quel il apparait.
 //!
 class Entity: public Sprite
 {
@@ -35,7 +40,7 @@ public:
     QPointF m_velocity;
     QPointF m_lastVelocity = m_velocity;
     QPointF getVelocity();
-    void updateCharacterVelocity();
+    virtual void updateVelocity();
 
     bool getIsOnFloor();
     virtual void setIsOnFloor(bool _isOnFloor);
