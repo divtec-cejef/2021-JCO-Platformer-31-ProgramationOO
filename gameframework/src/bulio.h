@@ -18,7 +18,7 @@ public:
     Bulio(QGraphicsItem* pParent = nullptr);
 
 
-    //Type d'animation du joueurs
+    //Type d'animation du bulio
     enum animation{
         BASE = 0,
         DEPLACEMENT = 1,
@@ -26,11 +26,15 @@ public:
         ATTAQUE = 4,
     };
 
+    //Configuration des animation du bulio
     void configureAnimation(animation bulio);
 
+    //Gestion des déplacement du Bulio
     QPointF getVelocity();
     void updateVelocity();
-
+    //Définit les déplacement du Bulio dans le jeu.
+    void collisionDetection(QRectF rect);
+    //void move(long long elapsedTimeInMilliseconds);
 
 
     bool getIsOnFloor();
@@ -40,19 +44,13 @@ public:
     bool getIsJump();
     void setIsJump(bool _isJump);
 
-    //Mort
+    //Définit si le Bulio doit être détruite ou non.
     bool getIsDeath();
     void setIsDeath(bool _isDeath);
 
-    //Compteur de mort(s)
-    int getDeathCount();
-    void incrementDeathCount();
-
     void respawn();
 
-    //void futureCollision();
-    void collisionDetection(QRectF rect);
-    void move(long long elapsedTimeInMilliseconds);
+
 
 public slots:
 
@@ -62,9 +60,6 @@ public slots:
 private:
 
     bool m_isJump = false;
-
-
-    int m_deathCount = 0;
 
     void configureTransformationMatrix();
 

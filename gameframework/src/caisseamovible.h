@@ -16,16 +16,22 @@ class caisseAmovible : public Entity
 public:
     caisseAmovible(QGraphicsItem* pParent = nullptr);
 
+    //Gestion des déplacement de la caisse
     QPointF getVelocity();
     void updateVelocity();
+    //Définit les déplacement de la caisse dans le jeu.
+    void collisionDetection(QRectF rect);
+    //void move(long long elapsedTimeInMilliseconds);
+
+    bool getIsOnFloor();
+    void setIsOnFloor(bool _isOnFloor);
 
     //Définit si la caisse doit être détruite ou non.
+    bool getIsDeath();
     void setIsDeath(bool _isDeath);
 
-    //Définit les déplacement de la caisse dans le jeu.
-    //void futureCollision();
-    void collisionDetection(QRectF rect);
-    void move(long long elapsedTimeInMilliseconds);
+
+
 };
 
 #endif // CAISSEAMOVIBLE_H

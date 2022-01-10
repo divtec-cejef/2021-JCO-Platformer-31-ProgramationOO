@@ -30,49 +30,49 @@ Bulio::Bulio(QGraphicsItem* pParent) : Entity(GameFramework::imagesPath() + "bas
 }
 
 
-//! Permet de savoir si le joueur est sur le sol.
-//! @return si le joueur est sur le sol.
+//! Permet de savoir si le bulio est sur le sol.
+//! @return si le bulio est sur le sol.
 //!
 bool Bulio::getIsOnFloor(){
     return this->m_isOnFloor;
 }
 
 //!
-//! Permet de définir si le joueur est sur le sol ou non.
-//! @param _isOnFloor nouvelle état du joueur.
+//! Permet de définir si le bulio est sur le sol ou non.
+//! @param _isOnFloor nouvelle état du bulio.
 //!
 void Bulio::setIsOnFloor(bool _isOnFloor){
     this->m_isOnFloor = _isOnFloor;
 }
 
 //!
-//! Permet de savoir l'états du joueur si il est en vie ou non.
-//! @return si le joueur est mort.
+//! Permet de savoir l'états du bulio si il est en vie ou non.
+//! @return si le bulio est mort.
 //!
 bool Bulio::getIsDeath(){
     return this->m_isDeath;
 }
 
 //!
-//! Permet de définir si le joueur doit être en vie ou non.
+//! Permet de définir si le bulio doit être en vie ou non.
 //! @brief Bulio::setIsDeath
-//! @param _isDeath nouvelle état du joueur.
+//! @param _isDeath nouvelle état du bulio.
 //!
 void Bulio::setIsDeath(bool _isDeath){
     this->m_isDeath = _isDeath;
 }
 
 //!
-//! @return la velocité actuel du joueur
+//! @return la velocité actuel du bulio
 //!
 QPointF Bulio::getVelocity(){
     return m_velocity;
 };
 
 //!
-//! Définit l'animation dans la quel le sprite du joueur doit être.
+//! Définit l'animation dans la quel le sprite du bulio doit être.
 //! @brief Character::configureAnimation
-//! @param player animation du joueur paramétrer
+//! @param player animation du bulio paramétrer
 //!
 void Bulio::configureAnimation(animation bulio) {
 
@@ -206,8 +206,8 @@ void Bulio::collisionDetection(QRectF rect){
     }
 }
 
-
-//!
+/*
+//! Application des déplacement de l'entité dans le jeu.
 //! \brief Bulio::move
 //! \param elapsedTimeInMilliseconds
 //!
@@ -221,5 +221,5 @@ void Bulio::move(long long elapsedTimeInMilliseconds){
     }
     collisionDetection(globalBoundingBox().translated(m_velocity));
 }
-
+*/
 
