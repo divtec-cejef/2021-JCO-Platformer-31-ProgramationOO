@@ -1,6 +1,8 @@
 release/main.o
 release/bulio.o
 release/buliotickhandler.o
+release/caisseamovible.o
+release/caisseamovtickhandler.o
 release/character.o
 release/entity.o
 release/entitytickhandler.o

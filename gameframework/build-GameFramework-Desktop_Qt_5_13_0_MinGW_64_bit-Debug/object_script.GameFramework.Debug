@@ -1,6 +1,8 @@
 debug/main.o
 debug/bulio.o
 debug/buliotickhandler.o
+debug/caisseamovible.o
+debug/caisseamovtickhandler.o
 debug/character.o
 debug/entity.o
 debug/entitytickhandler.o

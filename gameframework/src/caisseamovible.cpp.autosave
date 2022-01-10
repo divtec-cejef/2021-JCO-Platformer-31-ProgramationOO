@@ -1,0 +1,42 @@
+#include "caisseamovible.h"
+
+//Ajoute Supp
+#include "utilities.h"
+#include "playertickhandler.h"
+#include "sprite.h"
+#include "time.h"
+#include <QString>
+#include "gamescene.h"
+#include "gamecanvas.h"
+#include "resources.h"
+
+// Vitesse de la caisse
+const int VITESSE_DEPLACEMENT = 5;
+
+caisseAmovible::caisseAmovible(QGraphicsItem* pParent) : Entity(GameFramework::imagesPath() + "CaisseV1.png", pParent)
+{
+
+}
+
+//! Permet de savoir si la caisse est sur le sol.
+//! @return si la caisse est sur le sol.
+//!
+bool Bulio::getIsOnFloor(){
+    return this->m_isOnFloor;
+}
+
+//!
+//! Permet de définir si le joueur est sur le sol ou non.
+//! @param _isOnFloor nouvelle état du joueur.
+//!
+void Bulio::setIsOnFloor(bool _isOnFloor){
+    this->m_isOnFloor = _isOnFloor;
+}
+
+//!
+//! Permet de savoir l'états du joueur si il est en vie ou non.
+//! @return si le joueur est mort.
+//!
+bool Bulio::getIsDeath(){
+    return this->m_isDeath;
+}
