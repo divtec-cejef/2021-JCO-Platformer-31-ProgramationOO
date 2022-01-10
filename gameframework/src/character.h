@@ -10,7 +10,11 @@
 #include <sprite.h>
 #include <entity.h>
 
-
+//!
+//! \brief la Classe Character gère le joueur dans une scene
+//! Cette classe est permet de crée le personnage que va incarné le joueur.
+//! Elle gère les animations du sprite ainsi que ses déplacement dans la scene.
+//!
 class Character: public Entity
 {
 public:
@@ -28,12 +32,8 @@ public:
 
     void configureAnimation(animation player);
 
-
-    //QPointF getVelocity();
     void updateCharacterVelocity();
 
-
-    //bool getIsOnFloor();
     void setIsOnFloor(bool _isOnFloor);
 
 
@@ -43,7 +43,6 @@ public:
     void futureCollision();
 
     //Mort
-    //bool getIsDeath();
     void setIsDeath(bool _isDeath);
     //void setupDeath();
 

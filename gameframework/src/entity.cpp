@@ -1,17 +1,12 @@
 #include "entity.h"
 #include "character.h"
 
-#include <cmath>
-#include <QDebug>
-#include <QSettings>
-
-#include "utilities.h"
-#include "playertickhandler.h"
-#include "sprite.h"
-#include "time.h"
 
 //Ajoute Supp
-#include <QString>
+#include <cmath>
+#include <QDebug>
+
+#include "sprite.h"
 #include "gamescene.h"
 #include "gamecanvas.h"
 #include "resources.h"
@@ -53,13 +48,13 @@ bool Entity::getIsDeath(){
 }
 
 //! Permet de définir si l'entité doit périre ou non.
-//! \param _isOnFloor la nouvelle valeur de m_isDeath.
+//! \param _isDeath la nouvelle valeur de m_isDeath.
 //!
 void Entity::setIsDeath(bool _isDeath){
     this->m_isDeath = _isDeath;
 }
 
-//! Ajoute à une liste la localisation des collision entre deux sprite.
+//! Ajoute à une liste la localisation des collision entre l'entité et un sprite.
 //! \param collisionLocateList
 //! \param posSprite Position du Sprite principal.
 //! \param intersected zone de collision entre les deux sprites.
@@ -109,6 +104,10 @@ void Entity::gravityApplied(long long elapsedTime){
     }
 }
 
+//! Définit la scene sur la quel l'entité est liée.
+//! \brief Entity::setScene
+//! \param newScene
+//!
 void Entity::setScene(GameScene* newScene){
     m_pScene = newScene;
 
