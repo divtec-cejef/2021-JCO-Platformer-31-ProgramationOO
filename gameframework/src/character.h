@@ -32,7 +32,7 @@ public:
 
     void configureAnimation(animation player);
 
-    void updateCharacterVelocity();
+    //void updateCharacterVelocity();
 
     void setIsOnFloor(bool _isOnFloor);
 

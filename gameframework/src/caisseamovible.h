@@ -11,10 +11,10 @@
 #include <entity.h>
 
 
-class caisseAmovible : public Entity
+class CaisseAmovible : public Entity
 {
 public:
-    caisseAmovible(QGraphicsItem* pParent = nullptr);
+    CaisseAmovible(QGraphicsItem* pParent = nullptr);
 
     //Gestion des déplacement de la caisse
     void updateVelocity();

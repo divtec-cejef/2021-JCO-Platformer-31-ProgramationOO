@@ -85,6 +85,7 @@ void Character::incrementDeathCount(){
 
 }
 
+
 //!
 //! Définit l'animation dans la quel le sprite du joueur doit être.
 //! @brief Character::configureAnimation
@@ -274,6 +275,10 @@ void Character::setupDeath(GameScene pScene){
     pCharacter->incrementDeathCount();
 }
 */
+
+void Entity::updateVelocity(){
+
+}
 
 ///!
 //! \brief Bulio::collisionDetection

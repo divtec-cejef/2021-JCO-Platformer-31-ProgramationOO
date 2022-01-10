@@ -13,7 +13,7 @@
 // Vitesse de la caisse
 //const int VITESSE_DEPLACEMENT = 5;
 
-caisseAmovible::caisseAmovible(QGraphicsItem* pParent) : Entity(GameFramework::imagesPath() + "CaisseV1.png", pParent)
+CaisseAmovible::CaisseAmovible(QGraphicsItem* pParent) : Entity(GameFramework::imagesPath() + "CaisseV2.png", pParent)
 {
 
 }
@@ -23,7 +23,7 @@ caisseAmovible::caisseAmovible(QGraphicsItem* pParent) : Entity(GameFramework::i
 //! Permet de définir si la caisse est sur le sol ou non.
 //! @param _isOnFloor nouvelle état de la caisse.
 //!
-void caisseAmovible::setIsOnFloor(bool _isOnFloor){
+void CaisseAmovible::setIsOnFloor(bool _isOnFloor){
     this->m_isOnFloor = _isOnFloor;
 }
 
@@ -33,10 +33,14 @@ void caisseAmovible::setIsOnFloor(bool _isOnFloor){
 //! @brief caisseAmovible::setIsDeath
 //! @param _isDeath nouvelle état du bulio.
 //!
-void caisseAmovible::setIsDeath(bool _isDeath){
+void CaisseAmovible::setIsDeath(bool _isDeath){
     this->m_isDeath = _isDeath;
 }
 
-void caisseAmovible::collisionDetection(QRectF rect){
+void CaisseAmovible::collisionDetection(QRectF rect){
+
+}
+
+void CaisseAmovible::updateVelocity(){
 
 }

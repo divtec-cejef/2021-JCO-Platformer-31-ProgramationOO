@@ -184,3 +184,7 @@ void Bulio::collisionDetection(QRectF rect){
     }
 }
 
+void Bulio::updateVelocity(){
+
+}
+

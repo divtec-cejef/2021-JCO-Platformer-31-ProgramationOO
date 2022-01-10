@@ -5,8 +5,7 @@
   \date     decembre 2021
 */
 #include "buliotickhandler.h"
-#include "gamescene.h"
-#include "gamecore.h"
+
 
 BulioTickHandler::BulioTickHandler(Entity* pParentEntity,GameCore* newGameCore) : EntityTickHandler (pParentEntity)
 {

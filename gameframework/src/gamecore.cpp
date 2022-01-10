@@ -10,23 +10,25 @@
 
 #include <QDebug>
 #include <QSettings>
+#include "QPainterPath"
+#include <QGraphicsView>
 
 #include "gamescene.h"
 #include "gamecanvas.h"
 #include "resources.h"
 #include "utilities.h"
-#include "playertickhandler.h"
+
 #include "sprite.h"
-#include "time.h"
-#include "QPainterPath"
-#include <QGraphicsView>
 
 //Ajoute Supp
 #include <QString>
 #include "ground.h"
+
 #include "bulio.h"
 #include <buliotickhandler.h>
 
+#include "caisseamovible.h"
+#include "caisseamovtickhandler.h"
 
 //résolution de la fenetre
 const int SCENE_WIDTH   = 6000;
@@ -114,10 +116,10 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     //////////////////////////////
     ////        CAISSE        ////
     //////////////////////////////
-    Sprite* CaisseW1 = new Sprite(GameFramework::imagesPath() + "CaisseV2.png");
+    CaisseAmovible* CaisseW1 = new CaisseAmovible;
     //CaisseW1->setData(1,"sol");
     CaisseW1->setData(1,"Wood_caisse");
-    m_pScene->addSpriteToScene(CaisseW1, 500,1520);
+    m_pScene->addSpriteToScene(CaisseW1, 500,1120);
 
     Sprite* CaisseW2 = new Sprite(GameFramework::imagesPath() + "CaisseV2.png");
     //CaisseW2->setData(1,"sol");
@@ -176,6 +178,8 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pBulioL.append(enemie2);
     m_pBulioL.append(enemie3);
     m_pBulioL.append(enemie4);
+
+    m_pCaisseMovL.append(CaisseW1);
 
     //Ajoute du joueur dans la scene
     pCharacter->setData(1,"joueur");
@@ -418,6 +422,14 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         bTick->tick(elapsedTimeInMilliseconds);
         if(m_pBulioL.at(i)->getIsDeath())
             m_pBulioL.removeAt(i);
+    }
+
+    //Parcourt la liste des caisse de la scene.
+    for (int i = 0;i < m_pCaisseMovL.count();i++) {
+        CaisseAmovTickHandler* cTick = new CaisseAmovTickHandler(m_pCaisseMovL.at(i),this);
+        cTick->tick(elapsedTimeInMilliseconds);
+        if(m_pCaisseMovL.at(i)->getIsDeath())
+            m_pCaisseMovL.removeAt(i);
     }
 
     /*

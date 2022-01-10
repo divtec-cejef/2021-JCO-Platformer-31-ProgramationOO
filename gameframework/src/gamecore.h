@@ -15,7 +15,10 @@
 #include "character.h"
 #include "gameview.h"
 #include "ground.h"
+
 #include "bulio.h"
+#include "caisseamovible.h"
+
 
 class GameCanvas;
 class GameScene;
@@ -83,7 +86,7 @@ private:
     QList<QGraphicsTransform*> m_transformsForFlip;
 
     QList<Bulio*> m_pBulioL;
-    //Bulio* enemie1 = new Bulio();
+    QList<CaisseAmovible*> m_pCaisseMovL;
 
     Ground* m_Grounds = new Ground;
 
