@@ -119,9 +119,9 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     CaisseAmovible* CaisseW1 = new CaisseAmovible;
     //CaisseW1->setData(1,"sol");
     CaisseW1->setData(1,"Wood_caisse");
-    m_pScene->addSpriteToScene(CaisseW1, 500,1120);
+    m_pScene->addSpriteToScene(CaisseW1, 700,1020);
 
-    Sprite* CaisseW2 = new Sprite(GameFramework::imagesPath() + "CaisseV2.png");
+    CaisseAmovible* CaisseW2 = new CaisseAmovible;
     //CaisseW2->setData(1,"sol");
     CaisseW2->setData(1,"Wood_caisse");
     m_pScene->addSpriteToScene(CaisseW2, 2900,1380);
@@ -180,6 +180,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pBulioL.append(enemie4);
 
     m_pCaisseMovL.append(CaisseW1);
+    m_pCaisseMovL.append(CaisseW2);
 
     //Ajoute du joueur dans la scene
     pCharacter->setData(1,"joueur");
