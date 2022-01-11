@@ -47,11 +47,14 @@ void CaisseAmovTickHandler::tick(long long elapsedTimeInMilliseconds) {
             m_pParentEntity->getCollisionLocate(collidingSidesL,nextSpriteRect,intersected);
 
 
+
             if (CollisionDetected->data(1) == "joueur") {
-              for (int i =0;i < collidingSidesL.count();i++) {
+                for (int i =0;i < collidingSidesL.count();i++) {
                     switch (collidingSidesL.at(i)) {
+                    case Entity::hitSide::UP:
+                        break;
                     case Entity::hitSide::DOWN :
-                         m_pGameCore->setupCharacterDeath();
+                        m_pGameCore->setupCharacterDeath();
                         break;
                     case Entity::hitSide::RIGHT :
                         m_pParentEntity->m_velocity.setX(-5);
@@ -63,32 +66,40 @@ void CaisseAmovTickHandler::tick(long long elapsedTimeInMilliseconds) {
                 }
             }else{
                 for (int i =0;i < collidingSidesL.count();i++) {
-                    if(intersected.width() > 30 ||intersected.height() > 30){
-                        switch (collidingSidesL.at(i)) {
-                        case Entity::hitSide::DOWN:
-                                m_pParentEntity->setY((CollisionDetected->top()-m_pParentEntity->height()));
-                                m_pParentEntity->setIsOnFloor(true);
-                            break;
-                        case  Entity::hitSide::UP:
-                                m_pParentEntity->m_velocity.setY(0);
-                                m_pParentEntity->setY((CollisionDetected->bottom()+1));
-                            break;
-                        case Entity::hitSide::RIGHT:
-                                m_pParentEntity->setX((CollisionDetected->left()- m_pParentEntity->width()));
-                            break;
-                        case Entity::hitSide::LEFT:
-                                m_pParentEntity->setX(CollisionDetected->right());
-                            break;
+                    switch (collidingSidesL.at(i)) {
+                    case Entity::hitSide::DOWN:
+                        if(intersected.width() > 30){
+                            m_pParentEntity->setY((CollisionDetected->top()-m_pParentEntity->height()));
+                            m_pParentEntity->setIsOnFloor(true);
                         }
+                        break;
+                    case  Entity::hitSide::UP:
+                        if(intersected.width() > 30){
+                            m_pParentEntity->m_velocity.setY(0);
+                            m_pParentEntity->setY((CollisionDetected->bottom()+1));
+                        }
+                        break;
+                    case Entity::hitSide::RIGHT:
+                        if(intersected.height() > 30){
+                            m_pParentEntity->setX((CollisionDetected->left()- m_pParentEntity->width()));
+                        }
+                        break;
+                    case Entity::hitSide::LEFT:
+                        if(intersected.height() > 30){
+                            m_pParentEntity->setX(CollisionDetected->right());
+                        }
+                        break;
                     }
                 }
             }
         }
+
     }else {
+        m_pParentEntity->m_velocity.setX(0);
         m_pParentEntity->setIsOnFloor(false);
     }
 
-    m_pParentEntity->m_velocity.setX(0);
+
 
     if(!m_pParentEntity->parentScene()->isInsideScene(nextSpriteRect)){
         qDebug() << "la caisse a quitté ce monde ;-;";

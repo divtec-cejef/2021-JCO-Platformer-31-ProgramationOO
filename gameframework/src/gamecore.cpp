@@ -119,7 +119,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     CaisseAmovible* CaisseW1 = new CaisseAmovible;
     //CaisseW1->setData(1,"sol");
     CaisseW1->setData(1,"Wood_caisse");
-    CaisseW1->setSpawnPoint(QPoint(700,1020));
+    CaisseW1->setSpawnPoint(QPoint(700,1200));
     m_pScene->addSpriteToScene(CaisseW1,CaisseW1->getSpawnPoint());
 
     CaisseAmovible* CaisseW2 = new CaisseAmovible;
@@ -325,7 +325,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 QList<Entity::hitSide> collidingSidesL = QList<Entity::hitSide>();
                 pCharacter->getCollisionLocate(collidingSidesL,nextSpriteRect,intersected);
 
-                if (CollisionDetected->data(1) == "sol") {
+                /*if (CollisionDetected->data(1) == "sol") {
                     //Parcourt la list des local collision
                     for (int i =0;i < collidingSidesL.count();i++) {
 
@@ -357,7 +357,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                             break;
                         }
                     }
-                }
+                }*/
                 if (CollisionDetected->data(1) == "Piege") {
 
                     if(!pCharacter->getIsDeath()){
@@ -365,8 +365,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                         m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
                     }
                     setupCharacterDeath();
-                }
-                /*
+
+
                 if (CollisionDetected->data(1) == "Wood_caisse") {
 
                     //qDebug()<<"aaaaaaa";
@@ -374,16 +374,20 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
                         switch (collidingSidesL.at(i)) {
                         case Entity::hitSide::DOWN:
-                            pCharacter->m_velocity.setY(0.0);
-                            if(!pCharacter->getIsJump())
-                                pCharacter->setIsOnFloor(true);
-
-                            pCharacter->setIsJump(false);
-                            //this->setIsJump(false);
+                            if(intersected.width() > 30){
+                                //Truc de doryan bizarre
+                                pCharacter->setY((CollisionDetected->top()-pCharacter->height()));
+                                if(!pCharacter->getIsJump())
+                                    pCharacter->setIsOnFloor(true);
+                                pCharacter->setIsJump(false);
+                            }
                             break;
                         case  Entity::hitSide::UP:
-                            pCharacter->m_velocity.setY(0.0);
 
+                            if(intersected.width() > 30){
+                                pCharacter->m_velocity.setY(0);
+                                pCharacter->setY((CollisionDetected->bottom()+1));
+                            }
                             break;
                         case Entity::hitSide::RIGHT :
 
@@ -398,8 +402,9 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     }
 
                 }
-*/
-                if (CollisionDetected->data(1) == "ennemie") {
+
+
+                }else if (CollisionDetected->data(1) == "ennemie") {
 
                     for (int i =0;i < collidingSidesL.count();i++) {
                         switch (collidingSidesL.at(i)) {
@@ -416,7 +421,42 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                             setupCharacterDeath();
                         }
                     }
+
+
+                }else{
+                    //Parcourt la list des local collision
+                    for (int i =0;i < collidingSidesL.count();i++) {
+
+                        switch (collidingSidesL.at(i)) {
+                        case Entity::hitSide::DOWN:
+                            //pCharacter->m_velocity.setY(-0.2);
+                            if(intersected.width() > 30){
+                                //Truc de doryan bizarre
+                                pCharacter->setY((CollisionDetected->top()-pCharacter->height()));
+                                if(!pCharacter->getIsJump())
+                                    pCharacter->setIsOnFloor(true);
+                                pCharacter->setIsJump(false);
+                            }
+                            break;
+                        case  Entity::hitSide::UP:
+                            if(intersected.width() > 30){
+                                pCharacter->m_velocity.setY(0);
+                                pCharacter->setY((CollisionDetected->bottom()+1));
+
+                            }
+                            break;
+                        case Entity::hitSide::RIGHT :
+                            if(intersected.height() > 30)
+                                pCharacter->setX((CollisionDetected->left()- pCharacter->width())+5);
+                            break;
+                        case Entity::hitSide::LEFT :
+                            if(intersected.height() > 30)
+                                pCharacter->setX((CollisionDetected->right()) -5);
+                            break;
+                        }
+                    }
                 }
+
                 collidingSidesL.clear();
             }
         }else {
