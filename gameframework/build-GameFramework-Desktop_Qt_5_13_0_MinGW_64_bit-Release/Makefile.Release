@@ -13,7 +13,7 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1 -DQT_NO_DEBUG -DQT_SVG_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
+DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1 -DDEBUG_BBOX -DDEBUG_SHAPE -DQT_NO_DEBUG -DQT_SVG_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
 CFLAGS        = -fno-keep-inline-dllexport -O2 -Wall -W -Wextra $(DEFINES)
 CXXFLAGS      = -fno-keep-inline-dllexport -O2 -Wall -W -Wextra -fexceptions -mthreads $(DEFINES)
 INCPATH       = -I..\src -I. -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\include -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\include\QtSvg -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\include\QtWidgets -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\include\QtGui -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\include\QtANGLE -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\include\QtCore -Irelease -I. -I\include -IC:\Qt\Qt5.13.0\5.13.0\mingw73_64\mkspecs\win32-g++ 
@@ -1629,11 +1629,10 @@ release/bulio.o: ../src/bulio.cpp ../src/bulio.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qtimer.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qbasictimer.h \
 		../src/entity.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QString \
+		../src/resources.h \
 		../src/utilities.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QSize \
-		../src/playertickhandler.h \
-		../src/spritetickhandler.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QString \
 		../src/gamescene.h \
 		../src/gamecanvas.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QPointer \
@@ -1646,8 +1645,7 @@ release/bulio.o: ../src/bulio.cpp ../src/bulio.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsscene.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qbrush.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qfont.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpen.h \
-		../src/resources.h
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\bulio.o ..\src\bulio.cpp
 
 release/buliotickhandler.o: ../src/buliotickhandler.cpp ../src/buliotickhandler.h \
@@ -2344,7 +2342,6 @@ release/entity.o: ../src/entity.cpp ../src/entity.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QTimer \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qtimer.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qbasictimer.h \
-		../src/character.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QDebug \
 		../src/gamescene.h \
 		../src/gamecanvas.h \
@@ -2484,10 +2481,10 @@ release/ground.o: ../src/ground.cpp ../src/ground.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QDebug \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QSettings \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qsettings.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QString \
+		../src/resources.h \
 		../src/utilities.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QSize \
-		../src/playertickhandler.h \
-		../src/spritetickhandler.h \
 		../src/gamescene.h \
 		../src/gamecanvas.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QPointer \
@@ -2500,9 +2497,7 @@ release/ground.o: ../src/ground.cpp ../src/ground.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsscene.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qbrush.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qfont.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpen.h \
-		../src/resources.h \
-		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QString
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\ground.o ..\src\ground.cpp
 
 release/keytickhandler.o: ../src/keytickhandler.cpp ../src/keytickhandler.h \
@@ -2761,6 +2756,29 @@ release/mainfrm.o: ../src/mainfrm.cpp ../src/mainfrm.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qvector2d.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qtouchdevice.h \
 		ui_mainfrm.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QVariant \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QApplication \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qapplication.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qcoreapplication.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/qeventloop.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qdesktopwidget.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qguiapplication.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qinputmethod.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QVBoxLayout \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qboxlayout.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qlayout.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qlayoutitem.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgridlayout.h \
+		../src/gameview.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/QGraphicsView \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpainter.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qtextoption.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtGui/qpen.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qscrollarea.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qframe.h \
+		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtWidgets/qgraphicsscene.h \
 		../src/gamecanvas.h \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QObject \
 		C:/Qt/Qt5.13.0/5.13.0/mingw73_64/include/QtCore/QPointer \

@@ -353,7 +353,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                             break;
                         case Entity::hitSide::LEFT :
                             if(intersected.height() > 30)
-                                 qDebug()<< "gauche sol value de déplacement : " << CollisionDetected->left();
                                 pCharacter->setX((CollisionDetected->left()-pCharacter->width()+1));
                                // pCharacter->m_velocity.setX(0);
 
