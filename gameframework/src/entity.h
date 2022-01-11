@@ -27,6 +27,9 @@ public:
 
     Entity(const QPixmap& rPixmap, QGraphicsItem* pParent = nullptr);
 
+/*    Entity(const QPixmap& rPixmap, QGraphicsItem* pParent = nullptr,
+           QPointF _spawnPoint = QPoint(0.0,0.0));*/
+
     enum hitSide{
         UP =0,
         DOWN =1,
@@ -37,6 +40,7 @@ public:
     virtual void configureAnimation();
     //void uniqueSide(QList<hitSide> collidingSidesList, hitSide appendToSide);
 
+    //Gestion des déplacement
     QPointF m_velocity;
     QPointF m_lastVelocity = m_velocity;
     QPointF getVelocity();
@@ -44,6 +48,11 @@ public:
 
     bool getIsOnFloor();
     virtual void setIsOnFloor(bool _isOnFloor);
+
+    QPointF m_spawnPoint = QPointF(0,0);
+    void setSpawnPoint(QPointF _spawnPoint);
+    QPointF getSpawnPoint();
+
 
     bool getIsDeath();
     virtual void setIsDeath(bool _isDeath);

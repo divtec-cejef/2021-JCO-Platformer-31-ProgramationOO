@@ -143,6 +143,7 @@ void Character::configureAnimation(animation player) {
                                                                      Qt::SmoothTransformation)));
     }
     startAnimation(25);
+
 }
 
 //!

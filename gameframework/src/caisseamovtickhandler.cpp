@@ -15,13 +15,13 @@ CaisseAmovTickHandler::CaisseAmovTickHandler(Entity* pParentEntity,GameCore* new
 //! vérifie si il doit rebondir et le positionne à son nouvel emplacement.
 void CaisseAmovTickHandler::tick(long long elapsedTimeInMilliseconds) {
 
-    //Déplace le bulio.
+    //Déplace la caisse
     m_pParentEntity->setPos(m_pParentEntity->pos()+ m_pParentEntity->m_velocity);
 
-    //Attire le bulio vers le bas de l'écran
+    //Attire la caisse vers le bas de l'écran
     m_pParentEntity->gravityApplied(elapsedTimeInMilliseconds);
 
-    //Prochaine position du bulio.
+    //Prochaine position de la caisse.
     QRectF nextSpriteRect =
             m_pParentEntity->globalBoundingBox().translated(m_pParentEntity->m_velocity);
 
@@ -86,14 +86,21 @@ void CaisseAmovTickHandler::tick(long long elapsedTimeInMilliseconds) {
         m_pParentEntity->setIsOnFloor(false);
     }
 
+    m_pParentEntity->m_velocity.setX(0);
+
     if(!m_pParentEntity->parentScene()->isInsideScene(nextSpriteRect)){
-        qDebug() << "la caisse a quitté se monde ;-;";
+        qDebug() << "la caisse a quitté ce monde ;-;";
         m_pParentEntity->setIsDeath(true);
     }
 
     if(m_pParentEntity->getIsDeath()){
-        //Retire l'ennemie de la scene
+        //Retire la caisse de la scene
         m_pParentEntity->parentScene()->removeSpriteFromScene(m_pParentEntity);
+
+        //Rajoute la caisse dans la scene
+        m_pParentEntity->parentScene()->addSpriteToScene(
+                    m_pParentEntity,m_pParentEntity->getSpawnPoint());
+        m_pParentEntity->setIsDeath(false);
     }
 }
 

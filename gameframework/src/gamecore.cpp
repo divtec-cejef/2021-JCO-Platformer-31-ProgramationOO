@@ -119,12 +119,14 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     CaisseAmovible* CaisseW1 = new CaisseAmovible;
     //CaisseW1->setData(1,"sol");
     CaisseW1->setData(1,"Wood_caisse");
-    m_pScene->addSpriteToScene(CaisseW1, 700,1020);
+    CaisseW1->setSpawnPoint(QPoint(700,1020));
+    m_pScene->addSpriteToScene(CaisseW1,CaisseW1->getSpawnPoint());
 
     CaisseAmovible* CaisseW2 = new CaisseAmovible;
     //CaisseW2->setData(1,"sol");
     CaisseW2->setData(1,"Wood_caisse");
-    m_pScene->addSpriteToScene(CaisseW2, 2900,1380);
+    CaisseW2->setSpawnPoint(QPoint(2900,1380));
+    m_pScene->addSpriteToScene(CaisseW2, CaisseW2->getSpawnPoint());
 
     Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV2.png");
     caisseM1->setData(1,"sol");
@@ -184,7 +186,8 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     //Ajoute du joueur dans la scene
     pCharacter->setData(1,"joueur");
-    m_pScene->addSpriteToScene(pCharacter, 300,1200);
+    pCharacter->setSpawnPoint(QPoint(300,1200));
+    m_pScene->addSpriteToScene(pCharacter,pCharacter->getSpawnPoint());
     pCharacter->startAnimation(25);
 
     // ...
@@ -250,7 +253,7 @@ void GameCore::keyPressed(int key) {
     if(key == Qt::Key_Space && pCharacter->getIsDeath()){
         pCharacter->respawn();
         m_pScene->removeSpriteFromScene(pGhost);
-        m_pScene->addSpriteToScene(pCharacter, 300,1200);
+        m_pScene->addSpriteToScene(pCharacter, pCharacter->getSpawnPoint());
         pCharacter->startAnimation(25);
     }
 }
@@ -289,10 +292,16 @@ void GameCore::keyReleased(int key) {
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
     if(!pCharacter->getIsDeath()){
-
+        //Déplace le joueur
         pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
-        //Suite les déplacement du joueur dans la scene
-        m_pGameCanvas->getView()->centerOn(m_pScene->sprites().at(0)->pos());
+
+        for (int i = m_pScene->sprites().count();i >= 0;i--) {
+            if(m_pScene->sprites().at(i)->data(1) == "joueur"){
+                //Suite les déplacement du joueur dans la scene
+                m_pGameCanvas->getView()->centerOn(m_pScene->sprites().at(i)->pos());
+            }
+        }
+
 
         //Prochaine position du joueur
         QRectF nextSpriteRect =

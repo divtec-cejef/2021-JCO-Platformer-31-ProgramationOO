@@ -79,6 +79,7 @@ private:
 
     //Joueur
     Character* pCharacter = new Character();
+
     Sprite* pGhost = new Sprite();
     void setAnimationDeath();
 

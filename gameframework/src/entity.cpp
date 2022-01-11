@@ -14,10 +14,33 @@
 //!
 //! \param rPixmap
 //! \param pParent
-//!
+//! \param _spawnPoint point d'apparition de l'entité.
 Entity::Entity(const QPixmap& rPixmap, QGraphicsItem* pParent) : Sprite(rPixmap,pParent)
 {
 
+}
+
+/*
+//!
+//! \param rPixmap
+//! \param pParent
+//! \param _spawnPoint point d'apparition de l'entité.
+Entity::Entity(const QPixmap& rPixmap, QGraphicsItem* pParent, QPointF _spawnPoint) : Sprite(rPixmap,pParent)
+{
+    setSpawnPoint(_spawnPoint);
+}
+*/
+//! Premet de définir le point d'apparition de l'entité dans la scène.
+//! \param _spawnPoint nouveau point d'apparition.
+//!
+void Entity::setSpawnPoint(QPointF _spawnPoint){
+     m_spawnPoint = _spawnPoint;
+}
+
+//! Premet de récupéré le point d'apparition de l'entité dans la scène.
+//!
+QPointF Entity::getSpawnPoint(){
+    return m_spawnPoint;
 }
 
 ///!Permet de configurer l'animation d'une entité

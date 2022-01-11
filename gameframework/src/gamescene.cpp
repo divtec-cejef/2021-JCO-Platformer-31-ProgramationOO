@@ -74,6 +74,16 @@ void GameScene::addSpriteToScene(Sprite* pSprite, double posX, double posY)
     pSprite->setPos(posX, posY);
 }
 
+//! Ajoute le sprite à la scène, à la position donnée.
+//! La scène prend possession du sprite et se chargera de l'effacer.
+//! \param pSprite Pointeur sur le sprite à ajouter à la scène.
+//! \param pos position du sprite dans la scene
+void GameScene::addSpriteToScene(Sprite* pSprite,QPointF pos)
+{
+    addSpriteToScene(pSprite);
+    pSprite->setPos(pos);
+}
+
 //! Retire le sprite de la scène.
 //! La scène n'est plus propriétaire du sprite et ne se chargera pas de l'effacer.
 //! \param pSprite Pointeur sur le sprite à enlever de la scène.
