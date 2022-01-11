@@ -15,7 +15,7 @@ class Ground : public Sprite
 public:
     Ground(GameScene* CurrentScene);
 
-    //! Type d'orientation du sol.
+    //! Type d'orientation possible du sol.
     //! \brief The orientation enum
     //!
     enum orientation{

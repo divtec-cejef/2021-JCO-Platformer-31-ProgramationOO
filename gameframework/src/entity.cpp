@@ -1,8 +1,11 @@
+/**
+  \file
+  \brief    Définition de la classe Entity.
+  @author   Léo Küttel
+  @date     Janvier 2022
+ */
 #include "entity.h"
-#include "character.h"
 
-
-//Ajoute Supp
 #include <cmath>
 #include <QDebug>
 

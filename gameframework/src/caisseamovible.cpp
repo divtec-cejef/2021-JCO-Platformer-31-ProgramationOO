@@ -1,3 +1,9 @@
+/**
+  \file
+  \brief    Définition de la classe CaisseAmovible.
+  @author   LKU
+  @date     Janvier 2022
+ */
 #include "caisseamovible.h"
 
 //Ajoute Supp

@@ -1,15 +1,19 @@
-
+/**
+  \file
+  \brief    Définition de la classe Bulio.
+  @author   LKU
+  @date     Decembre 2021
+ */
 #include "bulio.h"
-#include "utilities.h"
-#include "playertickhandler.h"
-#include "sprite.h"
-#include "time.h"
 
-//Ajoute Supp
 #include <QString>
+
+#include "resources.h"
+#include "utilities.h"
+#include "sprite.h"
 #include "gamescene.h"
 #include "gamecanvas.h"
-#include "resources.h"
+
 
 // Vitesse des bulio
 const int VITESSE_DEPLACEMENT = 2;

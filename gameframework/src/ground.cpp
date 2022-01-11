@@ -1,24 +1,23 @@
+/**
+  \file
+  \brief    Définition de la classe Ground.
+  @author   LKU
+  @date     Novembre 2021
+ */
 #include "ground.h"
 
 #include <cmath>
 #include <QDebug>
 #include <QSettings>
-
-#include "utilities.h"
-#include "playertickhandler.h"
+#include <QString>
 #include "sprite.h"
-#include "time.h"
-
-
-#include "gamescene.h"
-#include "gamecanvas.h"
 #include "resources.h"
 #include "utilities.h"
-#include "playertickhandler.h"
-#include "sprite.h"
+#include "gamescene.h"
+#include "gamecanvas.h"
 
-//Ajoute Supp
-#include <QString>
+
+
 
 //Dimenssion de découpage des spriteSheets du sol.
 const int FRAME_SIZE_GROUND   = 120;    //  Dimenssion de la frame

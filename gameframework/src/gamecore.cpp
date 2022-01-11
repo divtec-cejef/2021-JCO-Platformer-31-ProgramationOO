@@ -2,7 +2,7 @@
   Fichier qui contient toute la logique du jeu.
 
   @author   Léo Küttel
-  @date     Novembre 2021
+  @date     Janvier 2022
  */
 #include "gamecore.h"
 

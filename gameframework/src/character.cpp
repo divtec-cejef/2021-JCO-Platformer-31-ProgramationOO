@@ -1,3 +1,9 @@
+/**
+  \file
+  \brief    Définition de la classe Character.
+  @author   LKU
+  @date     Decembre 2021
+ */
 #include "character.h"
 
 #include <cmath>

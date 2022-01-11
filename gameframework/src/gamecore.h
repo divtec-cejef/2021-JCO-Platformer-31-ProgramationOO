@@ -2,7 +2,8 @@
   \file
   \brief    Déclaration de la classe GameCore.
   \author   JCO
-  \date     septembre 2018
+  \author   LKU
+  \date     Janvier 2022
 */
 #ifndef GAMECORE_H
 #define GAMECORE_H
@@ -58,14 +59,6 @@ private:
     GameCanvas* m_pGameCanvas;
     GameScene* m_pScene;
     GameView* m_pView;
-
-    //Collision
-
-
-    //Actuelle
-    //void currentCollision(Sprite* entity);
-    //Future
-    //void futurCollision(Sprite* entity);
 
     //Joueur
     Character* pCharacter = new Character();
