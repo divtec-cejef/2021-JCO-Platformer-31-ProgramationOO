@@ -139,7 +139,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     Sprite* lanceF1 = new Sprite(GameFramework::imagesPath() + "lanceFlammeV3.png");
     lanceF1->setData(1,"Piege");
     lanceF1->setData(2,"Lance_flamme");
-    m_pScene->addSpriteToScene(lanceF1, 800,1510);
+    //m_pScene->addSpriteToScene(lanceF1, 800,1510);
 
     Sprite* lanceF2 = new Sprite(GameFramework::imagesPath() + "lanceFlammeV3.png");
     lanceF2->setData(1,"Piege");
@@ -320,7 +320,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
                 //intersected entre ls prochaine position du joueur et le sprite touché.
                 QRectF intersected = nextSpriteRect.intersected(CollisionDetected->globalBoundingBox());
-                qDebug() << intersected.height();
+                //qDebug() << intersected.height();
                 //List des coté touché
                 QList<Entity::hitSide> collidingSidesL = QList<Entity::hitSide>();
                 pCharacter->getCollisionLocate(collidingSidesL,nextSpriteRect,intersected);
@@ -332,31 +332,31 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                         switch (collidingSidesL.at(i)) {
                         case Entity::hitSide::DOWN:
                             //pCharacter->m_velocity.setY(-0.2);
+                            if(intersected.width() > 30){
+                                //Truc de doryan bizarre
+                                pCharacter->setY((CollisionDetected->top()-pCharacter->height()));
+                                if(!pCharacter->getIsJump())
+                                    pCharacter->setIsOnFloor(true);
+                                pCharacter->setIsJump(false);
+                            }
 
-                            //Truc de doryan bizarre
-                            pCharacter->setY((CollisionDetected->top()-pCharacter->height()));
-                            if(!pCharacter->getIsJump())
-                                pCharacter->setIsOnFloor(true);
-                            pCharacter->setIsJump(false);
+
                             //this->setIsJump(false);
                             break;
                         case  Entity::hitSide::UP:
-                            pCharacter->m_velocity.setY(0);
-                             pCharacter->setY((CollisionDetected->bottom()+1));
+                            if(intersected.width() > 30){
+                                pCharacter->m_velocity.setY(0);
+                                pCharacter->setY((CollisionDetected->bottom()+1));
+
+                            }
                             break;
                         case Entity::hitSide::RIGHT :
                             if(intersected.height() > 30)
-                                qDebug()<< "droite sol value de déplacement : " << CollisionDetected->right();
-                                 pCharacter->setX((CollisionDetected->right()-pCharacter->width()+1));
-                                //pCharacter->m_velocity.setX(0);
-
+                                pCharacter->setX((CollisionDetected->left()- pCharacter->width()));
                             break;
                         case Entity::hitSide::LEFT :
                             if(intersected.height() > 30)
-                                 qDebug()<< "gauche sol value de déplacement : " << CollisionDetected->left();
-                                pCharacter->setX((CollisionDetected->left()-pCharacter->width()+1));
-                               // pCharacter->m_velocity.setX(0);
-
+                                pCharacter->setX((CollisionDetected->right()));
                             break;
                         }
                     }
@@ -412,10 +412,10 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                             setupCharacterDeath();
                             break;
                         case Entity::hitSide::RIGHT :
-                             setupCharacterDeath();
+                            setupCharacterDeath();
                             break;
                         case Entity::hitSide::LEFT :
-                             setupCharacterDeath();
+                            setupCharacterDeath();
                         }
                     }
                 }
@@ -485,7 +485,7 @@ void GameCore::setAnimationDeath()
 //! Mets en place tout les éléments symbolisant la mort du joueur.
 //! @brief GameCore::setupCharacterDeath
 //!
- void GameCore::setupCharacterDeath(){
+void GameCore::setupCharacterDeath(){
     //Le joueur est considéré comme mort.
     pCharacter->setIsDeath(true);
     //Créé le fantôme dans la scene.
