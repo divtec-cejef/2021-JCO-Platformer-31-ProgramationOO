@@ -339,9 +339,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                                     pCharacter->setIsOnFloor(true);
                                 pCharacter->setIsJump(false);
                             }
-
-
-                            //this->setIsJump(false);
                             break;
                         case  Entity::hitSide::UP:
                             if(intersected.width() > 30){
@@ -369,7 +366,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     }
                     setupCharacterDeath();
                 }
-
+                /*
                 if (CollisionDetected->data(1) == "Wood_caisse") {
 
                     //qDebug()<<"aaaaaaa";
@@ -399,8 +396,9 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                             break;
                         }
                     }
-                }
 
+                }
+*/
                 if (CollisionDetected->data(1) == "ennemie") {
 
                     for (int i =0;i < collidingSidesL.count();i++) {

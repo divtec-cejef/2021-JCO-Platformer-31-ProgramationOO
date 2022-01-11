@@ -48,26 +48,29 @@ void BulioTickHandler::tick(long long elapsedTimeInMilliseconds) {
             m_pParentEntity->getCollisionLocate(collidingSidesL,nextSpriteRect,intersected);
 
             for (int i =0;i < collidingSidesL.count();i++) {
-                switch (collidingSidesL.at(i)) {
-                case Entity::hitSide::DOWN:
-                    m_pParentEntity->m_velocity.setY(0.0);
-                    m_pParentEntity->setIsOnFloor(true);
-                    //qDebug() << "touche les pied";
-                    break;
-                case  Entity::hitSide::UP:
-                    //m_pBulioL.at(i)->m_velocity.setY(0.0);
-                    qDebug() << "touche la tete";
-                    break;
-                case Entity::hitSide::RIGHT:
-                    m_pParentEntity->m_velocity.setX(-5);
-                    qDebug() << "touche coté droit";
-                    break;
-                case Entity::hitSide::LEFT:
-                    m_pParentEntity->m_velocity.setX(5);
-                    qDebug() << "touche coté gauche";
-                    break;
+                if(intersected.width() > 30 ||intersected.height() > 30){
+                    switch (collidingSidesL.at(i)) {
+                    case Entity::hitSide::DOWN:
+                            m_pParentEntity->setY((CollisionDetected->top()-m_pParentEntity->height()));
+                            m_pParentEntity->setIsOnFloor(true);
+                        break;
+                    case  Entity::hitSide::UP:
+                            m_pParentEntity->m_velocity.setY(0);
+                            m_pParentEntity->setY((CollisionDetected->bottom()+1));
+                        break;
+                    case Entity::hitSide::RIGHT:
+                            m_pParentEntity->setX((CollisionDetected->left()- m_pParentEntity->width()));
+                            m_pParentEntity->m_velocity.setX(-5);
+                        break;
+                    case Entity::hitSide::LEFT:
+                            m_pParentEntity->setX(CollisionDetected->right());
+                            m_pParentEntity->m_velocity.setX(5);
+                        break;
+                    }
                 }
             }
+
+
 
             if (CollisionDetected->data(1) == "joueur") {
                 /*
