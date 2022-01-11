@@ -44,17 +44,7 @@ public:
     void mouseButtonReleased(QPointF mousePosition, Qt::MouseButtons buttons);
     void setupCharacterDeath();
 
-    //Physique
-    QPointF m_gravity = QPointF(0,2);
-    //QPointF velocity = QPointF(0,0);
-
-    void gravityApplied(Entity* entity,long long elapsedTime);
-
     void tick(long long elapsedTimeInMilliseconds);
-
-    //Collision
-    void getCollisionLocate(QList<Entity::hitSide>&collisionLocateList,QRectF posSprite,QRectF intersected);
-    //void commonInteraction(Entity* CurrentEntity, Sprite* sprite,QRectF posSprite,QRectF intersected);
 
 signals:
     void notifyMouseMoved(QPointF newMousePosition);

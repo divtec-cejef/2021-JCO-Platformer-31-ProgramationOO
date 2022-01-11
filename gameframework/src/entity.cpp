@@ -115,7 +115,7 @@ void Entity::uniqueSide(QList<hitSide>* collidingSidesList, hitSide appendToSide
         }
 }
 
-//! Applique la gravité à l'entité.
+//! Applique une force d'attraction vers le bas de l'écran à une entitié.
 //! \param entity sprite au quel on applique la gravité
 //! \param enti_velocity velocité du sprite
 //! \param elapsedTime temps écoulé entre chaque tick.
