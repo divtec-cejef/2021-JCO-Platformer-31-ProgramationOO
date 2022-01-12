@@ -10,7 +10,7 @@
 class Entity;
 
 //! Construit un gestionnaire de tick pour le Entity donné.
-//! \param pParentSprite  Sprite qui sera géré par ce gestionnaire.
+//! \param pParentEntity Entity qui sera géré par ce gestionnaire.
 EntityTickHandler::EntityTickHandler(Entity* pParentEntity) {
     setParentEntity(pParentEntity);
 }
@@ -20,7 +20,14 @@ EntityTickHandler::~EntityTickHandler() {
 
 }
 
+//! Définit la procédure à executé pour les collisions qui touche l'entité.
+void EntityTickHandler::currentCollision(){}
+
+//! Définit la procédure à executé pour les collisions qui vont touché l'entité.
+void EntityTickHandler::nextCollision(){}
+
 //! Indique quel entity sera géré par ce gestionnaire.
 void EntityTickHandler::setParentEntity(Entity* pParentEntity) {
     m_pParentEntity = pParentEntity;
 }
+

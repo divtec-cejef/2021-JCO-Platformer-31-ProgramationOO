@@ -27,6 +27,7 @@ public:
 
     Entity(const QPixmap& rPixmap, QGraphicsItem* pParent = nullptr);
 
+
 /*    Entity(const QPixmap& rPixmap, QGraphicsItem* pParent = nullptr,
            QPointF _spawnPoint = QPoint(0.0,0.0));*/
 

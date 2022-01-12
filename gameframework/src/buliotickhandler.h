@@ -13,6 +13,10 @@ public:
 
     void tick(long long elapsedTimeInMilliseconds);
 
+    void currentCollision();
+    void nextCollision();
+
+
     void setGameCore(GameCore* newGameCore);
 private:
     GameCore* m_pGameCore = nullptr;

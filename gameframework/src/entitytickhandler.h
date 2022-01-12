@@ -35,6 +35,9 @@ public:
     virtual void init() {}
     virtual void tick(long long elapsedTimeInMilliseconds) = 0;
 
+    virtual void currentCollision();
+    virtual void nextCollision();
+
 protected:
     Entity* m_pParentEntity;
 };

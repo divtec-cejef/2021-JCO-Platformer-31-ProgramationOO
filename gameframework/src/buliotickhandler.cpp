@@ -16,6 +16,7 @@ BulioTickHandler::BulioTickHandler(Entity* pParentEntity,GameCore* newGameCore) 
 //! vérifie si il doit rebondir et le positionne à son nouvel emplacement.
 void BulioTickHandler::tick(long long elapsedTimeInMilliseconds) {
 
+
     //Déplace le bulio.
     m_pParentEntity->setPos(m_pParentEntity->pos()+ m_pParentEntity->m_velocity);
 
@@ -46,11 +47,6 @@ void BulioTickHandler::tick(long long elapsedTimeInMilliseconds) {
             QList<Entity::hitSide> collidingSidesL = QList<Entity::hitSide>();
             //Remplissage de la liste.
             m_pParentEntity->getCollisionLocate(collidingSidesL,nextSpriteRect,intersected);
-
-
-
-
-
 
             if (CollisionDetected->data(1) == "joueur") {
                 /*
@@ -99,6 +95,7 @@ void BulioTickHandler::tick(long long elapsedTimeInMilliseconds) {
                         break;
                     }
                 }
+                collidingSidesL.clear();
             }
         }
     }else {
@@ -115,6 +112,12 @@ void BulioTickHandler::tick(long long elapsedTimeInMilliseconds) {
         m_pParentEntity->parentScene()->removeSpriteFromScene(m_pParentEntity);
     }
 }
+
+void BulioTickHandler::currentCollision(){
+
+}
+
+void BulioTickHandler::nextCollision(){}
 
 void BulioTickHandler::setGameCore(GameCore* newGameCore){
     m_pGameCore = newGameCore;
