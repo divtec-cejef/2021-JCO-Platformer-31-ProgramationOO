@@ -14,7 +14,7 @@
 #include "gamecanvas.h"
 #include "resources.h"
 
-const int MIN_INTERSECTED = 15;      //  Intersection minimum
+const int MIN_INTERSECTED = 30;      //  Intersection minimum
 
 //!
 //! \param rPixmap
