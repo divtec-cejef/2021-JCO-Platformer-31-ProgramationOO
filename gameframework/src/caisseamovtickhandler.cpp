@@ -23,9 +23,8 @@ void CaisseAmovTickHandler::tick(long long elapsedTimeInMilliseconds) {
     //Attire la caisse vers le bas de l'écran
     m_pParentEntity->gravityApplied(elapsedTimeInMilliseconds);
 
-
-    nextCollision();
     currentCollision();
+    nextCollision();
 
     if(!m_isPlayer){
         m_pParentEntity->m_velocity.setX(0);

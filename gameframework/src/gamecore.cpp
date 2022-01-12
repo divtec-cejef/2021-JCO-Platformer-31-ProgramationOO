@@ -124,7 +124,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     CaisseAmovible* CaisseW2 = new CaisseAmovible;
     //CaisseW2->setData(1,"sol");
     CaisseW2->setData(1,"Wood_caisse");
-    CaisseW2->setSpawnPoint(QPoint(2900,1380));
+    CaisseW2->setSpawnPoint(QPoint(2900,1500));
     m_pScene->addSpriteToScene(CaisseW2, CaisseW2->getSpawnPoint());
 
     Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV2.png");
