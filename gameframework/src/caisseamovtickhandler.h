@@ -12,6 +12,7 @@ public:
     CaisseAmovTickHandler(Entity* pParentSprite = nullptr,GameCore* newGameCore = nullptr);
 
     bool m_isPlayer = false;
+    bool m_canMove = false;
 
     void tick(long long elapsedTimeInMilliseconds);
 

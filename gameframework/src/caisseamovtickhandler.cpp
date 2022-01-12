@@ -17,18 +17,15 @@ CaisseAmovTickHandler::CaisseAmovTickHandler(Entity* pParentEntity,GameCore* new
 //! vérifie si il doit rebondir et le positionne à son nouvel emplacement.
 void CaisseAmovTickHandler::tick(long long elapsedTimeInMilliseconds) {
 
-
-
-
-    //Déplace la caisse
-    m_pParentEntity->setPos(m_pParentEntity->pos()+ m_pParentEntity->m_velocity);
-
+    m_canMove= true;
     m_isPlayer= false;
 
     //Attire la caisse vers le bas de l'écran
     m_pParentEntity->gravityApplied(elapsedTimeInMilliseconds);
 
+
     nextCollision();
+    currentCollision();
 
     if(!m_isPlayer){
         m_pParentEntity->m_velocity.setX(0);
@@ -44,10 +41,60 @@ void CaisseAmovTickHandler::tick(long long elapsedTimeInMilliseconds) {
                     m_pParentEntity,m_pParentEntity->getSpawnPoint());
         m_pParentEntity->setIsDeath(false);
     }
+
+    //Déplace la caisse
+    m_pParentEntity->setPos(m_pParentEntity->pos()+ m_pParentEntity->m_velocity);
 }
 
 void CaisseAmovTickHandler::currentCollision(){
+    //Actuel position de la caisse.
+    QRectF CurrentSpriteRect =
+            m_pParentEntity->globalBoundingBox().translated(m_pParentEntity->pos());
 
+    // Récupère tous les sprites de la scène qui touche le joueur.
+    auto currentCollisionL = m_pParentEntity->parentScene()->collidingSprites(m_pParentEntity);
+
+    // Supprimer le sprite lui-même.
+    currentCollisionL.removeAll(m_pParentEntity);
+
+    //Récupère la valeur de liste (remplis/vide).
+    bool currentCol  = !currentCollisionL.isEmpty();
+
+    if(currentCol){
+
+        //Cherche les collisions entre le bulio les autres sprites
+        for (Sprite* CollisionDetected : currentCollisionL) {
+
+            //Zone de collision entre les 2 sprites.
+            QRectF intersected = CurrentSpriteRect.intersected(CollisionDetected->globalBoundingBox());
+
+            //Liste des côtés touché.
+            QList<Entity::hitSide> collidingSidesL = QList<Entity::hitSide>();
+            //Remplissage de la liste.
+            m_pParentEntity->getCollisionLocate(collidingSidesL,CurrentSpriteRect,intersected);
+
+            if (CollisionDetected->data(1) == "joueur") {
+                m_isPlayer = true;
+                for (int i =0;i < collidingSidesL.count();i++) {
+                    switch (collidingSidesL.at(i)) {
+                    case Entity::hitSide::UP:
+                        break;
+                    case Entity::hitSide::DOWN :
+                        m_pGameCore->setupCharacterDeath();
+                        break;
+                    case Entity::hitSide::RIGHT :
+                        if(m_canMove)
+                            m_pParentEntity->m_velocity.setX(-VITESSE);
+                        break;
+                    case Entity::hitSide::LEFT :
+                        if(m_canMove)
+                            m_pParentEntity->m_velocity.setX(VITESSE);
+                        break;
+                    }
+                }
+            }
+        }
+    }
 }
 
 void CaisseAmovTickHandler::nextCollision(){
@@ -55,9 +102,7 @@ void CaisseAmovTickHandler::nextCollision(){
     QRectF nextSpriteRect =
             m_pParentEntity->globalBoundingBox().translated(m_pParentEntity->m_velocity);
 
-    //Prochaine position de la caisse.
-    QRectF CurrentSpriteRect =
-            m_pParentEntity->globalBoundingBox().translated(m_pParentEntity->pos());
+
 
     // Récupère tous les sprites de la scène qui touche le joueur.
     auto nextCollisionL = m_pParentEntity->parentScene()->collidingSprites(m_pParentEntity);
@@ -81,46 +126,31 @@ void CaisseAmovTickHandler::nextCollision(){
             //Remplissage de la liste.
             m_pParentEntity->getCollisionLocate(collidingSidesL,nextSpriteRect,intersected);
 
-            if (CollisionDetected->data(1) == "joueur") {
 
-                qDebug() << "la caisse TOUCHEE le joueur";
-                m_isPlayer = true;
-                for (int i =0;i < collidingSidesL.count();i++) {
-                    switch (collidingSidesL.at(i)) {
-                    case Entity::hitSide::UP:
-                        break;
-                    case Entity::hitSide::DOWN :
-                        m_pGameCore->setupCharacterDeath();
-                        break;
-                    case Entity::hitSide::RIGHT :
-                        m_pParentEntity->m_velocity.setX(-VITESSE);
-                        break;
-                    case Entity::hitSide::LEFT :
-                        m_pParentEntity->m_velocity.setX(VITESSE);
-                        break;
-                    }
-                }
-            }else{
-                m_pParentEntity->m_velocity.setX(0);
-                for (int i =0;i < collidingSidesL.count();i++) {
-                    switch (collidingSidesL.at(i)) {
-                    case Entity::hitSide::DOWN:
-                            m_pParentEntity->setY((CollisionDetected->top()-m_pParentEntity->height()));
-                            m_pParentEntity->setIsOnFloor(true);
-                        break;
-                    case  Entity::hitSide::UP:
-                            m_pParentEntity->m_velocity.setY(0);
-                            m_pParentEntity->setY((CollisionDetected->bottom()+1));
-                        break;
-                    case Entity::hitSide::RIGHT:
-                            m_pParentEntity->setX((CollisionDetected->left()- m_pParentEntity->width()));
-                        break;
-                    case Entity::hitSide::LEFT:
-                            m_pParentEntity->setX(CollisionDetected->right());
-                        break;
-                    }
+            m_pParentEntity->m_velocity.setX(0);
+            for (int i =0;i < collidingSidesL.count();i++) {
+                switch (collidingSidesL.at(i)) {
+                case Entity::hitSide::DOWN:
+                    m_pParentEntity->setY((CollisionDetected->top()-m_pParentEntity->height()));
+                    m_pParentEntity->setIsOnFloor(true);
+                    break;
+                case  Entity::hitSide::UP:
+                    m_pParentEntity->m_velocity.setY(0);
+                    m_pParentEntity->setY((CollisionDetected->bottom()+1));
+                    break;
+                case Entity::hitSide::RIGHT:
+                    m_canMove = false;
+                    m_pParentEntity->m_velocity.setX(0);
+                    m_pParentEntity->setX((CollisionDetected->left()- m_pParentEntity->width()));
+                    break;
+                case Entity::hitSide::LEFT:
+                    m_canMove = false;
+                    m_pParentEntity->m_velocity.setX(0);
+                    m_pParentEntity->setX(CollisionDetected->right());
+                    break;
                 }
             }
+
         }
 
     }else {
@@ -132,6 +162,7 @@ void CaisseAmovTickHandler::nextCollision(){
         m_pParentEntity->setIsDeath(true);
     }
 }
+
 
 
 void CaisseAmovTickHandler::setGameCore(GameCore* newGameCore){

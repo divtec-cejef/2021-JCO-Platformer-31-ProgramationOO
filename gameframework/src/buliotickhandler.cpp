@@ -49,29 +49,18 @@ void BulioTickHandler::tick(long long elapsedTimeInMilliseconds) {
             m_pParentEntity->getCollisionLocate(collidingSidesL,nextSpriteRect,intersected);
 
             if (CollisionDetected->data(1) == "joueur") {
-                /*
-                for (int i =0;i < collidingSidesL.count();i++) {
-                    if (collidingSidesL.at(i) ==  Entity::hitSide::UP) {
-                        m_pParentEntity->setIsDeath(true);
-                    }
-                }
-                //m_pBulioL.at(i)->setIsOnFloor(true);
-                //m_pBulioL.at(i)->m_velocity.setY(0.0);
-                collidingSidesL.clear();
-*/
                 for (int i =0;i < collidingSidesL.count();i++) {
                     switch (collidingSidesL.at(i)) {
                     case Entity::hitSide::DOWN:
-                        m_pGameCore->setupCharacterDeath();
                         break;
                     case  Entity::hitSide::UP:
                         m_pParentEntity->setIsDeath(true);
                         break;
                     case Entity::hitSide::RIGHT :
-                        m_pGameCore->setupCharacterDeath();
+
                         break;
                     case Entity::hitSide::LEFT :
-                        m_pGameCore->setupCharacterDeath();
+                        break;
                     }
                 }
             }else {

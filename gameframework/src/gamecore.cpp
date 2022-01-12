@@ -365,44 +365,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     }
                     setupCharacterDeath();
 
-
-                if (CollisionDetected->data(1) == "Wood_caisse") {
-
-                    //qDebug()<<"aaaaaaa";
-                    for (int i =0;i < collidingSidesL.count();i++) {
-
-                        switch (collidingSidesL.at(i)) {
-                        case Entity::hitSide::DOWN:
-                            if(intersected.width() > 30){
-                                //Truc de doryan bizarre
-                                pCharacter->setY((CollisionDetected->top()-pCharacter->height()));
-                                if(!pCharacter->getIsJump())
-                                    pCharacter->setIsOnFloor(true);
-                                pCharacter->setIsJump(false);
-                            }
-                            break;
-                        case  Entity::hitSide::UP:
-
-                            if(intersected.width() > 30){
-                                pCharacter->m_velocity.setY(0);
-                                pCharacter->setY((CollisionDetected->bottom()+1));
-                            }
-                            break;
-                        case Entity::hitSide::RIGHT :
-
-                            CollisionDetected->setX(CollisionDetected->x() + 5);
-                            break;
-                        case Entity::hitSide::LEFT :
-
-                            CollisionDetected->setX(CollisionDetected->x() + -5);
-
-                            break;
-                        }
-                    }
-
-                }
-
-
                 }else if (CollisionDetected->data(1) == "ennemie") {
 
                     for (int i =0;i < collidingSidesL.count();i++) {
@@ -420,8 +382,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                             setupCharacterDeath();
                         }
                     }
-
-
                 }else{
                     //Parcourt la list des local collision
                     for (int i =0;i < collidingSidesL.count();i++) {
