@@ -14,6 +14,8 @@
 #include "gamecanvas.h"
 #include "resources.h"
 
+const int MIN_INTERSECTED = 15;      //  Intersection minimum
+
 //!
 //! \param rPixmap
 //! \param pParent
@@ -89,7 +91,7 @@ void Entity::getCollisionLocate(QList<Entity::hitSide>&collisionLocateL,
                                   QRectF posSprite,QRectF intersected){
 
     //Si l'intersected est plus large la collision est vertical.
-    if (intersected.width() > intersected.height() && intersected.width() > 10) {
+    if (intersected.width() > intersected.height() && intersected.width() > MIN_INTERSECTED) {
         if (intersected.center().y() < posSprite.center().y())
             //Détermine le haut
             Entity::uniqueSide(&collisionLocateL, Entity::hitSide::UP);
@@ -98,7 +100,7 @@ void Entity::getCollisionLocate(QList<Entity::hitSide>&collisionLocateL,
             Entity::uniqueSide(&collisionLocateL, Entity::hitSide::DOWN);
 
       //Sinon si la collision est plus haut que large est horizontal.
-    } else if (intersected.width() < intersected.height() && intersected.height() > 10){
+    } else if (intersected.width() < intersected.height() && intersected.height() > MIN_INTERSECTED){
         if (intersected.center().x() < posSprite.center().x())
             //Détermine la gauche
             Entity::uniqueSide(&collisionLocateL, Entity::hitSide::LEFT);
@@ -106,6 +108,7 @@ void Entity::getCollisionLocate(QList<Entity::hitSide>&collisionLocateL,
             //Détermine la droite
             Entity::uniqueSide(&collisionLocateL, Entity::hitSide::RIGHT);
     }
+
 }
 
 //! Permet de rendre les éléments de la liste unique

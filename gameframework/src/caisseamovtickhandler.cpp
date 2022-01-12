@@ -68,26 +68,18 @@ void CaisseAmovTickHandler::tick(long long elapsedTimeInMilliseconds) {
                 for (int i =0;i < collidingSidesL.count();i++) {
                     switch (collidingSidesL.at(i)) {
                     case Entity::hitSide::DOWN:
-                        if(intersected.width() > 30){
                             m_pParentEntity->setY((CollisionDetected->top()-m_pParentEntity->height()));
                             m_pParentEntity->setIsOnFloor(true);
-                        }
                         break;
                     case  Entity::hitSide::UP:
-                        if(intersected.width() > 30){
                             m_pParentEntity->m_velocity.setY(0);
                             m_pParentEntity->setY((CollisionDetected->bottom()+1));
-                        }
                         break;
                     case Entity::hitSide::RIGHT:
-                        if(intersected.height() > 30){
                             m_pParentEntity->setX((CollisionDetected->left()- m_pParentEntity->width()));
-                        }
                         break;
                     case Entity::hitSide::LEFT:
-                        if(intersected.height() > 30){
                             m_pParentEntity->setX(CollisionDetected->right());
-                        }
                         break;
                     }
                 }

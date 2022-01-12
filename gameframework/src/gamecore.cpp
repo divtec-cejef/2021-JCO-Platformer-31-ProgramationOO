@@ -1,4 +1,4 @@
-/**
+﻿/**
   Fichier qui contient toute la logique du jeu.
 
   @author   Léo Küttel
@@ -42,7 +42,6 @@ const int PLAYER_STOP   = 0;       // Arrete le joueur
 const int FRAME_SIZE_GHOST   = 60;   //  Dimenssion de la frame
 const int FRAME_COUNT_GHOST  = 7;    //  Nombres de frame à découper
 const int COLUMN_COUNT_GHOST = 3;    //  Nombres de colonne
-
 
 //! Initialise le contrôleur de jeu.
 //! \param pGameCanvas  GameCanvas pour lequel cet objet travaille.
@@ -430,27 +429,20 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                         switch (collidingSidesL.at(i)) {
                         case Entity::hitSide::DOWN:
                             //pCharacter->m_velocity.setY(-0.2);
-                            if(intersected.width() > 30){
                                 //Truc de doryan bizarre
                                 pCharacter->setY((CollisionDetected->top()-pCharacter->height()));
                                 if(!pCharacter->getIsJump())
                                     pCharacter->setIsOnFloor(true);
                                 pCharacter->setIsJump(false);
-                            }
                             break;
                         case  Entity::hitSide::UP:
-                            if(intersected.width() > 30){
                                 pCharacter->m_velocity.setY(0);
                                 pCharacter->setY((CollisionDetected->bottom()+1));
-
-                            }
                             break;
                         case Entity::hitSide::RIGHT :
-                            if(intersected.height() > 30)
                                 pCharacter->setX((CollisionDetected->left()- pCharacter->width())+5);
                             break;
                         case Entity::hitSide::LEFT :
-                            if(intersected.height() > 30)
                                 pCharacter->setX((CollisionDetected->right()) -5);
                             break;
                         }
