@@ -12,7 +12,7 @@
 #include <QPointF>
 
 #include <QGraphicsTransform>
- #include <QList>
+#include <QList>
 #include "character.h"
 #include "gameview.h"
 #include "ground.h"
@@ -60,12 +60,14 @@ private:
     GameScene* m_pScene;
     GameView* m_pView;
 
+    QGraphicsSimpleTextItem* pDeathCount = new QGraphicsSimpleTextItem();
+
     //Joueur
     Character* pCharacter = new Character();
 
     Sprite* pGhost = new Sprite();
     void setAnimationDeath();
-
+QRadialGradient lGradient;
 
     QList<QGraphicsTransform*> m_transformsForFlip;
 
@@ -81,7 +83,7 @@ private:
 
 private slots:
 
-//    void onSpriteDestroyed(QObject* pSprite);
+    //    void onSpriteDestroyed(QObject* pSprite);
 
 };
 

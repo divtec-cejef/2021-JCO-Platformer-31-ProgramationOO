@@ -12,6 +12,7 @@
 #include <QSettings>
 #include "QPainterPath"
 #include <QGraphicsView>
+#include <QRadialGradient>
 
 #include "gamescene.h"
 #include "gamecanvas.h"
@@ -60,6 +61,17 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     // Inistilisation de la scene dans m_Grounds.
     m_Grounds->setScene(m_pScene);
+
+    // Instancier et initialiser les élément de l'interface :
+    QGraphicsSimpleTextItem* deathCount = m_pScene->createText(QPointF(0,0),"Nombre de mort : " + pCharacter->getDeathCount());
+
+    QLinearGradient lGradient(QPointF(0,SCENE_HEIGHT / GameFramework::screenRatio()), QPointF(0,0));
+    lGradient.setColorAt(0,  QColor(255,0,0,200));
+    lGradient.setColorAt(0.3, Qt::transparent);
+    lGradient.setColorAt(1, QColor(0,0,0,200));
+
+
+    m_pScene->setForegroundBrush(lGradient);
 
     // Instancier et initialiser les sprite ici :
 
@@ -290,6 +302,9 @@ void GameCore::keyReleased(int key) {
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
+    pDeathCount->setPos(300,1200);
+
+
     if(!pCharacter->getIsDeath()){
         //Déplace le joueur
         pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
@@ -449,7 +464,6 @@ void GameCore::setAnimationDeath()
 {
     QImage spriteSheet(GameFramework::imagesPath() +  "deathAnimationV2.png");
 
-
     QList<QImage> deathFrameList;
     // Découpage de la spritesheet
     for (int frameIndex = 0; frameIndex <= FRAME_COUNT_GHOST; frameIndex++) {
@@ -457,17 +471,11 @@ void GameCore::setAnimationDeath()
         QImage CurrentFrameImage = spriteSheet.copy((frameIndex % COLUMN_COUNT_GHOST) * FRAME_SIZE_GHOST,
                                                     (frameIndex / COLUMN_COUNT_GHOST) * FRAME_SIZE_GHOST,
                                                     FRAME_SIZE_GHOST, FRAME_SIZE_GHOST);
-        if(frameIndex == 0){
-            pGhost = new Sprite(QPixmap::fromImage(CurrentFrameImage.scaled(FRAME_SIZE_GHOST * 1.5,
-                                                                            FRAME_SIZE_GHOST * 1.5,
-                                                                            Qt::IgnoreAspectRatio,
-                                                                            Qt::SmoothTransformation)));
-        }else{
+
             pGhost->addAnimationFrame(QPixmap::fromImage(CurrentFrameImage.scaled(FRAME_SIZE_GHOST * 1.5,
                                                                                   FRAME_SIZE_GHOST * 1.5,
                                                                                   Qt::IgnoreAspectRatio,
                                                                                   Qt::SmoothTransformation)));
-        }
     }
     pGhost->startAnimation(50);
 }

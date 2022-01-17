@@ -64,7 +64,7 @@ void GameView::resizeEvent(QResizeEvent* pEvent) {
 //! étant donné que chaque QGraphicsItem est responsable de se dessiner.
 //! \param pPainter     Painter à utiliser pour dessiner.
 //! \param rRect        Zone à dessiner.
-void GameView::drawForeground(QPainter* pPainter, const QRectF& rRect) {
+/*void GameView::drawForeground(QPainter* pPainter, const QRectF& rRect) {
     if (!m_clipScene)
         return;
 
@@ -79,7 +79,7 @@ void GameView::drawForeground(QPainter* pPainter, const QRectF& rRect) {
     for (int i = 0; i < 4; ++i)
         pPainter->fillRect(m_clippingRect[i], Qt::black);
 }
-
+*/
 //! Initialise cette affichage.
 void GameView::init() {
 

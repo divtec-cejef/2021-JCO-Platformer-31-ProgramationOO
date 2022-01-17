@@ -34,7 +34,7 @@ public:
 
 protected:
     virtual void resizeEvent(QResizeEvent* pEvent);
-    virtual void drawForeground(QPainter* pPainter, const QRectF& rRect);
+    //virtual void drawForeground(QPainter* pPainter, const QRectF& rRect);
 
 private:
     void init();
