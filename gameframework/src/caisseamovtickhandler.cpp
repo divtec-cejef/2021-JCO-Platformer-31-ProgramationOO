@@ -28,7 +28,6 @@ void CaisseAmovTickHandler::tick(long long elapsedTimeInMilliseconds) {
 
     if(!m_isPlayer){
         m_pParentEntity->m_velocity.setX(0);
-        qDebug() << "la caisse touche PASS le joueur";
     }
 
     if(m_pParentEntity->getIsDeath()){
