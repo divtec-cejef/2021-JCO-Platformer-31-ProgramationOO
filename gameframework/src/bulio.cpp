@@ -27,7 +27,7 @@ const int FRAME_HEIGHT = 48;
 const int FRAME_COUNT = 2;
 const int COLUMN_COUNT = 1;
 
-Bulio::Bulio(QGraphicsItem* pParent) : Entity(GameFramework::imagesPath() + "bastienbulioBaseV1.png", pParent)
+Bulio::Bulio(QGraphicsItem* pParent) : Entity(GameFramework::imagesPath() + "bulioBaseV1.png", pParent)
 {
     m_velocity.setX(VITESSE_DEPLACEMENT);
     configureAnimation(DEPLACEMENT);
@@ -63,10 +63,10 @@ void Bulio::configureAnimation(animation bulio) {
 
     switch (bulio) {
     case DEPLACEMENT:
-        iSprite = "bastienbulioDeplacementV3.png";
+        iSprite = "bulioDeplacementV3.png";
         break;
     default:
-        iSprite = "bastienbulioBaseV1.png";
+        iSprite = "bulioBaseV1.png";
         break;
     }
 
@@ -79,7 +79,7 @@ void Bulio::configureAnimation(animation bulio) {
     */
 
     QImage directionFrame(GameFramework::imagesPath() + iSprite);
-    if(iSprite == "bastienbulioDeplacementV3.png"){
+    if(iSprite == "bulioDeplacementV3.png"){
 
         QImage spriteSheet(GameFramework::imagesPath() + iSprite);
 

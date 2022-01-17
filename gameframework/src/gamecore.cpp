@@ -447,7 +447,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 //!
 void GameCore::setAnimationDeath()
 {
-    QImage spriteSheet(GameFramework::imagesPath() +  "deathAnimationV1.png");
+    QImage spriteSheet(GameFramework::imagesPath() +  "deathAnimationV2.png");
+
 
     QList<QImage> deathFrameList;
     // Découpage de la spritesheet
