@@ -22,9 +22,8 @@
 #include "sprite.h"
 
 //Ajoute Supp
-#include <QString>
 #include "ground.h"
-
+#include <string>
 #include "bulio.h"
 #include <buliotickhandler.h>
 
@@ -63,8 +62,13 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_Grounds->setScene(m_pScene);
 
     // Instancier et initialiser les élément de l'interface :
-    QGraphicsSimpleTextItem* deathCount = m_pScene->createText(QPointF(0,0),"Nombre de mort : " + pCharacter->getDeathCount());
+    pDeathCount = m_pScene->createText(QPointF(300,1200),
+                                       "Nombre de mort(s) : " + QString::number(pCharacter->getDeathCount()));
+    pDeathCount->setZValue(40);
 
+    //pDeathCount->setPos(300,1200);
+
+    //Création du filtre du premier plan
     QLinearGradient lGradient(QPointF(0,SCENE_HEIGHT / GameFramework::screenRatio()), QPointF(0,0));
     lGradient.setColorAt(0,  QColor(255,0,0,200));
     lGradient.setColorAt(0.3, Qt::transparent);
@@ -302,18 +306,25 @@ void GameCore::keyReleased(int key) {
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
-    pDeathCount->setPos(300,1200);
-
-
     if(!pCharacter->getIsDeath()){
         //Déplace le joueur
         pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
+        qDebug()<< "velocity x  "<< pCharacter->m_velocity.x() << " velocity y" << pCharacter->m_velocity.y();
 
         for (int i = m_pScene->sprites().count();i >= 0;i--) {
             if(m_pScene->sprites().at(i)->data(1) == "joueur"){
                 //Suite les déplacement du joueur dans la scene
-                m_pGameCanvas->getView()->centerOn(m_pScene->sprites().at(i)->pos());
+                m_pGameCanvas->getView()->centerOn(m_pScene->sprites().at(i)->pos().x(), 1300);
+//pDeathCount->setPos(pCharacter->pos());
+
+               /* pDeathCount->setPos(pCharacter->x() - m_pGameCanvas->getView()->width()/4.0,
+                                   pCharacter->y() -  m_pGameCanvas->getView()->height()/4.0);*/
+
+
+
+               // pDeathCount->setPos(m_pGameCanvas->getView()->);
             }
+
         }
 
         //Prochaine position du joueur
@@ -385,7 +396,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     for (int i =0;i < collidingSidesL.count();i++) {
                         switch (collidingSidesL.at(i)) {
                         case Entity::hitSide::DOWN:
-
                             break;
                         case  Entity::hitSide::UP:
                             setupCharacterDeath();
@@ -497,6 +507,9 @@ void GameCore::setupCharacterDeath(){
     m_pScene->addSpriteToScene(pGhost);
     //Ajoute d'une mort au compteur.
     pCharacter->incrementDeathCount();
+
+    //pDeathCount->setText("Nombre de mort(s) : " + QString::number(pCharacter->getDeathCount()));
+
 }
 
 

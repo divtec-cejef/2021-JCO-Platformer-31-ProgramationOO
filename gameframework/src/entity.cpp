@@ -130,6 +130,8 @@ void Entity::gravityApplied(long long elapsedTime){
     if (!this->getIsOnFloor()){
     this->setPos(this->pos() + this->m_velocity * (elapsedTime/100.0));
     this->m_velocity += m_gravity * (elapsedTime/100.0);
+    }else {
+       this->m_velocity.setY(0);
     }
 }
 

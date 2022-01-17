@@ -67,7 +67,7 @@ private:
 
     Sprite* pGhost = new Sprite();
     void setAnimationDeath();
-QRadialGradient lGradient;
+    QRadialGradient lGradient;
 
     QList<QGraphicsTransform*> m_transformsForFlip;
 

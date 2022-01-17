@@ -82,13 +82,13 @@ void Character::setIsDeath(bool _isDeath){
 }
 
 int Character::getDeathCount(){
-    qDebug() << this->m_deathCount;
+    //qDebug() << this->m_deathCount;
     return this->m_deathCount;
 }
+
 void Character::incrementDeathCount(){
     this->m_deathCount++;
     qDebug() << "Nombre de mort(s) : " << this->m_deathCount;
-
 }
 
 

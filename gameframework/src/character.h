@@ -61,7 +61,6 @@ private:
 
     bool m_isJump = false;
 
-
     int m_deathCount = 0;
 
     void configureTransformationMatrix();
