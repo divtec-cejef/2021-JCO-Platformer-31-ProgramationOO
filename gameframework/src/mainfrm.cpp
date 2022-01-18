@@ -9,12 +9,15 @@
 #include "ui_mainfrm.h"
 
 #include "gamecanvas.h"
+#include "QDebug"
 
 //! Construit la fenêtre principale.
 MainFrm::MainFrm(QWidget *pParent) : QWidget(pParent), ui(new Ui::MainFrm) {
     ui->setupUi(this);
 
     m_pGameCanvas = new GameCanvas(ui->grvGame);
+    setFixedSize(1400,1000);
+
 
     // Pour que la vue adapte sa taille à celle de la fenêtre
     //ui->grvGame->setFitToScreenEnabled(true);

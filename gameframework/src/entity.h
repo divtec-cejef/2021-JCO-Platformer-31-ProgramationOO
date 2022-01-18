@@ -45,7 +45,7 @@ public:
     QPointF m_velocity;
     QPointF m_lastVelocity = m_velocity;
     QPointF getVelocity();
-    virtual void updateVelocity();
+    //virtual void updateVelocity();
 
     bool getIsOnFloor();
     virtual void setIsOnFloor(bool _isOnFloor);
@@ -64,7 +64,7 @@ public:
 
     //Collision
     //virtual void currentCollision();
-    virtual void collisionDetection(QRectF rect);
+    //virtual void collisionDetection(QRectF rect);
 
     static void uniqueSide(QList<hitSide>* collidingSidesList, hitSide appendToSide);
 

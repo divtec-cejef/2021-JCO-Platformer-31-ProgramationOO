@@ -34,9 +34,11 @@
 const int SCENE_WIDTH   = 6000;
 const int SCENE_HEIGHT  = 4000;
 
-const int PLAYER_SPEED  = 7 ;     // Vitesse de déplacement du joueur en pixels/s
+const int PLAYER_SPEED  = 10 ;     // Vitesse de déplacement du joueur en pixels/s
 const int PLAYER_JUMP   = -10 ;    // Vitesse du saute
 const int PLAYER_STOP   = 0;       // Arrete le joueur
+
+const int GHOST_SPEED  = -10 ;
 
 //dimenssion de découpage des spriteSheets du fantome.
 const int FRAME_SIZE_GHOST   = 60;   //  Dimenssion de la frame
@@ -210,7 +212,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     // Attention : il est important que l'enclenchement du tick soit fait vers la fin de cette fonction,
     // sinon le temps passé jusqu'au premier tick (ElapsedTime) peut être élevé et provoquer de gros
     // déplacements, surtout si le déboggueur est démarré.
-    m_pGameCanvas->startTick(5);
+    m_pGameCanvas->startTick();
 
 }
 
@@ -308,23 +310,19 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
     if(!pCharacter->getIsDeath()){
         //Déplace le joueur
-        pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity);
+        pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity * elapsedTimeInMilliseconds/15.0);
         qDebug()<< "velocity x  "<< pCharacter->m_velocity.x() << " velocity y" << pCharacter->m_velocity.y();
 
         for (int i = m_pScene->sprites().count();i >= 0;i--) {
             if(m_pScene->sprites().at(i)->data(1) == "joueur"){
                 //Suite les déplacement du joueur dans la scene
-                m_pGameCanvas->getView()->centerOn(m_pScene->sprites().at(i)->pos().x(), 1300);
-//pDeathCount->setPos(pCharacter->pos());
+                m_pGameCanvas->getView()->centerOn(m_pScene->sprites().at(i)->pos().x(), 1450);               //pDeathCount->setPos(pCharacter->pos());
 
-               /* pDeathCount->setPos(pCharacter->x() - m_pGameCanvas->getView()->width()/4.0,
+                /* pDeathCount->setPos(pCharacter->x() - m_pGameCanvas->getView()->width()/4.0,
                                    pCharacter->y() -  m_pGameCanvas->getView()->height()/4.0);*/
 
-
-
-               // pDeathCount->setPos(m_pGameCanvas->getView()->);
+                // pDeathCount->setPos(m_pGameCanvas->getView()->);
             }
-
         }
 
         //Prochaine position du joueur
@@ -414,21 +412,22 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                         switch (collidingSidesL.at(i)) {
                         case Entity::hitSide::DOWN:
                             //pCharacter->m_velocity.setY(-0.2);
-                                //Truc de doryan bizarre
-                                pCharacter->setY((CollisionDetected->top()-pCharacter->height()));
-                                if(!pCharacter->getIsJump())
-                                    pCharacter->setIsOnFloor(true);
-                                pCharacter->setIsJump(false);
+                            //Truc de doryan bizarre
+                            pCharacter->setY((CollisionDetected->top()-pCharacter->height()));
+                            if(!pCharacter->getIsJump())
+                                pCharacter->setIsOnFloor(true);
+                            pCharacter->setIsJump(false);
+                            pCharacter->m_velocity.setY(0);
                             break;
                         case  Entity::hitSide::UP:
-                                pCharacter->m_velocity.setY(0);
-                                pCharacter->setY((CollisionDetected->bottom()+1));
+                            pCharacter->m_velocity.setY(0);
+                            pCharacter->setY((CollisionDetected->bottom()+1));
                             break;
                         case Entity::hitSide::RIGHT :
-                                pCharacter->setX((CollisionDetected->left()- pCharacter->width())+5);
+                            pCharacter->setX((CollisionDetected->left()- pCharacter->width())+5);
                             break;
                         case Entity::hitSide::LEFT :
-                                pCharacter->setX((CollisionDetected->right()) -5);
+                            pCharacter->setX((CollisionDetected->right()) -5);
                             break;
                         }
                     }
@@ -444,7 +443,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             setupCharacterDeath();
         }
     }else {
-        pGhost->setY(pGhost->y() -5);
+        pGhost->setY(pGhost->y() + GHOST_SPEED * elapsedTimeInMilliseconds/15.0);
     }
 
     //Parcourt la liste des Bulio de la scene.
@@ -482,10 +481,10 @@ void GameCore::setAnimationDeath()
                                                     (frameIndex / COLUMN_COUNT_GHOST) * FRAME_SIZE_GHOST,
                                                     FRAME_SIZE_GHOST, FRAME_SIZE_GHOST);
 
-            pGhost->addAnimationFrame(QPixmap::fromImage(CurrentFrameImage.scaled(FRAME_SIZE_GHOST * 1.5,
-                                                                                  FRAME_SIZE_GHOST * 1.5,
-                                                                                  Qt::IgnoreAspectRatio,
-                                                                                  Qt::SmoothTransformation)));
+        pGhost->addAnimationFrame(QPixmap::fromImage(CurrentFrameImage.scaled(FRAME_SIZE_GHOST * 1.5,
+                                                                              FRAME_SIZE_GHOST * 1.5,
+                                                                              Qt::IgnoreAspectRatio,
+                                                                              Qt::SmoothTransformation)));
     }
     pGhost->startAnimation(50);
 }

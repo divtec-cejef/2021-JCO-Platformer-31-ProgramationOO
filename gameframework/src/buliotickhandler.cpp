@@ -6,17 +6,22 @@
 */
 #include "buliotickhandler.h"
 
+// Vitesse des bulio
+const int SPEED = 10;
 
 BulioTickHandler::BulioTickHandler(Entity* pParentEntity,GameCore* newGameCore) : EntityTickHandler (pParentEntity)
 {
     setGameCore(newGameCore);
+    m_pParentEntity->m_velocity.setX(SPEED);
+
 }
 
 //! Cadence : détermine le mouvement que fait le sprite durant le temps écoulé,
 //! vérifie si il doit rebondir et le positionne à son nouvel emplacement.
 void BulioTickHandler::tick(long long elapsedTimeInMilliseconds) {
+    // qDebug() << m_pParentEntity->m_velocity.x();
     //Déplace le bulio.
-    m_pParentEntity->setPos(m_pParentEntity->pos()+ m_pParentEntity->m_velocity);
+    m_pParentEntity->setPos(m_pParentEntity->pos()+ m_pParentEntity->m_velocity * elapsedTimeInMilliseconds/15.0);
 
     nextCollision();
 
@@ -89,11 +94,11 @@ void BulioTickHandler::nextCollision(){
                         break;
                     case Entity::hitSide::RIGHT:
                         m_pParentEntity->setX((CollisionDetected->left()- m_pParentEntity->width()));
-                        m_pParentEntity->m_velocity.setX(-5);
+                        m_pParentEntity->m_velocity.setX(-SPEED);
                         break;
                     case Entity::hitSide::LEFT:
                         m_pParentEntity->setX(CollisionDetected->right());
-                        m_pParentEntity->m_velocity.setX(5);
+                        m_pParentEntity->m_velocity.setX(SPEED);
                         break;
                     }
                 }

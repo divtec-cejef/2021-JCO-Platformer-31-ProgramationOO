@@ -15,8 +15,7 @@
 #include "gamecanvas.h"
 
 
-// Vitesse des bulio
-const int VITESSE_DEPLACEMENT = 2;
+
 
 //Vitesse d'animation
 const int VITESSE_ANIM = 100;
@@ -29,7 +28,6 @@ const int COLUMN_COUNT = 1;
 
 Bulio::Bulio(QGraphicsItem* pParent) : Entity(GameFramework::imagesPath() + "bulioBaseV1.png", pParent)
 {
-    m_velocity.setX(VITESSE_DEPLACEMENT);
     configureAnimation(DEPLACEMENT);
 }
 
@@ -115,80 +113,3 @@ void Bulio::configureAnimation(animation bulio) {
     startAnimation(VITESSE_ANIM);
 
 }
-
-///!
-//! \param rect position de l'entité dans l'espace.
-//!
-void Bulio::collisionDetection(QRectF rect){
-
-    // ////////////////// //
-    // CURRENT COLLISION  //
-    // ////////////////// //
-
-    QList<hitSide> collidingSides = QList<hitSide>();
-
-    // Récupère tous les sprites de la scène qui touche le joueur
-    auto listeCurrentCollisionEnnemie = this->parentScene()->collidingSprites(this);
-    // Supprimer le sprite lui-même
-    listeCurrentCollisionEnnemie.removeAll(this);
-
-    //récupère la valeur de liste (remplis/vide)
-    bool currentCollision  = !listeCurrentCollisionEnnemie.isEmpty();
-
-    if(currentCollision){
-        //Cherche les collisions entre le joueurs les autres sprites
-        for (Sprite* CollisionDetected : listeCurrentCollisionEnnemie) {
-
-            QRectF intersected = rect.intersected(CollisionDetected->globalBoundingBox());
-
-            if (intersected.width() > intersected.height() && intersected.width() > 10) {
-                if (intersected.center().y() < rect.center().y())
-                    uniqueSide(&collidingSides, hitSide::UP);
-                else
-                    uniqueSide(&collidingSides, hitSide::DOWN);
-            } else if (intersected.width() < intersected.height() && intersected.height() > 10){
-                if (intersected.center().x() < rect.center().x())
-                    uniqueSide(&collidingSides, hitSide::LEFT);
-                else
-                    uniqueSide(&collidingSides, hitSide::RIGHT);
-            }
-
-            if (CollisionDetected->data(1) == "sol") {
-                for (hitSide CurrentSide : collidingSides) {
-
-                    switch (collidingSides.takeAt(CurrentSide)) {
-                    case hitSide::DOWN:
-                        this->m_velocity.setY(0.0);
-                        //this->setIsJump(false);
-                        break;
-                    case  hitSide::UP:
-                        this->m_velocity.setY(0.0);
-                        break;
-                    case hitSide::RIGHT :
-                        this->m_velocity.setX(-VITESSE_DEPLACEMENT);
-                        break;
-                    case hitSide::LEFT :
-                        this->m_velocity.setX(VITESSE_DEPLACEMENT);
-                        break;
-                    }
-               }
-            }else if (CollisionDetected->data(1) == "joueur") {
-                qDebug()<<"NON PAS LUI";
-                for (hitSide CurrentSide : collidingSides) {
-
-                    if(CurrentSide == hitSide::UP){
-                        setIsDeath(true);
-                        m_pScene->removeSpriteFromScene(this);
-                    }
-               }
-            }
-        }
-    }else {
-        this->setIsOnFloor(false);
-    }
-}
-
-void Bulio::updateVelocity(){
-
-}
-

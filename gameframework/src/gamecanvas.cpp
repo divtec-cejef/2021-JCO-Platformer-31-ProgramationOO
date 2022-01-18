@@ -18,7 +18,7 @@
 #include <QGraphicsTextItem>
 #include <QKeyEvent>
 
-const int DEFAULT_TICK_INTERVAL = 20;
+const int DEFAULT_TICK_INTERVAL = 1;
 
 //!
 //! Construit le canvas de jeu, qui se charge de faire l'interface entre GameView, GameScene et GameCore.

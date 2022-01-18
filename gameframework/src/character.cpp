@@ -282,15 +282,3 @@ void Character::setupDeath(GameScene pScene){
     pCharacter->incrementDeathCount();
 }
 */
-
-void Entity::updateVelocity(){
-
-}
-
-///!
-//! \brief Bulio::collisionDetection
-//! \param rect position de l'entité dans l'espace.
-//!
-void Entity::collisionDetection(QRectF rect){
-    qDebug() << "y a pas à print comme ça"<< rect;
-}

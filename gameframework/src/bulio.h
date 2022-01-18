@@ -33,8 +33,6 @@ public:
     enum animation{
         BASE = 0,
         DEPLACEMENT = 1,
-        SAUT = 3,
-        ATTAQUE = 4,
     };
 
     //Configuration des animation du bulio
