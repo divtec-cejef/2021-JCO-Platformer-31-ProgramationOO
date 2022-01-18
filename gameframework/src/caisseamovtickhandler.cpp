@@ -33,7 +33,7 @@ void CaisseAmovTickHandler::tick(long long elapsedTimeInMilliseconds) {
     if(m_pParentEntity->getIsDeath()){
         //Retire la caisse de la scene
         m_pParentEntity->parentScene()->removeSpriteFromScene(m_pParentEntity);
-
+        m_pParentEntity->m_velocity = QPointF(0,0);
         //Rajoute la caisse dans la scene
         m_pParentEntity->parentScene()->addSpriteToScene(
                     m_pParentEntity,m_pParentEntity->getSpawnPoint());
@@ -78,7 +78,7 @@ void CaisseAmovTickHandler::currentCollision(){
                     case Entity::hitSide::UP:
                         break;
                     case Entity::hitSide::DOWN :
-                        m_pGameCore->setupCharacterDeath();
+
                         break;
                     case Entity::hitSide::RIGHT :
                         if(m_canMove)
@@ -94,6 +94,7 @@ void CaisseAmovTickHandler::currentCollision(){
         }
     }
 }
+
 
 void CaisseAmovTickHandler::nextCollision(){
     //Prochaine position de la caisse.
@@ -126,31 +127,33 @@ void CaisseAmovTickHandler::nextCollision(){
 
 
             m_pParentEntity->m_velocity.setX(0);
-            for (int i =0;i < collidingSidesL.count();i++) {
-                switch (collidingSidesL.at(i)) {
-                case Entity::hitSide::DOWN:
-                    m_pParentEntity->setY((CollisionDetected->top()-m_pParentEntity->height()));
-                    m_pParentEntity->setIsOnFloor(true);
-                    break;
-                case  Entity::hitSide::UP:
-                    m_pParentEntity->m_velocity.setY(0);
-                    m_pParentEntity->setY((CollisionDetected->bottom()+1));
-                    break;
-                case Entity::hitSide::RIGHT:
-                    m_canMove = false;
-                    m_pParentEntity->m_velocity.setX(0);
-                    m_pParentEntity->setX((CollisionDetected->left()- m_pParentEntity->width()));
-                    break;
-                case Entity::hitSide::LEFT:
-                    m_canMove = false;
-                    m_pParentEntity->m_velocity.setX(0);
-                    m_pParentEntity->setX(CollisionDetected->right());
-                    break;
+
+            if (CollisionDetected->data(1) != "Ghost") {
+                for (int i =0;i < collidingSidesL.count();i++) {
+                    switch (collidingSidesL.at(i)) {
+                    case Entity::hitSide::DOWN:
+                        m_pParentEntity->setY((CollisionDetected->top()-m_pParentEntity->height()));
+                        m_pParentEntity->setIsOnFloor(true);
+                        break;
+                    case  Entity::hitSide::UP:
+                        m_pParentEntity->m_velocity.setY(0);
+                        m_pParentEntity->setY((CollisionDetected->bottom()+1));
+                        break;
+                    case Entity::hitSide::RIGHT:
+                        m_canMove = false;
+                        m_pParentEntity->m_velocity.setX(0);
+                        m_pParentEntity->setX((CollisionDetected->left()- m_pParentEntity->width()));
+                        break;
+                    case Entity::hitSide::LEFT:
+                        m_canMove = false;
+                        m_pParentEntity->m_velocity.setX(0);
+                        m_pParentEntity->setX(CollisionDetected->right());
+                        break;
+                    }
                 }
+
             }
-
         }
-
     }else {
         m_pParentEntity->setIsOnFloor(false);
     }

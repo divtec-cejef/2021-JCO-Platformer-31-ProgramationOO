@@ -12,7 +12,7 @@ const int SPEED = 10;
 BulioTickHandler::BulioTickHandler(Entity* pParentEntity,GameCore* newGameCore) : EntityTickHandler (pParentEntity)
 {
     setGameCore(newGameCore);
-    m_pParentEntity->m_velocity.setX(SPEED);
+
 
 }
 

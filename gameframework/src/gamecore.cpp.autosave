@@ -420,12 +420,9 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                         }
                     }
                 }else if (CollisionDetected->data(1) == "Wood_caisse") {
-
                     for (int i =0;i < collidingSidesL.count();i++) {
-                        switch (collidingSidesL.at(i)) {
-                        case  Entity::hitSide::UP:
+                        if(collidingSidesL.at(i) == Entity::hitSide::UP) {
                             setupCharacterDeath();
-                            break;
                         }
                     }
                 }else{

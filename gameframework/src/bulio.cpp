@@ -17,8 +17,7 @@
 
 
 
-//Vitesse d'animation
-const int VITESSE_ANIM = 100;
+
 
 //! spriteSheet animation de marche à gauche/droite
 const int FRAME_WIDTH = 76;
@@ -26,9 +25,16 @@ const int FRAME_HEIGHT = 48;
 const int FRAME_COUNT = 2;
 const int COLUMN_COUNT = 1;
 
+//Vitesse d'animation
+const int VITESSE_ANIM = 100;
+
+//Vitesse de velocité de base.
+const int SPEED = 10;
+
 Bulio::Bulio(QGraphicsItem* pParent) : Entity(GameFramework::imagesPath() + "bulioBaseV1.png", pParent)
 {
     configureAnimation(DEPLACEMENT);
+    this->m_velocity.setX(SPEED);
 }
 
 //!
