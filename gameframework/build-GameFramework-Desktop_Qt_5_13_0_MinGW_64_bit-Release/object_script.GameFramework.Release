@@ -16,7 +16,6 @@ release/resources.o
 release/gameview.o
 release/utilities.o
 release/gamecanvas.o
-release/blueball.o
 release/spritetickhandler.o
 release/bouncingspritehandler.o
 release/moc_mainfrm.o

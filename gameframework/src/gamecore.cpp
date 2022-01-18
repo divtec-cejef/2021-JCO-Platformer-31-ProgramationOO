@@ -34,11 +34,11 @@
 const int SCENE_WIDTH   = 6000;
 const int SCENE_HEIGHT  = 4000;
 
-const int PLAYER_SPEED  = 10 ;     // Vitesse de déplacement du joueur en pixels/s
-const int PLAYER_JUMP   = -10 ;    // Vitesse du saute
+const int PLAYER_SPEED  = 9 ;     // Vitesse de déplacement du joueur en pixels/s
+const int PLAYER_JUMP   = -8 ;    // Vitesse du saute
 const int PLAYER_STOP   = 0;       // Arrete le joueur
 
-const int GHOST_SPEED  = -10 ;
+const int GHOST_SPEED  = -10 ;      //Vitesse de vol
 
 //dimenssion de découpage des spriteSheets du fantome.
 const int FRAME_SIZE_GHOST   = 60;   //  Dimenssion de la frame
@@ -507,7 +507,7 @@ void GameCore::setupCharacterDeath(){
     //Ajoute d'une mort au compteur.
     pCharacter->incrementDeathCount();
 
-    //pDeathCount->setText("Nombre de mort(s) : " + QString::number(pCharacter->getDeathCount()));
+    pDeathCount->setText("Nombre de mort(s) : " + QString::number(pCharacter->getDeathCount()));
 
 }
 

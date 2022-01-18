@@ -34,7 +34,6 @@ SOURCES += main.cpp\
     gameview.cpp \
     utilities.cpp \
     gamecanvas.cpp \
-    blueball.cpp \
     spritetickhandler.cpp \
     bouncingspritehandler.cpp
 

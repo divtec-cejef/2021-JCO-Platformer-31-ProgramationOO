@@ -16,7 +16,6 @@ debug/resources.o
 debug/gameview.o
 debug/utilities.o
 debug/gamecanvas.o
-debug/blueball.o
 debug/spritetickhandler.o
 debug/bouncingspritehandler.o
 debug/moc_mainfrm.o
