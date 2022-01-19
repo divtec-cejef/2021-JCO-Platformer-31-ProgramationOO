@@ -74,6 +74,8 @@ private:
     QList<Bulio*> m_pBulioL;
     QList<CaisseAmovible*> m_pCaisseMovL;
 
+    void StackMetal(QPointF firstCase);
+
     Ground* m_Grounds = new Ground;
 
     //Collision

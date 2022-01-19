@@ -39,7 +39,7 @@ Entity::Entity(const QPixmap& rPixmap, QGraphicsItem* pParent, QPointF _spawnPoi
 //! \param _spawnPoint nouveau point d'apparition.
 //!
 void Entity::setSpawnPoint(QPointF _spawnPoint){
-     m_spawnPoint = _spawnPoint;
+    m_spawnPoint = _spawnPoint;
 }
 
 //! Premet de récupéré le point d'apparition de l'entité dans la scène.
@@ -87,7 +87,7 @@ void Entity::setIsDeath(bool _isDeath){
 //! \param posSprite Position du Sprite principal.
 //! \param intersected zone de collision entre les deux sprites.
 void Entity::getCollisionLocate(QList<Entity::hitSide>&collisionLocateL,
-                                  QRectF posSprite,QRectF intersected){
+                                QRectF posSprite,QRectF intersected){
 
     //Si l'intersected est plus large la collision est vertical.
     if (intersected.width() > intersected.height() && intersected.width() > MIN_INTERSECTED) {
@@ -98,7 +98,7 @@ void Entity::getCollisionLocate(QList<Entity::hitSide>&collisionLocateL,
             //Détermine le bas
             Entity::uniqueSide(&collisionLocateL, Entity::hitSide::DOWN);
 
-      //Sinon si la collision est plus haut que large est horizontal.
+        //Sinon si la collision est plus haut que large est horizontal.
     } else if (intersected.width() < intersected.height() && intersected.height() > MIN_INTERSECTED){
         if (intersected.center().x() < posSprite.center().x())
             //Détermine la gauche
@@ -116,8 +116,8 @@ void Entity::getCollisionLocate(QList<Entity::hitSide>&collisionLocateL,
 //!
 void Entity::uniqueSide(QList<hitSide>* collidingSidesList, hitSide appendToSide){
     if (!collidingSidesList->contains(appendToSide)) {
-            collidingSidesList->append(appendToSide);
-        }
+        collidingSidesList->append(appendToSide);
+    }
 }
 
 //! Applique une force d'attraction vers le bas de l'écran à une entitié.
@@ -126,8 +126,12 @@ void Entity::uniqueSide(QList<hitSide>* collidingSidesList, hitSide appendToSide
 //! \param elapsedTime temps écoulé entre chaque tick.
 void Entity::gravityApplied(long long elapsedTime){
     if (!this->getIsOnFloor()){
-    this->setPos(this->pos() + this->m_velocity * (elapsedTime/100.0));
-    this->m_velocity += m_gravity * (elapsedTime/100.0);
+        if(this->m_velocity.y() <= 0.3 && this->m_velocity.y() >= 0)
+            this->setIsOnFloor(true);
+        else
+            this->setIsOnFloor(false);
+
+        this->m_velocity += m_gravity * (elapsedTime/100.0);
     }
 }
 
