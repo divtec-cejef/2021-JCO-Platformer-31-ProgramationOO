@@ -1,0 +1,34 @@
+\hypertarget{entitytickhandler_8h_source}{}\doxysection{entitytickhandler.\+h}
+\label{entitytickhandler_8h_source}\index{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/entitytickhandler.h@{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/entitytickhandler.h}}
+\mbox{\hyperlink{entitytickhandler_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#ifndef ENTITYTICKHANDLER\_H}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#define ENTITYTICKHANDLER\_H}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{class }\mbox{\hyperlink{class_entity}{Entity}};}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 }
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{class }\mbox{\hyperlink{class_entity_tick_handler}{EntityTickHandler}}}
+\DoxyCodeLine{27 \{}
+\DoxyCodeLine{28 \textcolor{keyword}{public}:}
+\DoxyCodeLine{29     \mbox{\hyperlink{class_entity_tick_handler_a6653eafc76ded24d455d509a32ae7c85}{EntityTickHandler}}(\mbox{\hyperlink{class_entity}{Entity}}* pParentEntity = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{30     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_entity_tick_handler_ad5dba143532864af186f0bcff95874a6}{\string~EntityTickHandler}}();}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{keyword}{public}:}
+\DoxyCodeLine{33     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_entity_tick_handler_a0fa6def5f831dff28a1427fc592c6ca5}{setParentEntity}}(\mbox{\hyperlink{class_entity}{Entity}}* pParentEntity);}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} init() \{\}}
+\DoxyCodeLine{36     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} tick(\textcolor{keywordtype}{long} \textcolor{keywordtype}{long} elapsedTimeInMilliseconds) = 0;}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_entity_tick_handler_a64c248a17bebe450b99fbe4c88ea9094}{currentCollision}}();}
+\DoxyCodeLine{39     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_entity_tick_handler_a8d617f400dfc1e791bd33e6a6be6c958}{nextCollision}}();}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{42     \mbox{\hyperlink{class_entity}{Entity}}* m\_pParentEntity;}
+\DoxyCodeLine{43 \};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ENTITYTICKHANDLER\_H}}
+
+\end{DoxyCode}

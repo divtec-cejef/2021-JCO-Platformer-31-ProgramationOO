@@ -1,0 +1,56 @@
+\hypertarget{character_8cpp}{}\doxysection{C\+:/\+Users/kuttleo/\+DIVTEC/\+EMT Informatique -\/ 2019-\/2023/\+Kuttel Leo/\+Atelier/31-\/\+Programation\+OO/\+Le\+Jeu/gameframework/src/character.cpp File Reference}
+\label{character_8cpp}\index{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/character.cpp@{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/character.cpp}}
+
+
+Définition de la classe \mbox{\hyperlink{class_character}{Character}}.  
+
+
+{\ttfamily \#include \char`\"{}character.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$QDebug$>$}\newline
+{\ttfamily \#include $<$QSettings$>$}\newline
+{\ttfamily \#include \char`\"{}utilities.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}playertickhandler.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sprite.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}time.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$QString$>$}\newline
+{\ttfamily \#include \char`\"{}gamescene.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gamecanvas.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}resources.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structcollision_distance}{collision\+Distance}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{character_8cpp_ad092356e26e473e14317e583156e17da}\label{character_8cpp_ad092356e26e473e14317e583156e17da}} 
+const int {\bfseries NBR\+\_\+\+ANIMATION} = 6
+\item 
+\mbox{\Hypertarget{character_8cpp_ac96a9c046b50ebf22c37b3cf79c02ddb}\label{character_8cpp_ac96a9c046b50ebf22c37b3cf79c02ddb}} 
+const int {\bfseries FRAME\+\_\+\+WIDTH} = 60
+\begin{DoxyCompactList}\small\item\em sprite\+Sheet animation de marche à gauche/droite \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{character_8cpp_a51f854cccc79cb38663ab9df81542fa8}\label{character_8cpp_a51f854cccc79cb38663ab9df81542fa8}} 
+const int {\bfseries FRAME\+\_\+\+HEIGHT} = 60
+\item 
+\mbox{\Hypertarget{character_8cpp_a572277ede3a2bd8a792f6df9cfd60de7}\label{character_8cpp_a572277ede3a2bd8a792f6df9cfd60de7}} 
+const int {\bfseries FRAME\+\_\+\+COUNT} = 4
+\item 
+\mbox{\Hypertarget{character_8cpp_a5a453206c2b942b1b430a91fcc211520}\label{character_8cpp_a5a453206c2b942b1b430a91fcc211520}} 
+const int {\bfseries COLUMN\+\_\+\+COUNT} = 2
+\item 
+\mbox{\Hypertarget{character_8cpp_a9173d4f85bd7a9c891bc2eec694ee9a5}\label{character_8cpp_a9173d4f85bd7a9c891bc2eec694ee9a5}} 
+const int {\bfseries PLAYER\+\_\+\+SPEED} = 10
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Définition de la classe \mbox{\hyperlink{class_character}{Character}}. 
+
+\begin{DoxyAuthor}{Author}
+LKU 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Decembre 2021 
+\end{DoxyDate}

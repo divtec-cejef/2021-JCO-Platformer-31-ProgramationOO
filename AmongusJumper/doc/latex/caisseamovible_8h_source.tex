@@ -1,0 +1,39 @@
+\hypertarget{caisseamovible_8h_source}{}\doxysection{caisseamovible.\+h}
+\label{caisseamovible_8h_source}\index{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/caisseamovible.h@{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/caisseamovible.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef CAISSEAMOVIBLE\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define CAISSEAMOVIBLE\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QObject>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QPointF>}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <QGraphicsTransform>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <QList>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{sprite_8h}{sprite.h}}>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <entity.h>}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{keyword}{class }\mbox{\hyperlink{class_caisse_amovible}{CaisseAmovible}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_entity}{Entity}}}
+\DoxyCodeLine{15 \{}
+\DoxyCodeLine{16 \textcolor{keyword}{public}:}
+\DoxyCodeLine{17     \mbox{\hyperlink{class_caisse_amovible}{CaisseAmovible}}(QGraphicsItem* pParent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19     \textcolor{comment}{//Gestion des déplacement de la caisse}}
+\DoxyCodeLine{20     \textcolor{keywordtype}{void} updateVelocity();}
+\DoxyCodeLine{21     \textcolor{comment}{//Définit les déplacement de la caisse dans le jeu.}}
+\DoxyCodeLine{22     \textcolor{keywordtype}{void} collisionDetection(QRectF rect);}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_caisse_amovible_a121bbe8d841233204a9ba009038f2b3c}{setIsOnFloor}}(\textcolor{keywordtype}{bool} \_isOnFloor);}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26     \textcolor{comment}{//Définit si la caisse doit être détruite ou non.}}
+\DoxyCodeLine{27     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_caisse_amovible_ad781785bfd77150835e8e3436b20257f}{setIsDeath}}(\textcolor{keywordtype}{bool} \_isDeath);}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \};}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// CAISSEAMOVIBLE\_H}}
+
+\end{DoxyCode}
