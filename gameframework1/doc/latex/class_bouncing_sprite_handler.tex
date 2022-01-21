@@ -1,0 +1,89 @@
+\hypertarget{class_bouncing_sprite_handler}{}\doxysection{Bouncing\+Sprite\+Handler Class Reference}
+\label{class_bouncing_sprite_handler}\index{BouncingSpriteHandler@{BouncingSpriteHandler}}
+
+
+Classe qui gère le déplacement par rebond d\textquotesingle{}un sprite.  
+
+
+
+
+{\ttfamily \#include $<$bouncingspritehandler.\+h$>$}
+
+Inheritance diagram for Bouncing\+Sprite\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_bouncing_sprite_handler}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_bouncing_sprite_handler_a43ef90f814328060e09cbf410b487a04}{Bouncing\+Sprite\+Handler}} (\mbox{\hyperlink{class_sprite}{Sprite}} $\ast$p\+Parent\+Sprite=nullptr)
+\item 
+void \mbox{\hyperlink{class_bouncing_sprite_handler_ae8097da4df0cbf25ff956aab7f1b64b4}{set\+Sprite\+Velocity}} (QPointF sprite\+Velocity)
+\item 
+void \mbox{\hyperlink{class_bouncing_sprite_handler_ae88ca2d267671c0b13014901befa4c11}{set\+Sprite\+Velocity}} (double x\+Velocity, double y\+Velocity)
+\item 
+void \mbox{\hyperlink{class_bouncing_sprite_handler_a8b0210eaa1341f24ec4cd91930aa39c7}{tick}} (long long elapsed\+Time\+In\+Milliseconds)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Classe qui gère le déplacement par rebond d\textquotesingle{}un sprite. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_bouncing_sprite_handler_a43ef90f814328060e09cbf410b487a04}\label{class_bouncing_sprite_handler_a43ef90f814328060e09cbf410b487a04}} 
+\index{BouncingSpriteHandler@{BouncingSpriteHandler}!BouncingSpriteHandler@{BouncingSpriteHandler}}
+\index{BouncingSpriteHandler@{BouncingSpriteHandler}!BouncingSpriteHandler@{BouncingSpriteHandler}}
+\doxysubsubsection{\texorpdfstring{BouncingSpriteHandler()}{BouncingSpriteHandler()}}
+{\footnotesize\ttfamily Bouncing\+Sprite\+Handler\+::\+Bouncing\+Sprite\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sprite}{Sprite}} $\ast$}]{p\+Parent\+Sprite = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Constructeur. 
+\begin{DoxyParams}{Parameters}
+{\em p\+Parent\+Sprite} & \mbox{\hyperlink{class_sprite}{Sprite}} dont le déplacement doit être géré. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_bouncing_sprite_handler_ae88ca2d267671c0b13014901befa4c11}\label{class_bouncing_sprite_handler_ae88ca2d267671c0b13014901befa4c11}} 
+\index{BouncingSpriteHandler@{BouncingSpriteHandler}!setSpriteVelocity@{setSpriteVelocity}}
+\index{setSpriteVelocity@{setSpriteVelocity}!BouncingSpriteHandler@{BouncingSpriteHandler}}
+\doxysubsubsection{\texorpdfstring{setSpriteVelocity()}{setSpriteVelocity()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Bouncing\+Sprite\+Handler\+::set\+Sprite\+Velocity (\begin{DoxyParamCaption}\item[{double}]{x\+Velocity,  }\item[{double}]{y\+Velocity }\end{DoxyParamCaption})}
+
+Change le vecteur de vitesse de déplacement du sprite. 
+\begin{DoxyParams}{Parameters}
+{\em x\+Velocity} & Vitesse de déplacement en X. \\
+\hline
+{\em y\+Velocity} & Vitesse de déplacement en Y. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_bouncing_sprite_handler_ae8097da4df0cbf25ff956aab7f1b64b4}\label{class_bouncing_sprite_handler_ae8097da4df0cbf25ff956aab7f1b64b4}} 
+\index{BouncingSpriteHandler@{BouncingSpriteHandler}!setSpriteVelocity@{setSpriteVelocity}}
+\index{setSpriteVelocity@{setSpriteVelocity}!BouncingSpriteHandler@{BouncingSpriteHandler}}
+\doxysubsubsection{\texorpdfstring{setSpriteVelocity()}{setSpriteVelocity()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Bouncing\+Sprite\+Handler\+::set\+Sprite\+Velocity (\begin{DoxyParamCaption}\item[{QPointF}]{sprite\+Velocity }\end{DoxyParamCaption})}
+
+Change le vecteur de vitesse de déplacement du sprite. 
+\begin{DoxyParams}{Parameters}
+{\em sprite\+Velocity} & Vecteur de vitesse de déplacement du sprite. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_bouncing_sprite_handler_a8b0210eaa1341f24ec4cd91930aa39c7}\label{class_bouncing_sprite_handler_a8b0210eaa1341f24ec4cd91930aa39c7}} 
+\index{BouncingSpriteHandler@{BouncingSpriteHandler}!tick@{tick}}
+\index{tick@{tick}!BouncingSpriteHandler@{BouncingSpriteHandler}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily void Bouncing\+Sprite\+Handler\+::tick (\begin{DoxyParamCaption}\item[{long long}]{elapsed\+Time\+In\+Milliseconds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Cadence \+: détermine le mouvement que fait le sprite durant le temps écoulé, vérifie si il doit rebondir et le positionne à son nouvel emplacement. 
+
+Implements \mbox{\hyperlink{class_sprite_tick_handler}{Sprite\+Tick\+Handler}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/kuttleo/\+DIVTEC/\+EMT Informatique -\/ 2019-\/2023/\+Kuttel Leo/\+Atelier/31-\/\+Programation\+OO/\+Le\+Jeu/gameframework/src/\mbox{\hyperlink{bouncingspritehandler_8h}{bouncingspritehandler.\+h}}\item 
+C\+:/\+Users/kuttleo/\+DIVTEC/\+EMT Informatique -\/ 2019-\/2023/\+Kuttel Leo/\+Atelier/31-\/\+Programation\+OO/\+Le\+Jeu/gameframework/src/\mbox{\hyperlink{bouncingspritehandler_8cpp}{bouncingspritehandler.\+cpp}}\end{DoxyCompactItemize}

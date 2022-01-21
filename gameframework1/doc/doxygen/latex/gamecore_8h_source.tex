@@ -1,0 +1,99 @@
+\hypertarget{gamecore_8h_source}{}\doxysection{gamecore.\+h}
+\label{gamecore_8h_source}\index{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/gamecore.h@{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/gamecore.h}}
+\mbox{\hyperlink{gamecore_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#ifndef GAMECORE\_H}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#define GAMECORE\_H}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <QObject>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <QPointF>}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <QGraphicsTransform>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{ \#include <QList>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include "{}character.h"{}}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include "{}gameview.h"{}}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include "{}ground.h"{}}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include "{}bulio.h"{}}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{keyword}{class }\mbox{\hyperlink{class_game_canvas}{GameCanvas}};}
+\DoxyCodeLine{21 \textcolor{keyword}{class }\mbox{\hyperlink{class_game_scene}{GameScene}};}
+\DoxyCodeLine{22 \textcolor{keyword}{class }\mbox{\hyperlink{class_sprite}{Sprite}};}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{28 \textcolor{keyword}{class }\mbox{\hyperlink{class_game_core}{GameCore}} : \textcolor{keyword}{public} QObject}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     Q\_OBJECT}
+\DoxyCodeLine{32 \textcolor{keyword}{public}:}
+\DoxyCodeLine{33     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_game_core_a2b255aa441e1bc57ee7666a5c56307b0}{GameCore}}(\mbox{\hyperlink{class_game_canvas}{GameCanvas}}* pGameCanvas, QObject *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{34     \mbox{\hyperlink{class_game_core_a065550c7481cd6ed1878b66dac3e583f}{\string~GameCore}}();}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_core_af7d1e03d52e81d846e5733d970120655}{keyPressed}}(\textcolor{keywordtype}{int} key);}
+\DoxyCodeLine{37     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_core_a3e03c88acaf04467fc3213e09c58a441}{keyReleased}}(\textcolor{keywordtype}{int} key);}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_core_acb7e3ffb6923257ae234c274b2a2a2fc}{mouseMoved}}(QPointF newMousePosition);}
+\DoxyCodeLine{40     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_core_a1433068a5dcf2e4f7ddb7aee8475043b}{mouseButtonPressed}}(QPointF mousePosition, Qt::MouseButtons buttons);}
+\DoxyCodeLine{41     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_core_a95621dec286dce595fd65418fbcee04a}{mouseButtonReleased}}(QPointF mousePosition, Qt::MouseButtons buttons);}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44     \textcolor{comment}{//Physique}}
+\DoxyCodeLine{45     QPointF m\_gravity = QPointF(0,2);}
+\DoxyCodeLine{46     \textcolor{comment}{//QPointF velocity = QPointF(0,0);}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_core_a49a00773755d2e141d4441f9b5e09fb3}{gravityApplied}}(\mbox{\hyperlink{class_entity}{Entity}}* entity,QPointF \&enti\_velocity,\textcolor{keywordtype}{long} \textcolor{keywordtype}{long} elapsedTime);}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_core_a012c0e539d2110f68a6dc187f6a2af0b}{tick}}(\textcolor{keywordtype}{long} \textcolor{keywordtype}{long} elapsedTimeInMilliseconds);}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52     \textcolor{comment}{//Collision}}
+\DoxyCodeLine{53     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_core_a21f287efeff0c058beb9289c100fe8fb}{getCollisionLocate}}(QList<Entity::hitSide>\&collisionLocateList,QRectF posSprite,QRectF intersected);}
+\DoxyCodeLine{54     \textcolor{comment}{//void commonInteraction(Entity* CurrentEntity, Sprite* sprite,QRectF posSprite,QRectF intersected);}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 signals:}
+\DoxyCodeLine{57     \textcolor{keywordtype}{void} notifyMouseMoved(QPointF newMousePosition);}
+\DoxyCodeLine{58     \textcolor{keywordtype}{void} notifyMouseButtonPressed(QPointF mousePosition, Qt::MouseButtons buttons);}
+\DoxyCodeLine{59     \textcolor{keywordtype}{void} notifyMouseButtonReleased(QPointF mousePosition, Qt::MouseButtons buttons);}
+\DoxyCodeLine{60     \textcolor{keywordtype}{void} notifyKeyPressed(\textcolor{keywordtype}{int} key);}
+\DoxyCodeLine{61     \textcolor{keywordtype}{void} notifyKeyReleased(\textcolor{keywordtype}{int} key);}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63 \textcolor{keyword}{private}:}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65     \mbox{\hyperlink{class_game_canvas}{GameCanvas}}* m\_pGameCanvas;}
+\DoxyCodeLine{66     \mbox{\hyperlink{class_game_scene}{GameScene}}* m\_pScene;}
+\DoxyCodeLine{67     \mbox{\hyperlink{class_game_view}{GameView}}* m\_pView;}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     \textcolor{comment}{//Collision}}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72     \textcolor{comment}{//Actuelle}}
+\DoxyCodeLine{73     \textcolor{comment}{//void currentCollision(Sprite* entity);}}
+\DoxyCodeLine{74     \textcolor{comment}{//Future}}
+\DoxyCodeLine{75     \textcolor{comment}{//void futurCollision(Sprite* entity);}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77     \textcolor{comment}{//Joueur}}
+\DoxyCodeLine{78     \mbox{\hyperlink{class_character}{Character}}* pCharacter = \textcolor{keyword}{new} \mbox{\hyperlink{class_character}{Character}}();}
+\DoxyCodeLine{79     \mbox{\hyperlink{class_sprite}{Sprite}}* pGhost = \textcolor{keyword}{new} \mbox{\hyperlink{class_sprite}{Sprite}}();}
+\DoxyCodeLine{80     \textcolor{keywordtype}{void} setAnimationDeath();}
+\DoxyCodeLine{81     \textcolor{keywordtype}{void} setupCharacterDeath();}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83     QList<QGraphicsTransform*> m\_transformsForFlip;}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     QList<Bulio*> m\_pBulioList;}
+\DoxyCodeLine{86     \textcolor{comment}{//Bulio* enemie1 = new Bulio();}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88     \mbox{\hyperlink{class_ground}{Ground}}* m\_Grounds = \textcolor{keyword}{new} \mbox{\hyperlink{class_ground}{Ground}};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     \textcolor{comment}{//Collision}}
+\DoxyCodeLine{91     \textcolor{keywordtype}{void} currentCollision(\mbox{\hyperlink{class_entity}{Entity}}* entity);}
+\DoxyCodeLine{92     \textcolor{keywordtype}{void} futureCollision(\mbox{\hyperlink{class_entity}{Entity}}* entity);}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97 \textcolor{comment}{//    void onSpriteDestroyed(QObject* pSprite);}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 \};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GAMECORE\_H}}
+
+\end{DoxyCode}

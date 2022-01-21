@@ -1,0 +1,24 @@
+\hypertarget{playertickhandler_8h_source}{}\doxysection{playertickhandler.\+h}
+\label{playertickhandler_8h_source}\index{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/playertickhandler.h@{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/playertickhandler.h}}
+\mbox{\hyperlink{playertickhandler_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#ifndef PLAYERTICKHANDLER\_H}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#define PLAYERTICKHANDLER\_H}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <QPointF>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{spritetickhandler_8h}{spritetickhandler.h}}"{}}}
+\DoxyCodeLine{14 \textcolor{keyword}{class }\mbox{\hyperlink{class_player_tick_handler}{PlayerTickHandler}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_sprite_tick_handler}{SpriteTickHandler}}}
+\DoxyCodeLine{15 \{}
+\DoxyCodeLine{16 \textcolor{keyword}{public}:}
+\DoxyCodeLine{17     \mbox{\hyperlink{class_player_tick_handler}{PlayerTickHandler}}(\mbox{\hyperlink{class_sprite}{Sprite}}* pParentSprite = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{18     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} init();}
+\DoxyCodeLine{19     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} tick(\textcolor{keywordtype}{long} \textcolor{keywordtype}{long} elapsedTimeInMilliseconds);}
+\DoxyCodeLine{20 \textcolor{keyword}{private}:}
+\DoxyCodeLine{21     \textcolor{keywordtype}{int} m\_playerDirection = 1;}
+\DoxyCodeLine{22     QPointF m\_initialPos;}
+\DoxyCodeLine{23 \};}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// PLAYERTICKHANDLER\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,39 @@
+\hypertarget{gameview_8h_source}{}\doxysection{gameview.\+h}
+\label{gameview_8h_source}\index{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/gameview.h@{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/gameview.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#ifndef GAMEVIEW\_H}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#define GAMEVIEW\_H}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <QGraphicsView>}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{23 \textcolor{keyword}{class }\mbox{\hyperlink{class_game_view}{GameView}} : \textcolor{keyword}{public} QGraphicsView}
+\DoxyCodeLine{24 \{}
+\DoxyCodeLine{25 \textcolor{keyword}{public}:}
+\DoxyCodeLine{26     \mbox{\hyperlink{class_game_view_aabca3ac6b068f51fa32fd73a6481854a}{GameView}}(QWidget* pParent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{27     \mbox{\hyperlink{class_game_view_aabca3ac6b068f51fa32fd73a6481854a}{GameView}}(QGraphicsScene* pScene, QWidget* pParent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_view_a01d0a42238c426df5f22245946251d18}{setFitToScreenEnabled}}(\textcolor{keywordtype}{bool} fitToScreenEnabled);}
+\DoxyCodeLine{30     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_game_view_af6118debe09ef55369b51dae6561a061}{isFitToScreenEnabled}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_view_a4518b2fb02072cae4a9012ce7ee4b3e0}{setClipSceneEnabled}}(\textcolor{keywordtype}{bool} clipSceneEnabled);}
+\DoxyCodeLine{33     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_game_view_abde8077a47bc84a48e7fd95337d41a33}{isClipSceneEnabled}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{36     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_view_a0927a1a8a2a2afc53a0858d54cf88570}{resizeEvent}}(QResizeEvent* pEvent);}
+\DoxyCodeLine{37     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_view_a8bfcf485874824351c9fa70bdbf23a49}{drawForeground}}(QPainter* pPainter, \textcolor{keyword}{const} QRectF\& rRect);}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{keyword}{private}:}
+\DoxyCodeLine{40     \textcolor{keywordtype}{void} init();}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42     \textcolor{keywordtype}{bool} m\_fitToScreen;}
+\DoxyCodeLine{43     \textcolor{keywordtype}{bool} m\_clipScene;}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \textcolor{keywordtype}{bool} m\_clippingRectUpToDate;}
+\DoxyCodeLine{46     QRectF m\_clippingRect[4];}
+\DoxyCodeLine{47 \};}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GAMEVIEW\_H}}
+
+\end{DoxyCode}
