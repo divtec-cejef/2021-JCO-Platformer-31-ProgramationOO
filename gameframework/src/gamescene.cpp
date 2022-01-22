@@ -99,6 +99,23 @@ void GameScene::removeSpriteFromScene(Sprite* pSprite)
 
 }
 
+//! Retire tous les sprites de la scène.
+//! La scène n'est plus propriétaire des sprites et ne se chargera pas de les effacers.
+void GameScene::removeAllSpriteFromScene()
+{
+    for (int i = 0; i <= this->sprites().count();i++) {
+        Sprite* pCurrentSprite = this->sprites().at(i);
+
+        removeItem(pCurrentSprite);
+
+        disconnect(pCurrentSprite, &Sprite::destroyed, this, &GameScene::onSpriteDestroyed);
+
+        m_registeredForTickSpriteList.removeAll(pCurrentSprite);
+
+        emit spriteRemovedFromScene(pCurrentSprite);
+    }
+}
+
 //! Construit la liste de tous les sprites en collision avec le sprite donné en
 //! paramètre.
 //! Si la scène contient de nombreux sprites, cette méthode peut prendre du temps.
@@ -251,8 +268,8 @@ bool GameScene::isInsideScene(const QRectF& rRect) const {
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le tick précédent.
 void GameScene::tick(long long elapsedTimeInMilliseconds) {
     auto spriteListCopy = m_registeredForTickSpriteList; // On travaille sur une copie au cas où
-                                        // la liste originale serait modifiée
-                                        // lors de l'appel de tick auprès d'un sprite.
+    // la liste originale serait modifiée
+    // lors de l'appel de tick auprès d'un sprite.
     for(Sprite* pSprite : spriteListCopy) {
         pSprite->tick(elapsedTimeInMilliseconds);
     }

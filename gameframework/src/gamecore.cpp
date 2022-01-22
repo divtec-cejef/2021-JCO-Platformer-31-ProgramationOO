@@ -21,7 +21,6 @@
 
 #include "sprite.h"
 
-//Ajoute Supp
 #include "ground.h"
 #include <string>
 #include "bulio.h"
@@ -66,9 +65,26 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     // Inistilisation de la scene dans m_Grounds.
     m_Grounds->setScene(m_pScene);
 
+    // Paramètrage de du niveau de test.
+    loadTestLevel();
 
+    // ...
+    // Démarre le tick pour que les animations qui en dépendent fonctionnent correctement.
+    // Attention : il est important que l'enclenchement du tick soit fait vers la fin de cette fonction,
+    // sinon le temps passé jusqu'au premier tick (ElapsedTime) peut être élevé et provoquer de gros
+    // déplacements, surtout si le déboggueur est démarré.
+    m_pGameCanvas->startTick();
 
-    //pDeathCount->setPos(300,1200);
+}
+
+//! Destructeur de GameCore : efface les scènes
+GameCore::~GameCore() {
+    delete m_pScene;
+    m_pScene = nullptr;
+}
+
+//! Génère le niveau de démo du jeu.
+void GameCore::loadTestLevel(){
 
     //Création du filtre du premier plan
     QLinearGradient lGradient(QPointF(0,SCENE_HEIGHT / GameFramework::screenRatio()), QPointF(0,0));
@@ -79,21 +95,20 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pScene->setForegroundBrush(lGradient);
 
     // Instancier et initialiser les élément de l'interface :
-
     pDeathCount->setZValue(FIRST_LIGNE);
     pDeathCount = m_pScene->createText(QPointF(50,1200),"Nombre de mort : " + QString::number(pCharacter->getDeathCount()), 40, Qt::white);
 
+    //Message aidant le joueur durant sont parcourt.
     QGraphicsSimpleTextItem* tips = new QGraphicsSimpleTextItem();
     tips->setZValue(FIRST_LIGNE);
     tips =  m_pScene->createText(QPointF(50,1450),
-                                  "Touche de saut : < Espace > \n"
-                                  "Touche pour avancer à droite : < D > \n"
-                                  "Touche pour avancer à gauche : < A > \n", 20, Qt::white);
-
-    tips =  m_pScene->createText(QPointF(2400,1200),
-                                 "Vous pouvez pousser la caisse pour atteindre la plate forme en face.", 20, Qt::white);
-
-    //QGraphicsSimpleTextItem* tips1 = new QGraphicsSimpleTextItem();
+                                 "Touche de saut : < Espace > \n"
+                                 "Touche pour avancer à droite : < D > \n"
+                                 "Touche pour avancer à gauche : < A > \n", 20, Qt::white);
+    tips =  m_pScene->createText(QPointF(2500,1200),
+                                 "Vous pouvez sauté sur l'ennemie pour le tuer.", 20, Qt::white);
+    tips =  m_pScene->createText(QPointF(3010,1400),
+                                 " Vous pouvez pousser la caisse pour atteindre \n la plate forme en face.", 12, Qt::white);
 
     // Instancier et initialiser les sprite ici :
 
@@ -124,6 +139,12 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     QPointF posSolGroup6(5300,1660);
     m_Grounds->generated(10,7,posSolGroup6);
 
+    QPointF posSolGroup7(6800,1460);
+    m_Grounds->generated(2,9,posSolGroup7);
+
+    QPointF posSolGroup8(7140,1660);
+    m_Grounds->generated(2,4,posSolGroup8);
+
     //////////////////////////////////
     ////        PLATEFORME        ////
     //////////////////////////////////
@@ -145,55 +166,15 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     Sprite* platM4 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
     platM4->setData(1,"sol");
     platM4->setData(2,"plateforme");
-    m_pScene->addSpriteToScene(platM4, 3700,1320);
+    m_pScene->addSpriteToScene(platM4, 3680,1320);
 
-    Sprite* platM5 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
-    platM5->setData(1,"sol");
-    platM5->setData(2,"plateforme");
-    //m_pScene->addSpriteToScene(platM5, 4800,1085);
-
-    //////////////////////////////
-    ////        CAISSE        ////
-    //////////////////////////////
-    CaisseAmovible* CaisseW1 = new CaisseAmovible;
-    //CaisseW1->setData(1,"sol");
-    CaisseW1->setData(1,"Wood_caisse");
-    CaisseW1->setSpawnPoint(QPoint(700,1200));
-    //m_pScene->addSpriteToScene(CaisseW1,CaisseW1->getSpawnPoint());
-
-    CaisseAmovible* CaisseW2 = new CaisseAmovible;
-    //CaisseW2->setData(1,"sol");
-    CaisseW2->setData(1,"Wood_caisse");
-    CaisseW2->setSpawnPoint(QPoint(2900,1500));
-    m_pScene->addSpriteToScene(CaisseW2, CaisseW2->getSpawnPoint());
-
-    CaisseAmovible* CaisseW5 = new CaisseAmovible;
-    //CaisseW1->setData(1,"sol");
-    CaisseW5->setData(1,"Wood_caisse");
-    CaisseW5->setSpawnPoint(QPoint(4800,600));
-    m_pScene->addSpriteToScene(CaisseW5,CaisseW5->getSpawnPoint());
-
-    CaisseAmovible* CaisseW6 = new CaisseAmovible;
-    //CaisseW2->setData(1,"sol");
-    CaisseW6->setData(1,"Wood_caisse");
-    CaisseW6->setSpawnPoint(QPoint(5160,785));
-    m_pScene->addSpriteToScene(CaisseW6, CaisseW6->getSpawnPoint());
-
-    Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV2.png");
-    caisseM1->setData(1,"sol");
-    //caisseM1->setData(2,"Wood_caisse");
-    m_pScene->addSpriteToScene(caisseM1, 700,1520);
-
+    //Pile de caisse en métal.
     StackMetal(QPointF(5401,1580));
-
     StackMetal(QPointF(6201,1580));
+
     /////////////////////////////
     ////        PIEGE        ////
     /////////////////////////////
-    Sprite* lanceF1 = new Sprite(GameFramework::imagesPath() + "lanceFlammeV3.png");
-    lanceF1->setData(1,"Piege");
-    lanceF1->setData(2,"Lance_flamme");
-    //m_pScene->addSpriteToScene(lanceF1, 800,1510);
 
     Sprite* lanceF2 = new Sprite(GameFramework::imagesPath() + "lanceFlammeV3.png");
     lanceF2->setData(1,"Piege");
@@ -205,6 +186,29 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     lanceF3->setData(2,"Lance_flamme");
     m_pScene->addSpriteToScene(lanceF3, 4580,1570);
 
+
+    //////////////////////////////
+    ////        CAISSE        ////
+    //////////////////////////////
+
+    CaisseAmovible* CaisseW2 = new CaisseAmovible;
+    CaisseW2->setData(1,"Wood_caisse");
+    CaisseW2->setSpawnPoint(QPoint(2900,1500));
+    m_pScene->addSpriteToScene(CaisseW2, CaisseW2->getSpawnPoint());
+
+    CaisseAmovible* CaisseW5 = new CaisseAmovible;
+    CaisseW5->setData(1,"Wood_caisse");
+    CaisseW5->setSpawnPoint(QPoint(4800,600));
+    m_pScene->addSpriteToScene(CaisseW5,CaisseW5->getSpawnPoint());
+
+    CaisseAmovible* CaisseW6 = new CaisseAmovible;
+    CaisseW6->setData(1,"Wood_caisse");
+    CaisseW6->setSpawnPoint(QPoint(5160,785));
+    m_pScene->addSpriteToScene(CaisseW6, CaisseW6->getSpawnPoint());
+
+    Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV2.png");
+    caisseM1->setData(1,"sol");
+    m_pScene->addSpriteToScene(caisseM1, 700,1520);
 
     //////////////////////////////
     ////        ENEMIE        ////
@@ -230,8 +234,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     enemie4->setData(2,"bulio");
     m_pScene->addSpriteToScene(enemie4, 5380,1430);
 
-
-    //Ajoute des entités du jeu dans la liste.
+    //Ajout des entités du jeu dans la liste.
     m_pEntityL.append(CaisseW2);
     m_pEntityL.append(CaisseW5);
     m_pEntityL.append(CaisseW6);
@@ -240,30 +243,41 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pEntityL.append(enemie3);
     m_pEntityL.append(enemie4);
 
+    m_pBulioL.append(enemie1);
+    m_pBulioL.append(enemie2);
+    m_pBulioL.append(enemie3);
+    m_pBulioL.append(enemie4);
 
-    //Ajoute du joueur dans la scene
+    //Ajout du joueur dans la scene
     pCharacter->setData(1,"joueur");
     pCharacter->setSpawnPoint(QPoint(300,1200));
     m_pScene->addSpriteToScene(pCharacter,pCharacter->getSpawnPoint());
     pCharacter->startAnimation(25);
+}
+//! Refait apparaitre tout les ennemis de la scene.
+void GameCore::reloadEnnemi(){
 
-    // ...
-    // Démarre le tick pour que les animations qui en dépendent fonctionnent correctement.
-    // Attention : il est important que l'enclenchement du tick soit fait vers la fin de cette fonction,
-    // sinon le temps passé jusqu'au premier tick (ElapsedTime) peut être élevé et provoquer de gros
-    // déplacements, surtout si le déboggueur est démarré.
-    m_pGameCanvas->startTick();
+    //Retire tout les Bulios.
+    for (int i = 0;i <= m_pScene->sprites().count();i++) {
+        if(m_pScene->sprites().at(i)->data(2) == "bulio"){
+            m_pScene->removeSpriteFromScene(m_pScene->sprites().at(i));
+        }
+    }
 
+    //Réinitialise tout les Bulios
+    for (int i = 0;i <= m_pEntityL.count();i++) {
+        if(m_pEntityL.at(i)->data(2) == "bulio"){
+            m_pEntityL.at(i)->setIsDeath(false);
+            m_pScene->addSpriteToScene(m_pEntityL.at(i));
+        }
+    }
 }
 
-//! Destructeur de GameCore : efface les scènes
-GameCore::~GameCore() {
-    delete m_pScene;
-    m_pScene = nullptr;
-}
-
+//! Génère une pile de caisse en métal.
+//! \param firstCase position de la première caisse de la pile.
 void GameCore::StackMetal(QPointF firstCase){
 
+    //Caisse actuel
     QPointF CurrentPosCase = firstCase;
     for (int i = 1; i <= 5;i++) {
 
@@ -272,16 +286,13 @@ void GameCore::StackMetal(QPointF firstCase){
         else if (i >= 4){
             if(i == 4){
                 CurrentPosCase = firstCase;
-                qDebug() << "oe la caisse LA 4444444444444 ou la " << i;
                 CurrentPosCase.setY(CurrentPosCase.y() - 78);
                 CurrentPosCase.setX(CurrentPosCase.x() + 40);
             }else {
-                qDebug() << "oe la caisse " << i << " X : " << CurrentPosCase.x();
                 CurrentPosCase.setX(CurrentPosCase.x() + 81);
             }
 
         }
-
         Sprite* caisseMCurrent = new Sprite(GameFramework::imagesPath() + "CaisseMetalV2.png");
         caisseMCurrent->setData(1,"sol");
         m_pScene->addSpriteToScene(caisseMCurrent,CurrentPosCase);
@@ -359,11 +370,7 @@ void GameCore::keyReleased(int key) {
             pCharacter->setIsJump(false);
             break;
         }
-        //if(!isOnFloor)
-        //pCharacter->configureAnimation(Character::SAUT);
-        //else {
         pCharacter->configureAnimation(Character::BASE);
-        //}
     }
 }
 
@@ -374,39 +381,28 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
     //Parcourt la liste des entités de la scene.
     for (int i = 0;i < m_pEntityL.count();i++) {
+        if(!m_pEntityL.at(i)->getIsDeath()){
+            if(m_pEntityL.at(i)->data(2) == "bulio"){
 
-        if(m_pEntityL.at(i)->data(2) == "bulio"){
-            BulioTickHandler* bTick = new BulioTickHandler(m_pEntityL.at(i),this);
-            bTick->tick(elapsedTimeInMilliseconds);
-        }else if (m_pEntityL.at(i)->data(1) == "Wood_caisse") {
-            CaisseAmovTickHandler* cTick = new CaisseAmovTickHandler(m_pEntityL.at(i),this);
-            cTick->tick(elapsedTimeInMilliseconds);
+                BulioTickHandler* bTick = new BulioTickHandler(m_pEntityL.at(i),this);
+                bTick->tick(elapsedTimeInMilliseconds);
+
+            }else if (m_pEntityL.at(i)->data(1) == "Wood_caisse") {
+
+                CaisseAmovTickHandler* cTick = new CaisseAmovTickHandler(m_pEntityL.at(i),this);
+                cTick->tick(elapsedTimeInMilliseconds);
+            }
         }
-        //Supprime l'entité si elle est morte.
-        if(m_pEntityL.at(i)->getIsDeath())
-            m_pEntityL.removeAt(i);
     }
 
-    /* if ((pCharacter->m_velocity.y() > 0.6 || pCharacter->m_velocity.y() < 0) && pCharacter->getIsOnFloor()) {
-        pCharacter->configureAnimation(Character::SAUT);
-    }*/
-
-
-    //qDebug()<< "Velocity x : " << pCharacter->m_velocity.x() << " y : " << pCharacter->m_velocity.y();
     if(!pCharacter->getIsDeath()){
         //Déplace le joueur
         pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity * elapsedTimeInMilliseconds/15.0);
-        //qDebug()<< "velocity x  "<< pCharacter->m_velocity.x() << " velocity y" << pCharacter->m_velocity.y();
 
         for (int i = m_pScene->sprites().count();i >= 0;i--) {
             if(m_pScene->sprites().at(i)->data(1) == "joueur"){
                 //Suite les déplacement du joueur dans la scene
-                m_pGameCanvas->getView()->centerOn(m_pScene->sprites().at(i)->pos().x(), 1450);               //pDeathCount->setPos(pCharacter->pos());
-
-                /* pDeathCount->setPos(pCharacter->x() - m_pGameCanvas->getView()->width()/4.0,
-                                   pCharacter->y() -  m_pGameCanvas->getView()->height()/4.0);*/
-
-                // pDeathCount->setPos(m_pGameCanvas->getView()->);
+                m_pGameCanvas->getView()->centerOn(m_pScene->sprites().at(i)->pos().x(), 1450);
             }
         }
 
@@ -428,7 +424,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
                 //intersected entre ls prochaine position du joueur et le sprite touché.
                 QRectF intersected = nextSpriteRect.intersected(CollisionDetected->globalBoundingBox());
-                //qDebug() << intersected.height();
+
                 //List des coté touché
                 QList<Entity::hitSide> collidingSidesL = QList<Entity::hitSide>();
                 pCharacter->getCollisionLocate(collidingSidesL,nextSpriteRect,intersected);
@@ -436,7 +432,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 if (CollisionDetected->data(1) == "Piege") {
 
                     if(!pCharacter->getIsDeath()){
-                        //qDebug() << "HO NON UN PIEGE AHHHH";
                         m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
                     }
                     setupCharacterDeath();
@@ -446,7 +441,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     for (int i =0;i < collidingSidesL.count();i++) {
                         switch (collidingSidesL.at(i)) {
                         case Entity::hitSide::DOWN:
-                            //pCharacter->m_velocity.setY(-6);
                             break;
                         case  Entity::hitSide::UP:
                             setupCharacterDeath();
@@ -463,7 +457,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     for (int i =0;i < collidingSidesL.count();i++) {
                         switch (collidingSidesL.at(i)) {
                         case Entity::hitSide::DOWN:
-                            //pCharacter->m_velocity.setY(-0.2);
                             //Truc de doryan bizarre
                             pCharacter->setY((CollisionDetected->top()-pCharacter->height()));
                             if(!pCharacter->getIsJump())
@@ -488,8 +481,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
                         switch (collidingSidesL.at(i)) {
                         case Entity::hitSide::DOWN:
-                            //pCharacter->m_velocity.setY(-0.2);
-                            //Truc de doryan bizarre
                             pCharacter->setY((CollisionDetected->top()-pCharacter->height()));
                             if(!pCharacter->getIsJump())
                                 pCharacter->setIsOnFloor(true);
@@ -522,8 +513,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     }else {
         pGhost->setY(pGhost->y() + GHOST_SPEED * elapsedTimeInMilliseconds/15.0);
     }
-
-
     //Attire le joueur vers le bas de l'écran
     pCharacter->gravityApplied(elapsedTimeInMilliseconds);
 }
@@ -557,6 +546,7 @@ void GameCore::setAnimationDeath()
 //! @brief GameCore::setupCharacterDeath
 //!
 void GameCore::setupCharacterDeath(){
+
     //Le joueur est considéré comme mort.
     pCharacter->setIsDeath(true);
     pGhost->setData(1,"Ghost");
@@ -573,12 +563,21 @@ void GameCore::setupCharacterDeath(){
 
 
     QString textMort = "mort";
-
     if(pCharacter->getDeathCount() > 1){
         textMort += "s";
     }
     pDeathCount->setText("Nombre de " + textMort + " : " + QString::number(pCharacter->getDeathCount()));
 
+    //Refait apparaitre les enemis si le joueur est mort de suite 5 fois.
+    if(pCharacter->getDeathCount()%5 == 0){
+        //Message prévenant le joueur du retour des ennemis.
+        pAlert->setZValue(FIRST_LIGNE);
+        pAlert =  m_pScene->createText(QPointF(50,1300),
+                                       "Les Bulios sont de retour !!", 20, Qt::red);
+        reloadEnnemi();
+    }else {
+        m_pScene->removeItem(pAlert);
+    }
 }
 
 

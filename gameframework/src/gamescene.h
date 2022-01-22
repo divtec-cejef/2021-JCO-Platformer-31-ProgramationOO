@@ -50,6 +50,7 @@ public:
     //Ajoute
     void addSpriteToScene(Sprite* pSprite, QPointF pos);
     void removeSpriteFromScene(Sprite* pSprite);
+    void removeAllSpriteFromScene();
 
     QList<Sprite*> collidingSprites(const Sprite* pSprite) const;
     QList<Sprite*> collidingSprites(const QRectF& rRect) const;

@@ -11,18 +11,14 @@
 #include <QSettings>
 
 #include "utilities.h"
-//#include "playertickhandler.h"
 #include "sprite.h"
 #include "time.h"
 
-//Ajoute Supp
 #include <QString>
 #include "gamescene.h"
 #include "gamecanvas.h"
 #include "resources.h"
 
-//Type d'animation du joueurs
-const int NBR_ANIMATION = 6;
 
 //! spriteSheet animation de marche à gauche/droite
 const int FRAME_WIDTH = 60;
@@ -82,7 +78,6 @@ void Character::setIsDeath(bool _isDeath){
 }
 
 int Character::getDeathCount(){
-    //qDebug() << this->m_deathCount;
     return this->m_deathCount;
 }
 
@@ -119,7 +114,6 @@ void Character::configureAnimation(animation player) {
 
         QImage spriteSheet(GameFramework::imagesPath() + iSprite);
 
-        //QList<QImage> listFrame;
         // Découpage de la spritesheet
         for (int frameIndex = 0; frameIndex < FRAME_COUNT; frameIndex++) {
             QImage frameSheet = spriteSheet.copy((frameIndex % COLUMN_COUNT) * FRAME_WIDTH,
@@ -165,120 +159,3 @@ void Character::respawn(){
     QPointF velocityReste = QPointF(0,0);
     this->m_velocity = velocityReste;
 }
-
-void Character::setAnimationDeplacementList(){
-/*
-    QString iSprite;
-
-    switch () {
-    case DEPLA_GAUCHE:
-        iSprite = "MarcheGaucheV9.png";
-        break;
-    case DEPLA_DROITE:
-        iSprite =  "MarcheDroiteV9.png";
-        break;
-    case SAUT:
-        iSprite = "SautDroiteV7.png";
-        break;
-    default:
-        iSprite = "BasicPoseV4.png";
-        break;
-    }
-    for (int i;i <= NBR_ANIMATION;i++) {
-
-        if(i >= NBR_ANIMATION){
-            QImage spriteSheet(GameFramework::imagesPath() + iSprite);
-
-            //iSprite == "MarcheDroiteV9.png" || iSprite == "MarcheGaucheV9.png"
-            // Découpage de la spritesheet
-            for (int frameIndex = 0; frameIndex < FRAME_COUNT; frameIndex++) {
-                QImage CurrentAnimImage = spriteSheet.copy((frameIndex % COLUMN_COUNT) * FRAME_WIDTH,
-                                                 (frameIndex / COLUMN_COUNT) * FRAME_HEIGHT,
-                                                 FRAME_WIDTH, FRAME_HEIGHT);
-
-
-                 m_listAnimation.append(CurrentAnimImage);
-            }
-
-    }else {
-            m_listAnimation.append()
-        }
-
-*/
-}
-/*
-void Character::futureCollision(){
-
-    // Détermine la prochaine position du sprite selon sa velwocité
-    QRectF nextSpriteRect = this->globalBoundingBox().translated(this->m_velocity);
-
-    if(!this->parentScene()->isInsideScene(nextSpriteRect)){
-        qDebug() << "Le joueur est sortit de la scene";
-        setupCharacterDeath();
-    }
-
-    // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
-    auto listeFuturCollision = this->parentScene()->collidingSprites(nextSpriteRect);
-    // Supprime le sprite lui-même, qui collisionne toujours awdvec sa boundingbox
-    listeFuturCollision.removeAll(this);
-
-    //récupère la valeur de liste (remplis/vide)
-    bool futurCollision = !listeFuturCollision.isEmpty();
-
-    if(futurCollision){
-        //Cherche de potentielle futur collisions entre le joueur et les autres sprites
-        for (Sprite* CollisionDetected : listeFuturCollision) {
-
-            if (CollisionDetected->data(1) == "sol") {
-
-                if(!this->getIsJump())
-                    this->setIsOnFloor(true);
-
-                this->m_velocity.setY(0.0);
-                this->setIsJump(false);
-
-                QRectF zoneDeCollision = this->boundingRect().intersected(CollisionDetected->boundingRect());
-                qDebug() << "Y collision :" << zoneDeCollision.y();
-                qDebug() << "X collision :" << zoneDeCollision.x();
-
-                if(zoneDeCollision.height() < zoneDeCollision.width()){
-                      qDebug() << "Collision de haut/bas";
-                }else if(zoneDeCollision.height() > zoneDeCollision.width()){
-                        qDebug() << "Collision de côté";
-                }
-            }
-
-            if (CollisionDetected->data(1) == "Piege") {
-
-                if(!this->getIsDeath()){
-                    //qDebug() << "HO NON UN PIEGE AHHHH";
-                    m_pGameCanvas->getView()->centerOn(CollisionDetected->pos());
-                }
-                setupCharacterDeath();
-            }
-        }
-    }else {
-        this->setIsOnFloor(false);
-    }
-
-}
-
-//!
-//! Mets en place tout les éléments symbolisant la mort du joueur.
-//! @brief GameCore::setupCharacterDeath
-//!
-void Character::setupDeath(GameScene pScene){
-    //Le joueur est considéré comme mort.
-    this->setIsDeath(true);
-    //Créé le fantôme dans la scene.
-    setAnimationDeath();
-    //Positionne le fantôme à la place du joueur
-    pGhost->setPos(this->pos());
-    //Supprime le joueur de la scene.
-    m_pScene->removeSpriteFromScene(pCharacter);
-    //Ajoute du fantome à la scene.
-    m_pScene->addSpriteToScene(pGhost);
-    //Ajoute d'une mort au compteur.
-    pCharacter->incrementDeathCount();
-}
-*/

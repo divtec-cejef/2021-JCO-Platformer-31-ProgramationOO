@@ -91,6 +91,7 @@ void CaisseAmovTickHandler::currentCollision(){
                     }
                 }
             }
+
         }
     }
 }
@@ -151,7 +152,26 @@ void CaisseAmovTickHandler::nextCollision(){
                         break;
                     }
                 }
+                if(CollisionDetected->data(1) == "Piege") {
+                    m_isPlayer = true;
+                    for (int i =0;i < collidingSidesL.count();i++) {
+                        switch (collidingSidesL.at(i)) {
+                        case Entity::hitSide::UP:
+                            m_pParentEntity->setIsDeath(true);
+                            break;
+                        case Entity::hitSide::DOWN :
+                            m_pParentEntity->setIsDeath(true);
+                            break;
+                        case Entity::hitSide::RIGHT :
+                            m_pParentEntity->setIsDeath(true);
+                            break;
+                        case Entity::hitSide::LEFT :
 
+                            m_pParentEntity->setIsDeath(true);
+                            break;
+                        }
+                    }
+                }
             }
         }
     }else {

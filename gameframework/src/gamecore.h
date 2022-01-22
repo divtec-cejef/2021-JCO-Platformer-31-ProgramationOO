@@ -60,7 +60,11 @@ private:
     GameScene* m_pScene;
     GameView* m_pView;
 
+    void loadTestLevel();
+    void reloadEnnemi();
+
     QGraphicsSimpleTextItem* pDeathCount = new QGraphicsSimpleTextItem();
+    QGraphicsSimpleTextItem* pAlert = new QGraphicsSimpleTextItem();
 
     //Joueur
     Character* pCharacter = new Character();
@@ -70,12 +74,11 @@ private:
 
     QRadialGradient lGradient;
 
-    QList<QGraphicsTransform*> m_transformsForFlip;
 
-    QList<Bulio*> m_pBulioL;
-    QList<CaisseAmovible*> m_pCaisseMovL;
+
 
     QList<Entity*>m_pEntityL;
+    QList<Bulio*> m_pBulioL;
 
     void StackMetal(QPointF firstCase);
 
