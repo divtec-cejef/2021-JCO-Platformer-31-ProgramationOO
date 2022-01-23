@@ -11,18 +11,11 @@
 #include <entity.h>
 
 //!
-//! \brief la Classe Character gère l'ennemie de base du jeu, dans une scene
-//! Cette classe est permet de crée un ennemie se déplaçant de droite à gauche.
-//! Elle gère les animations, ses déplacement, les collisions entre elle
-//! et les sprites qu'elle touche ainsi que sa propre mort.
+//! \brief la Classe Bulio gère l'ennemie de base du jeu, dans une scene.
+//! Cette classe hérite de la classe \ref Entity elle permet de géré l'état d'une caisse dans une scene.
+//! Elle gère les animations ainsi que sa propre mort.
 //! \section1 Déplacement du Bulio
-//! Le Bulio se déplace toujours à droite si il ne rentre pas en collision avec un autre sprite
-//! , si telle est le cas le bulio change de dirction et continue à se déplacé dans le sens opposé du sprite
-//! touché.
-//! Le Bulio est soumis à la gravité si il n'y a pas de sol sous ses pieds il sera attiré en bas de l'écran.
-//! \section2 Mort du Bulio
-//! Le Bulio peut mourrir de deux manière différente.
-//! Soit le joueur touche le bulio sur la partie superieur de son sprite ou alors le Bulio touche le bord de la scene.
+//! Les déplacement sont géré par la classe \ref BulioTickHandler.
 class Bulio: public Entity
 {
 public:

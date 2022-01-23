@@ -15,12 +15,12 @@ class Entity;
 //! Cette classe a pour but d'être spécialisée afin de donner à un sprite un comportement
 //! à effectuer lors de chaque tick émis par la cadence.
 //!
-//! Lorsqu'un gestionnaire est affecté à un sprite (Sprite::setTickHandler), la
+//! Lorsqu'un gestionnaire est affecté à une entité (Entity::setTickHandler), la
 //! fonction init() du gestionnaire est appelée une unique fois, puis, lorsque
 //! la cadence démarre, la fonction tick() du gestionnaire est automatiquement appelée.
 //!
 //! Depuis le gestionnaire, il est possible d'accéder au Sprite en question avec
-//! l'attribut m_pParentSprite.
+//! l'attribut m_pParentEntity.
 //!
 
 class EntityTickHandler

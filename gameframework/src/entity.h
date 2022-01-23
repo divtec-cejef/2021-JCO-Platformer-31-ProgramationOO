@@ -16,20 +16,17 @@
 //! qui lui est propre.
 //! \section1 Déplacement d'une entité
 //! Une entité peut se mouvoire dans un espace donnée(la scene sur la quelle elle a été assigné).
-//! Ses déplacement sont géré par la méthodes updateVelocity() qui modifie la variable m_velocity qui
-//! enregistre la vitesse actuel qu'elle a dans la scene.
+//! Ses déplacement et collision sont géré par les sous classe de celle-ci qui réutiliseront les sous classe de \ref EntityTickHandler.
 //! \section2 Mort de l'entité
 //! La mort d'une entité consite à renvoyé un booléan qui redéfinit sont état et le détruit de la scene sur la quel il apparait.
-//!
+//! \section3 Collision ciblé
+//! Cette classe permet de récupéré les collision ciblé que le sprite va avoir.
+//! Elle permet de localisé l'endroit exacte ou elle a été touché.
 class Entity: public Sprite
 {
 public:
 
     Entity(const QPixmap& rPixmap, QGraphicsItem* pParent = nullptr);
-
-
-/*    Entity(const QPixmap& rPixmap, QGraphicsItem* pParent = nullptr,
-           QPointF _spawnPoint = QPoint(0.0,0.0));*/
 
     enum hitSide{
         UP =0,
@@ -39,13 +36,11 @@ public:
     };
 
     virtual void configureAnimation();
-    //void uniqueSide(QList<hitSide> collidingSidesList, hitSide appendToSide);
 
     //Gestion des déplacement
     QPointF m_velocity;
     QPointF m_lastVelocity = m_velocity;
     QPointF getVelocity();
-    //virtual void updateVelocity();
 
     bool getIsOnFloor();
     virtual void setIsOnFloor(bool _isOnFloor);
@@ -57,14 +52,10 @@ public:
 
     bool getIsDeath();
     virtual void setIsDeath(bool _isDeath);
-    //virtual void setupDeath();
 
 
     void setScene(GameScene* m_pScene);
 
-    //Collision
-    //virtual void currentCollision();
-    //virtual void collisionDetection(QRectF rect);
 
     static void uniqueSide(QList<hitSide>* collidingSidesList, hitSide appendToSide);
 
@@ -81,11 +72,6 @@ protected:
     QPointF m_gravity = QPointF(0,2);
     bool m_isDeath = false;
     bool m_isOnFloor = false;
-
-
-
-
-
 };
 
 #endif // ENTITY_H

@@ -12,14 +12,11 @@ const int SPEED = 10;
 BulioTickHandler::BulioTickHandler(Entity* pParentEntity,GameCore* newGameCore) : EntityTickHandler (pParentEntity)
 {
     setGameCore(newGameCore);
-
-
 }
 
 //! Cadence : détermine le mouvement que fait le sprite durant le temps écoulé,
-//! vérifie si il doit rebondir et le positionne à son nouvel emplacement.
+//! vérifie si il doit rebondir et le positionne à son nouvel demplacement.
 void BulioTickHandler::tick(long long elapsedTimeInMilliseconds) {
-    // qDebug() << m_pParentEntity->m_velocity.x();
     //Déplace le bulio.
     m_pParentEntity->setPos(m_pParentEntity->pos()+ m_pParentEntity->m_velocity * elapsedTimeInMilliseconds/15.0);
 
@@ -34,10 +31,17 @@ void BulioTickHandler::tick(long long elapsedTimeInMilliseconds) {
     }
 }
 
+//! Vérifie sa collision actuelle
+//! se qu'il doit faire.
+//! \brief BulioTickHandler::currentCollision
+//!
 void BulioTickHandler::currentCollision(){
 
 }
-
+//! Vérifie son prochain déplacement et définit
+//! se qu'il doit faire
+//! \brief BulioTickHandler::nextCollision
+//!
 void BulioTickHandler::nextCollision(){
 
 
@@ -68,42 +72,36 @@ void BulioTickHandler::nextCollision(){
 
             if (CollisionDetected->data(1) == "joueur") {
                 for (int i =0;i < collidingSidesL.count();i++) {
-                    switch (collidingSidesL.at(i)) {
-                    case Entity::hitSide::DOWN:
-                        break;
-                    case  Entity::hitSide::UP:
-                        //CollisionDetected->setY(CollisionDetected->y()- 5 * 100 /15.0);
+                    if(collidingSidesL.at(i) == Entity::hitSide::UP){
+                        //le joueur es entrains de sauté sur le bulio se qui le tue.
                         m_pParentEntity->setIsDeath(true);
-                        break;
-                    case Entity::hitSide::RIGHT :
-
-                        break;
-                    case Entity::hitSide::LEFT :
-                        break;
                     }
                 }
             }else {
-                for (int i =0;i < collidingSidesL.count();i++) {
-                    switch (collidingSidesL.at(i)) {
-                    case Entity::hitSide::DOWN:
-                        m_pParentEntity->setY((CollisionDetected->top()-m_pParentEntity->height()));
-                        m_pParentEntity->setIsOnFloor(true);
-                        break;
-                    case  Entity::hitSide::UP:
-                        m_pParentEntity->m_velocity.setY(0);
-                        m_pParentEntity->setY((CollisionDetected->bottom()+1));
-                        break;
-                    case Entity::hitSide::RIGHT:
-                        m_pParentEntity->setX((CollisionDetected->left()- m_pParentEntity->width()));
-                        m_pParentEntity->m_velocity.setX(-SPEED);
-                        break;
-                    case Entity::hitSide::LEFT:
-                        m_pParentEntity->setX(CollisionDetected->right());
-                        m_pParentEntity->m_velocity.setX(SPEED);
-                        break;
+                //Si elle n'est pas en collision avec le fantôme alors le sprite collisioné est considéré comme un sol.
+                if (CollisionDetected->data(1) != "Ghost") {
+                    for (int i =0;i < collidingSidesL.count();i++) {
+                        switch (collidingSidesL.at(i)) {
+                        case Entity::hitSide::DOWN:
+                            m_pParentEntity->setY((CollisionDetected->top()-m_pParentEntity->height()));
+                            m_pParentEntity->setIsOnFloor(true);
+                            break;
+                        case  Entity::hitSide::UP:
+                            m_pParentEntity->m_velocity.setY(0);
+                            m_pParentEntity->setY((CollisionDetected->bottom()+1));
+                            break;
+                        case Entity::hitSide::RIGHT:
+                            m_pParentEntity->setX((CollisionDetected->left()- m_pParentEntity->width()));
+                            m_pParentEntity->m_velocity.setX(-SPEED);
+                            break;
+                        case Entity::hitSide::LEFT:
+                            m_pParentEntity->setX(CollisionDetected->right());
+                            m_pParentEntity->m_velocity.setX(SPEED);
+                            break;
+                        }
                     }
+                    collidingSidesL.clear();
                 }
-                collidingSidesL.clear();
             }
         }
     }else {
@@ -112,7 +110,7 @@ void BulioTickHandler::nextCollision(){
 
 
     if(!m_pParentEntity->parentScene()->isInsideScene(nextSpriteRect)){
-        qDebug() << "Bulio a quitté se monde ;-;";
+        qDebug() << "Le bulio a quitté ce monde.";
         m_pParentEntity->setIsDeath(true);
     }
 }

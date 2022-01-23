@@ -29,7 +29,9 @@
 #include "caisseamovible.h"
 #include "caisseamovtickhandler.h"
 
-//résolution de la fenetre
+/// résolution de la fenetre
+///  \ref SCENE_WIDTH largeur
+///  \ref SCENE_HEIGHT longueur
 const int SCENE_WIDTH   = 8000;
 const int SCENE_HEIGHT  = 4000;
 
@@ -109,41 +111,43 @@ void GameCore::loadTestLevel(){
                                  "Vous pouvez sauté sur l'ennemie pour le tuer.", 20, Qt::white);
     tips =  m_pScene->createText(QPointF(3010,1400),
                                  " Vous pouvez pousser la caisse pour atteindre \n la plate forme en face.", 12, Qt::white);
+    tips =  m_pScene->createText(QPointF(7140,1200),
+                                 " Le niveau s'arrête ici.", 40, Qt::green);
 
     // Instancier et initialiser les sprite ici :
 
     ///////////////////////////
     ////        SOL        ////
     ///////////////////////////
-    QPointF posSolGroup1_1erEtage(0,750);
-    m_Grounds->generated(40,3,posSolGroup1_1erEtage);
+    QPointF posSol1_Platfond(0,750);
+    m_Grounds->generated(40,3,posSol1_Platfond);
 
-    QPointF posSolGroup2_1erEtage(5280,750);
-    m_Grounds->generated(6,3,posSolGroup2_1erEtage);
+    QPointF posSol2_Platfond(5280,750);
+    m_Grounds->generated(6,3,posSol2_Platfond);
 
-    QPointF posSolGroup1(0,1600);
-    m_Grounds->generated(8,6,posSolGroup1);
+    QPointF posSol1(0,1600);
+    m_Grounds->generated(8,6,posSol1);
 
-    QPointF posSolGroup2(2200,1460);
-    m_Grounds->generated(8,5,posSolGroup2);
+    QPointF posSol2(2200,1460);
+    m_Grounds->generated(8,5,posSol2);
 
-    QPointF posSolGroup3(3960,1460);
-    m_Grounds->generated(2,9,posSolGroup3);
+    QPointF posSol3(3960,1460);
+    m_Grounds->generated(2,9,posSol3);
 
-    QPointF posSolGroup4(4460,1660);
-    m_Grounds->generated(2,9,posSolGroup4);
+    QPointF posSol4(4460,1660);
+    m_Grounds->generated(2,9,posSol4);
 
-    QPointF posSolGroup5(4900,1660);
-    m_Grounds->generated(2,9,posSolGroup5);
+    QPointF posSol5(4900,1660);
+    m_Grounds->generated(2,9,posSol5);
 
-    QPointF posSolGroup6(5300,1660);
-    m_Grounds->generated(10,7,posSolGroup6);
+    QPointF posSol6(5300,1660);
+    m_Grounds->generated(10,7,posSol6);
 
-    QPointF posSolGroup7(6800,1460);
-    m_Grounds->generated(2,9,posSolGroup7);
+    QPointF posSol7(6800,1460);
+    m_Grounds->generated(2,9,posSol7);
 
-    QPointF posSolGroup8(7140,1660);
-    m_Grounds->generated(2,4,posSolGroup8);
+    QPointF posSol8(7140,1660);
+    m_Grounds->generated(2,4,posSol8);
 
     //////////////////////////////////
     ////        PLATEFORME        ////
@@ -191,20 +195,20 @@ void GameCore::loadTestLevel(){
     ////        CAISSE        ////
     //////////////////////////////
 
-    CaisseAmovible* CaisseW2 = new CaisseAmovible;
-    CaisseW2->setData(1,"Wood_caisse");
-    CaisseW2->setSpawnPoint(QPoint(2900,1500));
-    m_pScene->addSpriteToScene(CaisseW2, CaisseW2->getSpawnPoint());
+    CaisseAmovible* caisseB2 = new CaisseAmovible;
+    caisseB2->setData(1,"Wood_caisse");
+    caisseB2->setSpawnPoint(QPoint(2900,1500));
+    m_pScene->addSpriteToScene(caisseB2, caisseB2->getSpawnPoint());
 
-    CaisseAmovible* CaisseW5 = new CaisseAmovible;
-    CaisseW5->setData(1,"Wood_caisse");
-    CaisseW5->setSpawnPoint(QPoint(4800,600));
-    m_pScene->addSpriteToScene(CaisseW5,CaisseW5->getSpawnPoint());
+    CaisseAmovible* caisseB5 = new CaisseAmovible;
+    caisseB5->setData(1,"Wood_caisse");
+    caisseB5->setSpawnPoint(QPoint(4800,600));
+    m_pScene->addSpriteToScene(caisseB5,caisseB5->getSpawnPoint());
 
-    CaisseAmovible* CaisseW6 = new CaisseAmovible;
-    CaisseW6->setData(1,"Wood_caisse");
-    CaisseW6->setSpawnPoint(QPoint(5160,785));
-    m_pScene->addSpriteToScene(CaisseW6, CaisseW6->getSpawnPoint());
+    CaisseAmovible* caisseB6 = new CaisseAmovible;
+    caisseB6->setData(1,"Wood_caisse");
+    caisseB6->setSpawnPoint(QPoint(5160,785));
+    m_pScene->addSpriteToScene(caisseB6, caisseB6->getSpawnPoint());
 
     Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV2.png");
     caisseM1->setData(1,"sol");
@@ -235,9 +239,9 @@ void GameCore::loadTestLevel(){
     m_pScene->addSpriteToScene(enemie4, 5380,1430);
 
     //Ajout des entités du jeu dans la liste.
-    m_pEntityL.append(CaisseW2);
-    m_pEntityL.append(CaisseW5);
-    m_pEntityL.append(CaisseW6);
+    m_pEntityL.append(caisseB2);
+    m_pEntityL.append(caisseB5);
+    m_pEntityL.append(caisseB6);
     m_pEntityL.append(enemie1);
     m_pEntityL.append(enemie2);
     m_pEntityL.append(enemie3);
@@ -337,7 +341,11 @@ void GameCore::keyPressed(int key) {
             }
             break;
         default:
-            player = Character::BASE;
+            if(pCharacter->m_velocity.y() < 0){
+                player = Character::SAUT;
+            }else{
+                player = Character::BASE;
+            }
         }
         pCharacter->configureAnimation(player);
     }
@@ -370,7 +378,6 @@ void GameCore::keyReleased(int key) {
             pCharacter->setIsJump(false);
             break;
         }
-        pCharacter->configureAnimation(Character::BASE);
     }
 }
 
@@ -379,6 +386,7 @@ void GameCore::keyReleased(int key) {
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
+    qDebug() << "Velocity Y : " << pCharacter->m_velocity.y() ;
     //Parcourt la liste des entités de la scene.
     for (int i = 0;i < m_pEntityL.count();i++) {
         if(!m_pEntityL.at(i)->getIsDeath()){
@@ -396,6 +404,14 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     }
 
     if(!pCharacter->getIsDeath()){
+
+        //Animation du joueur spécifique.
+        if(pCharacter->getIsOnFloor() == false){
+           pCharacter->configureAnimation(Character::SAUT);
+        }else if(pCharacter->m_velocity.x() == 0.0){
+             pCharacter->configureAnimation(Character::BASE);
+        }
+
         //Déplace le joueur
         pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity * elapsedTimeInMilliseconds/15.0);
 

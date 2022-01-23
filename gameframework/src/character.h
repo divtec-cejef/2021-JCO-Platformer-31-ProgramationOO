@@ -13,8 +13,9 @@
 //!
 //! \brief la Classe Character gère le joueur dans une scene
 //! Cette classe est permet de crée le personnage que va incarné le joueur.
-//! Elle gère les animations du sprite ainsi que ses déplacement dans la scene.
-//!
+//! Elle gère les animations du sprite ainsi que sa velocité dans la scene.
+//! \section Déplacement du joueur
+//! Ses déplacement et collision sont géré dans le \ref Gamecore.
 class Character: public Entity
 {
 public:

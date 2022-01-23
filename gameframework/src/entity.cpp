@@ -25,16 +25,6 @@ Entity::Entity(const QPixmap& rPixmap, QGraphicsItem* pParent) : Sprite(rPixmap,
 
 }
 
-/*
-//!
-//! \param rPixmap
-//! \param pParent
-//! \param _spawnPoint point d'apparition de l'entité.
-Entity::Entity(const QPixmap& rPixmap, QGraphicsItem* pParent, QPointF _spawnPoint) : Sprite(rPixmap,pParent)
-{
-    setSpawnPoint(_spawnPoint);
-}
-*/
 //! Premet de définir le point d'apparition de l'entité dans la scène.
 //! \param _spawnPoint nouveau point d'apparition.
 //!
@@ -136,8 +126,7 @@ void Entity::gravityApplied(long long elapsedTime){
 }
 
 //! Définit la scene sur la quel l'entité est liée.
-//! \param newScene
-//!
+//! \param newScene La nouvelle scene définit .
 void Entity::setScene(GameScene* newScene){
     m_pScene = newScene;
 

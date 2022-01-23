@@ -75,11 +75,6 @@ void CaisseAmovTickHandler::currentCollision(){
                 m_isPlayer = true;
                 for (int i =0;i < collidingSidesL.count();i++) {
                     switch (collidingSidesL.at(i)) {
-                    case Entity::hitSide::UP:
-                        break;
-                    case Entity::hitSide::DOWN :
-
-                        break;
                     case Entity::hitSide::RIGHT :
                         if(m_canMove)
                             m_pParentEntity->m_velocity.setX(-VITESSE);
@@ -101,8 +96,6 @@ void CaisseAmovTickHandler::nextCollision(){
     //Prochaine position de la caisse.
     QRectF nextSpriteRect =
             m_pParentEntity->globalBoundingBox().translated(m_pParentEntity->m_velocity);
-
-
 
     // Récupère tous les sprites de la scène qui touche le joueur.
     auto nextCollisionL = m_pParentEntity->parentScene()->collidingSprites(m_pParentEntity);
@@ -129,6 +122,7 @@ void CaisseAmovTickHandler::nextCollision(){
 
             m_pParentEntity->m_velocity.setX(0);
 
+            //Si elle n'est pas en collision avec le fantôme alors le sprite collisioné est considéré comme un sol.
             if (CollisionDetected->data(1) != "Ghost") {
                 for (int i =0;i < collidingSidesL.count();i++) {
                     switch (collidingSidesL.at(i)) {
@@ -153,24 +147,8 @@ void CaisseAmovTickHandler::nextCollision(){
                     }
                 }
                 if(CollisionDetected->data(1) == "Piege") {
-                    m_isPlayer = true;
-                    for (int i =0;i < collidingSidesL.count();i++) {
-                        switch (collidingSidesL.at(i)) {
-                        case Entity::hitSide::UP:
-                            m_pParentEntity->setIsDeath(true);
-                            break;
-                        case Entity::hitSide::DOWN :
-                            m_pParentEntity->setIsDeath(true);
-                            break;
-                        case Entity::hitSide::RIGHT :
-                            m_pParentEntity->setIsDeath(true);
-                            break;
-                        case Entity::hitSide::LEFT :
+                    m_pParentEntity->setIsDeath(true);
 
-                            m_pParentEntity->setIsDeath(true);
-                            break;
-                        }
-                    }
                 }
             }
         }

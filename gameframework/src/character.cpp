@@ -26,16 +26,6 @@ const int FRAME_HEIGHT = 60;
 const int FRAME_COUNT = 4;
 const int COLUMN_COUNT = 2;
 
-const int PLAYER_SPEED  = 10 ;
-
-struct collisionDistance{
-    double top;
-    double down;
-    double right;
-    double left;
-
-};
-
 //!
 //! Construit le character du joueur et l'initialise.
 //! @param   pParent Pointeur sur le parent (afin d'obtenir une destruction automatique de cet objet).
@@ -45,9 +35,8 @@ Character::Character(QGraphicsItem* pParent) : Entity(GameFramework::imagesPath(
 
 }
 
-//!
+//! Permet de récupéré l'etat du joueur (si il saute ou non)
 //! @return si le joueur saute.
-//!
 bool Character::getIsJump(){
     return this->m_isJump;
 }
@@ -77,10 +66,14 @@ void Character::setIsDeath(bool _isDeath){
     this->m_isDeath = _isDeath;
 }
 
+//! Permet de savoir le nombre de mort du joueur.
+//! \return retour le nombre de mort du joueur.
+//!
 int Character::getDeathCount(){
     return this->m_deathCount;
 }
 
+//! Augemente le compteur de mort
 void Character::incrementDeathCount(){
     this->m_deathCount++;
     qDebug() << "Nombre de mort(s) : " << this->m_deathCount;
@@ -125,7 +118,7 @@ void Character::configureAnimation(animation player) {
                 directionFrame = frameSheet.mirrored(true,false);
             else
                 directionFrame = frameSheet;
-
+            //ajoute la frame à l'animation.
             addAnimationFrame(QPixmap::fromImage(directionFrame.scaled(FRAME_WIDTH * 1,
                                                                         FRAME_HEIGHT * 1,
                                                                         Qt::IgnoreAspectRatio,
@@ -143,7 +136,6 @@ void Character::configureAnimation(animation player) {
                                                                      Qt::SmoothTransformation)));
     }
     startAnimation(25);
-
 }
 
 //!
