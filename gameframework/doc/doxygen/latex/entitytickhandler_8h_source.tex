@@ -4,7 +4,7 @@
 \DoxyCodeLine{1 }
 \DoxyCodeLine{7 \textcolor{preprocessor}{\#ifndef ENTITYTICKHANDLER\_H}}
 \DoxyCodeLine{8 \textcolor{preprocessor}{\#define ENTITYTICKHANDLER\_H}}
-\DoxyCodeLine{9 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{gamecore_8h}{gamecore.h}}>}}
 \DoxyCodeLine{10 \textcolor{keyword}{class }\mbox{\hyperlink{class_entity}{Entity}};}
 \DoxyCodeLine{11 }
 \DoxyCodeLine{12 }
@@ -23,11 +23,13 @@
 \DoxyCodeLine{37 }
 \DoxyCodeLine{38     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_entity_tick_handler_a64c248a17bebe450b99fbe4c88ea9094}{currentCollision}}();}
 \DoxyCodeLine{39     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_entity_tick_handler_a8d617f400dfc1e791bd33e6a6be6c958}{nextCollision}}();}
-\DoxyCodeLine{40 }
-\DoxyCodeLine{41 \textcolor{keyword}{protected}:}
-\DoxyCodeLine{42     \mbox{\hyperlink{class_entity}{Entity}}* m\_pParentEntity;}
-\DoxyCodeLine{43 \};}
-\DoxyCodeLine{44 }
-\DoxyCodeLine{45 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ENTITYTICKHANDLER\_H}}
+\DoxyCodeLine{40     \textcolor{keywordtype}{void} setGameCore(\mbox{\hyperlink{class_game_core}{GameCore}}* newGameCore);}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{43     \mbox{\hyperlink{class_entity}{Entity}}* m\_pParentEntity;}
+\DoxyCodeLine{44     \mbox{\hyperlink{class_game_core}{GameCore}}* m\_pGameCore = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{45 \};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ENTITYTICKHANDLER\_H}}
 
 \end{DoxyCode}

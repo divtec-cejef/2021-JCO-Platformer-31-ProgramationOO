@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AmogusJumper: Référence de la classe EntityTickHandler</title>
+<title>Amogus-Jumper: Référence de la classe EntityTickHandler</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,8 +20,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="BasicPoseV4.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">AmogusJumper
+   <div id="projectname">Amogus-Jumper
    </div>
   </td>
  </tr>
@@ -77,13 +78,13 @@ $(function() {
 <div class="dynheader">
 Graphe d'héritage de EntityTickHandler:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_entity_tick_handler__inherit__graph.png" border="0" usemap="#a_entity_tick_handler_inherit__map" alt="Inheritance graph"/></div>
-<center><span class="legend">[<a href="graph_legend.html">légende</a>]</span></center></div>
-<div class="dynheader">
-Graphe de collaboration de EntityTickHandler:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_entity_tick_handler__coll__graph.png" border="0" usemap="#a_entity_tick_handler_coll__map" alt="Collaboration graph"/></div>
-<center><span class="legend">[<a href="graph_legend.html">légende</a>]</span></center></div>
+ <div class="center">
+  <img src="class_entity_tick_handler.png" usemap="#EntityTickHandler_map" alt=""/>
+  <map id="EntityTickHandler_map" name="EntityTickHandler_map">
+<area href="class_bulio_tick_handler.html" title="Cette classe est permet de crée un ennemie se déplaçant de droite à gauche." alt="BulioTickHandler" shape="rect" coords="0,56,150,80"/>
+<area href="class_caisse_amov_tick_handler.html" title="The CaisseAmovTickHandler class Cette classe permet de géré des entités et de leur donnée le comporte..." alt="CaisseAmovTickHandler" shape="rect" coords="160,56,310,80"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Fonctions membres publiques</h2></td></tr>
@@ -108,12 +109,18 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> ()</
 <tr class="memitem:a8d617f400dfc1e791bd33e6a6be6c958"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_tick_handler.html#a8d617f400dfc1e791bd33e6a6be6c958">nextCollision</a> ()</td></tr>
 <tr class="memdesc:a8d617f400dfc1e791bd33e6a6be6c958"><td class="mdescLeft">&#160;</td><td class="mdescRight">Définit la procédure à executé pour les collisions qui vont touché l'entité.  <a href="class_entity_tick_handler.html#a8d617f400dfc1e791bd33e6a6be6c958">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a8d617f400dfc1e791bd33e6a6be6c958"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bff5d66d4ff0b4f46dea32e2c6968a0"><td class="memItemLeft" align="right" valign="top"><a id="a0bff5d66d4ff0b4f46dea32e2c6968a0" name="a0bff5d66d4ff0b4f46dea32e2c6968a0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setGameCore</b> (<a class="el" href="class_game_core.html">GameCore</a> *newGameCore)</td></tr>
+<tr class="separator:a0bff5d66d4ff0b4f46dea32e2c6968a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Attributs protégés</h2></td></tr>
 <tr class="memitem:ae5893b9fa83494dc94ffdeb0ef54b89f"><td class="memItemLeft" align="right" valign="top"><a id="ae5893b9fa83494dc94ffdeb0ef54b89f" name="ae5893b9fa83494dc94ffdeb0ef54b89f"></a>
 <a class="el" href="class_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pParentEntity</b></td></tr>
 <tr class="separator:ae5893b9fa83494dc94ffdeb0ef54b89f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaa38cc1ce585eb84e3699e90c3cf124"><td class="memItemLeft" align="right" valign="top"><a id="afaa38cc1ce585eb84e3699e90c3cf124" name="afaa38cc1ce585eb84e3699e90c3cf124"></a>
+<a class="el" href="class_game_core.html">GameCore</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pGameCore</b> = nullptr</td></tr>
+<tr class="separator:afaa38cc1ce585eb84e3699e90c3cf124"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p >Classe abstraite qui représente un gestionnaire de tick pour une entité. </p>

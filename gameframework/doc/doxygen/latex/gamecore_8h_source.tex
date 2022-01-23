@@ -62,33 +62,28 @@
 \DoxyCodeLine{69     \textcolor{comment}{//Joueur}}
 \DoxyCodeLine{70     \mbox{\hyperlink{class_character}{Character}}* pCharacter = \textcolor{keyword}{new} \mbox{\hyperlink{class_character}{Character}}();}
 \DoxyCodeLine{71 }
-\DoxyCodeLine{72     \mbox{\hyperlink{class_sprite}{Sprite}}* pGhost = \textcolor{keyword}{new} \mbox{\hyperlink{class_sprite}{Sprite}}();}
-\DoxyCodeLine{73     \textcolor{keywordtype}{void} setAnimationDeath();}
+\DoxyCodeLine{72     QList<Entity*>m\_pEntityL;}
+\DoxyCodeLine{73     QList<Bulio*> m\_pBulioL;}
 \DoxyCodeLine{74 }
-\DoxyCodeLine{75     QRadialGradient lGradient;}
-\DoxyCodeLine{76 }
+\DoxyCodeLine{75     \mbox{\hyperlink{class_ground}{Ground}}* m\_Grounds = \textcolor{keyword}{new} \mbox{\hyperlink{class_ground}{Ground}};}
+\DoxyCodeLine{76     \textcolor{keywordtype}{void} stackMetal(QPointF firstCase);}
 \DoxyCodeLine{77 }
-\DoxyCodeLine{78 }
-\DoxyCodeLine{79 }
-\DoxyCodeLine{80     QList<Entity*>m\_pEntityL;}
-\DoxyCodeLine{81     QList<Bulio*> m\_pBulioL;}
+\DoxyCodeLine{78     \mbox{\hyperlink{class_sprite}{Sprite}}* pGhost = \textcolor{keyword}{new} \mbox{\hyperlink{class_sprite}{Sprite}}();}
+\DoxyCodeLine{79     \textcolor{keywordtype}{void} setAnimationDeath();}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81     QRadialGradient lGradient;}
 \DoxyCodeLine{82 }
-\DoxyCodeLine{83     \textcolor{keywordtype}{void} StackMetal(QPointF firstCase);}
+\DoxyCodeLine{83 }
 \DoxyCodeLine{84 }
-\DoxyCodeLine{85     \mbox{\hyperlink{class_ground}{Ground}}* m\_Grounds = \textcolor{keyword}{new} \mbox{\hyperlink{class_ground}{Ground}};}
+\DoxyCodeLine{85 }
 \DoxyCodeLine{86 }
-\DoxyCodeLine{87     \textcolor{comment}{//Collision}}
-\DoxyCodeLine{88     \textcolor{keywordtype}{void} currentCollision(\mbox{\hyperlink{class_entity}{Entity}}* entity);}
-\DoxyCodeLine{89     \textcolor{keywordtype}{void} futureCollision(\mbox{\hyperlink{class_entity}{Entity}}* entity);}
+\DoxyCodeLine{87 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89     \textcolor{comment}{//    void onSpriteDestroyed(QObject* pSprite);}}
 \DoxyCodeLine{90 }
-\DoxyCodeLine{91 }
-\DoxyCodeLine{92 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{91 \};}
+\DoxyCodeLine{92 }
 \DoxyCodeLine{93 }
-\DoxyCodeLine{94     \textcolor{comment}{//    void onSpriteDestroyed(QObject* pSprite);}}
-\DoxyCodeLine{95 }
-\DoxyCodeLine{96 \};}
-\DoxyCodeLine{97 }
-\DoxyCodeLine{98 }
-\DoxyCodeLine{99 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GAMECORE\_H}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GAMECORE\_H}}
 
 \end{DoxyCode}

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AmogusJumper:  Fichier source de caisseamovible.h</title>
+<title>Amogus-Jumper:  Fichier source de caisseamovible.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,8 +20,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="BasicPoseV4.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">AmogusJumper
+   <div id="projectname">Amogus-Jumper
    </div>
   </td>
  </tr>
@@ -82,21 +83,15 @@ $(function() {
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_class" href="class_caisse_amovible.html">CaisseAmovible</a>(QGraphicsItem* pParent = <span class="keyword">nullptr</span>);</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="comment">//Gestion des déplacement de la caisse</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> updateVelocity();</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="comment">//Définit les déplacement de la caisse dans le jeu.</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">void</span> collisionDetection(QRectF rect);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_caisse_amovible.html#a121bbe8d841233204a9ba009038f2b3c">setIsOnFloor</a>(<span class="keywordtype">bool</span> _isOnFloor);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="comment">//Définit si la caisse doit être détruite ou non.</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_caisse_amovible.html#ad781785bfd77150835e8e3436b20257f">setIsDeath</a>(<span class="keywordtype">bool</span> _isDeath);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>};</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif </span><span class="comment">// CAISSEAMOVIBLE_H</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>   <span class="comment">//Définit si la caisse est sur le sol ou non.</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_caisse_amovible.html#a121bbe8d841233204a9ba009038f2b3c">setIsOnFloor</a>(<span class="keywordtype">bool</span> _isOnFloor);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="comment">//Définit si la caisse doit être détruite ou non.</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_caisse_amovible.html#ad781785bfd77150835e8e3436b20257f">setIsDeath</a>(<span class="keywordtype">bool</span> _isDeath);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#endif </span><span class="comment">// CAISSEAMOVIBLE_H</span></div>
 <div class="ttc" id="aclass_caisse_amovible_html"><div class="ttname"><a href="class_caisse_amovible.html">CaisseAmovible</a></div><div class="ttdoc">The CaisseAmovible class Cette classe hérite de la classe Entity elle permet de géré l'état d'une cai...</div><div class="ttdef"><b>Definition:</b> caisseamovible.h:19</div></div>
 <div class="ttc" id="aclass_caisse_amovible_html_a121bbe8d841233204a9ba009038f2b3c"><div class="ttname"><a href="class_caisse_amovible.html#a121bbe8d841233204a9ba009038f2b3c">CaisseAmovible::setIsOnFloor</a></div><div class="ttdeci">void setIsOnFloor(bool _isOnFloor)</div><div class="ttdef"><b>Definition:</b> caisseamovible.cpp:32</div></div>
 <div class="ttc" id="aclass_caisse_amovible_html_ad781785bfd77150835e8e3436b20257f"><div class="ttname"><a href="class_caisse_amovible.html#ad781785bfd77150835e8e3436b20257f">CaisseAmovible::setIsDeath</a></div><div class="ttdeci">void setIsDeath(bool _isDeath)</div><div class="ttdoc">caisseAmovible::setIsDeath</div><div class="ttdef"><b>Definition:</b> caisseamovible.cpp:42</div></div>

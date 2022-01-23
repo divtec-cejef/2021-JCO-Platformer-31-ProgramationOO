@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AmogusJumper: Référence de la classe BulioTickHandler</title>
+<title>Amogus-Jumper: Référence de la classe BulioTickHandler</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,8 +20,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="BasicPoseV4.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">AmogusJumper
+   <div id="projectname">Amogus-Jumper
    </div>
   </td>
  </tr>
@@ -76,13 +77,12 @@ $(function() {
 <div class="dynheader">
 Graphe d'héritage de BulioTickHandler:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_bulio_tick_handler__inherit__graph.png" border="0" usemap="#a_bulio_tick_handler_inherit__map" alt="Inheritance graph"/></div>
-<center><span class="legend">[<a href="graph_legend.html">légende</a>]</span></center></div>
-<div class="dynheader">
-Graphe de collaboration de BulioTickHandler:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_bulio_tick_handler__coll__graph.png" border="0" usemap="#a_bulio_tick_handler_coll__map" alt="Collaboration graph"/></div>
-<center><span class="legend">[<a href="graph_legend.html">légende</a>]</span></center></div>
+ <div class="center">
+  <img src="class_bulio_tick_handler.png" usemap="#BulioTickHandler_map" alt=""/>
+  <map id="BulioTickHandler_map" name="BulioTickHandler_map">
+<area href="class_entity_tick_handler.html" title="Classe abstraite qui représente un gestionnaire de tick pour une entité." alt="EntityTickHandler" shape="rect" coords="0,0,111,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Fonctions membres publiques</h2></td></tr>
@@ -97,9 +97,6 @@ Fonctions membres publiques</h2></td></tr>
 <tr class="memitem:a96e5d6e704883d5bbb8138c9a19ab10a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bulio_tick_handler.html#a96e5d6e704883d5bbb8138c9a19ab10a">nextCollision</a> ()</td></tr>
 <tr class="memdesc:a96e5d6e704883d5bbb8138c9a19ab10a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_bulio_tick_handler.html#a96e5d6e704883d5bbb8138c9a19ab10a" title="BulioTickHandler::nextCollision.">BulioTickHandler::nextCollision</a>.  <a href="class_bulio_tick_handler.html#a96e5d6e704883d5bbb8138c9a19ab10a">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a96e5d6e704883d5bbb8138c9a19ab10a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0a9aa223cf148548224a3c16aa34b98"><td class="memItemLeft" align="right" valign="top"><a id="aa0a9aa223cf148548224a3c16aa34b98" name="aa0a9aa223cf148548224a3c16aa34b98"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setGameCore</b> (<a class="el" href="class_game_core.html">GameCore</a> *newGameCore)</td></tr>
-<tr class="separator:aa0a9aa223cf148548224a3c16aa34b98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_entity_tick_handler"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_entity_tick_handler')"><img src="closed.png" alt="-"/>&#160;Fonctions membres publiques hérités de <a class="el" href="class_entity_tick_handler.html">EntityTickHandler</a></td></tr>
 <tr class="memitem:a6653eafc76ded24d455d509a32ae7c85 inherit pub_methods_class_entity_tick_handler"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_tick_handler.html#a6653eafc76ded24d455d509a32ae7c85">EntityTickHandler</a> (<a class="el" href="class_entity.html">Entity</a> *pParentEntity=nullptr)</td></tr>
 <tr class="separator:a6653eafc76ded24d455d509a32ae7c85 inherit pub_methods_class_entity_tick_handler"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -114,6 +111,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setParentEnti
 <tr class="memitem:a4cf2ae0618ba74b5d236cc34e5cc880e inherit pub_methods_class_entity_tick_handler"><td class="memItemLeft" align="right" valign="top"><a id="a4cf2ae0618ba74b5d236cc34e5cc880e" name="a4cf2ae0618ba74b5d236cc34e5cc880e"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> ()</td></tr>
 <tr class="separator:a4cf2ae0618ba74b5d236cc34e5cc880e inherit pub_methods_class_entity_tick_handler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bff5d66d4ff0b4f46dea32e2c6968a0 inherit pub_methods_class_entity_tick_handler"><td class="memItemLeft" align="right" valign="top"><a id="a0bff5d66d4ff0b4f46dea32e2c6968a0" name="a0bff5d66d4ff0b4f46dea32e2c6968a0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setGameCore</b> (<a class="el" href="class_game_core.html">GameCore</a> *newGameCore)</td></tr>
+<tr class="separator:a0bff5d66d4ff0b4f46dea32e2c6968a0 inherit pub_methods_class_entity_tick_handler"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Membres hérités additionnels</h2></td></tr>
@@ -121,6 +121,9 @@ Membres hérités additionnels</h2></td></tr>
 <tr class="memitem:ae5893b9fa83494dc94ffdeb0ef54b89f inherit pro_attribs_class_entity_tick_handler"><td class="memItemLeft" align="right" valign="top"><a id="ae5893b9fa83494dc94ffdeb0ef54b89f" name="ae5893b9fa83494dc94ffdeb0ef54b89f"></a>
 <a class="el" href="class_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pParentEntity</b></td></tr>
 <tr class="separator:ae5893b9fa83494dc94ffdeb0ef54b89f inherit pro_attribs_class_entity_tick_handler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaa38cc1ce585eb84e3699e90c3cf124 inherit pro_attribs_class_entity_tick_handler"><td class="memItemLeft" align="right" valign="top"><a id="afaa38cc1ce585eb84e3699e90c3cf124" name="afaa38cc1ce585eb84e3699e90c3cf124"></a>
+<a class="el" href="class_game_core.html">GameCore</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pGameCore</b> = nullptr</td></tr>
+<tr class="separator:afaa38cc1ce585eb84e3699e90c3cf124 inherit pro_attribs_class_entity_tick_handler"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p >Cette classe est permet de crée un ennemie se déplaçant de droite à gauche. </p>

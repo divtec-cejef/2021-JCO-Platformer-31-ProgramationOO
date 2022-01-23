@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AmogusJumper: Référence de la classe CaisseAmovTickHandler</title>
+<title>Amogus-Jumper: Référence de la classe CaisseAmovTickHandler</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,8 +20,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="BasicPoseV4.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">AmogusJumper
+   <div id="projectname">Amogus-Jumper
    </div>
   </td>
  </tr>
@@ -64,7 +65,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Fonctions membres publiques</a> &#124;
-<a href="#pub-attribs">Attributs publics</a> &#124;
 <a href="class_caisse_amov_tick_handler-members.html">Liste de tous les membres</a>  </div>
   <div class="headertitle"><div class="title">Référence de la classe CaisseAmovTickHandler</div></div>
 </div><!--header-->
@@ -77,13 +77,12 @@ $(function() {
 <div class="dynheader">
 Graphe d'héritage de CaisseAmovTickHandler:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_caisse_amov_tick_handler__inherit__graph.png" border="0" usemap="#a_caisse_amov_tick_handler_inherit__map" alt="Inheritance graph"/></div>
-<center><span class="legend">[<a href="graph_legend.html">légende</a>]</span></center></div>
-<div class="dynheader">
-Graphe de collaboration de CaisseAmovTickHandler:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_caisse_amov_tick_handler__coll__graph.png" border="0" usemap="#a_caisse_amov_tick_handler_coll__map" alt="Collaboration graph"/></div>
-<center><span class="legend">[<a href="graph_legend.html">légende</a>]</span></center></div>
+ <div class="center">
+  <img src="class_caisse_amov_tick_handler.png" usemap="#CaisseAmovTickHandler_map" alt=""/>
+  <map id="CaisseAmovTickHandler_map" name="CaisseAmovTickHandler_map">
+<area href="class_entity_tick_handler.html" title="Classe abstraite qui représente un gestionnaire de tick pour une entité." alt="EntityTickHandler" shape="rect" coords="0,0,150,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Fonctions membres publiques</h2></td></tr>
@@ -98,9 +97,6 @@ Fonctions membres publiques</h2></td></tr>
 <tr class="memitem:ac365c48c789c606102e55dbcdb19ffbd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_caisse_amov_tick_handler.html#ac365c48c789c606102e55dbcdb19ffbd">nextCollision</a> ()</td></tr>
 <tr class="memdesc:ac365c48c789c606102e55dbcdb19ffbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Définit la procédure à executé pour les collisions qui vont touché l'entité.  <a href="class_caisse_amov_tick_handler.html#ac365c48c789c606102e55dbcdb19ffbd">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ac365c48c789c606102e55dbcdb19ffbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afabfa2b893e82b868cd290157216dc84"><td class="memItemLeft" align="right" valign="top"><a id="afabfa2b893e82b868cd290157216dc84" name="afabfa2b893e82b868cd290157216dc84"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setGameCore</b> (<a class="el" href="class_game_core.html">GameCore</a> *newGameCore)</td></tr>
-<tr class="separator:afabfa2b893e82b868cd290157216dc84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_entity_tick_handler"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_entity_tick_handler')"><img src="closed.png" alt="-"/>&#160;Fonctions membres publiques hérités de <a class="el" href="class_entity_tick_handler.html">EntityTickHandler</a></td></tr>
 <tr class="memitem:a6653eafc76ded24d455d509a32ae7c85 inherit pub_methods_class_entity_tick_handler"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_tick_handler.html#a6653eafc76ded24d455d509a32ae7c85">EntityTickHandler</a> (<a class="el" href="class_entity.html">Entity</a> *pParentEntity=nullptr)</td></tr>
 <tr class="separator:a6653eafc76ded24d455d509a32ae7c85 inherit pub_methods_class_entity_tick_handler"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,15 +111,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setParentEnti
 <tr class="memitem:a4cf2ae0618ba74b5d236cc34e5cc880e inherit pub_methods_class_entity_tick_handler"><td class="memItemLeft" align="right" valign="top"><a id="a4cf2ae0618ba74b5d236cc34e5cc880e" name="a4cf2ae0618ba74b5d236cc34e5cc880e"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> ()</td></tr>
 <tr class="separator:a4cf2ae0618ba74b5d236cc34e5cc880e inherit pub_methods_class_entity_tick_handler"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Attributs publics</h2></td></tr>
-<tr class="memitem:afb999e69d7087ef37caf6c17ce7257b3"><td class="memItemLeft" align="right" valign="top"><a id="afb999e69d7087ef37caf6c17ce7257b3" name="afb999e69d7087ef37caf6c17ce7257b3"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_isPlayer</b> = false</td></tr>
-<tr class="separator:afb999e69d7087ef37caf6c17ce7257b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82641cf14b224d1b96608522f4927d0f"><td class="memItemLeft" align="right" valign="top"><a id="a82641cf14b224d1b96608522f4927d0f" name="a82641cf14b224d1b96608522f4927d0f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_canMove</b> = false</td></tr>
-<tr class="separator:a82641cf14b224d1b96608522f4927d0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bff5d66d4ff0b4f46dea32e2c6968a0 inherit pub_methods_class_entity_tick_handler"><td class="memItemLeft" align="right" valign="top"><a id="a0bff5d66d4ff0b4f46dea32e2c6968a0" name="a0bff5d66d4ff0b4f46dea32e2c6968a0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setGameCore</b> (<a class="el" href="class_game_core.html">GameCore</a> *newGameCore)</td></tr>
+<tr class="separator:a0bff5d66d4ff0b4f46dea32e2c6968a0 inherit pub_methods_class_entity_tick_handler"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Membres hérités additionnels</h2></td></tr>
@@ -131,6 +121,9 @@ Membres hérités additionnels</h2></td></tr>
 <tr class="memitem:ae5893b9fa83494dc94ffdeb0ef54b89f inherit pro_attribs_class_entity_tick_handler"><td class="memItemLeft" align="right" valign="top"><a id="ae5893b9fa83494dc94ffdeb0ef54b89f" name="ae5893b9fa83494dc94ffdeb0ef54b89f"></a>
 <a class="el" href="class_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pParentEntity</b></td></tr>
 <tr class="separator:ae5893b9fa83494dc94ffdeb0ef54b89f inherit pro_attribs_class_entity_tick_handler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaa38cc1ce585eb84e3699e90c3cf124 inherit pro_attribs_class_entity_tick_handler"><td class="memItemLeft" align="right" valign="top"><a id="afaa38cc1ce585eb84e3699e90c3cf124" name="afaa38cc1ce585eb84e3699e90c3cf124"></a>
+<a class="el" href="class_game_core.html">GameCore</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pGameCore</b> = nullptr</td></tr>
+<tr class="separator:afaa38cc1ce585eb84e3699e90c3cf124 inherit pro_attribs_class_entity_tick_handler"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p >The <a class="el" href="class_caisse_amov_tick_handler.html" title="The CaisseAmovTickHandler class Cette classe permet de géré des entités et de leur donnée le comporte...">CaisseAmovTickHandler</a> class Cette classe permet de géré des entités et de leur donnée le comportement d'une caisse amovible. Cette classe à pour bute de géré une enité provenant de la classe <a class="el" href="class_caisse_amovible.html">CaisseAmovible</a>. Mais elle peut très bien appliqué ce comportement à d'autre entité. </p>

@@ -9,7 +9,10 @@
 
 #include <sprite.h>
 
-
+//! la classe Ground permettant de générer automatiquement des groupes de sol en précisant simplement l’emplacement du premier bloc,
+//! le nombre de colonnes et de lignes. Cette classe s’occupe de la gestion de l’orientation des blocs,
+//! en utilisant une sprite sheet. Actuellement, elle ne peut pas générer des figures complexes.
+//! Elle fait uniquement des rectangles et des carrés.
 class Ground : public Sprite
 {
 public:
