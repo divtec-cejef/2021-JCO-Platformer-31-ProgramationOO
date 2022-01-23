@@ -1,0 +1,98 @@
+\hypertarget{class_ground}{}\doxysection{Référence de la classe Ground}
+\label{class_ground}\index{Ground@{Ground}}
+
+
+Graphe d\textquotesingle{}héritage de Ground\+:
+% FIG 0
+
+
+Graphe de collaboration de Ground\+:
+% FIG 1
+\doxysubsection*{Types publics}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_ground_a8008cf0be30e14d888b4a43d0ccc9766}{orientation}} \{ \newline
+{\bfseries GROUND\+\_\+\+UP} = 0
+, {\bfseries GROUND\+\_\+\+DOWN} = 1
+, {\bfseries GROUND\+\_\+\+LEFT} = 2
+, {\bfseries GROUND\+\_\+\+RIGHT} = 3
+, \newline
+{\bfseries CORNER\+\_\+\+UP\+\_\+\+RIGHT} = 4
+, {\bfseries CORNER\+\_\+\+UP\+\_\+\+LEFT} = 5
+, {\bfseries CORNER\+\_\+\+DOWN\+\_\+\+RIGHT} = 6
+, {\bfseries CORNER\+\_\+\+DOWN\+\_\+\+LEFT} = 7
+, \newline
+{\bfseries GROUND\+\_\+\+OF\+\_\+\+GROUND} = 8
+ \}
+\begin{DoxyCompactList}\small\item\em The orientation enum. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_ground_a9b705b9f54f99894b07860d0e9ab151a}\label{class_ground_a9b705b9f54f99894b07860d0e9ab151a}} 
+{\bfseries Ground} (\mbox{\hyperlink{class_game_scene}{Game\+Scene}} $\ast$Current\+Scene)
+\item 
+void \mbox{\hyperlink{class_ground_abbeedeb9ea19875e215efaf958aeaa92}{generated}} (int colonne, int ligne, QPointF pos\+Groupe)
+\begin{DoxyCompactList}\small\item\em Game\+Core\+::generator\+Ground génére un groupe de sol sur la map d\textquotesingle{}un niveau. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_ground_a872f7ae7a4deaa60d3fb47b8315d9b18}\label{class_ground_a872f7ae7a4deaa60d3fb47b8315d9b18}} 
+void {\bfseries set\+Scene} (\mbox{\hyperlink{class_game_scene}{Game\+Scene}} $\ast$Current\+Scene)
+\item 
+\mbox{\hyperlink{class_ground_a85c1531733d5062a4a908c3d5e97061d}{Ground}} (QGraphics\+Item $\ast$p\+Parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Game\+Core\+::set\+Ground\+Images. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_ground_ada9997eb91bf9fc9ccb08603c844976a}\label{class_ground_ada9997eb91bf9fc9ccb08603c844976a}} 
+void {\bfseries configure\+Orientation} (\mbox{\hyperlink{class_ground_a8008cf0be30e14d888b4a43d0ccc9766}{orientation}} ground)
+\end{DoxyCompactItemize}
+\doxysubsection*{Membres hérités additionnels}
+
+
+\doxysubsection{Documentation des énumérations membres}
+\mbox{\Hypertarget{class_ground_a8008cf0be30e14d888b4a43d0ccc9766}\label{class_ground_a8008cf0be30e14d888b4a43d0ccc9766}} 
+\index{Ground@{Ground}!orientation@{orientation}}
+\index{orientation@{orientation}!Ground@{Ground}}
+\doxysubsubsection{\texorpdfstring{orientation}{orientation}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_ground_a8008cf0be30e14d888b4a43d0ccc9766}{Ground\+::orientation}}}
+
+
+
+The orientation enum. 
+
+Type d\textquotesingle{}orientation possible du sol. 
+
+\doxysubsection{Documentation des constructeurs et destructeur}
+\mbox{\Hypertarget{class_ground_a85c1531733d5062a4a908c3d5e97061d}\label{class_ground_a85c1531733d5062a4a908c3d5e97061d}} 
+\index{Ground@{Ground}!Ground@{Ground}}
+\index{Ground@{Ground}!Ground@{Ground}}
+\doxysubsubsection{\texorpdfstring{Ground()}{Ground()}}
+{\footnotesize\ttfamily Ground\+::\+Ground (\begin{DoxyParamCaption}\item[{QGraphics\+Item $\ast$}]{p\+Parent = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Game\+Core\+::set\+Ground\+Images. 
+
+Découpage des images pour les différentes orientations du sol. 
+
+\doxysubsection{Documentation des fonctions membres}
+\mbox{\Hypertarget{class_ground_abbeedeb9ea19875e215efaf958aeaa92}\label{class_ground_abbeedeb9ea19875e215efaf958aeaa92}} 
+\index{Ground@{Ground}!generated@{generated}}
+\index{generated@{generated}!Ground@{Ground}}
+\doxysubsubsection{\texorpdfstring{generated()}{generated()}}
+{\footnotesize\ttfamily void Ground\+::generated (\begin{DoxyParamCaption}\item[{int}]{colonne\+Max,  }\item[{int}]{ligne\+Max,  }\item[{QPointF}]{pos\+Groupe }\end{DoxyParamCaption})}
+
+
+
+Game\+Core\+::generator\+Ground génére un groupe de sol sur la map d\textquotesingle{}un niveau. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em colonne} & nbr de colonne dans le bloque de de sol \\
+\hline
+{\em ligne} & nbr de colonne dans le bloque de de sol \\
+\hline
+{\em max} & nbr max de sol à généré \\
+\hline
+\end{DoxyParams}
+
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+ground.\+h\item 
+\mbox{\hyperlink{ground_8cpp}{ground.\+cpp}}\end{DoxyCompactItemize}

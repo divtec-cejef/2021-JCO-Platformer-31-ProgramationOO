@@ -1,0 +1,92 @@
+\hypertarget{class_sprite_tick_handler}{}\doxysection{Référence de la classe Sprite\+Tick\+Handler}
+\label{class_sprite_tick_handler}\index{SpriteTickHandler@{SpriteTickHandler}}
+
+
+Classe abstraite qui représente un gestionnaire de tick pour un sprite.  
+
+
+
+
+{\ttfamily \#include $<$spritetickhandler.\+h$>$}
+
+
+
+Graphe d\textquotesingle{}héritage de Sprite\+Tick\+Handler\+:
+% FIG 0
+
+
+Graphe de collaboration de Sprite\+Tick\+Handler\+:
+% FIG 1
+\doxysubsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_sprite_tick_handler_acda6cf250e925007d63ea5d0431e7c5c}{Sprite\+Tick\+Handler}} (\mbox{\hyperlink{class_sprite}{Sprite}} $\ast$p\+Parent\+Sprite=nullptr)
+\item 
+\mbox{\Hypertarget{class_sprite_tick_handler_a1cb7fb2faf22b20c4c029e3c7ab08bda}\label{class_sprite_tick_handler_a1cb7fb2faf22b20c4c029e3c7ab08bda}} 
+virtual {\bfseries $\sim$\+Sprite\+Tick\+Handler} ()
+\begin{DoxyCompactList}\small\item\em Destructeur. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sprite_tick_handler_a107a84168474e213cc06cdc77e4d7b86}\label{class_sprite_tick_handler_a107a84168474e213cc06cdc77e4d7b86}} 
+virtual void {\bfseries set\+Parent\+Sprite} (\mbox{\hyperlink{class_sprite}{Sprite}} $\ast$p\+Parent\+Sprite)
+\begin{DoxyCompactList}\small\item\em Indique quel sprite sera géré par ce gestionnaire. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_sprite_tick_handler_a2c1c5399a6d61d6489d926acf6349622}{init}} ()
+\item 
+virtual void \mbox{\hyperlink{class_sprite_tick_handler_a51aecdfa16a82023074c5367b48d8e7f}{tick}} (long long elapsed\+Time\+In\+Milliseconds)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Attributs protégés}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sprite_tick_handler_a4d7b77faf3fc09ca63767f5cb1afcc90}\label{class_sprite_tick_handler_a4d7b77faf3fc09ca63767f5cb1afcc90}} 
+\mbox{\hyperlink{class_sprite}{Sprite}} $\ast$ {\bfseries m\+\_\+p\+Parent\+Sprite}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Classe abstraite qui représente un gestionnaire de tick pour un sprite. 
+
+Cette classe a pour but d\textquotesingle{}être spécialisée afin de donner à un sprite un comportement à effectuer lors de chaque tick émis par la cadence.
+
+Lorsqu\textquotesingle{}un gestionnaire est affecté à un sprite (\mbox{\hyperlink{class_sprite_a824c82dee03274adfee1287bda73ff66}{Sprite\+::set\+Tick\+Handler}}), la fonction init() du gestionnaire est appelée une unique fois, puis, lorsque la cadence démarre, la fonction tick() du gestionnaire est automatiquement appelée.
+
+Depuis le gestionnaire, il est possible d\textquotesingle{}accéder au \mbox{\hyperlink{class_sprite}{Sprite}} en question avec l\textquotesingle{}attribut m\+\_\+p\+Parent\+Sprite. 
+
+\doxysubsection{Documentation des constructeurs et destructeur}
+\mbox{\Hypertarget{class_sprite_tick_handler_acda6cf250e925007d63ea5d0431e7c5c}\label{class_sprite_tick_handler_acda6cf250e925007d63ea5d0431e7c5c}} 
+\index{SpriteTickHandler@{SpriteTickHandler}!SpriteTickHandler@{SpriteTickHandler}}
+\index{SpriteTickHandler@{SpriteTickHandler}!SpriteTickHandler@{SpriteTickHandler}}
+\doxysubsubsection{\texorpdfstring{SpriteTickHandler()}{SpriteTickHandler()}}
+{\footnotesize\ttfamily Sprite\+Tick\+Handler\+::\+Sprite\+Tick\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sprite}{Sprite}} $\ast$}]{p\+Parent\+Sprite = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Construit un gestionnaire de tick pour le \mbox{\hyperlink{class_sprite}{Sprite}} donné. 
+\begin{DoxyParams}{Paramètres}
+{\em p\+Parent\+Sprite} & \mbox{\hyperlink{class_sprite}{Sprite}} qui sera géré par ce gestionnaire. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Documentation des fonctions membres}
+\mbox{\Hypertarget{class_sprite_tick_handler_a2c1c5399a6d61d6489d926acf6349622}\label{class_sprite_tick_handler_a2c1c5399a6d61d6489d926acf6349622}} 
+\index{SpriteTickHandler@{SpriteTickHandler}!init@{init}}
+\index{init@{init}!SpriteTickHandler@{SpriteTickHandler}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily virtual void Sprite\+Tick\+Handler\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Réimplémentée dans \mbox{\hyperlink{class_key_tick_handler_ae7efcfa2ad109fe36d8a70251a4a52bf}{Key\+Tick\+Handler}}.
+
+\mbox{\Hypertarget{class_sprite_tick_handler_a51aecdfa16a82023074c5367b48d8e7f}\label{class_sprite_tick_handler_a51aecdfa16a82023074c5367b48d8e7f}} 
+\index{SpriteTickHandler@{SpriteTickHandler}!tick@{tick}}
+\index{tick@{tick}!SpriteTickHandler@{SpriteTickHandler}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily virtual void Sprite\+Tick\+Handler\+::tick (\begin{DoxyParamCaption}\item[{long long}]{elapsed\+Time\+In\+Milliseconds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implémenté dans \mbox{\hyperlink{class_key_tick_handler_aa9e85a9d38b805277fb0000c931dcab7}{Key\+Tick\+Handler}}.
+
+
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{spritetickhandler_8h}{spritetickhandler.\+h}}\item 
+\mbox{\hyperlink{spritetickhandler_8cpp}{spritetickhandler.\+cpp}}\end{DoxyCompactItemize}

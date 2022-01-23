@@ -31,3 +31,7 @@ void EntityTickHandler::setParentEntity(Entity* pParentEntity) {
     m_pParentEntity = pParentEntity;
 }
 
+void EntityTickHandler::setGameCore(GameCore *newGameCore){
+    m_pGameCore = newGameCore;
+}
+

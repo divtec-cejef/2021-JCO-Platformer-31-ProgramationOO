@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['blueball_0',['BlueBall',['../class_blue_ball.html',1,'']]],
-  ['bouncingspritehandler_1',['BouncingSpriteHandler',['../class_bouncing_sprite_handler.html',1,'']]],
-  ['bulio_2',['Bulio',['../class_bulio.html',1,'']]],
-  ['buliotickhandler_3',['BulioTickHandler',['../class_bulio_tick_handler.html',1,'']]]
+  ['caisseamovible_0',['CaisseAmovible',['../class_caisse_amovible.html',1,'']]],
+  ['caisseamovtickhandler_1',['CaisseAmovTickHandler',['../class_caisse_amov_tick_handler.html',1,'']]],
+  ['character_2',['Character',['../class_character.html',1,'']]]
 ];

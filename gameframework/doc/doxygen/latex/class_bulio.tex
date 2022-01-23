@@ -1,0 +1,128 @@
+\hypertarget{class_bulio}{}\doxysection{Référence de la classe Bulio}
+\label{class_bulio}\index{Bulio@{Bulio}}
+
+
+la Classe \mbox{\hyperlink{class_bulio}{Bulio}} gère l\textquotesingle{}ennemie de base du jeu, dans une scene. Cette classe hérite de la classe \mbox{\hyperlink{class_entity}{Entity}} elle permet de géré l\textquotesingle{}état d\textquotesingle{}une caisse dans une scene. Elle gère les animations ainsi que sa propre mort.  
+
+
+
+
+{\ttfamily \#include $<$bulio.\+h$>$}
+
+
+
+Graphe d\textquotesingle{}héritage de Bulio\+:
+% FIG 0
+
+
+Graphe de collaboration de Bulio\+:
+% FIG 1
+\doxysubsection*{Types publics}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_bulio_a9d35f27cf05516c480d2cc8b7a3485c5}\label{class_bulio_a9d35f27cf05516c480d2cc8b7a3485c5}} 
+enum {\bfseries animation} \{ {\bfseries BASE} = 0
+, {\bfseries DEPLACEMENT} = 1
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Connecteurs publics}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_bulio_a87bb257ee2750f1a03af8ae3f44e640a}\label{class_bulio_a87bb257ee2750f1a03af8ae3f44e640a}} 
+void {\bfseries on\+Key\+Pressed} (int key)
+\item 
+\mbox{\Hypertarget{class_bulio_a175d3e41df4ca908cd527e23ce1cc01b}\label{class_bulio_a175d3e41df4ca908cd527e23ce1cc01b}} 
+void {\bfseries on\+Key\+Released} (int key)
+\end{DoxyCompactItemize}
+\doxysubsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_bulio_ac3eca2d6a1d3d9d3c6e0d930d456ccb6}\label{class_bulio_ac3eca2d6a1d3d9d3c6e0d930d456ccb6}} 
+{\bfseries Bulio} (QGraphics\+Item $\ast$p\+Parent=nullptr)
+\item 
+void \mbox{\hyperlink{class_bulio_acbcd5088596eb2496a3c53271895468b}{configure\+Animation}} (animation bulio)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_character_a9ef016109b99ab9867954969167addd4}{Character\+::configure\+Animation}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_bulio_a5845ef8f98eaee6aa9f8298f8d91e96a}\label{class_bulio_a5845ef8f98eaee6aa9f8298f8d91e96a}} 
+void {\bfseries update\+Velocity} ()
+\item 
+\mbox{\Hypertarget{class_bulio_ab275f160fe50afb37b16cef8632e8db2}\label{class_bulio_ab275f160fe50afb37b16cef8632e8db2}} 
+void {\bfseries collision\+Detection} (QRectF rect)
+\item 
+void \mbox{\hyperlink{class_bulio_a36707053633b3bbe763cd94f840cfdd1}{set\+Is\+On\+Floor}} (bool \+\_\+is\+On\+Floor)
+\item 
+\mbox{\Hypertarget{class_bulio_a3390d222ae27319dc63d233870bbabc8}\label{class_bulio_a3390d222ae27319dc63d233870bbabc8}} 
+bool {\bfseries get\+Is\+Jump} ()
+\item 
+\mbox{\Hypertarget{class_bulio_ab96cf11f5e5fd7769b65f95ea4b2bd63}\label{class_bulio_ab96cf11f5e5fd7769b65f95ea4b2bd63}} 
+void {\bfseries set\+Is\+Jump} (bool \+\_\+is\+Jump)
+\item 
+void \mbox{\hyperlink{class_bulio_aa3ca4ad37ad2e79caaa1aeaf58ef5ebf}{set\+Is\+Death}} (bool \+\_\+is\+Death)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_bulio_aa3ca4ad37ad2e79caaa1aeaf58ef5ebf}{Bulio\+::set\+Is\+Death}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_bulio_a668249a57bc534327c4b753992c15b1d}\label{class_bulio_a668249a57bc534327c4b753992c15b1d}} 
+void {\bfseries respawn} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Membres hérités additionnels}
+
+
+\doxysubsection{Description détaillée}
+la Classe \mbox{\hyperlink{class_bulio}{Bulio}} gère l\textquotesingle{}ennemie de base du jeu, dans une scene. Cette classe hérite de la classe \mbox{\hyperlink{class_entity}{Entity}} elle permet de géré l\textquotesingle{}état d\textquotesingle{}une caisse dans une scene. Elle gère les animations ainsi que sa propre mort. 
+
+\hypertarget{class_entity_Déplacement}{}\doxysubsection{du joueur}\label{class_entity_Déplacement}
+Les déplacement sont géré par la classe \mbox{\hyperlink{class_bulio_tick_handler}{Bulio\+Tick\+Handler}}. 
+
+\doxysubsection{Documentation des fonctions membres}
+\mbox{\Hypertarget{class_bulio_acbcd5088596eb2496a3c53271895468b}\label{class_bulio_acbcd5088596eb2496a3c53271895468b}} 
+\index{Bulio@{Bulio}!configureAnimation@{configureAnimation}}
+\index{configureAnimation@{configureAnimation}!Bulio@{Bulio}}
+\doxysubsubsection{\texorpdfstring{configureAnimation()}{configureAnimation()}}
+{\footnotesize\ttfamily void Bulio\+::configure\+Animation (\begin{DoxyParamCaption}\item[{animation}]{bulio }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_character_a9ef016109b99ab9867954969167addd4}{Character\+::configure\+Animation}}. 
+
+Définit l\textquotesingle{}animation dans la quel le sprite du bulio doit être. 
+\begin{DoxyParams}{Paramètres}
+{\em player} & animation du bulio paramétrer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_bulio_aa3ca4ad37ad2e79caaa1aeaf58ef5ebf}\label{class_bulio_aa3ca4ad37ad2e79caaa1aeaf58ef5ebf}} 
+\index{Bulio@{Bulio}!setIsDeath@{setIsDeath}}
+\index{setIsDeath@{setIsDeath}!Bulio@{Bulio}}
+\doxysubsubsection{\texorpdfstring{setIsDeath()}{setIsDeath()}}
+{\footnotesize\ttfamily void Bulio\+::set\+Is\+Death (\begin{DoxyParamCaption}\item[{bool}]{\+\_\+is\+Death }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{class_bulio_aa3ca4ad37ad2e79caaa1aeaf58ef5ebf}{Bulio\+::set\+Is\+Death}}. 
+
+Permet de définir si le bulio doit être en vie ou non. 
+\begin{DoxyParams}{Paramètres}
+{\em \+\_\+is\+Death} & nouvelle état du bulio. \\
+\hline
+\end{DoxyParams}
+
+
+Réimplémentée à partir de \mbox{\hyperlink{class_entity_a58b7b2981e65030805e14f9be227467f}{Entity}}.
+
+\mbox{\Hypertarget{class_bulio_a36707053633b3bbe763cd94f840cfdd1}\label{class_bulio_a36707053633b3bbe763cd94f840cfdd1}} 
+\index{Bulio@{Bulio}!setIsOnFloor@{setIsOnFloor}}
+\index{setIsOnFloor@{setIsOnFloor}!Bulio@{Bulio}}
+\doxysubsubsection{\texorpdfstring{setIsOnFloor()}{setIsOnFloor()}}
+{\footnotesize\ttfamily void Bulio\+::set\+Is\+On\+Floor (\begin{DoxyParamCaption}\item[{bool}]{\+\_\+is\+On\+Floor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Permet de définir si le bulio est sur le sol ou non. 
+\begin{DoxyParams}{Paramètres}
+{\em \+\_\+is\+On\+Floor} & nouvelle état du bulio. \\
+\hline
+\end{DoxyParams}
+
+
+Réimplémentée à partir de \mbox{\hyperlink{class_entity_a0ad4da29d70e01f0688c0d1f0d866721}{Entity}}.
+
+
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+bulio.\+h\item 
+\mbox{\hyperlink{bulio_8cpp}{bulio.\+cpp}}\end{DoxyCompactItemize}

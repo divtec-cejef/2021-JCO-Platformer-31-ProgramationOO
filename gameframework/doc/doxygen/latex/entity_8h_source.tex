@@ -1,0 +1,69 @@
+\hypertarget{entity_8h_source}{}\doxysection{entity.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef ENTITY\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define ENTITY\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QObject>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QPointF>}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <QGraphicsTransform>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <QList>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{sprite_8h}{sprite.h}}>}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{25 \textcolor{keyword}{class }\mbox{\hyperlink{class_entity}{Entity}}: \textcolor{keyword}{public} \mbox{\hyperlink{class_sprite}{Sprite}}}
+\DoxyCodeLine{26 \{}
+\DoxyCodeLine{27 \textcolor{keyword}{public}:}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     \mbox{\hyperlink{class_entity_aed35becf09a294b5d4d1c48da773e97f}{Entity}}(\textcolor{keyword}{const} QPixmap\& rPixmap, QGraphicsItem* pParent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     \textcolor{keyword}{enum} hitSide\{}
+\DoxyCodeLine{32         UP =0,}
+\DoxyCodeLine{33         DOWN =1,}
+\DoxyCodeLine{34         RIGHT=2,}
+\DoxyCodeLine{35         LEFT =3}
+\DoxyCodeLine{36     \};}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_entity_a7e13400ff06e108f2fd0278690dc61bd}{configureAnimation}}();}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     \textcolor{comment}{//Gestion des déplacement}}
+\DoxyCodeLine{41     QPointF m\_velocity;}
+\DoxyCodeLine{42     QPointF m\_lastVelocity = m\_velocity;}
+\DoxyCodeLine{43     QPointF getVelocity();}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_entity_af84b52a5ef8d0b94006b2b6bec6ef1c5}{getIsOnFloor}}();}
+\DoxyCodeLine{46     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_entity_a0ad4da29d70e01f0688c0d1f0d866721}{setIsOnFloor}}(\textcolor{keywordtype}{bool} \_isOnFloor);}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48     QPointF m\_spawnPoint = QPointF(0,0);}
+\DoxyCodeLine{49     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_entity_aa07efe5e01e4a6d68930f639a9cc53e1}{setSpawnPoint}}(QPointF \_spawnPoint);}
+\DoxyCodeLine{50     QPointF \mbox{\hyperlink{class_entity_a80f1fee2cdae8fbf165bc8bbd94788a1}{getSpawnPoint}}();}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_entity_a91a72a5e62b2fb033c67d1b943145b1d}{getIsDeath}}();}
+\DoxyCodeLine{54     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_entity_a58b7b2981e65030805e14f9be227467f}{setIsDeath}}(\textcolor{keywordtype}{bool} \_isDeath);}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_entity_aaec7db44eeba5122f6bcdd4728640169}{setScene}}(\mbox{\hyperlink{class_game_scene}{GameScene}}* m\_pScene);}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_entity_a566cc8ba09efad9d327dc64f4c36ca89}{uniqueSide}}(QList<hitSide>* collidingSidesList, hitSide appendToSide);}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_entity_ae01e2de2cd4d53bceecd30c833f5cb68}{getCollisionLocate}}(QList<Entity::hitSide>\&collisionLocateL,}
+\DoxyCodeLine{63                                       QRectF posSprite,QRectF intersected);}
+\DoxyCodeLine{64     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_entity_aa1be2c79f9cb9152fd5872dab8fe7e51}{gravityApplied}}(\textcolor{keywordtype}{long} \textcolor{keywordtype}{long} elapsedTime);}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66 \textcolor{keyword}{private}:}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68     \textcolor{keywordtype}{void} setAnimationDeplacementList();}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{71     \mbox{\hyperlink{class_game_scene}{GameScene}}* m\_pScene = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{72     QPointF m\_gravity = QPointF(0,2);}
+\DoxyCodeLine{73     \textcolor{keywordtype}{bool} m\_isDeath = \textcolor{keyword}{false};}
+\DoxyCodeLine{74     \textcolor{keywordtype}{bool} m\_isOnFloor = \textcolor{keyword}{false};}
+\DoxyCodeLine{75 \};}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ENTITY\_H}}
+
+\end{DoxyCode}

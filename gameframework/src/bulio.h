@@ -21,7 +21,6 @@ class Bulio: public Entity
 public:
     Bulio(QGraphicsItem* pParent = nullptr);
 
-
     //Type d'animation du bulio
     enum animation{
         BASE = 0,
@@ -31,24 +30,17 @@ public:
     //Configuration des animation du bulio
     void configureAnimation(animation bulio);
 
-    //Gestion des déplacement du Bulio
-    void updateVelocity();
     //Définit les déplacement du Bulio dans le jeu.
     void collisionDetection(QRectF rect);
     //void move(long long elapsedTimeInMilliseconds);
 
     void setIsOnFloor(bool _isOnFloor);
 
-
     bool getIsJump();
     void setIsJump(bool _isJump);
 
     //Définit si le Bulio doit être détruite ou non.
     void setIsDeath(bool _isDeath);
-
-    void respawn();
-
-
 
 public slots:
 

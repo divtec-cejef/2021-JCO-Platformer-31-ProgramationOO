@@ -173,8 +173,8 @@ void GameCore::loadTestLevel(){
     m_pScene->addSpriteToScene(platM4, 3680,1320);
 
     //Pile de caisse en métal.
-    StackMetal(QPointF(5401,1580));
-    StackMetal(QPointF(6201,1580));
+    stackMetal(QPointF(5401,1580));
+    stackMetal(QPointF(6201,1580));
 
     /////////////////////////////
     ////        PIEGE        ////
@@ -279,7 +279,7 @@ void GameCore::reloadEnnemi(){
 
 //! Génère une pile de caisse en métal.
 //! \param firstCase position de la première caisse de la pile.
-void GameCore::StackMetal(QPointF firstCase){
+void GameCore::stackMetal(QPointF firstCase){
 
     //Caisse actuel
     QPointF CurrentPosCase = firstCase;
@@ -315,9 +315,13 @@ void GameCore::keyPressed(int key) {
 
         switch(key) {
         case Qt::Key_W:
-            player = Character::SAUT;
-            pCharacter->m_velocity.setY(PLAYER_JUMP);
-            pCharacter->setIsJump(true);
+            if(pCharacter->getIsOnFloor()){
+                player = Character::SAUT;
+                pCharacter->m_velocity.setY(PLAYER_JUMP);
+                pCharacter->setIsJump(true);
+            }else{
+                player = Character::BASE;
+            }
             break;
 
         case Qt::Key_A:
@@ -335,7 +339,6 @@ void GameCore::keyPressed(int key) {
                 player = Character::SAUT;
                 pCharacter->m_velocity.setY(PLAYER_JUMP);
                 pCharacter->setIsJump(true);
-                qDebug() << "isJump : " << pCharacter->getIsJump();
             }else{
                 player = Character::BASE;
             }
@@ -386,7 +389,6 @@ void GameCore::keyReleased(int key) {
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
-    qDebug() << "Velocity Y : " << pCharacter->m_velocity.y() ;
     //Parcourt la liste des entités de la scene.
     for (int i = 0;i < m_pEntityL.count();i++) {
         if(!m_pEntityL.at(i)->getIsDeath()){
@@ -407,9 +409,9 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
         //Animation du joueur spécifique.
         if(pCharacter->getIsOnFloor() == false){
-           pCharacter->configureAnimation(Character::SAUT);
+            pCharacter->configureAnimation(Character::SAUT);
         }else if(pCharacter->m_velocity.x() == 0.0){
-             pCharacter->configureAnimation(Character::BASE);
+            pCharacter->configureAnimation(Character::BASE);
         }
 
         //Déplace le joueur

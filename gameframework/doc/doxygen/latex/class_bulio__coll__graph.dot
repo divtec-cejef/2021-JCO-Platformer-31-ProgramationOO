@@ -1,0 +1,20 @@
+digraph "Bulio"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="Bulio",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="la Classe Bulio gère l'ennemie de base du jeu, dans une scene. Cette classe hérite de la classe Entit..."];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="Entity",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_entity.html",tooltip="The Entity class Cette classe est permet de crée une entité et de la géré avec différente méthode...."];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="Sprite",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_sprite.html",tooltip="Classe qui représente un élément d'animation graphique 2D."];
+  Node4 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="QObject",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node5 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="QGraphicsPixmapItem",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node6 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" m_pParentScene" ];
+  Node6 [label="GameScene",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_game_scene.html",tooltip="Représente l'espace 2D du jeu."];
+  Node7 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="QGraphicsScene",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node6 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" m_pScene" ];
+}

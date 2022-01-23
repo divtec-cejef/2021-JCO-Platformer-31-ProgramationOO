@@ -1,0 +1,30 @@
+digraph "Graphe hiérarchique des classes"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node4 [label="QGraphicsPixmapItem",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node4 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 [label="Sprite",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_sprite.html",tooltip="Classe qui représente un élément d'animation graphique 2D."];
+  Node0 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 [label="Entity",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_entity.html",tooltip="The Entity class Cette classe est permet de crée une entité et de la géré avec différente méthode...."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Bulio",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_bulio.html",tooltip="la Classe Bulio gère l'ennemie de base du jeu, dans une scene. Cette classe hérite de la classe Entit..."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="CaisseAmovible",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_caisse_amovible.html",tooltip="The CaisseAmovible class Cette classe hérite de la classe Entity elle permet de géré l'état d'une cai..."];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Character",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_character.html",tooltip="la Classe Character gère le joueur dans une scene Cette classe est permet de crée le personnage que v..."];
+  Node0 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Ground",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_ground.html",tooltip=" "];
+  Node15 [label="QObject",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node15 -> Node16 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="GameCanvas",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_game_canvas.html",tooltip="Classe de gestion des scènes du jeu et de sa cadence."];
+  Node15 -> Node17 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 [label="GameCore",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_game_core.html",tooltip="Classe qui gère la logique du jeu."];
+  Node15 -> Node18 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="KeyTickHandler",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_key_tick_handler.html",tooltip=" "];
+  Node15 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="SpriteTickHandler",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_sprite_tick_handler.html",tooltip="Classe abstraite qui représente un gestionnaire de tick pour un sprite."];
+  Node21 -> Node18 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

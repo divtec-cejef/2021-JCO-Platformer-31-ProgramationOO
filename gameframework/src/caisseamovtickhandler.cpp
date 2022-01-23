@@ -163,7 +163,3 @@ void CaisseAmovTickHandler::nextCollision(){
 }
 
 
-
-void CaisseAmovTickHandler::setGameCore(GameCore* newGameCore){
-    m_pGameCore = newGameCore;
-}

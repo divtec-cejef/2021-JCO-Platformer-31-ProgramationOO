@@ -1,5 +1,13 @@
 var searchData=
 [
-  ['tick_0',['tick',['../class_automatic_walking_handler.html#a6c688c1758e61e47ff6d138ec872db47',1,'AutomaticWalkingHandler::tick()'],['../class_blue_ball.html#a4046a2819526fc86cf9023bf241f37fa',1,'BlueBall::tick()'],['../class_bouncing_sprite_handler.html#a8b0210eaa1341f24ec4cd91930aa39c7',1,'BouncingSpriteHandler::tick()'],['../class_game_core.html#a012c0e539d2110f68a6dc187f6a2af0b',1,'GameCore::tick()'],['../class_game_scene.html#acd260c1d14c0a4176438e07eaf5e1b82',1,'GameScene::tick()'],['../class_key_tick_handler.html#aa9e85a9d38b805277fb0000c931dcab7',1,'KeyTickHandler::tick()'],['../class_manual_walking_handler.html#a1d6b41794335eadcc8e01fdffccb4c61',1,'ManualWalkingHandler::tick()'],['../class_player.html#a3f1533a29039e16b2d4da279b874d311',1,'Player::tick()'],['../class_random_move_tick_handler.html#aed34f2c4573c077e41c440079892764e',1,'RandomMoveTickHandler::tick()'],['../class_sprite.html#a613ffe7e1cfea09977d5985104a94d46',1,'Sprite::tick(long long elapsedTimeInMilliseconds)']]],
-  ['tickhandler_1',['tickHandler',['../class_sprite.html#aef81d20c2b5b6d307eb56c0679f2b4fd',1,'Sprite']]]
+  ['registerfortick_0',['registerForTick',['../class_sprite.html#ad7b9cb1b2fea3a130b3ceb322d46f8e1',1,'Sprite']]],
+  ['registerspritefortick_1',['registerSpriteForTick',['../class_game_scene.html#a0bfc0ba479a5b0388a737480e8871cbe',1,'GameScene']]],
+  ['removeallspritefromscene_2',['removeAllSpriteFromScene',['../class_game_scene.html#aebef432e21cc19f448998780a8d91c75',1,'GameScene']]],
+  ['removespritefromscene_3',['removeSpriteFromScene',['../class_game_scene.html#a23eea9fd7ee67e208919214ae3f32a3a',1,'GameScene']]],
+  ['removetickhandler_4',['removeTickHandler',['../class_sprite.html#aa4f515244ff52da72e5fb58a9042ea84',1,'Sprite']]],
+  ['resizeevent_5',['resizeEvent',['../class_game_view.html#a0927a1a8a2a2afc53a0858d54cf88570',1,'GameView']]],
+  ['resources_2ecpp_6',['resources.cpp',['../resources_8cpp.html',1,'']]],
+  ['resources_2eh_7',['resources.h',['../resources_8h.html',1,'']]],
+  ['resourcespath_8',['resourcesPath',['../namespace_game_framework.html#a0c59d547af7a5c977f8879c1514c4351',1,'GameFramework']]],
+  ['respawn_9',['respawn',['../class_character.html#a6953345fc6ebe0ded6039fe84e449a1c',1,'Character']]]
 ];

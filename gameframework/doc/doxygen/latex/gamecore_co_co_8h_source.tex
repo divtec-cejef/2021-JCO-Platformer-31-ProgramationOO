@@ -1,0 +1,87 @@
+\hypertarget{gamecore_co_co_8h_source}{}\doxysection{gamecore\+Co\+Co.\+h}
+\mbox{\hyperlink{gamecore_co_co_8h}{Aller à la documentation de ce fichier.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#ifndef GAMECORE\_H}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#define GAMECORE\_H}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <QList>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <QObject>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <QPointF>}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{keyword}{class }QAbstractAnimation;}
+\DoxyCodeLine{15 \textcolor{keyword}{class }QGraphicsTransform;}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{keyword}{class }\mbox{\hyperlink{class_game_canvas}{GameCanvas}};}
+\DoxyCodeLine{18 \textcolor{keyword}{class }\mbox{\hyperlink{class_game_scene}{GameScene}};}
+\DoxyCodeLine{19 \textcolor{keyword}{class }\mbox{\hyperlink{class_sprite}{Sprite}};}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{137 \textcolor{keyword}{class }\mbox{\hyperlink{class_game_core}{GameCore}} : \textcolor{keyword}{public} QObject}
+\DoxyCodeLine{138 \{}
+\DoxyCodeLine{139     Q\_OBJECT}
+\DoxyCodeLine{140 \textcolor{keyword}{public}:}
+\DoxyCodeLine{141     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_game_core_a2b255aa441e1bc57ee7666a5c56307b0}{GameCore}}(\mbox{\hyperlink{class_game_canvas}{GameCanvas}}* pGameCanvas, QObject *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{142     \mbox{\hyperlink{class_game_core_a065550c7481cd6ed1878b66dac3e583f}{\string~GameCore}}();}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_core_af7d1e03d52e81d846e5733d970120655}{keyPressed}}(\textcolor{keywordtype}{int} key);}
+\DoxyCodeLine{145     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_core_a3e03c88acaf04467fc3213e09c58a441}{keyReleased}}(\textcolor{keywordtype}{int} key);}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_core_acb7e3ffb6923257ae234c274b2a2a2fc}{mouseMoved}}(QPointF newMousePosition);}
+\DoxyCodeLine{148     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_core_a1433068a5dcf2e4f7ddb7aee8475043b}{mouseButtonPressed}}(QPointF mousePosition, Qt::MouseButtons buttons);}
+\DoxyCodeLine{149     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_core_a95621dec286dce595fd65418fbcee04a}{mouseButtonReleased}}(QPointF mousePosition, Qt::MouseButtons buttons);}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_core_a012c0e539d2110f68a6dc187f6a2af0b}{tick}}(\textcolor{keywordtype}{long} \textcolor{keywordtype}{long} elapsedTimeInMilliseconds);}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153 signals:}
+\DoxyCodeLine{154     \textcolor{keywordtype}{void} notifyMouseMoved(QPointF newMousePosition);}
+\DoxyCodeLine{155     \textcolor{keywordtype}{void} notifyMouseButtonPressed(QPointF mousePosition, Qt::MouseButtons buttons);}
+\DoxyCodeLine{156     \textcolor{keywordtype}{void} notifyMouseButtonReleased(QPointF mousePosition, Qt::MouseButtons buttons);}
+\DoxyCodeLine{157     \textcolor{keywordtype}{void} notifyKeyPressed(\textcolor{keywordtype}{int} key);}
+\DoxyCodeLine{158     \textcolor{keywordtype}{void} notifyKeyReleased(\textcolor{keywordtype}{int} key);}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 \textcolor{keyword}{private}:}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162     \textcolor{keywordtype}{void} setupWalkingMen();}
+\DoxyCodeLine{163     \textcolor{keywordtype}{void} setupBouncingArea();}
+\DoxyCodeLine{164     \textcolor{keywordtype}{void} setupBlueBall();}
+\DoxyCodeLine{165     \textcolor{keywordtype}{void} setupSpinningWheel();}
+\DoxyCodeLine{166     \textcolor{keywordtype}{void} setupCirclingEarth();}
+\DoxyCodeLine{167     \textcolor{keywordtype}{void} setupHeadToShoot();}
+\DoxyCodeLine{168     \textcolor{keywordtype}{void} setupPlayer();}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170     \textcolor{keywordtype}{void} createAlternativeScene();}
+\DoxyCodeLine{171     \textcolor{keywordtype}{void} configureWalking(\mbox{\hyperlink{class_sprite}{Sprite}}* pSprite);}
+\DoxyCodeLine{172     \textcolor{keywordtype}{void} reduceWalkingManOpacity();}
+\DoxyCodeLine{173     \textcolor{keywordtype}{void} removeBall();}
+\DoxyCodeLine{174     \textcolor{keywordtype}{void} swapScenes();}
+\DoxyCodeLine{175     \textcolor{keywordtype}{void} displaySpriteDebugInfos();}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177     \textcolor{keywordtype}{void} createFootBallClip(QPointF position);}
+\DoxyCodeLine{178     QAbstractAnimation* createVanishAnimation(\mbox{\hyperlink{class_sprite}{Sprite}}* pSprite);}
+\DoxyCodeLine{179     \textcolor{keywordtype}{void} toggleSpinningWheel();}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181     \textcolor{keywordtype}{void} createExplosion(QPointF pos);}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183     \mbox{\hyperlink{class_game_canvas}{GameCanvas}}* m\_pGameCanvas;}
+\DoxyCodeLine{184     \mbox{\hyperlink{class_game_scene}{GameScene}}* m\_pScene;}
+\DoxyCodeLine{185     \mbox{\hyperlink{class_game_scene}{GameScene}}* m\_pAlternativeScene;}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{187     \mbox{\hyperlink{class_sprite}{Sprite}}* m\_pBall;}
+\DoxyCodeLine{188     \mbox{\hyperlink{class_sprite}{Sprite}}* m\_pSpinningWheel;}
+\DoxyCodeLine{189     \mbox{\hyperlink{class_sprite}{Sprite}}* m\_pEarth;}
+\DoxyCodeLine{190     \mbox{\hyperlink{class_sprite}{Sprite}}* m\_pPlayer;}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192     QList<Sprite*> m\_footballClipSpriteList;}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194     \textcolor{keywordtype}{bool} m\_footballClipRunning;}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198     \textcolor{keywordtype}{void} onClipVanishFinished();}
+\DoxyCodeLine{199     \textcolor{keywordtype}{void} onSpriteDestroyed(QObject* pSprite);}
+\DoxyCodeLine{200 \};}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GAMECORE\_H}}
+
+\end{DoxyCode}

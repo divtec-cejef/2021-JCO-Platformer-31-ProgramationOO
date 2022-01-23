@@ -65,7 +65,6 @@ public:
 
 private:
 
-    void setAnimationDeplacementList();
 
 protected:
     GameScene* m_pScene = nullptr;

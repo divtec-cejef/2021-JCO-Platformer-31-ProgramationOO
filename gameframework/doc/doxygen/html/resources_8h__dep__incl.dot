@@ -1,0 +1,21 @@
+digraph "resources.h"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="resources.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Méthodes utilitaires permettant d'accéder aux ressources."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="bulio.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bulio_8cpp.html",tooltip="Définition de la classe Bulio."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="caisseamovible.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$caisseamovible_8cpp.html",tooltip="Définition de la classe CaisseAmovible."];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="character.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$character_8cpp.html",tooltip="Définition de la classe Character."];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="entity.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$entity_8cpp.html",tooltip="Définition de la classe Entity."];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="gamescene.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$gamescene_8cpp.html",tooltip="Définition de la classe GameScene."];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="ground.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ground_8cpp.html",tooltip="Définition de la classe Ground."];
+  Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="resources.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$resources_8cpp.html",tooltip="Méthodes utilitaires permettant d'accéder aux ressources."];
+}

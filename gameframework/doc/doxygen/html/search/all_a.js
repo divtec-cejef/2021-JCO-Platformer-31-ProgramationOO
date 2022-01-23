@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['onkeypressed_0',['onKeyPressed',['../class_blue_ball.html#aff7afa79a1ee7f1761291550ef828699',1,'BlueBall::onKeyPressed()'],['../class_player.html#ac3890515bf42426c6478327ab10c2ab7',1,'Player::onKeyPressed()']]],
-  ['onkeyreleased_1',['onKeyReleased',['../class_blue_ball.html#a450251994c591a5faeff138c44da0ba0',1,'BlueBall::onKeyReleased()'],['../class_player.html#a2a5c6492c02cd2091f397817904647b4',1,'Player::onKeyReleased()']]],
-  ['onmousemove_2',['onMouseMove',['../class_spinning_pinwheel.html#af000eb49e02fd3f276e9077cca30f078',1,'SpinningPinwheel']]],
-  ['orientation_3',['orientation',['../class_ground.html#a8008cf0be30e14d888b4a43d0ccc9766',1,'Ground']]]
+  ['mainfrm_0',['MainFrm',['../class_main_frm.html',1,'MainFrm'],['../class_main_frm.html#a2554d892285ba0f95c33a7f6b0089297',1,'MainFrm::MainFrm()']]],
+  ['mainfrm_2ecpp_1',['mainfrm.cpp',['../mainfrm_8cpp.html',1,'']]],
+  ['mainfrm_2eh_2',['mainfrm.h',['../mainfrm_8h.html',1,'']]],
+  ['manualwalkinghandler_2ecpp_3',['manualwalkinghandler.cpp',['../manualwalkinghandler_8cpp.html',1,'']]],
+  ['mousebuttonpressed_4',['mouseButtonPressed',['../class_game_core.html#a1433068a5dcf2e4f7ddb7aee8475043b',1,'GameCore']]],
+  ['mousebuttonreleased_5',['mouseButtonReleased',['../class_game_core.html#a95621dec286dce595fd65418fbcee04a',1,'GameCore']]],
+  ['mousemoved_6',['mouseMoved',['../class_game_core.html#acb7e3ffb6923257ae234c274b2a2a2fc',1,'GameCore']]]
 ];

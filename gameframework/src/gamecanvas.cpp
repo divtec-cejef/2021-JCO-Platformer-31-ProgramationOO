@@ -25,6 +25,7 @@ const int DEFAULT_TICK_INTERVAL = 1;
 //! \param pView    La vue qui affiche les scènes du jeu.
 //! \param pParent  Objet parent.
 GameCanvas::GameCanvas(GameView* pView, QObject* pParent) : QObject(pParent) {
+
     m_pView = pView;
     m_pGameCore = nullptr;
     m_pDetailedInfosItem = nullptr;

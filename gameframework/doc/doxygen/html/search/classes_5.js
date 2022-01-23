@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['keytickhandler_0',['KeyTickHandler',['../class_key_tick_handler.html',1,'']]]
+  ['mainfrm_0',['MainFrm',['../class_main_frm.html',1,'']]]
 ];

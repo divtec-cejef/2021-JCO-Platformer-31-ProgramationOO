@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['parentscene_0',['parentScene',['../class_sprite.html#a62f3d63b0ce906fa1caa71efd847ffec',1,'Sprite']]],
-  ['player_1',['Player',['../class_player.html',1,'']]],
-  ['playertickhandler_2',['PlayerTickHandler',['../class_player_tick_handler.html',1,'']]],
-  ['playertickhandler_2eh_3',['playertickhandler.h',['../playertickhandler_8h.html',1,'']]]
+  ['nextcollision_0',['nextCollision',['../class_bulio_tick_handler.html#a96e5d6e704883d5bbb8138c9a19ab10a',1,'BulioTickHandler::nextCollision()'],['../class_caisse_amov_tick_handler.html#ac365c48c789c606102e55dbcdb19ffbd',1,'CaisseAmovTickHandler::nextCollision()'],['../class_entity_tick_handler.html#a8d617f400dfc1e791bd33e6a6be6c958',1,'EntityTickHandler::nextCollision()']]]
 ];

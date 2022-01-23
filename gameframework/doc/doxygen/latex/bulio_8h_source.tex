@@ -1,5 +1,4 @@
 \hypertarget{bulio_8h_source}{}\doxysection{bulio.\+h}
-\label{bulio_8h_source}\index{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/bulio.h@{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/bulio.h}}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef BULIO\_H}}
@@ -14,70 +13,57 @@
 \DoxyCodeLine{10 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{sprite_8h}{sprite.h}}>}}
 \DoxyCodeLine{11 \textcolor{preprocessor}{\#include <entity.h>}}
 \DoxyCodeLine{12 }
-\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}buliotickhandler.h"{}}}
-\DoxyCodeLine{14 }
-\DoxyCodeLine{15 \textcolor{keyword}{class }\mbox{\hyperlink{class_bulio}{Bulio}}: \textcolor{keyword}{public} \mbox{\hyperlink{class_entity}{Entity}}}
-\DoxyCodeLine{16 \{}
-\DoxyCodeLine{17 \textcolor{keyword}{public}:}
-\DoxyCodeLine{18     \mbox{\hyperlink{class_bulio}{Bulio}}(QGraphicsItem* pParent = \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{19 }
-\DoxyCodeLine{20 }
-\DoxyCodeLine{21     \textcolor{comment}{//Type d'animation du joueurs}}
-\DoxyCodeLine{22     \textcolor{keyword}{enum} animation\{}
-\DoxyCodeLine{23         BASE = 0,}
-\DoxyCodeLine{24         DEPLACEMENT = 1,}
-\DoxyCodeLine{25         SAUT = 3,}
-\DoxyCodeLine{26         ATTAQUE = 4,}
-\DoxyCodeLine{27     \};}
-\DoxyCodeLine{28 }
-\DoxyCodeLine{29     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_entity_a7e13400ff06e108f2fd0278690dc61bd}{configureAnimation}}(animation bulio);}
+\DoxyCodeLine{19 \textcolor{keyword}{class }\mbox{\hyperlink{class_bulio}{Bulio}}: \textcolor{keyword}{public} \mbox{\hyperlink{class_entity}{Entity}}}
+\DoxyCodeLine{20 \{}
+\DoxyCodeLine{21 \textcolor{keyword}{public}:}
+\DoxyCodeLine{22     \mbox{\hyperlink{class_bulio}{Bulio}}(QGraphicsItem* pParent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \textcolor{comment}{//Type d'animation du bulio}}
+\DoxyCodeLine{26     \textcolor{keyword}{enum} animation\{}
+\DoxyCodeLine{27         BASE = 0,}
+\DoxyCodeLine{28         DEPLACEMENT = 1,}
+\DoxyCodeLine{29     \};}
 \DoxyCodeLine{30 }
-\DoxyCodeLine{31     QPointF \mbox{\hyperlink{class_bulio_a39cb4426a7911d776532406cda8dd270}{getVelocity}}();}
-\DoxyCodeLine{32     \textcolor{keywordtype}{void} updateVelocity();}
+\DoxyCodeLine{31     \textcolor{comment}{//Configuration des animation du bulio}}
+\DoxyCodeLine{32     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_entity_a7e13400ff06e108f2fd0278690dc61bd}{configureAnimation}}(animation bulio);}
 \DoxyCodeLine{33 }
-\DoxyCodeLine{34 }
-\DoxyCodeLine{35 }
-\DoxyCodeLine{36     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_bulio_acc34f17312a235c247f60efc13e940bd}{getIsOnFloor}}();}
-\DoxyCodeLine{37     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bulio_a36707053633b3bbe763cd94f840cfdd1}{setIsOnFloor}}(\textcolor{keywordtype}{bool} \_isOnFloor);}
-\DoxyCodeLine{38 }
+\DoxyCodeLine{34     \textcolor{comment}{//Gestion des déplacement du Bulio}}
+\DoxyCodeLine{35     \textcolor{keywordtype}{void} updateVelocity();}
+\DoxyCodeLine{36     \textcolor{comment}{//Définit les déplacement du Bulio dans le jeu.}}
+\DoxyCodeLine{37     \textcolor{keywordtype}{void} collisionDetection(QRectF rect);}
+\DoxyCodeLine{38     \textcolor{comment}{//void move(long long elapsedTimeInMilliseconds);}}
 \DoxyCodeLine{39 }
-\DoxyCodeLine{40     \textcolor{keywordtype}{bool} getIsJump();}
-\DoxyCodeLine{41     \textcolor{keywordtype}{void} setIsJump(\textcolor{keywordtype}{bool} \_isJump);}
+\DoxyCodeLine{40     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bulio_a36707053633b3bbe763cd94f840cfdd1}{setIsOnFloor}}(\textcolor{keywordtype}{bool} \_isOnFloor);}
+\DoxyCodeLine{41 }
 \DoxyCodeLine{42 }
-\DoxyCodeLine{43     \textcolor{comment}{//Mort}}
-\DoxyCodeLine{44     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_bulio_a96a1dc1e514c6d33d57db44dc3a6b8ff}{getIsDeath}}();}
-\DoxyCodeLine{45     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bulio_aa3ca4ad37ad2e79caaa1aeaf58ef5ebf}{setIsDeath}}(\textcolor{keywordtype}{bool} \_isDeath);}
-\DoxyCodeLine{46 }
-\DoxyCodeLine{47     \textcolor{comment}{//Compteur de mort(s)}}
-\DoxyCodeLine{48     \textcolor{keywordtype}{int} getDeathCount();}
-\DoxyCodeLine{49     \textcolor{keywordtype}{void} incrementDeathCount();}
+\DoxyCodeLine{43     \textcolor{keywordtype}{bool} getIsJump();}
+\DoxyCodeLine{44     \textcolor{keywordtype}{void} setIsJump(\textcolor{keywordtype}{bool} \_isJump);}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \textcolor{comment}{//Définit si le Bulio doit être détruite ou non.}}
+\DoxyCodeLine{47     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bulio_aa3ca4ad37ad2e79caaa1aeaf58ef5ebf}{setIsDeath}}(\textcolor{keywordtype}{bool} \_isDeath);}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \textcolor{keywordtype}{void} respawn();}
 \DoxyCodeLine{50 }
-\DoxyCodeLine{51     \textcolor{keywordtype}{void} respawn();}
+\DoxyCodeLine{51 }
 \DoxyCodeLine{52 }
-\DoxyCodeLine{53     \textcolor{comment}{//void futureCollision();}}
-\DoxyCodeLine{54     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bulio_ab275f160fe50afb37b16cef8632e8db2}{collisionDetection}}(QRectF rect);}
-\DoxyCodeLine{55     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bulio_ad7834056849ea1e4c74f6a6021a9cb3f}{move}}(\textcolor{keywordtype}{long} \textcolor{keywordtype}{long} elapsedTimeInMilliseconds);}
-\DoxyCodeLine{56 }
-\DoxyCodeLine{57 \textcolor{keyword}{public} slots:}
-\DoxyCodeLine{58 }
-\DoxyCodeLine{59     \textcolor{keywordtype}{void} onKeyPressed(\textcolor{keywordtype}{int} key);}
-\DoxyCodeLine{60     \textcolor{keywordtype}{void} onKeyReleased(\textcolor{keywordtype}{int} key);}
+\DoxyCodeLine{53 \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55     \textcolor{keywordtype}{void} onKeyPressed(\textcolor{keywordtype}{int} key);}
+\DoxyCodeLine{56     \textcolor{keywordtype}{void} onKeyReleased(\textcolor{keywordtype}{int} key);}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 \textcolor{keyword}{private}:}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     \textcolor{keywordtype}{bool} m\_isJump = \textcolor{keyword}{false};}
 \DoxyCodeLine{61 }
-\DoxyCodeLine{62 \textcolor{keyword}{private}:}
+\DoxyCodeLine{62     \textcolor{keywordtype}{void} configureTransformationMatrix();}
 \DoxyCodeLine{63 }
-\DoxyCodeLine{64     \textcolor{keywordtype}{bool} m\_isJump = \textcolor{keyword}{false};}
-\DoxyCodeLine{65 }
+\DoxyCodeLine{64     QList<QImage>m\_listAnimation;}
+\DoxyCodeLine{65     \textcolor{keywordtype}{void} setAnimationDeplacementList();}
 \DoxyCodeLine{66 }
-\DoxyCodeLine{67     \textcolor{keywordtype}{int} m\_deathCount = 0;}
+\DoxyCodeLine{67 \};}
 \DoxyCodeLine{68 }
-\DoxyCodeLine{69     \textcolor{keywordtype}{void} configureTransformationMatrix();}
-\DoxyCodeLine{70 }
-\DoxyCodeLine{71     QList<QImage>m\_listAnimation;}
-\DoxyCodeLine{72     \textcolor{keywordtype}{void} setAnimationDeplacementList();}
-\DoxyCodeLine{73 }
-\DoxyCodeLine{74 \};}
-\DoxyCodeLine{75 }
-\DoxyCodeLine{76 }
-\DoxyCodeLine{77 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// BULIO\_H}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// BULIO\_H}}
 
 \end{DoxyCode}

@@ -1,0 +1,94 @@
+\hypertarget{class_caisse_amov_tick_handler}{}\doxysection{Référence de la classe Caisse\+Amov\+Tick\+Handler}
+\label{class_caisse_amov_tick_handler}\index{CaisseAmovTickHandler@{CaisseAmovTickHandler}}
+
+
+The \mbox{\hyperlink{class_caisse_amov_tick_handler}{Caisse\+Amov\+Tick\+Handler}} class Cette classe permet de géré des entités et de leur donnée le comportement d\textquotesingle{}une caisse amovible. Cette classe à pour bute de géré une enité provenant de la classe \mbox{\hyperlink{class_caisse_amovible}{Caisse\+Amovible}}. Mais elle peut très bien appliqué ce comportement à d\textquotesingle{}autre entité.  
+
+
+
+
+{\ttfamily \#include $<$caisseamovtickhandler.\+h$>$}
+
+
+
+Graphe d\textquotesingle{}héritage de Caisse\+Amov\+Tick\+Handler\+:
+% FIG 0
+
+
+Graphe de collaboration de Caisse\+Amov\+Tick\+Handler\+:
+% FIG 1
+\doxysubsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_caisse_amov_tick_handler_a579b02d4c8097c63ee48e2b7153dafe8}\label{class_caisse_amov_tick_handler_a579b02d4c8097c63ee48e2b7153dafe8}} 
+{\bfseries Caisse\+Amov\+Tick\+Handler} (\mbox{\hyperlink{class_entity}{Entity}} $\ast$p\+Parent\+Sprite=nullptr, \mbox{\hyperlink{class_game_core}{Game\+Core}} $\ast$new\+Game\+Core=nullptr)
+\item 
+void \mbox{\hyperlink{class_caisse_amov_tick_handler_a2265559dee59bc802ba53545d35ffedd}{tick}} (long long elapsed\+Time\+In\+Milliseconds)
+\item 
+void \mbox{\hyperlink{class_caisse_amov_tick_handler_a830d6b6bcf8464fecf9eff83895ca9b0}{current\+Collision}} ()
+\begin{DoxyCompactList}\small\item\em Définit la procédure à executé pour les collisions qui touche l\textquotesingle{}entité. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_caisse_amov_tick_handler_ac365c48c789c606102e55dbcdb19ffbd}{next\+Collision}} ()
+\begin{DoxyCompactList}\small\item\em Définit la procédure à executé pour les collisions qui vont touché l\textquotesingle{}entité. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_caisse_amov_tick_handler_afabfa2b893e82b868cd290157216dc84}\label{class_caisse_amov_tick_handler_afabfa2b893e82b868cd290157216dc84}} 
+void {\bfseries set\+Game\+Core} (\mbox{\hyperlink{class_game_core}{Game\+Core}} $\ast$new\+Game\+Core)
+\end{DoxyCompactItemize}
+\doxysubsection*{Attributs publics}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_caisse_amov_tick_handler_afb999e69d7087ef37caf6c17ce7257b3}\label{class_caisse_amov_tick_handler_afb999e69d7087ef37caf6c17ce7257b3}} 
+bool {\bfseries m\+\_\+is\+Player} = false
+\item 
+\mbox{\Hypertarget{class_caisse_amov_tick_handler_a82641cf14b224d1b96608522f4927d0f}\label{class_caisse_amov_tick_handler_a82641cf14b224d1b96608522f4927d0f}} 
+bool {\bfseries m\+\_\+can\+Move} = false
+\end{DoxyCompactItemize}
+\doxysubsection*{Membres hérités additionnels}
+
+
+\doxysubsection{Description détaillée}
+The \mbox{\hyperlink{class_caisse_amov_tick_handler}{Caisse\+Amov\+Tick\+Handler}} class Cette classe permet de géré des entités et de leur donnée le comportement d\textquotesingle{}une caisse amovible. Cette classe à pour bute de géré une enité provenant de la classe \mbox{\hyperlink{class_caisse_amovible}{Caisse\+Amovible}}. Mais elle peut très bien appliqué ce comportement à d\textquotesingle{}autre entité. 
+
+\doxysubsection{Documentation des fonctions membres}
+\mbox{\Hypertarget{class_caisse_amov_tick_handler_a830d6b6bcf8464fecf9eff83895ca9b0}\label{class_caisse_amov_tick_handler_a830d6b6bcf8464fecf9eff83895ca9b0}} 
+\index{CaisseAmovTickHandler@{CaisseAmovTickHandler}!currentCollision@{currentCollision}}
+\index{currentCollision@{currentCollision}!CaisseAmovTickHandler@{CaisseAmovTickHandler}}
+\doxysubsubsection{\texorpdfstring{currentCollision()}{currentCollision()}}
+{\footnotesize\ttfamily void Caisse\+Amov\+Tick\+Handler\+::current\+Collision (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Définit la procédure à executé pour les collisions qui touche l\textquotesingle{}entité. 
+
+
+
+Réimplémentée à partir de \mbox{\hyperlink{class_entity_tick_handler_a64c248a17bebe450b99fbe4c88ea9094}{Entity\+Tick\+Handler}}.
+
+\mbox{\Hypertarget{class_caisse_amov_tick_handler_ac365c48c789c606102e55dbcdb19ffbd}\label{class_caisse_amov_tick_handler_ac365c48c789c606102e55dbcdb19ffbd}} 
+\index{CaisseAmovTickHandler@{CaisseAmovTickHandler}!nextCollision@{nextCollision}}
+\index{nextCollision@{nextCollision}!CaisseAmovTickHandler@{CaisseAmovTickHandler}}
+\doxysubsubsection{\texorpdfstring{nextCollision()}{nextCollision()}}
+{\footnotesize\ttfamily void Caisse\+Amov\+Tick\+Handler\+::next\+Collision (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Définit la procédure à executé pour les collisions qui vont touché l\textquotesingle{}entité. 
+
+
+
+Réimplémentée à partir de \mbox{\hyperlink{class_entity_tick_handler_a8d617f400dfc1e791bd33e6a6be6c958}{Entity\+Tick\+Handler}}.
+
+\mbox{\Hypertarget{class_caisse_amov_tick_handler_a2265559dee59bc802ba53545d35ffedd}\label{class_caisse_amov_tick_handler_a2265559dee59bc802ba53545d35ffedd}} 
+\index{CaisseAmovTickHandler@{CaisseAmovTickHandler}!tick@{tick}}
+\index{tick@{tick}!CaisseAmovTickHandler@{CaisseAmovTickHandler}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily void Caisse\+Amov\+Tick\+Handler\+::tick (\begin{DoxyParamCaption}\item[{long long}]{elapsed\+Time\+In\+Milliseconds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Cadence \+: détermine le mouvement que fait le sprite durant le temps écoulé, vérifie si il doit rebondir et le positionne à son nouvel emplacement. 
+
+Implémente \mbox{\hyperlink{class_entity_tick_handler}{Entity\+Tick\+Handler}}.
+
+
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+caisseamovtickhandler.\+h\item 
+\mbox{\hyperlink{caisseamovtickhandler_8cpp}{caisseamovtickhandler.\+cpp}}\end{DoxyCompactItemize}

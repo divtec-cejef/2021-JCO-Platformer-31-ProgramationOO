@@ -43,10 +43,4 @@ void CaisseAmovible::setIsDeath(bool _isDeath){
     this->m_isDeath = _isDeath;
 }
 
-void CaisseAmovible::collisionDetection(QRectF rect){
 
-}
-
-void CaisseAmovible::updateVelocity(){
-
-}

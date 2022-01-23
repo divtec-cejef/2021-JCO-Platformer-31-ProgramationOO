@@ -27,10 +27,8 @@ public:
     void currentCollision();
     void nextCollision();
 
-
-    void setGameCore(GameCore* newGameCore);
 private:
-    GameCore* m_pGameCore = nullptr;
+
 };
 
 #endif // BULIOTICKHANDLER_H

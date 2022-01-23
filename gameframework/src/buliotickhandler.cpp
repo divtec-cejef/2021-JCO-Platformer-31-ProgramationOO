@@ -114,7 +114,3 @@ void BulioTickHandler::nextCollision(){
         m_pParentEntity->setIsDeath(true);
     }
 }
-
-void BulioTickHandler::setGameCore(GameCore* newGameCore){
-    m_pGameCore = newGameCore;
-}

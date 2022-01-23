@@ -1,0 +1,81 @@
+\hypertarget{gamecanvas_8h_source}{}\doxysection{gamecanvas.\+h}
+\mbox{\hyperlink{gamecanvas_8h}{Aller à la documentation de ce fichier.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#ifndef GAMECANVAS\_H}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#define GAMECANVAS\_H}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <QObject>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <QPointer>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <QTime>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <QTimer>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <QElapsedTimer>}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{keyword}{class }\mbox{\hyperlink{class_game_core}{GameCore}};}
+\DoxyCodeLine{17 \textcolor{keyword}{class }\mbox{\hyperlink{class_game_scene}{GameScene}};}
+\DoxyCodeLine{18 \textcolor{keyword}{class }\mbox{\hyperlink{class_game_view}{GameView}};}
+\DoxyCodeLine{19 \textcolor{keyword}{class }QGraphicsSceneMouseEvent;}
+\DoxyCodeLine{20 \textcolor{keyword}{class }QGraphicsTextItem;}
+\DoxyCodeLine{21 \textcolor{keyword}{class }QKeyEvent;}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{47 \textcolor{keyword}{class }\mbox{\hyperlink{class_game_canvas}{GameCanvas}} : \textcolor{keyword}{public} QObject}
+\DoxyCodeLine{48 \{}
+\DoxyCodeLine{49     Q\_OBJECT}
+\DoxyCodeLine{50 \textcolor{keyword}{public}:}
+\DoxyCodeLine{51     \textcolor{keyword}{enum} \{ KEEP\_PREVIOUS\_TICK\_INTERVAL = -\/1  \};}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_game_canvas_a43c7eb677a1e7f12c8d355116586872a}{GameCanvas}}(\mbox{\hyperlink{class_game_view}{GameView}}* pView, QObject* pParent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{54     \mbox{\hyperlink{class_game_canvas_ad5a4fae0a9e236dedb65f31dcb737805}{\string~GameCanvas}}();}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57     \mbox{\hyperlink{class_game_scene}{GameScene}}* \mbox{\hyperlink{class_game_canvas_ab207f2189a7a28a7024f8c05e6254451}{createScene}}();}
+\DoxyCodeLine{58     \mbox{\hyperlink{class_game_scene}{GameScene}}* \mbox{\hyperlink{class_game_canvas_ab207f2189a7a28a7024f8c05e6254451}{createScene}}(\textcolor{keyword}{const} QRectF\& rSceneRect);}
+\DoxyCodeLine{59     \mbox{\hyperlink{class_game_scene}{GameScene}}* \mbox{\hyperlink{class_game_canvas_ab207f2189a7a28a7024f8c05e6254451}{createScene}}(qreal x, qreal y, qreal width, qreal height);}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_canvas_a326898c390ed700b827c33cf08e25009}{setCurrentScene}}(\mbox{\hyperlink{class_game_scene}{GameScene}}* pScene);}
+\DoxyCodeLine{62     \mbox{\hyperlink{class_game_scene}{GameScene}}* \mbox{\hyperlink{class_game_canvas_a7897fa78ef39001d1c7c37d737179647}{currentScene}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_canvas_a102153a6332fa9af8cc956c126f6740c}{startTick}}(\textcolor{keywordtype}{int} tickInterval = KEEP\_PREVIOUS\_TICK\_INTERVAL);}
+\DoxyCodeLine{65     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_canvas_aa484cf048075d69f85995e0816209087}{stopTick}}();}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67     \mbox{\hyperlink{class_game_view}{GameView}}* getView();}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_canvas_a7736798ad6218b4329bf4b29064f7d6a}{startMouseTracking}}();}
+\DoxyCodeLine{70     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_canvas_ae345211fcf3ad4e35b154c52ed963357}{stopMouseTracking}}();}
+\DoxyCodeLine{71     QPointF \mbox{\hyperlink{class_game_canvas_a83d91283bfbbc81a7f1803bd794deeb0}{currentMousePosition}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 signals:}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75 \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{78     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_game_canvas_a091d65a6d0efef5265e805565ec36123}{eventFilter}}(QObject* pObject, QEvent* pEvent);}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 \textcolor{keyword}{private}:}
+\DoxyCodeLine{81     \textcolor{keywordtype}{void} initDetailedInfos();}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83     \textcolor{keywordtype}{void} keyPressed(QKeyEvent* pKeyEvent);}
+\DoxyCodeLine{84     \textcolor{keywordtype}{void} keyReleased(QKeyEvent* pKeyEvent);}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86     \textcolor{keywordtype}{void} mouseMoved(QGraphicsSceneMouseEvent* pMouseEvent);}
+\DoxyCodeLine{87     \textcolor{keywordtype}{void} mouseButtonPressed(QGraphicsSceneMouseEvent* pMouseEvent);}
+\DoxyCodeLine{88     \textcolor{keywordtype}{void} mouseButtonReleased(QGraphicsSceneMouseEvent* pMouseEvent);}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     \mbox{\hyperlink{class_game_view}{GameView}}* m\_pView;}
+\DoxyCodeLine{91     \mbox{\hyperlink{class_game_core}{GameCore}}* m\_pGameCore;}
+\DoxyCodeLine{92     QPointer<QGraphicsTextItem> m\_pDetailedInfosItem; \textcolor{comment}{// Smart Pointer pour qu'il soit mis à zéro au cas où l'item est effacé par GameScene::clear()}}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94     \textcolor{keywordtype}{bool} m\_keepTicking;}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96     QElapsedTimer m\_lastUpdateTime;}
+\DoxyCodeLine{97     QTimer m\_tickTimer;}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{100     \textcolor{keywordtype}{void} onInit();}
+\DoxyCodeLine{101     \textcolor{keywordtype}{void} onTick();}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103 \};}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GAMECANVAS\_H}}
+
+\end{DoxyCode}

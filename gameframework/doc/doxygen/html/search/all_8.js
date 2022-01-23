@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['keypressed_0',['keyPressed',['../class_game_core.html#af7d1e03d52e81d846e5733d970120655',1,'GameCore']]],
-  ['keyreleased_1',['keyReleased',['../class_game_core.html#a3e03c88acaf04467fc3213e09c58a441',1,'GameCore']]],
-  ['keytickhandler_2',['KeyTickHandler',['../class_key_tick_handler.html',1,'KeyTickHandler'],['../class_key_tick_handler.html#a9e4f0796c84426f7271bca234b4b7744',1,'KeyTickHandler::KeyTickHandler()']]],
-  ['keytickhandler_2ecpp_3',['keytickhandler.cpp',['../keytickhandler_8cpp.html',1,'']]],
-  ['keytickhandler_2eh_4',['keytickhandler.h',['../keytickhandler_8h.html',1,'']]]
+  ['imagespath_0',['imagesPath',['../namespace_game_framework.html#ad9258f3ab92cd03e443344a86166140a',1,'GameFramework']]],
+  ['incrementdeathcount_1',['incrementDeathCount',['../class_character.html#ae6aa3f61adb1a975ba2e7d5399546ef9',1,'Character']]],
+  ['init_2',['init',['../class_key_tick_handler.html#ae7efcfa2ad109fe36d8a70251a4a52bf',1,'KeyTickHandler']]],
+  ['isanimationrunning_3',['isAnimationRunning',['../class_sprite.html#a08c30dd5ac15ec2b9366afff46cc64c4',1,'Sprite']]],
+  ['isclipsceneenabled_4',['isClipSceneEnabled',['../class_game_view.html#abde8077a47bc84a48e7fd95337d41a33',1,'GameView']]],
+  ['isemitsignalendofanimationenabled_5',['isEmitSignalEndOfAnimationEnabled',['../class_sprite.html#a8161492c75be0a4c785a77c9ca52e112',1,'Sprite']]],
+  ['isfittoscreenenabled_6',['isFitToScreenEnabled',['../class_game_view.html#af6118debe09ef55369b51dae6561a061',1,'GameView']]],
+  ['isinsidescene_7',['isInsideScene',['../class_game_scene.html#a2cd089fb5992b2686c7b99989bdd0d45',1,'GameScene::isInsideScene(const QPointF &amp;rPosition) const'],['../class_game_scene.html#aaa24f6900e350bd4cb210099c22e3f3b',1,'GameScene::isInsideScene(const QRectF &amp;rRect) const']]]
 ];

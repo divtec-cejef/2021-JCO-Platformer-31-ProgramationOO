@@ -1,0 +1,85 @@
+\hypertarget{class_caisse_amovible}{}\doxysection{Référence de la classe Caisse\+Amovible}
+\label{class_caisse_amovible}\index{CaisseAmovible@{CaisseAmovible}}
+
+
+The \mbox{\hyperlink{class_caisse_amovible}{Caisse\+Amovible}} class Cette classe hérite de la classe \mbox{\hyperlink{class_entity}{Entity}} elle permet de géré l\textquotesingle{}état d\textquotesingle{}une caisse dans une scene.  
+
+
+
+
+{\ttfamily \#include $<$caisseamovible.\+h$>$}
+
+
+
+Graphe d\textquotesingle{}héritage de Caisse\+Amovible\+:
+% FIG 0
+
+
+Graphe de collaboration de Caisse\+Amovible\+:
+% FIG 1
+\doxysubsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_caisse_amovible_a8ba691403cb8e384b855281078cb1131}\label{class_caisse_amovible_a8ba691403cb8e384b855281078cb1131}} 
+{\bfseries Caisse\+Amovible} (QGraphics\+Item $\ast$p\+Parent=nullptr)
+\item 
+\mbox{\Hypertarget{class_caisse_amovible_a87a6e460e8c4146ab86597f2dff71b16}\label{class_caisse_amovible_a87a6e460e8c4146ab86597f2dff71b16}} 
+void {\bfseries update\+Velocity} ()
+\item 
+\mbox{\Hypertarget{class_caisse_amovible_aa2810012eadbb269ecbcde59365ad392}\label{class_caisse_amovible_aa2810012eadbb269ecbcde59365ad392}} 
+void {\bfseries collision\+Detection} (QRectF rect)
+\item 
+void \mbox{\hyperlink{class_caisse_amovible_a121bbe8d841233204a9ba009038f2b3c}{set\+Is\+On\+Floor}} (bool \+\_\+is\+On\+Floor)
+\item 
+void \mbox{\hyperlink{class_caisse_amovible_ad781785bfd77150835e8e3436b20257f}{set\+Is\+Death}} (bool \+\_\+is\+Death)
+\begin{DoxyCompactList}\small\item\em caisse\+Amovible\+::set\+Is\+Death \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Membres hérités additionnels}
+
+
+\doxysubsection{Description détaillée}
+The \mbox{\hyperlink{class_caisse_amovible}{Caisse\+Amovible}} class Cette classe hérite de la classe \mbox{\hyperlink{class_entity}{Entity}} elle permet de géré l\textquotesingle{}état d\textquotesingle{}une caisse dans une scene. 
+
+\hypertarget{class_entity_Déplacement}{}\doxysubsection{du joueur}\label{class_entity_Déplacement}
+Les déplacement sont géré par la classe \mbox{\hyperlink{class_caisse_amov_tick_handler}{Caisse\+Amov\+Tick\+Handler}}. 
+
+\doxysubsection{Documentation des fonctions membres}
+\mbox{\Hypertarget{class_caisse_amovible_ad781785bfd77150835e8e3436b20257f}\label{class_caisse_amovible_ad781785bfd77150835e8e3436b20257f}} 
+\index{CaisseAmovible@{CaisseAmovible}!setIsDeath@{setIsDeath}}
+\index{setIsDeath@{setIsDeath}!CaisseAmovible@{CaisseAmovible}}
+\doxysubsubsection{\texorpdfstring{setIsDeath()}{setIsDeath()}}
+{\footnotesize\ttfamily void Caisse\+Amovible\+::set\+Is\+Death (\begin{DoxyParamCaption}\item[{bool}]{\+\_\+is\+Death }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+caisse\+Amovible\+::set\+Is\+Death 
+
+Permet de définir si le bulio doit être en vie ou non. 
+\begin{DoxyParams}{Paramètres}
+{\em \+\_\+is\+Death} & nouvelle état du bulio. \\
+\hline
+\end{DoxyParams}
+
+
+Réimplémentée à partir de \mbox{\hyperlink{class_entity_a58b7b2981e65030805e14f9be227467f}{Entity}}.
+
+\mbox{\Hypertarget{class_caisse_amovible_a121bbe8d841233204a9ba009038f2b3c}\label{class_caisse_amovible_a121bbe8d841233204a9ba009038f2b3c}} 
+\index{CaisseAmovible@{CaisseAmovible}!setIsOnFloor@{setIsOnFloor}}
+\index{setIsOnFloor@{setIsOnFloor}!CaisseAmovible@{CaisseAmovible}}
+\doxysubsubsection{\texorpdfstring{setIsOnFloor()}{setIsOnFloor()}}
+{\footnotesize\ttfamily void Caisse\+Amovible\+::set\+Is\+On\+Floor (\begin{DoxyParamCaption}\item[{bool}]{\+\_\+is\+On\+Floor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Permet de définir si la caisse est sur le sol ou non. 
+\begin{DoxyParams}{Paramètres}
+{\em \+\_\+is\+On\+Floor} & nouvelle état de la caisse. \\
+\hline
+\end{DoxyParams}
+
+
+Réimplémentée à partir de \mbox{\hyperlink{class_entity_a0ad4da29d70e01f0688c0d1f0d866721}{Entity}}.
+
+
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+caisseamovible.\+h\item 
+\mbox{\hyperlink{caisseamovible_8cpp}{caisseamovible.\+cpp}}\end{DoxyCompactItemize}

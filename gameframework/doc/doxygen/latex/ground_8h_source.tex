@@ -1,0 +1,50 @@
+\hypertarget{ground_8h_source}{}\doxysection{ground.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef GROUND\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define GROUND\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QObject>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QPointF>}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <QGraphicsTransform>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <QList>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{sprite_8h}{sprite.h}}>}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{keyword}{class }\mbox{\hyperlink{class_ground}{Ground}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_sprite}{Sprite}}}
+\DoxyCodeLine{14 \{}
+\DoxyCodeLine{15 \textcolor{keyword}{public}:}
+\DoxyCodeLine{16     \mbox{\hyperlink{class_ground}{Ground}}(\mbox{\hyperlink{class_game_scene}{GameScene}}* CurrentScene);}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{21     \textcolor{keyword}{enum} \mbox{\hyperlink{class_ground_a8008cf0be30e14d888b4a43d0ccc9766}{orientation}}\{}
+\DoxyCodeLine{22         GROUND\_UP = 0,}
+\DoxyCodeLine{23         GROUND\_DOWN = 1,}
+\DoxyCodeLine{24         GROUND\_LEFT = 2,}
+\DoxyCodeLine{25         GROUND\_RIGHT = 3,}
+\DoxyCodeLine{26         CORNER\_UP\_RIGHT = 4,}
+\DoxyCodeLine{27         CORNER\_UP\_LEFT = 5,}
+\DoxyCodeLine{28         CORNER\_DOWN\_RIGHT = 6,}
+\DoxyCodeLine{29         CORNER\_DOWN\_LEFT = 7,}
+\DoxyCodeLine{30         GROUND\_OF\_GROUND = 8}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     \};}
+\DoxyCodeLine{33     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_ground_abbeedeb9ea19875e215efaf958aeaa92}{generated}}(\textcolor{keywordtype}{int} colonne,\textcolor{keywordtype}{int} ligne,QPointF posGroupe);}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{keywordtype}{void} setScene(\mbox{\hyperlink{class_game_scene}{GameScene}}* CurrentScene);}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37     \mbox{\hyperlink{class_ground}{Ground}}(QGraphicsItem* pParent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{38     \textcolor{keywordtype}{void} configureOrientation(\mbox{\hyperlink{class_ground_a8008cf0be30e14d888b4a43d0ccc9766}{orientation}} ground);}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{keyword}{private}:}
+\DoxyCodeLine{41     \mbox{\hyperlink{class_game_scene}{GameScene}}* m\_pScene;}
+\DoxyCodeLine{42     QList<QImage> m\_groundImagesList;}
+\DoxyCodeLine{43     \textcolor{keywordtype}{void} setGroundImages();}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \textcolor{keywordtype}{void} configureOrientation(\mbox{\hyperlink{class_ground_a8008cf0be30e14d888b4a43d0ccc9766}{orientation}} \mbox{\hyperlink{class_ground_a8008cf0be30e14d888b4a43d0ccc9766}{orientation}}, \mbox{\hyperlink{class_sprite}{Sprite}}* \&ground);}
+\DoxyCodeLine{46 \};}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GROUND\_H}}
+
+\end{DoxyCode}

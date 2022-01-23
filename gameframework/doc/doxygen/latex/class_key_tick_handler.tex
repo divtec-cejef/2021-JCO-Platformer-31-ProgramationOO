@@ -1,0 +1,117 @@
+\hypertarget{class_key_tick_handler}{}\doxysection{Référence de la classe Key\+Tick\+Handler}
+\label{class_key_tick_handler}\index{KeyTickHandler@{KeyTickHandler}}
+
+
+Graphe d\textquotesingle{}héritage de Key\+Tick\+Handler\+:
+% FIG 0
+
+
+Graphe de collaboration de Key\+Tick\+Handler\+:
+% FIG 1
+\doxysubsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_key_tick_handler_a9e4f0796c84426f7271bca234b4b7744}{Key\+Tick\+Handler}} (\mbox{\hyperlink{class_game_core}{Game\+Core}} $\ast$p\+Game\+Core, \mbox{\hyperlink{class_sprite}{Sprite}} $\ast$p\+Parent\+Sprite=nullptr)
+\item 
+virtual void \mbox{\hyperlink{class_key_tick_handler_ae7efcfa2ad109fe36d8a70251a4a52bf}{init}} ()
+\begin{DoxyCompactList}\small\item\em Initialisation du gestionnaire. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_key_tick_handler_aa9e85a9d38b805277fb0000c931dcab7}{tick}} (long long elapsed\+Time\+In\+Milliseconds)
+\begin{DoxyCompactList}\small\item\em Cadence \+: détermine le mouvement que fait le sprite durant le temps écoulé. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_key_tick_handler_a1f2dca40728377c5a7b6592b0f6bc501}{set\+Sprite\+Velocity}} (double velocity\+In\+Pixel\+Per\+Second)
+\item 
+\mbox{\Hypertarget{class_key_tick_handler_a6d7b498b1a4546855dc647e592ff8f4d}\label{class_key_tick_handler_a6d7b498b1a4546855dc647e592ff8f4d}} 
+void {\bfseries set\+Right\+Key} (int key)
+\item 
+\mbox{\Hypertarget{class_key_tick_handler_ad82aceaa65be63469fdfff29c56e45de}\label{class_key_tick_handler_ad82aceaa65be63469fdfff29c56e45de}} 
+void {\bfseries set\+Left\+Key} (int key)
+\item 
+\mbox{\Hypertarget{class_key_tick_handler_ad36a10e31842104a7b3105cf53d77631}\label{class_key_tick_handler_ad36a10e31842104a7b3105cf53d77631}} 
+void {\bfseries set\+Up\+Key} (int key)
+\item 
+\mbox{\Hypertarget{class_key_tick_handler_a6826f5b2bf38de40848860db494a159a}\label{class_key_tick_handler_a6826f5b2bf38de40848860db494a159a}} 
+void {\bfseries set\+Down\+Key} (int key)
+\item 
+void \mbox{\hyperlink{class_key_tick_handler_a805ba9766bc534724573645f7bc03593}{set\+Keys}} (int right\+Key, int left\+Key, int up\+Key, int down\+Key)
+\end{DoxyCompactItemize}
+\doxysubsection*{Membres hérités additionnels}
+
+
+\doxysubsection{Documentation des constructeurs et destructeur}
+\mbox{\Hypertarget{class_key_tick_handler_a9e4f0796c84426f7271bca234b4b7744}\label{class_key_tick_handler_a9e4f0796c84426f7271bca234b4b7744}} 
+\index{KeyTickHandler@{KeyTickHandler}!KeyTickHandler@{KeyTickHandler}}
+\index{KeyTickHandler@{KeyTickHandler}!KeyTickHandler@{KeyTickHandler}}
+\doxysubsubsection{\texorpdfstring{KeyTickHandler()}{KeyTickHandler()}}
+{\footnotesize\ttfamily Key\+Tick\+Handler\+::\+Key\+Tick\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_core}{Game\+Core}} $\ast$}]{p\+Game\+Core,  }\item[{\mbox{\hyperlink{class_sprite}{Sprite}} $\ast$}]{p\+Parent\+Sprite = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Constructeur 
+\begin{DoxyParams}{Paramètres}
+{\em p\+Game\+Core} & Pointeur sur le \mbox{\hyperlink{class_game_core}{Game\+Core}} qui signal l\textquotesingle{}appui sur les touches du clavier. \\
+\hline
+{\em p\+Parent\+Sprite} & \mbox{\hyperlink{class_sprite}{Sprite}} dont le déplacement doit être géré. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Documentation des fonctions membres}
+\mbox{\Hypertarget{class_key_tick_handler_ae7efcfa2ad109fe36d8a70251a4a52bf}\label{class_key_tick_handler_ae7efcfa2ad109fe36d8a70251a4a52bf}} 
+\index{KeyTickHandler@{KeyTickHandler}!init@{init}}
+\index{init@{init}!KeyTickHandler@{KeyTickHandler}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void Key\+Tick\+Handler\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Initialisation du gestionnaire. 
+
+
+
+Réimplémentée à partir de \mbox{\hyperlink{class_sprite_tick_handler}{Sprite\+Tick\+Handler}}.
+
+\mbox{\Hypertarget{class_key_tick_handler_a805ba9766bc534724573645f7bc03593}\label{class_key_tick_handler_a805ba9766bc534724573645f7bc03593}} 
+\index{KeyTickHandler@{KeyTickHandler}!setKeys@{setKeys}}
+\index{setKeys@{setKeys}!KeyTickHandler@{KeyTickHandler}}
+\doxysubsubsection{\texorpdfstring{setKeys()}{setKeys()}}
+{\footnotesize\ttfamily void Key\+Tick\+Handler\+::set\+Keys (\begin{DoxyParamCaption}\item[{int}]{right\+Key,  }\item[{int}]{left\+Key,  }\item[{int}]{up\+Key,  }\item[{int}]{down\+Key }\end{DoxyParamCaption})}
+
+Détermine les touches qui serviront au déplacement du sprite. 
+\begin{DoxyParams}{Paramètres}
+{\em right\+Key} & Touche pour le déplacement à droite. \\
+\hline
+{\em left\+Key} & Touche pour le déplacement à gauche. \\
+\hline
+{\em up\+Key} & Touche pour le déplacement en haut. \\
+\hline
+{\em down\+Key} & Touche pour le déplacement en bas. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_key_tick_handler_a1f2dca40728377c5a7b6592b0f6bc501}\label{class_key_tick_handler_a1f2dca40728377c5a7b6592b0f6bc501}} 
+\index{KeyTickHandler@{KeyTickHandler}!setSpriteVelocity@{setSpriteVelocity}}
+\index{setSpriteVelocity@{setSpriteVelocity}!KeyTickHandler@{KeyTickHandler}}
+\doxysubsubsection{\texorpdfstring{setSpriteVelocity()}{setSpriteVelocity()}}
+{\footnotesize\ttfamily void Key\+Tick\+Handler\+::set\+Sprite\+Velocity (\begin{DoxyParamCaption}\item[{double}]{velocity\+In\+Pixel\+Per\+Second }\end{DoxyParamCaption})}
+
+Change la vitesse de déplacement du sprite. 
+\begin{DoxyParams}{Paramètres}
+{\em velocity\+In\+Pixel\+Per\+Second} & Nouvelle vitesse de déplacement du sprite. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_key_tick_handler_aa9e85a9d38b805277fb0000c931dcab7}\label{class_key_tick_handler_aa9e85a9d38b805277fb0000c931dcab7}} 
+\index{KeyTickHandler@{KeyTickHandler}!tick@{tick}}
+\index{tick@{tick}!KeyTickHandler@{KeyTickHandler}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily void Key\+Tick\+Handler\+::tick (\begin{DoxyParamCaption}\item[{long long}]{elapsed\+Time\+In\+Milliseconds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Cadence \+: détermine le mouvement que fait le sprite durant le temps écoulé. 
+
+
+
+Implémente \mbox{\hyperlink{class_sprite_tick_handler}{Sprite\+Tick\+Handler}}.
+
+
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{keytickhandler_8h}{keytickhandler.\+h}}\item 
+\mbox{\hyperlink{keytickhandler_8cpp}{keytickhandler.\+cpp}}\end{DoxyCompactItemize}

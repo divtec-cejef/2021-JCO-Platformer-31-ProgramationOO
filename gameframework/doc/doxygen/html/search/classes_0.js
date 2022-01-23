@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['automaticwalkinghandler_0',['AutomaticWalkingHandler',['../class_automatic_walking_handler.html',1,'']]]
+  ['bulio_0',['Bulio',['../class_bulio.html',1,'']]],
+  ['buliotickhandler_1',['BulioTickHandler',['../class_bulio_tick_handler.html',1,'']]]
 ];

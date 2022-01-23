@@ -1,0 +1,153 @@
+\hypertarget{class_game_view}{}\doxysection{Référence de la classe Game\+View}
+\label{class_game_view}\index{GameView@{GameView}}
+
+
+Classe de visualisation d\textquotesingle{}un espace 2D de jeu.  
+
+
+
+
+{\ttfamily \#include $<$gameview.\+h$>$}
+
+
+
+Graphe d\textquotesingle{}héritage de Game\+View\+:
+% FIG 0
+
+
+Graphe de collaboration de Game\+View\+:
+% FIG 1
+\doxysubsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game_view_aabca3ac6b068f51fa32fd73a6481854a}{Game\+View}} (QWidget $\ast$p\+Parent=nullptr)
+\item 
+\mbox{\hyperlink{class_game_view_ac63d0c46852839eb81f7763e7d568d39}{Game\+View}} (QGraphics\+Scene $\ast$p\+Scene, QWidget $\ast$p\+Parent=nullptr)
+\item 
+void \mbox{\hyperlink{class_game_view_a01d0a42238c426df5f22245946251d18}{set\+Fit\+To\+Screen\+Enabled}} (bool fit\+To\+Screen\+Enabled)
+\item 
+bool \mbox{\hyperlink{class_game_view_af6118debe09ef55369b51dae6561a061}{is\+Fit\+To\+Screen\+Enabled}} () const
+\item 
+void \mbox{\hyperlink{class_game_view_a4518b2fb02072cae4a9012ce7ee4b3e0}{set\+Clip\+Scene\+Enabled}} (bool clip\+Scene\+Enabled)
+\item 
+bool \mbox{\hyperlink{class_game_view_abde8077a47bc84a48e7fd95337d41a33}{is\+Clip\+Scene\+Enabled}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Fonctions membres protégées}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_game_view_a0927a1a8a2a2afc53a0858d54cf88570}{resize\+Event}} (QResize\+Event $\ast$p\+Event)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Classe de visualisation d\textquotesingle{}un espace 2D de jeu. 
+
+Déclaration de la classe \mbox{\hyperlink{class_game_view}{Game\+View}}, qui affiche une scène.
+
+\begin{DoxyAuthor}{Auteur}
+JCO 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Janvier 2015
+\end{DoxyDate}
+\mbox{\hyperlink{class_game_view}{Game\+View}} représente la vue utilisée par l\textquotesingle{}application pour afficher une scène (QGraphics\+Scene), généralement plus spécifiquement la scène de jeu (\mbox{\hyperlink{class_game_scene}{Game\+Scene}})..
+
+Cette classe implémente les fonctionnalités suivantes \+:
+\begin{DoxyItemize}
+\item Possibilité d\textquotesingle{}adapter l\textquotesingle{}affichage de la scène à la taille de la fenêtre. Cette possibilité est déclanchée par défaut et peut être enclenchée avec \mbox{\hyperlink{class_game_view_a01d0a42238c426df5f22245946251d18}{set\+Fit\+To\+Screen\+Enabled()}}.
+\item Possibilité de \char`\"{}clipper\char`\"{} l\textquotesingle{}affichage de la scène, afin que tout élment en dehors de la surface de la scène soit caché. Cette possibilité est déclanchée par défaut et peut être enclenchée avec \mbox{\hyperlink{class_game_view_a4518b2fb02072cae4a9012ce7ee4b3e0}{set\+Clip\+Scene\+Enabled()}}. 
+\end{DoxyItemize}
+
+\doxysubsection{Documentation des constructeurs et destructeur}
+\mbox{\Hypertarget{class_game_view_aabca3ac6b068f51fa32fd73a6481854a}\label{class_game_view_aabca3ac6b068f51fa32fd73a6481854a}} 
+\index{GameView@{GameView}!GameView@{GameView}}
+\index{GameView@{GameView}!GameView@{GameView}}
+\doxysubsubsection{\texorpdfstring{GameView()}{GameView()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Game\+View\+::\+Game\+View (\begin{DoxyParamCaption}\item[{QWidget $\ast$}]{p\+Parent = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Déclaration de la classe \mbox{\hyperlink{class_game_view}{Game\+View}}, qui affiche une scène.
+
+\begin{DoxyAuthor}{Auteur}
+JCO 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Janvier 2015 Construit une fenêtre de visualisation de la scène de jeu. 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Paramètres}
+{\em p\+Parent} & Widget parent. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_view_ac63d0c46852839eb81f7763e7d568d39}\label{class_game_view_ac63d0c46852839eb81f7763e7d568d39}} 
+\index{GameView@{GameView}!GameView@{GameView}}
+\index{GameView@{GameView}!GameView@{GameView}}
+\doxysubsubsection{\texorpdfstring{GameView()}{GameView()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Game\+View\+::\+Game\+View (\begin{DoxyParamCaption}\item[{QGraphics\+Scene $\ast$}]{p\+Scene,  }\item[{QWidget $\ast$}]{p\+Parent = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Construit une fenêtre de visualisation de la scène de jeu. 
+\begin{DoxyParams}{Paramètres}
+{\em p\+Scene} & Scène affichée par cette vue. \\
+\hline
+{\em p\+Parent} & Widget parent. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Documentation des fonctions membres}
+\mbox{\Hypertarget{class_game_view_abde8077a47bc84a48e7fd95337d41a33}\label{class_game_view_abde8077a47bc84a48e7fd95337d41a33}} 
+\index{GameView@{GameView}!isClipSceneEnabled@{isClipSceneEnabled}}
+\index{isClipSceneEnabled@{isClipSceneEnabled}!GameView@{GameView}}
+\doxysubsubsection{\texorpdfstring{isClipSceneEnabled()}{isClipSceneEnabled()}}
+{\footnotesize\ttfamily bool Game\+View\+::is\+Clip\+Scene\+Enabled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Renvoie}
+un booléen indiquant si le clipping de la scène est enclenché ou non. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_game_view_af6118debe09ef55369b51dae6561a061}\label{class_game_view_af6118debe09ef55369b51dae6561a061}} 
+\index{GameView@{GameView}!isFitToScreenEnabled@{isFitToScreenEnabled}}
+\index{isFitToScreenEnabled@{isFitToScreenEnabled}!GameView@{GameView}}
+\doxysubsubsection{\texorpdfstring{isFitToScreenEnabled()}{isFitToScreenEnabled()}}
+{\footnotesize\ttfamily bool Game\+View\+::is\+Fit\+To\+Screen\+Enabled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Renvoie}
+un booléen indiquant si l\textquotesingle{}ajustage automatique de l\textquotesingle{}affichage est enclenché (true) ou non (false). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_game_view_a0927a1a8a2a2afc53a0858d54cf88570}\label{class_game_view_a0927a1a8a2a2afc53a0858d54cf88570}} 
+\index{GameView@{GameView}!resizeEvent@{resizeEvent}}
+\index{resizeEvent@{resizeEvent}!GameView@{GameView}}
+\doxysubsubsection{\texorpdfstring{resizeEvent()}{resizeEvent()}}
+{\footnotesize\ttfamily void Game\+View\+::resize\+Event (\begin{DoxyParamCaption}\item[{QResize\+Event $\ast$}]{p\+Event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Gère le redimensionnement de l\textquotesingle{}affichage. 
+\begin{DoxyParams}{Paramètres}
+{\em p\+Event} & Evénement de redimensionnement reçu. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_view_a4518b2fb02072cae4a9012ce7ee4b3e0}\label{class_game_view_a4518b2fb02072cae4a9012ce7ee4b3e0}} 
+\index{GameView@{GameView}!setClipSceneEnabled@{setClipSceneEnabled}}
+\index{setClipSceneEnabled@{setClipSceneEnabled}!GameView@{GameView}}
+\doxysubsubsection{\texorpdfstring{setClipSceneEnabled()}{setClipSceneEnabled()}}
+{\footnotesize\ttfamily void Game\+View\+::set\+Clip\+Scene\+Enabled (\begin{DoxyParamCaption}\item[{bool}]{clip\+Scene\+Enabled }\end{DoxyParamCaption})}
+
+Enclenche ou déclenche le clipping de la scène. 
+\begin{DoxyParams}{Paramètres}
+{\em clip\+Scene\+Enabled} & Indique si le clipping est enclenché (true) ou déclanché (false). \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_view_a01d0a42238c426df5f22245946251d18}\label{class_game_view_a01d0a42238c426df5f22245946251d18}} 
+\index{GameView@{GameView}!setFitToScreenEnabled@{setFitToScreenEnabled}}
+\index{setFitToScreenEnabled@{setFitToScreenEnabled}!GameView@{GameView}}
+\doxysubsubsection{\texorpdfstring{setFitToScreenEnabled()}{setFitToScreenEnabled()}}
+{\footnotesize\ttfamily void Game\+View\+::set\+Fit\+To\+Screen\+Enabled (\begin{DoxyParamCaption}\item[{bool}]{fit\+To\+Screen\+Enabled }\end{DoxyParamCaption})}
+
+Enclenche ou déclenche l\textquotesingle{}ajustage automatique de l\textquotesingle{}affichage de la scène à la taille de la fenêtre. 
+\begin{DoxyParams}{Paramètres}
+{\em fit\+To\+Screen\+Enabled} & Indique si l\textquotesingle{}ajustage automatique est enclenché (true) ou déclanché (false). \\
+\hline
+\end{DoxyParams}
+
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+gameview.\+h\item 
+gameview.\+cpp\end{DoxyCompactItemize}

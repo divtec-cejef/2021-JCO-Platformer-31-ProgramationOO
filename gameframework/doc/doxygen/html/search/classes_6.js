@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['mainfrm_0',['MainFrm',['../class_main_frm.html',1,'']]],
-  ['manualwalkinghandler_1',['ManualWalkingHandler',['../class_manual_walking_handler.html',1,'']]]
+  ['sprite_0',['Sprite',['../class_sprite.html',1,'']]],
+  ['spritetickhandler_1',['SpriteTickHandler',['../class_sprite_tick_handler.html',1,'']]]
 ];

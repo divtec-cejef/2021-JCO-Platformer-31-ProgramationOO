@@ -1,0 +1,48 @@
+\hypertarget{bulio_8cpp}{}\doxysection{Référence du fichier bulio.\+cpp}
+\label{bulio_8cpp}\index{bulio.cpp@{bulio.cpp}}
+
+
+Définition de la classe \mbox{\hyperlink{class_bulio}{Bulio}}.  
+
+
+{\ttfamily \#include \char`\"{}bulio.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$QString$>$}\newline
+{\ttfamily \#include \char`\"{}resources.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utilities.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sprite.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gamescene.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gamecanvas.\+h\char`\"{}}\newline
+Graphe des dépendances par inclusion de bulio.\+cpp\+:
+% FIG 0
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{bulio_8cpp_ac96a9c046b50ebf22c37b3cf79c02ddb}\label{bulio_8cpp_ac96a9c046b50ebf22c37b3cf79c02ddb}} 
+const int {\bfseries FRAME\+\_\+\+WIDTH} = 76
+\begin{DoxyCompactList}\small\item\em sprite\+Sheet animation de marche à gauche/droite \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{bulio_8cpp_a51f854cccc79cb38663ab9df81542fa8}\label{bulio_8cpp_a51f854cccc79cb38663ab9df81542fa8}} 
+const int {\bfseries FRAME\+\_\+\+HEIGHT} = 48
+\item 
+\mbox{\Hypertarget{bulio_8cpp_a572277ede3a2bd8a792f6df9cfd60de7}\label{bulio_8cpp_a572277ede3a2bd8a792f6df9cfd60de7}} 
+const int {\bfseries FRAME\+\_\+\+COUNT} = 2
+\item 
+\mbox{\Hypertarget{bulio_8cpp_a5a453206c2b942b1b430a91fcc211520}\label{bulio_8cpp_a5a453206c2b942b1b430a91fcc211520}} 
+const int {\bfseries COLUMN\+\_\+\+COUNT} = 1
+\item 
+\mbox{\Hypertarget{bulio_8cpp_a0cd69d9b330aa6137e091d55e3c72cf8}\label{bulio_8cpp_a0cd69d9b330aa6137e091d55e3c72cf8}} 
+const int {\bfseries VITESSE\+\_\+\+ANIM} = 100
+\item 
+\mbox{\Hypertarget{bulio_8cpp_a447efb7d562d7dd631b6a985ff88b5e0}\label{bulio_8cpp_a447efb7d562d7dd631b6a985ff88b5e0}} 
+const int {\bfseries SPEED} = 10
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Définition de la classe \mbox{\hyperlink{class_bulio}{Bulio}}. 
+
+\begin{DoxyAuthor}{Auteur}
+LKU 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Decembre 2021 
+\end{DoxyDate}

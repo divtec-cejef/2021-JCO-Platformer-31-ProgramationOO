@@ -16,17 +16,14 @@ class CaisseAmovTickHandler : public EntityTickHandler
 public:    
     CaisseAmovTickHandler(Entity* pParentSprite = nullptr,GameCore* newGameCore = nullptr);
 
-    bool m_isPlayer = false;
-    bool m_canMove = false;
-
     void tick(long long elapsedTimeInMilliseconds);
 
     void currentCollision();
     void nextCollision();
 
-    void setGameCore(GameCore* newGameCore);
 private:
-    GameCore* m_pGameCore = nullptr;
+    bool m_isPlayer = false;
+    bool m_canMove = false;
 };
 
 #endif // CAISSEAMOVTICKHANDLER_H

@@ -1,0 +1,72 @@
+\hypertarget{character_8h_source}{}\doxysection{character.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef CHARACTER\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define CHARACTER\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QObject>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QPointF>}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <QGraphicsTransform>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <QList>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{sprite_8h}{sprite.h}}>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <entity.h>}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{19 \textcolor{keyword}{class }\mbox{\hyperlink{class_character}{Character}}: \textcolor{keyword}{public} \mbox{\hyperlink{class_entity}{Entity}}}
+\DoxyCodeLine{20 \{}
+\DoxyCodeLine{21 \textcolor{keyword}{public}:}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \mbox{\hyperlink{class_character_a1aaf71cf19e80a5788d42073d7219a04}{Character}}(QGraphicsItem* pParent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26     \textcolor{comment}{//Type d'animation du joueurs}}
+\DoxyCodeLine{27     \textcolor{keyword}{enum} animation\{}
+\DoxyCodeLine{28         BASE = 0,}
+\DoxyCodeLine{29         DEPLACEMENT = 1,}
+\DoxyCodeLine{30         SAUT = 3,}
+\DoxyCodeLine{31         ATTAQUE = 4,}
+\DoxyCodeLine{32     \};}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_entity_a7e13400ff06e108f2fd0278690dc61bd}{configureAnimation}}(animation player);}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     \textcolor{comment}{//void updateCharacterVelocity();}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_character_a8df37d038371ddd117a629a2075b012c}{setIsOnFloor}}(\textcolor{keywordtype}{bool} \_isOnFloor);}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_character_aa8afbda57c5dc601a162a9831d24dd19}{getIsJump}}();}
+\DoxyCodeLine{42     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_character_abd5085d14e509b2ac8da29c667510d66}{setIsJump}}(\textcolor{keywordtype}{bool} \_isJump);}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44     \textcolor{keywordtype}{void} futureCollision();}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \textcolor{comment}{//Mort}}
+\DoxyCodeLine{47     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_character_aa5f5f164aa9b0dbeb30ee7abcb52f34d}{setIsDeath}}(\textcolor{keywordtype}{bool} \_isDeath);}
+\DoxyCodeLine{48     \textcolor{comment}{//void setupDeath();}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \textcolor{comment}{//Compteur de mort(s)}}
+\DoxyCodeLine{51     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_character_a5d25bc67e90e591bcf27a1dcab975580}{getDeathCount}}();}
+\DoxyCodeLine{52     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_character_ae6aa3f61adb1a975ba2e7d5399546ef9}{incrementDeathCount}}();}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_character_a6953345fc6ebe0ded6039fe84e449a1c}{respawn}}();}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     \textcolor{keywordtype}{void} onKeyPressed(\textcolor{keywordtype}{int} key);}
+\DoxyCodeLine{59     \textcolor{keywordtype}{void} onKeyReleased(\textcolor{keywordtype}{int} key);}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{keyword}{private}:}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     \textcolor{keywordtype}{bool} m\_isJump = \textcolor{keyword}{false};}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65     \textcolor{keywordtype}{int} m\_deathCount = 0;}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67     \textcolor{keywordtype}{void} configureTransformationMatrix();}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     QList<QImage>m\_listAnimation;}
+\DoxyCodeLine{70     \textcolor{keywordtype}{void} setAnimationDeplacementList();}
+\DoxyCodeLine{71 \};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// CHARACTER\_H}}
+
+\end{DoxyCode}

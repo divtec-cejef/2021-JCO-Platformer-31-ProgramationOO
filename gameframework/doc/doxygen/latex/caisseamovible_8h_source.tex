@@ -1,0 +1,37 @@
+\hypertarget{caisseamovible_8h_source}{}\doxysection{caisseamovible.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef CAISSEAMOVIBLE\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define CAISSEAMOVIBLE\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QObject>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QPointF>}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <QGraphicsTransform>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <QList>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{sprite_8h}{sprite.h}}>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <entity.h>}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{18 \textcolor{keyword}{class }\mbox{\hyperlink{class_caisse_amovible}{CaisseAmovible}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_entity}{Entity}}}
+\DoxyCodeLine{19 \{}
+\DoxyCodeLine{20 \textcolor{keyword}{public}:}
+\DoxyCodeLine{21     \mbox{\hyperlink{class_caisse_amovible}{CaisseAmovible}}(QGraphicsItem* pParent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     \textcolor{comment}{//Gestion des déplacement de la caisse}}
+\DoxyCodeLine{24     \textcolor{keywordtype}{void} updateVelocity();}
+\DoxyCodeLine{25     \textcolor{comment}{//Définit les déplacement de la caisse dans le jeu.}}
+\DoxyCodeLine{26     \textcolor{keywordtype}{void} collisionDetection(QRectF rect);}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_caisse_amovible_a121bbe8d841233204a9ba009038f2b3c}{setIsOnFloor}}(\textcolor{keywordtype}{bool} \_isOnFloor);}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30     \textcolor{comment}{//Définit si la caisse doit être détruite ou non.}}
+\DoxyCodeLine{31     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_caisse_amovible_ad781785bfd77150835e8e3436b20257f}{setIsDeath}}(\textcolor{keywordtype}{bool} \_isDeath);}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \};}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// CAISSEAMOVIBLE\_H}}
+
+\end{DoxyCode}

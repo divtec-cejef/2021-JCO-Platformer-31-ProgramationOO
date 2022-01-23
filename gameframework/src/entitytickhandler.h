@@ -6,7 +6,7 @@
 */
 #ifndef ENTITYTICKHANDLER_H
 #define ENTITYTICKHANDLER_H
-
+#include <gamecore.h>
 class Entity;
 
 
@@ -37,9 +37,11 @@ public:
 
     virtual void currentCollision();
     virtual void nextCollision();
+    void setGameCore(GameCore* newGameCore);
 
 protected:
     Entity* m_pParentEntity;
+    GameCore* m_pGameCore = nullptr;
 };
 
 #endif // ENTITYTICKHANDLER_H

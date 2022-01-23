@@ -69,6 +69,12 @@ private:
     //Joueur
     Character* pCharacter = new Character();
 
+    QList<Entity*>m_pEntityL;
+    QList<Bulio*> m_pBulioL;
+
+    Ground* m_Grounds = new Ground;
+    void stackMetal(QPointF firstCase);
+
     Sprite* pGhost = new Sprite();
     void setAnimationDeath();
 
@@ -76,17 +82,6 @@ private:
 
 
 
-
-    QList<Entity*>m_pEntityL;
-    QList<Bulio*> m_pBulioL;
-
-    void StackMetal(QPointF firstCase);
-
-    Ground* m_Grounds = new Ground;
-
-    //Collision
-    void currentCollision(Entity* entity);
-    void futureCollision(Entity* entity);
 
 
 private slots:
