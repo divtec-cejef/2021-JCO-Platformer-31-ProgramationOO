@@ -33,6 +33,8 @@ public:
 
     void configureAnimation(animation player);
 
+    animation m_lastAnim = BASE;
+
     //void updateCharacterVelocity();
 
     void setIsOnFloor(bool _isOnFloor);

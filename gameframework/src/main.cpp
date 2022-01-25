@@ -17,17 +17,17 @@
  * Les collisions sont détectées et utilisées par les entités du jeu. La plupart des entités comme les caisses gèrent leur collision par leur TickHandler()
  * (qui est activé dans le tick() du \ref gamecore).
  * Le TickHandler() va s’occuper des collisions (selon le type d’entité) par anticipation ou par collision actuelle.
- * \subsection Collision par anticipation
+ * \subsection  Collision par anticipation
  * La collision par anticipation est utilisée essentiellement pour la gestion de la gravité.
  * Effectivement, on en a besoin pour savoir à l’avance à quel moment l’entité devra être attirée par le bas ou non.
  * Pour ce faire, on utilise la vélocité de l’entité pour savoir si elle va entrer en collision avec la scène ou un élément de celle-ci.
  * On utilise la fonction nextCollision() du \ref TickHandlerEntity.
- * \subsection Collision actuelle
+ * \subsection  Collision actuelle
  * Ce type de collision se produit lors d’un contact direct entre l’entité et un autre sprite.
  * Par exemple, pour savoir si une caisse doit se déplacer, on vérifie si le joueur touche la caisse.
- * \subsection Collision ciblée
+ * \subsection  Collision ciblée
  * Dans ce jeu, on a besoin de savoir de quel côté une entité entre en contact avec un sprite.
- * Pour ce faire, les entités utilisent la méthode getCollisionLocate() qui récupère les valeurs de la fonction intersected()
+ * Pour ce faire, les entités utilisent la méthode \ref getCollisionLocate() qui récupère les valeurs de la fonction \ref intersected()
  * mise à dispositions par Qt. Celle-ci renvoie l'intersection entre les deux rectangles donnés.
  * En l’occurrence, on utilise la bouding Box des deux sprites pour ensuite localiser la zone en contact.
  * \section Annexes

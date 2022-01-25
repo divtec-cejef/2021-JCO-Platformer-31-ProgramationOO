@@ -311,56 +311,37 @@ void GameCore::keyPressed(int key) {
     emit notifyKeyPressed(key);
 
     if(!pCharacter->getIsDeath()){
-        Character::animation player;
-
         switch(key) {
         case Qt::Key_W:
             if(pCharacter->getIsOnFloor()){
-                player = Character::SAUT;
                 pCharacter->m_velocity.setY(PLAYER_JUMP);
                 pCharacter->setIsJump(true);
-            }else{
-                player = Character::BASE;
             }
             break;
 
         case Qt::Key_A:
             pCharacter->m_velocity.setX(-PLAYER_SPEED);
-            player = Character::DEPLACEMENT;
             break;
 
         case Qt::Key_D:
             pCharacter->m_velocity.setX(PLAYER_SPEED);
-            player = Character::DEPLACEMENT;
             break;
 
         case Qt::Key_Space:
-            if(pCharacter->getIsOnFloor()){
-                player = Character::SAUT;
-                pCharacter->m_velocity.setY(PLAYER_JUMP);
-                pCharacter->setIsJump(true);
-            }else{
-                player = Character::BASE;
-            }
+            pCharacter->m_velocity.setY(PLAYER_JUMP);
+            pCharacter->setIsJump(true);
             break;
-        default:
-            if(pCharacter->m_velocity.y() < 0){
-                player = Character::SAUT;
-            }else{
-                player = Character::BASE;
-            }
-        }
-        pCharacter->configureAnimation(player);
-    }
 
-    if(key == Qt::Key_Space && pCharacter->getIsDeath()){
-        pCharacter->respawn();
-        m_pScene->removeSpriteFromScene(pGhost);
-        m_pScene->addSpriteToScene(pCharacter, pCharacter->getSpawnPoint());
-        pCharacter->startAnimation(25);
+        }
+
+        if(key == Qt::Key_Space && pCharacter->getIsDeath()){
+            pCharacter->respawn();
+            m_pScene->removeSpriteFromScene(pGhost);
+            m_pScene->addSpriteToScene(pCharacter, pCharacter->getSpawnPoint());
+            pCharacter->startAnimation(25);
+        }
     }
 }
-
 //! Traite le relâchement d'une touche.
 //! \param key Numéro de la touche (voir les constantes Qt)
 void GameCore::keyReleased(int key) {
@@ -407,12 +388,16 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
     if(!pCharacter->getIsDeath()){
 
-        //Animation du joueur spécifique.
+
+        //Animation du joueur
+        Character::animation animation = Character::BASE;;
+
         if(pCharacter->getIsOnFloor() == false){
-            pCharacter->configureAnimation(Character::SAUT);
-        }else if(pCharacter->m_velocity.x() == 0.0){
-            pCharacter->configureAnimation(Character::BASE);
+            animation = Character::SAUT;
+        }else if(pCharacter->m_velocity.x() > 0.5 || pCharacter->m_velocity.x() < -0.5){
+            animation =  Character::DEPLACEMENT;
         }
+        pCharacter->configureAnimation(animation);
 
         //Déplace le joueur
         pCharacter->setPos(pCharacter->pos()+ pCharacter->m_velocity * elapsedTimeInMilliseconds/15.0);

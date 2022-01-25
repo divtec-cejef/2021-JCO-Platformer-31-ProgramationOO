@@ -87,55 +87,58 @@ void Character::incrementDeathCount(){
 //!
 void Character::configureAnimation(animation player) {
 
-    clearAnimations();
-    QString iSprite;
+    if(player != m_lastAnim){
+        clearAnimations();
+        QString iSprite;
 
-    switch (player) {
-    case DEPLACEMENT:
-        iSprite = "MarcheDroiteV9.png";
-        break;
-    case SAUT:
-        iSprite = "SautDroiteV7.png";
-        break;
-    default:
-        iSprite = "BasicPoseV4.png";
-        break;
-    }
-
-    QImage directionFrame(GameFramework::imagesPath() + iSprite);
-    if(iSprite == "MarcheDroiteV9.png"){
-
-        QImage spriteSheet(GameFramework::imagesPath() + iSprite);
-
-        // Découpage de la spritesheet
-        for (int frameIndex = 0; frameIndex < FRAME_COUNT; frameIndex++) {
-            QImage frameSheet = spriteSheet.copy((frameIndex % COLUMN_COUNT) * FRAME_WIDTH,
-                                             (frameIndex / COLUMN_COUNT) * FRAME_HEIGHT,
-                                             FRAME_WIDTH, FRAME_HEIGHT);
-
-            //Oriente l'animation selon la velocité du joueur
-            if(m_velocity.x() < 0)
-                directionFrame = frameSheet.mirrored(true,false);
-            else
-                directionFrame = frameSheet;
-            //ajoute la frame à l'animation.
-            addAnimationFrame(QPixmap::fromImage(directionFrame.scaled(FRAME_WIDTH * 1,
-                                                                        FRAME_HEIGHT * 1,
-                                                                        Qt::IgnoreAspectRatio,
-                                                                        Qt::SmoothTransformation)));
+        switch (player) {
+        case DEPLACEMENT:
+            iSprite = "MarcheDroiteV9.png";
+            break;
+        case SAUT:
+            iSprite = "SautDroiteV7.png";
+            break;
+        default:
+            iSprite = "BasicPoseV4.png";
+            break;
         }
 
-    }else {
-        //Oriente l'animation selon l'actuel ou l'ancienne velocité du joueur
-        if(m_velocity.x() < 0 || m_lastVelocity.x() < 0)
-            directionFrame = directionFrame.mirrored(true,false);
+        QImage directionFrame(GameFramework::imagesPath() + iSprite);
+        if(iSprite == "MarcheDroiteV9.png"){
 
-        addAnimationFrame(QPixmap::fromImage(directionFrame.scaled(FRAME_WIDTH * 1,
-                                                                     FRAME_HEIGHT * 1,
-                                                                     Qt::IgnoreAspectRatio,
-                                                                     Qt::SmoothTransformation)));
+            QImage spriteSheet(GameFramework::imagesPath() + iSprite);
+
+            // Découpage de la spritesheet
+            for (int frameIndex = 0; frameIndex < FRAME_COUNT; frameIndex++) {
+                QImage frameSheet = spriteSheet.copy((frameIndex % COLUMN_COUNT) * FRAME_WIDTH,
+                                                 (frameIndex / COLUMN_COUNT) * FRAME_HEIGHT,
+                                                 FRAME_WIDTH, FRAME_HEIGHT);
+
+                //Oriente l'animation selon la velocité du joueur
+                if(m_velocity.x() < 0)
+                    directionFrame = frameSheet.mirrored(true,false);
+                else
+                    directionFrame = frameSheet;
+                //ajoute la frame à l'animation.
+                addAnimationFrame(QPixmap::fromImage(directionFrame.scaled(FRAME_WIDTH * 1,
+                                                                            FRAME_HEIGHT * 1,
+                                                                            Qt::IgnoreAspectRatio,
+                                                                            Qt::SmoothTransformation)));
+            }
+
+        }else {
+            //Oriente l'animation selon l'actuel ou l'ancienne velocité du joueur
+            if(m_velocity.x() < 0 || m_lastVelocity.x() < 0)
+                directionFrame = directionFrame.mirrored(true,false);
+
+            addAnimationFrame(QPixmap::fromImage(directionFrame.scaled(FRAME_WIDTH * 1,
+                                                                         FRAME_HEIGHT * 1,
+                                                                         Qt::IgnoreAspectRatio,
+                                                                         Qt::SmoothTransformation)));
+        }
+        startAnimation(25);
+        m_lastAnim = player;
     }
-    startAnimation(25);
 }
 
 //!
