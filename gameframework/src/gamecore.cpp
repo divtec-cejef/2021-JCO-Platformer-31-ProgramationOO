@@ -328,18 +328,19 @@ void GameCore::keyPressed(int key) {
             break;
 
         case Qt::Key_Space:
-            pCharacter->m_velocity.setY(PLAYER_JUMP);
-            pCharacter->setIsJump(true);
+            if(pCharacter->getIsOnFloor()){
+                pCharacter->m_velocity.setY(PLAYER_JUMP);
+                pCharacter->setIsJump(true);
+            }
             break;
 
         }
-
-        if(key == Qt::Key_Space && pCharacter->getIsDeath()){
-            pCharacter->respawn();
-            m_pScene->removeSpriteFromScene(pGhost);
-            m_pScene->addSpriteToScene(pCharacter, pCharacter->getSpawnPoint());
-            pCharacter->startAnimation(25);
-        }
+    }
+    if(key == Qt::Key_Space && pCharacter->getIsDeath()){
+        pCharacter->respawn();
+        m_pScene->removeSpriteFromScene(pGhost);
+        m_pScene->addSpriteToScene(pCharacter, pCharacter->getSpawnPoint());
+        pCharacter->startAnimation(25);
     }
 }
 //! Traite le relâchement d'une touche.
