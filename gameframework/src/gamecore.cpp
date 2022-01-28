@@ -143,11 +143,12 @@ void GameCore::loadTestLevel(){
     QPointF posSol6(5300,1660);
     m_Grounds->generated(10,7,posSol6);
 
-    QPointF posSol7(6800,1460);
-    m_Grounds->generated(2,9,posSol7);
+    QPointF posSol7(6800,1380);
+    m_Grounds->generated(2,2,posSol7);
 
-    QPointF posSol8(7140,1660);
-    m_Grounds->generated(2,4,posSol8);
+    QPointF posSol8(6800,1760);
+    m_Grounds->generated(6,2,posSol8);
+
 
     //////////////////////////////////
     ////        PLATEFORME        ////
@@ -210,9 +211,16 @@ void GameCore::loadTestLevel(){
     caisseB6->setSpawnPoint(QPoint(5160,785));
     m_pScene->addSpriteToScene(caisseB6, caisseB6->getSpawnPoint());
 
+    CaisseAmovible* caisseB7 = new CaisseAmovible;
+    caisseB7->setData(1,"Wood_caisse");
+    caisseB7->setSpawnPoint(QPoint(6850,1360));
+    m_pScene->addSpriteToScene(caisseB7, caisseB7->getSpawnPoint());
+
     Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV2.png");
     caisseM1->setData(1,"sol");
     m_pScene->addSpriteToScene(caisseM1, 700,1520);
+
+
 
     //////////////////////////////
     ////        ENEMIE        ////
@@ -242,6 +250,7 @@ void GameCore::loadTestLevel(){
     m_pEntityL.append(caisseB2);
     m_pEntityL.append(caisseB5);
     m_pEntityL.append(caisseB6);
+    m_pEntityL.append(caisseB7);
     m_pEntityL.append(enemie1);
     m_pEntityL.append(enemie2);
     m_pEntityL.append(enemie3);
@@ -343,6 +352,7 @@ void GameCore::keyPressed(int key) {
         pCharacter->startAnimation(25);
     }
 }
+
 //! Traite le relâchement d'une touche.
 //! \param key Numéro de la touche (voir les constantes Qt)
 void GameCore::keyReleased(int key) {
@@ -388,7 +398,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     }
 
     if(!pCharacter->getIsDeath()){
-
 
         //Animation du joueur
         Character::animation animation = Character::BASE;;
@@ -564,7 +573,6 @@ void GameCore::setupCharacterDeath(){
     m_pScene->addSpriteToScene(pGhost);
     //Ajoute d'une mort au compteur.
     pCharacter->incrementDeathCount();
-
 
     QString textMort = "mort";
     if(pCharacter->getDeathCount() > 1){
