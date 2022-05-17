@@ -1,0 +1,32 @@
+#ifndef BULIOTICKHANDLER_H
+#define BULIOTICKHANDLER_H
+
+#include <bulio.h>
+#include "entitytickhandler.h"
+#include <gamecore.h>
+#include "gamescene.h"
+
+//!
+//! \brief Cette classe est permet de crée un ennemie se déplaçant de droite à gauche.
+//! 
+//! \section1 Déplacement du Bulio
+//! Le Bulio se déplace toujours à droite si il ne rentre pas en collision avec un autre sprite
+//! , si telle est le cas le bulio change de dirction et continue à se déplacé dans le sens opposé du sprite
+//! touché.
+class BulioTickHandler : public EntityTickHandler
+{
+public:
+    BulioTickHandler(Entity* pParentSprite = nullptr,GameCore* newGameCore = nullptr);
+
+    void tick(long long elapsedTimeInMilliseconds);
+
+    void currentCollision();
+    void nextCollision();
+
+
+    void setGameCore(GameCore* newGameCore);
+private:
+    GameCore* m_pGameCore = nullptr;
+};
+
+#endif // BULIOTICKHANDLER_H

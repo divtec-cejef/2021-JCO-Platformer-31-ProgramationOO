@@ -1,0 +1,74 @@
+\hypertarget{class_spinning_pinwheel}{}\doxysection{Spinning\+Pinwheel Class Reference}
+\label{class_spinning_pinwheel}\index{SpinningPinwheel@{SpinningPinwheel}}
+
+
+Démontre le suivi de la souris.  
+
+
+
+
+{\ttfamily \#include $<$spinningpinwheel.\+h$>$}
+
+Inheritance diagram for Spinning\+Pinwheel\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_spinning_pinwheel}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_spinning_pinwheel_af000eb49e02fd3f276e9077cca30f078}\label{class_spinning_pinwheel_af000eb49e02fd3f276e9077cca30f078}} 
+void {\bfseries on\+Mouse\+Move} (QPointF new\+Mouse\+Position)
+\begin{DoxyCompactList}\small\item\em Traite le déplacement de la souris. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_spinning_pinwheel_a2cb4407ce9722f010e32672a23c26de5}{Spinning\+Pinwheel}} (QGraphics\+Item $\ast$p\+Parent=nullptr)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+QVariant \mbox{\hyperlink{class_spinning_pinwheel_a9e4ce9d580b75cf1d437fdfe4548b2ca}{item\+Change}} (Graphics\+Item\+Change change, const QVariant \&r\+Value)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Démontre le suivi de la souris. 
+
+Cette classe spécialise \mbox{\hyperlink{class_sprite}{Sprite}} pour gérer le déplacement d\textquotesingle{}une roue tournante, qui suit en permanence le pointeur de la souris.
+
+Cette classe démontre également les fonctionnalités suivantes \+:
+\begin{DoxyItemize}
+\item Détecter les changements d\textquotesingle{}état d\textquotesingle{}un item (\mbox{\hyperlink{class_spinning_pinwheel_a9e4ce9d580b75cf1d437fdfe4548b2ca}{item\+Change()}}, mécanisme hérité de \mbox{\hyperlink{class_sprite}{Sprite}} qui lui-\/même l\textquotesingle{}hérite de QGraphics\+Item) et plus particulièrement dans ce cas un changement de visibilité pour stopper l\textquotesingle{}animation de la roue si celle-\/ci est invisible.
+\item Générer une animation à partir d\textquotesingle{}une spritesheet (dans configure\+Animation()). 
+\end{DoxyItemize}
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_spinning_pinwheel_a2cb4407ce9722f010e32672a23c26de5}\label{class_spinning_pinwheel_a2cb4407ce9722f010e32672a23c26de5}} 
+\index{SpinningPinwheel@{SpinningPinwheel}!SpinningPinwheel@{SpinningPinwheel}}
+\index{SpinningPinwheel@{SpinningPinwheel}!SpinningPinwheel@{SpinningPinwheel}}
+\doxysubsubsection{\texorpdfstring{SpinningPinwheel()}{SpinningPinwheel()}}
+{\footnotesize\ttfamily Spinning\+Pinwheel\+::\+Spinning\+Pinwheel (\begin{DoxyParamCaption}\item[{QGraphics\+Item $\ast$}]{p\+Parent = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Construit un marcheur et l\textquotesingle{}initialise. 
+\begin{DoxyParams}{Parameters}
+{\em p\+Parent} & Pointeur sur le parent (afin d\textquotesingle{}obtenir une destruction automatique de cet objet). \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_spinning_pinwheel_a9e4ce9d580b75cf1d437fdfe4548b2ca}\label{class_spinning_pinwheel_a9e4ce9d580b75cf1d437fdfe4548b2ca}} 
+\index{SpinningPinwheel@{SpinningPinwheel}!itemChange@{itemChange}}
+\index{itemChange@{itemChange}!SpinningPinwheel@{SpinningPinwheel}}
+\doxysubsubsection{\texorpdfstring{itemChange()}{itemChange()}}
+{\footnotesize\ttfamily QVariant Spinning\+Pinwheel\+::item\+Change (\begin{DoxyParamCaption}\item[{Graphics\+Item\+Change}]{change,  }\item[{const QVariant \&}]{r\+Value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Traite le changement concernant ce sprite. Si le changement concerne sa visibilité, on le traite. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/kuttleo/\+DIVTEC/\+EMT Informatique -\/ 2019-\/2023/\+Kuttel Leo/\+Atelier/31-\/\+Programation\+OO/\+Le\+Jeu/gameframework/src/\mbox{\hyperlink{spinningpinwheel_8h}{spinningpinwheel.\+h}}\item 
+C\+:/\+Users/kuttleo/\+DIVTEC/\+EMT Informatique -\/ 2019-\/2023/\+Kuttel Leo/\+Atelier/31-\/\+Programation\+OO/\+Le\+Jeu/gameframework/src/\mbox{\hyperlink{spinningpinwheel_8cpp}{spinningpinwheel.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,31 @@
+\hypertarget{bouncingspritehandler_8h_source}{}\doxysection{bouncingspritehandler.\+h}
+\label{bouncingspritehandler_8h_source}\index{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/bouncingspritehandler.h@{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/bouncingspritehandler.h}}
+\mbox{\hyperlink{bouncingspritehandler_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#ifndef BOUNCINGSPRITEHANDLER\_H}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#define BOUNCINGSPRITEHANDLER\_H}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <QPointF>}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{spritetickhandler_8h}{spritetickhandler.h}}"{}}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{keyword}{class }\mbox{\hyperlink{class_bouncing_sprite_handler}{BouncingSpriteHandler}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_sprite_tick_handler}{SpriteTickHandler}}}
+\DoxyCodeLine{18 \{}
+\DoxyCodeLine{19 \textcolor{keyword}{public}:}
+\DoxyCodeLine{20     \mbox{\hyperlink{class_bouncing_sprite_handler_a43ef90f814328060e09cbf410b487a04}{BouncingSpriteHandler}}(\mbox{\hyperlink{class_sprite}{Sprite}}* pParentSprite = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bouncing_sprite_handler_ae8097da4df0cbf25ff956aab7f1b64b4}{setSpriteVelocity}}(QPointF spriteVelocity);}
+\DoxyCodeLine{23     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bouncing_sprite_handler_ae8097da4df0cbf25ff956aab7f1b64b4}{setSpriteVelocity}}(\textcolor{keywordtype}{double} xVelocity, \textcolor{keywordtype}{double} yVelocity);}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bouncing_sprite_handler_a8b0210eaa1341f24ec4cd91930aa39c7}{tick}}(\textcolor{keywordtype}{long} \textcolor{keywordtype}{long} elapsedTimeInMilliseconds);}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{private}:}
+\DoxyCodeLine{28     QPointF m\_spriteVelocity;}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// BOUNCINGSPRITEHANDLER\_H}}
+
+\end{DoxyCode}
