@@ -1,0 +1,34 @@
+\hypertarget{spinningpinwheel_8h_source}{}\doxysection{spinningpinwheel.\+h}
+\label{spinningpinwheel_8h_source}\index{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/spinningpinwheel.h@{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/spinningpinwheel.h}}
+\mbox{\hyperlink{spinningpinwheel_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#ifndef SPINNINGPINWHEEL\_H}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#define SPINNINGPINWHEEL\_H}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{sprite_8h}{sprite.h}}"{}}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{23 \textcolor{keyword}{class }\mbox{\hyperlink{class_spinning_pinwheel}{SpinningPinwheel}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_sprite}{Sprite}}}
+\DoxyCodeLine{24 \{}
+\DoxyCodeLine{25     Q\_OBJECT}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{public}:}
+\DoxyCodeLine{28     \mbox{\hyperlink{class_spinning_pinwheel_a2cb4407ce9722f010e32672a23c26de5}{SpinningPinwheel}}(QGraphicsItem* pParent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{31     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_spinning_pinwheel_af000eb49e02fd3f276e9077cca30f078}{onMouseMove}}(QPointF newMousePosition);}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{34     QVariant \mbox{\hyperlink{class_spinning_pinwheel_a9e4ce9d580b75cf1d437fdfe4548b2ca}{itemChange}}(GraphicsItemChange change, \textcolor{keyword}{const} QVariant\& rValue);}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{keyword}{private}:}
+\DoxyCodeLine{37     \textcolor{keywordtype}{void} configureAnimation();}
+\DoxyCodeLine{38     \textcolor{keywordtype}{void} updateAnimationState();}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     QPointF m\_wheelShifting;}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// SPINNINGPINWHEEL\_H}}
+
+\end{DoxyCode}

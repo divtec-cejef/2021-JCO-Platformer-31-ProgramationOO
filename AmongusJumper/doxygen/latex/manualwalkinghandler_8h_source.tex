@@ -1,0 +1,41 @@
+\hypertarget{manualwalkinghandler_8h_source}{}\doxysection{manualwalkinghandler.\+h}
+\label{manualwalkinghandler_8h_source}\index{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/manualwalkinghandler.h@{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/manualwalkinghandler.h}}
+\mbox{\hyperlink{manualwalkinghandler_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef MANUALWALKINGHANDLER\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define MANUALWALKINGHANDLER\_H}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{spritetickhandler_8h}{spritetickhandler.h}}"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <QGraphicsTransform>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <QList>}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{23 \textcolor{keyword}{class }\mbox{\hyperlink{class_manual_walking_handler}{ManualWalkingHandler}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_sprite_tick_handler}{SpriteTickHandler}}}
+\DoxyCodeLine{24 \{}
+\DoxyCodeLine{25 \textcolor{keyword}{public}:}
+\DoxyCodeLine{26     \textcolor{keyword}{enum} WalkingDirection \{}
+\DoxyCodeLine{27         WALKING\_RIGHT,}
+\DoxyCodeLine{28         WALKING\_LEFT}
+\DoxyCodeLine{29     \};}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     \mbox{\hyperlink{class_manual_walking_handler_ab6d7e577e0e795a839b6279a18639473}{ManualWalkingHandler}}(\mbox{\hyperlink{class_sprite}{Sprite}}* pParentSprite = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_manual_walking_handler_a7a514fd712583483dc18b8ef215291ac}{init}}();}
+\DoxyCodeLine{34     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_manual_walking_handler_a1d6b41794335eadcc8e01fdffccb4c61}{tick}}(\textcolor{keywordtype}{long} \textcolor{keywordtype}{long} elapsedTimeInMilliseconds);}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_manual_walking_handler_ad076f22e2bb712daf4e5057214b09eee}{setWalkingSpeed}}(\textcolor{keywordtype}{int} \mbox{\hyperlink{class_manual_walking_handler_a53b8273104b1b6c446b1d18ae506232a}{walkingSpeed}});}
+\DoxyCodeLine{37     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_manual_walking_handler_a53b8273104b1b6c446b1d18ae506232a}{walkingSpeed}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_manual_walking_handler_a2249e760b5ab46b5385731be17263a59}{changeWalkingDirection}}();}
+\DoxyCodeLine{40     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_manual_walking_handler_a6a20dd8612b10c85bbeddc10ce7eeb62}{setWalkingDirection}}(WalkingDirection newWalkingDirection);}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{keyword}{private}:}
+\DoxyCodeLine{43     \textcolor{keywordtype}{void} configureTransformationMatrix();}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     WalkingDirection m\_walkingDirection;}
+\DoxyCodeLine{46     QList<QGraphicsTransform*> m\_transformsForFlip;}
+\DoxyCodeLine{47     \textcolor{keywordtype}{int} m\_walkingSpeed;}
+\DoxyCodeLine{48 \};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// MANUALWALKINGHANDLER\_H}}
+
+\end{DoxyCode}

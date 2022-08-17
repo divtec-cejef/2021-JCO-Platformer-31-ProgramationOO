@@ -38,7 +38,7 @@ public:
     void setScene(GameScene* CurrentScene);
 
     Ground(QGraphicsItem* pParent = nullptr);
-    void configureOrientation(orientation ground);
+
 
 private:
     GameScene* m_pScene;

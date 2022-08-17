@@ -1,0 +1,71 @@
+\hypertarget{class_bulio_tick_handler}{}\doxysection{Bulio\+Tick\+Handler Class Reference}
+\label{class_bulio_tick_handler}\index{BulioTickHandler@{BulioTickHandler}}
+Inheritance diagram for Bulio\+Tick\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_bulio_tick_handler}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_bulio_tick_handler_a36bc7aad4a561cea939e8be2621054f1}\label{class_bulio_tick_handler_a36bc7aad4a561cea939e8be2621054f1}} 
+{\bfseries Bulio\+Tick\+Handler} (\mbox{\hyperlink{class_entity}{Entity}} $\ast$p\+Parent\+Sprite=nullptr, \mbox{\hyperlink{class_game_core}{Game\+Core}} $\ast$new\+Game\+Core=nullptr)
+\item 
+void \mbox{\hyperlink{class_bulio_tick_handler_a80aeafa5efdc7a26cfa063617c8df1dd}{tick}} (long long elapsed\+Time\+In\+Milliseconds)
+\item 
+void \mbox{\hyperlink{class_bulio_tick_handler_af3cb33dbab044ae5575029d11af3eafb}{current\+Collision}} ()
+\begin{DoxyCompactList}\small\item\em Définit la procédure à executé pour les collisions qui touche l\textquotesingle{}entité. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_bulio_tick_handler_a96e5d6e704883d5bbb8138c9a19ab10a}{next\+Collision}} ()
+\begin{DoxyCompactList}\small\item\em Définit la procédure à executé pour les collisions qui vont touché l\textquotesingle{}entité. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_bulio_tick_handler_aa0a9aa223cf148548224a3c16aa34b98}\label{class_bulio_tick_handler_aa0a9aa223cf148548224a3c16aa34b98}} 
+void {\bfseries set\+Game\+Core} (\mbox{\hyperlink{class_game_core}{Game\+Core}} $\ast$new\+Game\+Core)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_bulio_tick_handler_af3cb33dbab044ae5575029d11af3eafb}\label{class_bulio_tick_handler_af3cb33dbab044ae5575029d11af3eafb}} 
+\index{BulioTickHandler@{BulioTickHandler}!currentCollision@{currentCollision}}
+\index{currentCollision@{currentCollision}!BulioTickHandler@{BulioTickHandler}}
+\doxysubsubsection{\texorpdfstring{currentCollision()}{currentCollision()}}
+{\footnotesize\ttfamily void Bulio\+Tick\+Handler\+::current\+Collision (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Définit la procédure à executé pour les collisions qui touche l\textquotesingle{}entité. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_entity_tick_handler_a64c248a17bebe450b99fbe4c88ea9094}{Entity\+Tick\+Handler}}.
+
+\mbox{\Hypertarget{class_bulio_tick_handler_a96e5d6e704883d5bbb8138c9a19ab10a}\label{class_bulio_tick_handler_a96e5d6e704883d5bbb8138c9a19ab10a}} 
+\index{BulioTickHandler@{BulioTickHandler}!nextCollision@{nextCollision}}
+\index{nextCollision@{nextCollision}!BulioTickHandler@{BulioTickHandler}}
+\doxysubsubsection{\texorpdfstring{nextCollision()}{nextCollision()}}
+{\footnotesize\ttfamily void Bulio\+Tick\+Handler\+::next\+Collision (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Définit la procédure à executé pour les collisions qui vont touché l\textquotesingle{}entité. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_entity_tick_handler_a8d617f400dfc1e791bd33e6a6be6c958}{Entity\+Tick\+Handler}}.
+
+\mbox{\Hypertarget{class_bulio_tick_handler_a80aeafa5efdc7a26cfa063617c8df1dd}\label{class_bulio_tick_handler_a80aeafa5efdc7a26cfa063617c8df1dd}} 
+\index{BulioTickHandler@{BulioTickHandler}!tick@{tick}}
+\index{tick@{tick}!BulioTickHandler@{BulioTickHandler}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily void Bulio\+Tick\+Handler\+::tick (\begin{DoxyParamCaption}\item[{long long}]{elapsed\+Time\+In\+Milliseconds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Cadence \+: détermine le mouvement que fait le sprite durant le temps écoulé, vérifie si il doit rebondir et le positionne à son nouvel emplacement. 
+
+Implements \mbox{\hyperlink{class_entity_tick_handler}{Entity\+Tick\+Handler}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/kuttleo/\+DIVTEC/\+EMT Informatique -\/ 2019-\/2023/\+Kuttel Leo/\+Atelier/31-\/\+Programation\+OO/\+Le\+Jeu/gameframework/src/buliotickhandler.\+h\item 
+C\+:/\+Users/kuttleo/\+DIVTEC/\+EMT Informatique -\/ 2019-\/2023/\+Kuttel Leo/\+Atelier/31-\/\+Programation\+OO/\+Le\+Jeu/gameframework/src/\mbox{\hyperlink{buliotickhandler_8cpp}{buliotickhandler.\+cpp}}\end{DoxyCompactItemize}

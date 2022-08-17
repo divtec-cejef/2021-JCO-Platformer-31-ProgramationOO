@@ -1,0 +1,33 @@
+\hypertarget{caisseamovtickhandler_8h_source}{}\doxysection{caisseamovtickhandler.\+h}
+\label{caisseamovtickhandler_8h_source}\index{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/caisseamovtickhandler.h@{C:/Users/kuttleo/DIVTEC/EMT Informatique -\/ 2019-\/2023/Kuttel Leo/Atelier/31-\/ProgramationOO/LeJeu/gameframework/src/caisseamovtickhandler.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef CAISSEAMOVTICKHANDLER\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define CAISSEAMOVTICKHANDLER\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}caisseamovible.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{entitytickhandler_8h}{entitytickhandler.h}}"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{gamecore_8h}{gamecore.h}}>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{gamescene_8h}{gamescene.h}}"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{keyword}{class }\mbox{\hyperlink{class_caisse_amov_tick_handler}{CaisseAmovTickHandler}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_entity_tick_handler}{EntityTickHandler}}}
+\DoxyCodeLine{10 \{}
+\DoxyCodeLine{11 \textcolor{keyword}{public}:    }
+\DoxyCodeLine{12     \mbox{\hyperlink{class_caisse_amov_tick_handler}{CaisseAmovTickHandler}}(\mbox{\hyperlink{class_entity}{Entity}}* pParentSprite = \textcolor{keyword}{nullptr},\mbox{\hyperlink{class_game_core}{GameCore}}* newGameCore = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14     \textcolor{keywordtype}{bool} m\_isPlayer = \textcolor{keyword}{false};}
+\DoxyCodeLine{15     \textcolor{keywordtype}{bool} m\_canMove = \textcolor{keyword}{false};}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_caisse_amov_tick_handler_a2265559dee59bc802ba53545d35ffedd}{tick}}(\textcolor{keywordtype}{long} \textcolor{keywordtype}{long} elapsedTimeInMilliseconds);}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_caisse_amov_tick_handler_a830d6b6bcf8464fecf9eff83895ca9b0}{currentCollision}}();}
+\DoxyCodeLine{20     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_caisse_amov_tick_handler_ac365c48c789c606102e55dbcdb19ffbd}{nextCollision}}();}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22     \textcolor{keywordtype}{void} setGameCore(\mbox{\hyperlink{class_game_core}{GameCore}}* newGameCore);}
+\DoxyCodeLine{23 \textcolor{keyword}{private}:}
+\DoxyCodeLine{24     \mbox{\hyperlink{class_game_core}{GameCore}}* m\_pGameCore = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{25 \};}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// CAISSEAMOVTICKHANDLER\_H}}
+
+\end{DoxyCode}

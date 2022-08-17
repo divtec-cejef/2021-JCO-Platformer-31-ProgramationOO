@@ -1,0 +1,113 @@
+\hypertarget{class_entity_tick_handler}{}\doxysection{Entity\+Tick\+Handler Class Reference}
+\label{class_entity_tick_handler}\index{EntityTickHandler@{EntityTickHandler}}
+
+
+Classe abstraite qui représente un gestionnaire de tick pour une entité.  
+
+
+
+
+{\ttfamily \#include $<$entitytickhandler.\+h$>$}
+
+Inheritance diagram for Entity\+Tick\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_entity_tick_handler}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_entity_tick_handler_a6653eafc76ded24d455d509a32ae7c85}{Entity\+Tick\+Handler}} (\mbox{\hyperlink{class_entity}{Entity}} $\ast$p\+Parent\+Entity=nullptr)
+\item 
+\mbox{\Hypertarget{class_entity_tick_handler_ad5dba143532864af186f0bcff95874a6}\label{class_entity_tick_handler_ad5dba143532864af186f0bcff95874a6}} 
+virtual {\bfseries $\sim$\+Entity\+Tick\+Handler} ()
+\begin{DoxyCompactList}\small\item\em Destructeur. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_entity_tick_handler_a0fa6def5f831dff28a1427fc592c6ca5}\label{class_entity_tick_handler_a0fa6def5f831dff28a1427fc592c6ca5}} 
+virtual void {\bfseries set\+Parent\+Entity} (\mbox{\hyperlink{class_entity}{Entity}} $\ast$p\+Parent\+Entity)
+\begin{DoxyCompactList}\small\item\em Indique quel entity sera géré par ce gestionnaire. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_entity_tick_handler_a4cf2ae0618ba74b5d236cc34e5cc880e}\label{class_entity_tick_handler_a4cf2ae0618ba74b5d236cc34e5cc880e}} 
+virtual void {\bfseries init} ()
+\item 
+virtual void \mbox{\hyperlink{class_entity_tick_handler_ad32d0a635effcf51f3247239d6974da3}{tick}} (long long elapsed\+Time\+In\+Milliseconds)=0
+\item 
+virtual void \mbox{\hyperlink{class_entity_tick_handler_a64c248a17bebe450b99fbe4c88ea9094}{current\+Collision}} ()
+\begin{DoxyCompactList}\small\item\em Définit la procédure à executé pour les collisions qui touche l\textquotesingle{}entité. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_entity_tick_handler_a8d617f400dfc1e791bd33e6a6be6c958}{next\+Collision}} ()
+\begin{DoxyCompactList}\small\item\em Définit la procédure à executé pour les collisions qui vont touché l\textquotesingle{}entité. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_entity_tick_handler_ae5893b9fa83494dc94ffdeb0ef54b89f}\label{class_entity_tick_handler_ae5893b9fa83494dc94ffdeb0ef54b89f}} 
+\mbox{\hyperlink{class_entity}{Entity}} $\ast$ {\bfseries m\+\_\+p\+Parent\+Entity}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe abstraite qui représente un gestionnaire de tick pour une entité. 
+
+Cette classe a pour but d\textquotesingle{}être spécialisée afin de donner à un sprite un comportement à effectuer lors de chaque tick émis par la cadence.
+
+Lorsqu\textquotesingle{}un gestionnaire est affecté à un sprite (\mbox{\hyperlink{class_sprite_a824c82dee03274adfee1287bda73ff66}{Sprite\+::set\+Tick\+Handler}}), la fonction init() du gestionnaire est appelée une unique fois, puis, lorsque la cadence démarre, la fonction tick() du gestionnaire est automatiquement appelée.
+
+Depuis le gestionnaire, il est possible d\textquotesingle{}accéder au \mbox{\hyperlink{class_sprite}{Sprite}} en question avec l\textquotesingle{}attribut m\+\_\+p\+Parent\+Sprite. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_entity_tick_handler_a6653eafc76ded24d455d509a32ae7c85}\label{class_entity_tick_handler_a6653eafc76ded24d455d509a32ae7c85}} 
+\index{EntityTickHandler@{EntityTickHandler}!EntityTickHandler@{EntityTickHandler}}
+\index{EntityTickHandler@{EntityTickHandler}!EntityTickHandler@{EntityTickHandler}}
+\doxysubsubsection{\texorpdfstring{EntityTickHandler()}{EntityTickHandler()}}
+{\footnotesize\ttfamily Entity\+Tick\+Handler\+::\+Entity\+Tick\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_entity}{Entity}} $\ast$}]{p\+Parent\+Entity = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Construit un gestionnaire de tick pour le \mbox{\hyperlink{class_entity}{Entity}} donné. 
+\begin{DoxyParams}{Parameters}
+{\em p\+Parent\+Entity} & \mbox{\hyperlink{class_entity}{Entity}} qui sera géré par ce gestionnaire. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_entity_tick_handler_a64c248a17bebe450b99fbe4c88ea9094}\label{class_entity_tick_handler_a64c248a17bebe450b99fbe4c88ea9094}} 
+\index{EntityTickHandler@{EntityTickHandler}!currentCollision@{currentCollision}}
+\index{currentCollision@{currentCollision}!EntityTickHandler@{EntityTickHandler}}
+\doxysubsubsection{\texorpdfstring{currentCollision()}{currentCollision()}}
+{\footnotesize\ttfamily void Entity\+Tick\+Handler\+::current\+Collision (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Définit la procédure à executé pour les collisions qui touche l\textquotesingle{}entité. 
+
+
+
+Reimplemented in \mbox{\hyperlink{class_bulio_tick_handler_af3cb33dbab044ae5575029d11af3eafb}{Bulio\+Tick\+Handler}}, and \mbox{\hyperlink{class_caisse_amov_tick_handler_a830d6b6bcf8464fecf9eff83895ca9b0}{Caisse\+Amov\+Tick\+Handler}}.
+
+\mbox{\Hypertarget{class_entity_tick_handler_a8d617f400dfc1e791bd33e6a6be6c958}\label{class_entity_tick_handler_a8d617f400dfc1e791bd33e6a6be6c958}} 
+\index{EntityTickHandler@{EntityTickHandler}!nextCollision@{nextCollision}}
+\index{nextCollision@{nextCollision}!EntityTickHandler@{EntityTickHandler}}
+\doxysubsubsection{\texorpdfstring{nextCollision()}{nextCollision()}}
+{\footnotesize\ttfamily void Entity\+Tick\+Handler\+::next\+Collision (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Définit la procédure à executé pour les collisions qui vont touché l\textquotesingle{}entité. 
+
+
+
+Reimplemented in \mbox{\hyperlink{class_bulio_tick_handler_a96e5d6e704883d5bbb8138c9a19ab10a}{Bulio\+Tick\+Handler}}, and \mbox{\hyperlink{class_caisse_amov_tick_handler_ac365c48c789c606102e55dbcdb19ffbd}{Caisse\+Amov\+Tick\+Handler}}.
+
+\mbox{\Hypertarget{class_entity_tick_handler_ad32d0a635effcf51f3247239d6974da3}\label{class_entity_tick_handler_ad32d0a635effcf51f3247239d6974da3}} 
+\index{EntityTickHandler@{EntityTickHandler}!tick@{tick}}
+\index{tick@{tick}!EntityTickHandler@{EntityTickHandler}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily virtual void Entity\+Tick\+Handler\+::tick (\begin{DoxyParamCaption}\item[{long long}]{elapsed\+Time\+In\+Milliseconds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_bulio_tick_handler_a80aeafa5efdc7a26cfa063617c8df1dd}{Bulio\+Tick\+Handler}}, and \mbox{\hyperlink{class_caisse_amov_tick_handler_a2265559dee59bc802ba53545d35ffedd}{Caisse\+Amov\+Tick\+Handler}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/kuttleo/\+DIVTEC/\+EMT Informatique -\/ 2019-\/2023/\+Kuttel Leo/\+Atelier/31-\/\+Programation\+OO/\+Le\+Jeu/gameframework/src/\mbox{\hyperlink{entitytickhandler_8h}{entitytickhandler.\+h}}\item 
+C\+:/\+Users/kuttleo/\+DIVTEC/\+EMT Informatique -\/ 2019-\/2023/\+Kuttel Leo/\+Atelier/31-\/\+Programation\+OO/\+Le\+Jeu/gameframework/src/\mbox{\hyperlink{entitytickhandler_8cpp}{entitytickhandler.\+cpp}}\end{DoxyCompactItemize}

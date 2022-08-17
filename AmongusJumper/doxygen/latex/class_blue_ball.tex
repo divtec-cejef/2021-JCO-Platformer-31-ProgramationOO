@@ -1,0 +1,105 @@
+\hypertarget{class_blue_ball}{}\doxysection{Blue\+Ball Class Reference}
+\label{class_blue_ball}\index{BlueBall@{BlueBall}}
+
+
+Classe qui gère la balle bleue.  
+
+
+
+
+{\ttfamily \#include $<$blueball.\+h$>$}
+
+Inheritance diagram for Blue\+Ball\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_blue_ball}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_blue_ball_aff7afa79a1ee7f1761291550ef828699}{on\+Key\+Pressed}} (int key)
+\item 
+void \mbox{\hyperlink{class_blue_ball_a450251994c591a5faeff138c44da0ba0}{on\+Key\+Released}} (int key)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_blue_ball_a9095f337087b5df276dbd8e8f5e7530a}{Blue\+Ball}} (QGraphics\+Item $\ast$p\+Parent=nullptr)
+\item 
+virtual void \mbox{\hyperlink{class_blue_ball_a4046a2819526fc86cf9023bf241f37fa}{tick}} (long long elapsed\+Time\+In\+Milliseconds)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Classe qui gère la balle bleue. 
+
+Cette classe démontre les fonctionnalités suivantes \+:
+
+
+\begin{DoxyItemize}
+\item Spécialiser la classe \mbox{\hyperlink{class_sprite}{Sprite}} pour y ajouter une gestion des touches du clavier.
+\item Réagir aux événements clavier pour mémoriser l\textquotesingle{}état des touches, afin de déplacer correctement la balle. Pour que les fonctions \mbox{\hyperlink{class_blue_ball_aff7afa79a1ee7f1761291550ef828699}{on\+Key\+Pressed()}} et \mbox{\hyperlink{class_blue_ball_a450251994c591a5faeff138c44da0ba0}{on\+Key\+Released()}} soient appelées lorsqu\textquotesingle{}une touche est appuyée, il faut que l\textquotesingle{}objet qui crée une instance de \mbox{\hyperlink{class_blue_ball}{Blue\+Ball}} se charge de les connecter aux signaux Game\+Core\+::notify\+Key\+Pressed() et Game\+Core\+::notify\+Key\+Released().
+\item Lors du \mbox{\hyperlink{class_blue_ball_a4046a2819526fc86cf9023bf241f37fa}{tick()}}, déterminer la nouvelle position de la boule selon les touches du clavier qui sont appuyées.
+\item Récupérer la bounding box (boîte d\textquotesingle{}encombrement) du sprite dans le système de coordonnées global avec global\+Bounding\+Box() et déplacement à la future position de la balle (avec translated()) pour vérifier qu\textquotesingle{}elle soit toujours incluse dans les limites de la surface de la scène. 
+\end{DoxyItemize}
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_blue_ball_a9095f337087b5df276dbd8e8f5e7530a}\label{class_blue_ball_a9095f337087b5df276dbd8e8f5e7530a}} 
+\index{BlueBall@{BlueBall}!BlueBall@{BlueBall}}
+\index{BlueBall@{BlueBall}!BlueBall@{BlueBall}}
+\doxysubsubsection{\texorpdfstring{BlueBall()}{BlueBall()}}
+{\footnotesize\ttfamily Blue\+Ball\+::\+Blue\+Ball (\begin{DoxyParamCaption}\item[{QGraphics\+Item $\ast$}]{p\+Parent = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Construit et initialise une balle bleue. 
+\begin{DoxyParams}{Parameters}
+{\em p\+Parent} & Objet propiétaire de cet objet. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_blue_ball_aff7afa79a1ee7f1761291550ef828699}\label{class_blue_ball_aff7afa79a1ee7f1761291550ef828699}} 
+\index{BlueBall@{BlueBall}!onKeyPressed@{onKeyPressed}}
+\index{onKeyPressed@{onKeyPressed}!BlueBall@{BlueBall}}
+\doxysubsubsection{\texorpdfstring{onKeyPressed}{onKeyPressed}}
+{\footnotesize\ttfamily void Blue\+Ball\+::on\+Key\+Pressed (\begin{DoxyParamCaption}\item[{int}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Une touche a été appuyée. 
+\begin{DoxyParams}{Parameters}
+{\em key} & Code de la touche appuyée. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_blue_ball_a450251994c591a5faeff138c44da0ba0}\label{class_blue_ball_a450251994c591a5faeff138c44da0ba0}} 
+\index{BlueBall@{BlueBall}!onKeyReleased@{onKeyReleased}}
+\index{onKeyReleased@{onKeyReleased}!BlueBall@{BlueBall}}
+\doxysubsubsection{\texorpdfstring{onKeyReleased}{onKeyReleased}}
+{\footnotesize\ttfamily void Blue\+Ball\+::on\+Key\+Released (\begin{DoxyParamCaption}\item[{int}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Une touche a été relâchée. 
+\begin{DoxyParams}{Parameters}
+{\em key} & Code de la touche relâchée. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_blue_ball_a4046a2819526fc86cf9023bf241f37fa}\label{class_blue_ball_a4046a2819526fc86cf9023bf241f37fa}} 
+\index{BlueBall@{BlueBall}!tick@{tick}}
+\index{tick@{tick}!BlueBall@{BlueBall}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily void Blue\+Ball\+::tick (\begin{DoxyParamCaption}\item[{long long}]{elapsed\+Time\+In\+Milliseconds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Cadence. 
+\begin{DoxyParams}{Parameters}
+{\em elapsed\+Time\+In\+Milliseconds} & Temps écoulé depuis le dernier appel. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_sprite_a613ffe7e1cfea09977d5985104a94d46}{Sprite}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/kuttleo/\+DIVTEC/\+EMT Informatique -\/ 2019-\/2023/\+Kuttel Leo/\+Atelier/31-\/\+Programation\+OO/\+Le\+Jeu/gameframework/src/\mbox{\hyperlink{blueball_8h}{blueball.\+h}}\item 
+C\+:/\+Users/kuttleo/\+DIVTEC/\+EMT Informatique -\/ 2019-\/2023/\+Kuttel Leo/\+Atelier/31-\/\+Programation\+OO/\+Le\+Jeu/gameframework/src/\mbox{\hyperlink{blueball_8cpp}{blueball.\+cpp}}\end{DoxyCompactItemize}
