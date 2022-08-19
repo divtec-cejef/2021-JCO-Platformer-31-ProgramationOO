@@ -104,13 +104,14 @@ void GameCore::loadTestLevel(){
     QGraphicsSimpleTextItem* tips = new QGraphicsSimpleTextItem();
     tips->setZValue(FIRST_LIGNE);
     tips =  m_pScene->createText(QPointF(50,1450),
-                                 "Touche de saut : < Espace > \n"
+                                 "Touche de saut / réapparition : < Espace > \n"
                                  "Touche pour avancer à droite : < D > \n"
                                  "Touche pour avancer à gauche : < A > \n", 20, Qt::white);
     tips =  m_pScene->createText(QPointF(2500,1200),
                                  "Vous pouvez sauté sur l'ennemie pour le tuer.", 20, Qt::white);
     tips =  m_pScene->createText(QPointF(3010,1400),
                                  " Vous pouvez pousser la caisse pour atteindre \n la plate forme en face.", 12, Qt::white);
+
     tips =  m_pScene->createText(QPointF(7140,1200),
                                  " Le niveau s'arrête ici.", 40, Qt::green);
 
@@ -153,25 +154,25 @@ void GameCore::loadTestLevel(){
     //////////////////////////////////
     ////        PLATEFORME        ////
     //////////////////////////////////
-    Sprite* platM1 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
-    platM1->setData(1,"sol");
-    platM1->setData(2,"plateforme");
-    m_pScene->addSpriteToScene(platM1, 1200,1600);
+    Sprite* plateformeMoyenne1 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
+    plateformeMoyenne1->setData(1,"sol");
+    plateformeMoyenne1->setData(2,"plateforme");
+    m_pScene->addSpriteToScene(plateformeMoyenne1, 1200,1600);
 
-    Sprite* platM2 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
-    platM2->setData(1,"sol");
-    platM2->setData(2,"plateforme");
-    m_pScene->addSpriteToScene(platM2, 1500,1730);
+    Sprite* plateformeMoyenne2 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
+    plateformeMoyenne2->setData(1,"sol");
+    plateformeMoyenne2->setData(2,"plateforme");
+    m_pScene->addSpriteToScene(plateformeMoyenne2, 1500,1730);
 
-    Sprite* platM3 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
-    platM3->setData(1,"sol");
-    platM3->setData(2,"plateforme");
-    m_pScene->addSpriteToScene(platM3, 1800,1600);
+    Sprite* plateformeMoyenne3 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
+    plateformeMoyenne3->setData(1,"sol");
+    plateformeMoyenne3->setData(2,"plateforme");
+    m_pScene->addSpriteToScene(plateformeMoyenne3, 1800,1600);
 
-    Sprite* platM4 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
-    platM4->setData(1,"sol");
-    platM4->setData(2,"plateforme");
-    m_pScene->addSpriteToScene(platM4, 3680,1320);
+    Sprite* plateformeMoyenne4 = new Sprite(GameFramework::imagesPath() + "PlatformeMoyenneV2.png");
+    plateformeMoyenne4->setData(1,"sol");
+    plateformeMoyenne4->setData(2,"plateforme");
+    m_pScene->addSpriteToScene(plateformeMoyenne4, 3680,1320);
 
     //Pile de caisse en métal.
     stackMetal(QPointF(5401,1580));
@@ -181,44 +182,44 @@ void GameCore::loadTestLevel(){
     ////        PIEGE        ////
     /////////////////////////////
 
-    Sprite* lanceF2 = new Sprite(GameFramework::imagesPath() + "lanceFlammeV3.png");
-    lanceF2->setData(1,"Piege");
-    lanceF2->setData(2,"Lance_flamme");
-    m_pScene->addSpriteToScene(lanceF2, 2400,1370);
+    Sprite* lanceFlamme1 = new Sprite(GameFramework::imagesPath() + "lanceFlammeV3.png");
+    lanceFlamme1->setData(1,"Piege");
+    lanceFlamme1->setData(2,"Lance_flamme");
+    m_pScene->addSpriteToScene(lanceFlamme1, 2400,1370);
 
-    Sprite* lanceF3 = new Sprite(GameFramework::imagesPath() + "lanceFlammeV3.png");
-    lanceF3->setData(1,"Piege");
-    lanceF3->setData(2,"Lance_flamme");
-    m_pScene->addSpriteToScene(lanceF3, 4580,1570);
+    Sprite* lanceFlamme2 = new Sprite(GameFramework::imagesPath() + "lanceFlammeV3.png");
+    lanceFlamme2->setData(1,"Piege");
+    lanceFlamme2->setData(2,"Lance_flamme");
+    m_pScene->addSpriteToScene(lanceFlamme2, 4580,1570);
 
 
     //////////////////////////////
     ////        CAISSE        ////
     //////////////////////////////
 
-    CaisseAmovible* caisseB2 = new CaisseAmovible;
-    caisseB2->setData(1,"Wood_caisse");
-    caisseB2->setSpawnPoint(QPoint(2900,1500));
-    m_pScene->addSpriteToScene(caisseB2, caisseB2->getSpawnPoint());
+    CaisseAmovible* caisseBois1 = new CaisseAmovible;
+    caisseBois1->setData(1,"Wood_caisse");
+    caisseBois1->setSpawnPoint(QPoint(2900,1500));
+    m_pScene->addSpriteToScene(caisseBois1, caisseBois1->getSpawnPoint());
 
-    CaisseAmovible* caisseB5 = new CaisseAmovible;
-    caisseB5->setData(1,"Wood_caisse");
-    caisseB5->setSpawnPoint(QPoint(4800,600));
-    m_pScene->addSpriteToScene(caisseB5,caisseB5->getSpawnPoint());
+    CaisseAmovible* caisseBois2 = new CaisseAmovible;
+    caisseBois2->setData(1,"Wood_caisse");
+    caisseBois2->setSpawnPoint(QPoint(4800,600));
+    m_pScene->addSpriteToScene(caisseBois2,caisseBois2->getSpawnPoint());
 
-    CaisseAmovible* caisseB6 = new CaisseAmovible;
-    caisseB6->setData(1,"Wood_caisse");
-    caisseB6->setSpawnPoint(QPoint(5160,785));
-    m_pScene->addSpriteToScene(caisseB6, caisseB6->getSpawnPoint());
+    CaisseAmovible* caisseBois3 = new CaisseAmovible;
+    caisseBois3->setData(1,"Wood_caisse");
+    caisseBois3->setSpawnPoint(QPoint(5160,785));
+    m_pScene->addSpriteToScene(caisseBois3, caisseBois3->getSpawnPoint());
 
-    CaisseAmovible* caisseB7 = new CaisseAmovible;
-    caisseB7->setData(1,"Wood_caisse");
-    caisseB7->setSpawnPoint(QPoint(6850,1360));
-    m_pScene->addSpriteToScene(caisseB7, caisseB7->getSpawnPoint());
+    CaisseAmovible* caisseBois4 = new CaisseAmovible;
+    caisseBois4->setData(1,"Wood_caisse");
+    caisseBois4->setSpawnPoint(QPoint(6850,1360));
+    m_pScene->addSpriteToScene(caisseBois4, caisseBois4->getSpawnPoint());
 
-    Sprite* caisseM1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV2.png");
-    caisseM1->setData(1,"sol");
-    m_pScene->addSpriteToScene(caisseM1, 700,1520);
+    Sprite* caisseMental1 = new Sprite(GameFramework::imagesPath() + "CaisseMetalV2.png");
+    caisseMental1->setData(1,"sol");
+    m_pScene->addSpriteToScene(caisseMental1, 700,1520);
 
 
 
@@ -247,10 +248,10 @@ void GameCore::loadTestLevel(){
     m_pScene->addSpriteToScene(enemie4, 5380,1430);
 
     //Ajout des entités du jeu dans la liste.
-    m_pEntityL.append(caisseB2);
-    m_pEntityL.append(caisseB5);
-    m_pEntityL.append(caisseB6);
-    m_pEntityL.append(caisseB7);
+    m_pEntityL.append(caisseBois1);
+    m_pEntityL.append(caisseBois2);
+    m_pEntityL.append(caisseBois3);
+    m_pEntityL.append(caisseBois4);
     m_pEntityL.append(enemie1);
     m_pEntityL.append(enemie2);
     m_pEntityL.append(enemie3);
