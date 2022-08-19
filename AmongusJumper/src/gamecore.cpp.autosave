@@ -42,10 +42,24 @@ const int PLAYER_STOP   = 0;      // Arrete le joueur
 
 const int GHOST_SPEED  = -10 ;      //Vitesse de vol
 
+const
+
 //dimenssion de découpage des spriteSheets du fantome.
 const int FRAME_SIZE_GHOST   = 60;   //  Dimenssion de la frame
 const int FRAME_COUNT_GHOST  = 7;    //  Nombres de frame à découper
 const int COLUMN_COUNT_GHOST = 3;    //  Nombres de colonne
+
+//dimenssion de découpage des spriteSheets du bouton.
+const int FRAME_WIDTH_ENDING_BUTON   = 88;  //  Largeur de la frame
+const int FRAME_HEIGHT_ENDING_BUTON   = 96; //  Hauteur de la frame
+const int FRAME_COUNT_ENDING_BUTON = 2;     //  Nombres de frame à découper
+const int COLUMN_COUNT_ENDING_BUTON = 1;    //  Nombres de colonne
+
+//dimenssion de découpage des spriteSheets du bouton quand le joueur le touche.
+const int FRAME_WIDTH_ENDING_BUTON_ACTIVE   = 88;  //  Largeur de la frame
+const int FRAME_HEIGT_ENDING_BUTON_ACTIVE   = 96; //  Hauteur de la frame
+const int FRAME_COUNT_ENDING_BUTON_ACTIVE = 2;     //  Nombres de frame à découper
+const int COLUMN_COUNT_ENDING_BUTON_ACTIVE = 1;    //  Nombres de colonne
 
 const int FIRST_LIGNE = 40; // premier plan de la scene.
 
@@ -496,6 +510,11 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                             break;
                         }
                     }
+                    
+                }else if(CollisionDetected->data(1) == "FinDuNiveau"){
+                     
+                    m_pScene->removeSpriteFromScene(pCharacter);
+                    
                 }else{
                     //Parcourt la list des local collision
                     for (int i =0;i < collidingSidesL.count();i++) {
@@ -523,7 +542,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 }
 
                 collidingSidesL.clear();
-            }
+          }
         }else{
             pCharacter->setIsOnFloor(false);
         }
@@ -536,6 +555,30 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     }
     //Attire le joueur vers le bas de l'écran
     pCharacter->gravityApplied(elapsedTimeInMilliseconds);
+}
+
+//!
+//! Définit l'animation que va prendre le bouton de fin de niveau
+//! @brief GameCore::setAnimationDeath
+//!
+void GameCore::setAnimationDeath()
+{
+    QImage spriteSheet(GameFramework::imagesPath() +  "deathAnimationV2.png");
+
+    QList<QImage> deathFrameList;
+    // Découpage de la spritesheet
+    for (int frameIndex = 0; frameIndex <= FRAME_COUNT_GHOST; frameIndex++) {
+
+        QImage CurrentFrameImage = spriteSheet.copy((frameIndex % COLUMN_COUNT_GHOST) * FRAME_SIZE_GHOST,
+                                                    (frameIndex / COLUMN_COUNT_GHOST) * FRAME_SIZE_GHOST,
+                                                    FRAME_SIZE_GHOST, FRAME_SIZE_GHOST);
+
+        pGhost->addAnimationFrame(QPixmap::fromImage(CurrentFrameImage.scaled(FRAME_SIZE_GHOST * 1.5,
+                                                                              FRAME_SIZE_GHOST * 1.5,
+                                                                              Qt::IgnoreAspectRatio,
+                                                                              Qt::SmoothTransformation)));
+    }
+    pGhost->startAnimation(50);
 }
 
 //!
