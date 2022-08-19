@@ -107,8 +107,9 @@ void GameCore::loadTestLevel(){
     lGradient.setColorAt(0.0,  QColor(255,0,0,200));
     lGradient.setColorAt(0.3, Qt::transparent);
     lGradient.setColorAt(0.6, QColor(0,0,0,200));
-
     m_pScene->setForegroundBrush(lGradient);
+
+    m_pScene->setBackgroundColor(QColor(5,38,64));
 
     // Instancier et initialiser les élément de l'interface :
     pDeathCount->setZValue(FIRST_LIGNE);
@@ -125,9 +126,6 @@ void GameCore::loadTestLevel(){
                                  "Vous pouvez sauté sur l'ennemie pour le tuer.", 20, Qt::white);
     tips =  m_pScene->createText(QPointF(3010,1400),
                                  " Vous pouvez pousser la caisse pour atteindre \n la plate forme en face.", 12, Qt::white);
-
-    tips =  m_pScene->createText(QPointF(7140,1200),
-                                 " Le niveau s'arrête ici.", 40, Qt::green);
 
     // Instancier et initialiser les sprite ici :
 
@@ -198,7 +196,7 @@ void GameCore::loadTestLevel(){
 
     Sprite* pBoutonDeFin = new Sprite();
     pBoutonDeFin->setData(1,"FinDuNiveau");
-    m_pScene->addSpriteToScene(pBoutonDeFin, 3680,1320);
+    m_pScene->addSpriteToScene(pBoutonDeFin, 7080,1568);
     setAnimationEndingButon(pBoutonDeFin);
 
     /////////////////////////////
@@ -287,7 +285,7 @@ void GameCore::loadTestLevel(){
 
     //Ajout du joueur dans la scene
     pCharacter->setData(1,"joueur");
-    pCharacter->setSpawnPoint(QPoint(6800,600)); //300 1200
+    pCharacter->setSpawnPoint(QPoint(300,1200));
     m_pScene->addSpriteToScene(pCharacter,pCharacter->getSpawnPoint());
     pCharacter->startAnimation(25);
 }
@@ -513,11 +511,19 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                     }
 
                 }else if(CollisionDetected->data(1) == "FinDuNiveau"){
+                    if(!isFinished){
+                        pCharacter->setVisible(false);
+                        isFinished=true;
+                        setAnimationEndingButon(CollisionDetected);
 
-                    pCharacter->setVisible(false);
-                    isFinished=true;
-                    setAnimationEndingButon(CollisionDetected);
+                        QGraphicsSimpleTextItem* tips = new QGraphicsSimpleTextItem();
+                        tips->setZValue(FIRST_LIGNE);
 
+                        tips =  m_pScene->createText(QPointF(7140,1200),
+                                                     "Bravo vous avez fini le jeu !", 40, Qt::green);
+                        tips =  m_pScene->createText(QPointF(7140,1250),
+                                                     "Merci d'avoir joué, vous pouvez fermer la fenêtre.", 20, Qt::gray);
+                    }
                 }else{
                     //Parcourt la list des local collision
                     for (int i =0;i < collidingSidesL.count();i++) {
