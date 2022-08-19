@@ -69,6 +69,8 @@ private:
     //Joueur
     Character* pCharacter = new Character();
 
+
+
     QList<Entity*>m_pEntityL;
     QList<Bulio*> m_pBulioL;
 
@@ -80,7 +82,8 @@ private:
 
     QRadialGradient lGradient;
 
-
+    bool isFinished = false;
+    void setAnimationEndingButon(Sprite* &endingButon);
 
 
 

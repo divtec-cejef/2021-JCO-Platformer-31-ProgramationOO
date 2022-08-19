@@ -47,7 +47,21 @@ const int FRAME_SIZE_GHOST   = 60;   //  Dimenssion de la frame
 const int FRAME_COUNT_GHOST  = 7;    //  Nombres de frame à découper
 const int COLUMN_COUNT_GHOST = 3;    //  Nombres de colonne
 
+//dimenssion de découpage des spriteSheets du bouton.
+const int FRAME_ENDING_BUTON_WIDTH   = 176;  //  Largeur de la frame
+const int FRAME_ENDING_BUTON_HEIGHT   = 192; //  Hauteur de la frame
+const int FRAME_COUNT_ENDING_BUTON = 1;     //  Nombres de frame à découper
+const int COLUMN_COUNT_ENDING_BUTON = 1;    //  Nombres de colonne
+
+//dimenssion de découpage des spriteSheets du bouton quand le joueur le touche.
+const int FRAME_ENDING_BUTON_ACTIVE_WIDTH   = 88;  //  Largeur de la frame
+const int FRAME_ENDING_BUTON_ACTIVE_HEIGT   = 192; //  Hauteur de la frame
+const int FRAME_COUNT_ENDING_BUTON_ACTIVE = 10;     //  Nombres de frame à découper
+const int COLUMN_COUNT_ENDING_BUTON_ACTIVE = 1;    //  Nombres de colonne
+
 const int FIRST_LIGNE = 40; // premier plan de la scene.
+
+
 
 //! Initialise le contrôleur de jeu.
 //! \param pGameCanvas  GameCanvas pour lequel cet objet travaille.
@@ -181,9 +195,11 @@ void GameCore::loadTestLevel(){
     //////////////////////////////////
     //// Bouton de fin de niveau  ////
     //////////////////////////////////
-    Sprite* boutonDeFin = new Sprite(GameFramework::imagesPath() + "EmergencyMeetingButton.png");
-    plateformeMoyenne4->setData(1,"FinDuNiveau");
-    m_pScene->addSpriteToScene(boutonDeFin, 1500,1730);
+
+    Sprite* pBoutonDeFin = new Sprite();
+    pBoutonDeFin->setData(1,"FinDuNiveau");
+    m_pScene->addSpriteToScene(pBoutonDeFin, 3680,1320);
+    setAnimationEndingButon(pBoutonDeFin);
 
     /////////////////////////////
     ////        PIEGE        ////
@@ -271,7 +287,7 @@ void GameCore::loadTestLevel(){
 
     //Ajout du joueur dans la scene
     pCharacter->setData(1,"joueur");
-    pCharacter->setSpawnPoint(QPoint(300,1200));
+    pCharacter->setSpawnPoint(QPoint(6800,600)); //300 1200
     m_pScene->addSpriteToScene(pCharacter,pCharacter->getSpawnPoint());
     pCharacter->startAnimation(25);
 }
@@ -327,7 +343,7 @@ void GameCore::stackMetal(QPointF firstCase){
 void GameCore::keyPressed(int key) {
     emit notifyKeyPressed(key);
 
-    if(!pCharacter->getIsDeath()){
+    if(!pCharacter->getIsDeath() && !isFinished){
         switch(key) {
         case Qt::Key_W:
             if(pCharacter->getIsOnFloor()){
@@ -350,7 +366,6 @@ void GameCore::keyPressed(int key) {
                 pCharacter->setIsJump(true);
             }
             break;
-
         }
     }
     if(key == Qt::Key_Space && pCharacter->getIsDeath()){
@@ -496,6 +511,13 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                             break;
                         }
                     }
+
+                }else if(CollisionDetected->data(1) == "FinDuNiveau"){
+
+                    pCharacter->setVisible(false);
+                    isFinished=true;
+                    setAnimationEndingButon(CollisionDetected);
+
                 }else{
                     //Parcourt la list des local collision
                     for (int i =0;i < collidingSidesL.count();i++) {
@@ -523,7 +545,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
                 }
 
                 collidingSidesL.clear();
-            }
+          }
         }else{
             pCharacter->setIsOnFloor(false);
         }
@@ -539,7 +561,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 }
 
 //!
-//! Créé un sprite pour symbolisé la mort du joueur.
+//! Définit l'animation que va prendre le bouton de fin de niveau
 //! @brief GameCore::setAnimationDeath
 //!
 void GameCore::setAnimationDeath()
@@ -560,6 +582,50 @@ void GameCore::setAnimationDeath()
                                                                               Qt::SmoothTransformation)));
     }
     pGhost->startAnimation(50);
+}
+
+//!
+//! Créé un sprite pour symbolisé la mort du joueur.
+//! @brief GameCore::setAnimationDeath
+//!
+void GameCore::setAnimationEndingButon(Sprite* &endingButon)
+{
+
+    if(isFinished){
+
+        QImage spriteSheet(GameFramework::imagesPath() +  "EmergencyMeetingButton.png");
+
+        // Découpage de la spritesheet
+        for (int frameIndex = 0; frameIndex <= FRAME_COUNT_ENDING_BUTON_ACTIVE; frameIndex++) {
+
+            QImage CurrentFrameImage = spriteSheet.copy((frameIndex % COLUMN_COUNT_ENDING_BUTON_ACTIVE) * FRAME_ENDING_BUTON_ACTIVE_WIDTH,
+                                                        (frameIndex / COLUMN_COUNT_ENDING_BUTON_ACTIVE) * FRAME_ENDING_BUTON_ACTIVE_HEIGT,
+                                                        FRAME_ENDING_BUTON_ACTIVE_WIDTH, FRAME_ENDING_BUTON_ACTIVE_HEIGT);
+
+            endingButon->addAnimationFrame(QPixmap::fromImage(CurrentFrameImage.scaled(FRAME_ENDING_BUTON_ACTIVE_WIDTH,
+                                                                                  FRAME_ENDING_BUTON_ACTIVE_HEIGT,
+                                                                                  Qt::IgnoreAspectRatio,
+                                                                                  Qt::SmoothTransformation)));
+        }
+        endingButon->startAnimation(600);
+
+    }else {
+        QImage spriteSheet(GameFramework::imagesPath() +  "EmergencyMeetingButton.png");
+
+        // Découpage de la spritesheet
+        for (int frameIndex = 0; frameIndex <= FRAME_COUNT_ENDING_BUTON; frameIndex++) {
+
+            QImage CurrentFrameImage = spriteSheet.copy((frameIndex % COLUMN_COUNT_ENDING_BUTON) * FRAME_ENDING_BUTON_WIDTH,
+                                                        (frameIndex / COLUMN_COUNT_ENDING_BUTON) * FRAME_ENDING_BUTON_HEIGHT,
+                                                        FRAME_ENDING_BUTON_WIDTH, FRAME_ENDING_BUTON_HEIGHT);
+
+            endingButon->addAnimationFrame(QPixmap::fromImage(CurrentFrameImage.scaled(FRAME_ENDING_BUTON_WIDTH,
+                                                                                  FRAME_ENDING_BUTON_HEIGHT,
+                                                                                  Qt::IgnoreAspectRatio,
+                                                                                  Qt::SmoothTransformation)));
+        }
+        endingButon->startAnimation(600);
+    }
 }
 
 //!
